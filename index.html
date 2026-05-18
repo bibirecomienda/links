@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bibi Recomienda</title>
+  <meta name="description" content="Las mejores ofertas y productos de Amazon, Mercado Libre y más — curados por Bibi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="links.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #042C53;
+      --blue:      #185FA5;
+      --mid:       #378ADD;
+      --light:     #B5D4F4;
+      --pale:      #E6F1FB;
+      --amber:     #EF9F27;
+      --amber-bg:  #FAEEDA;
+      --amber-dk:  #633806;
+      --white:     #ffffff;
+      --gray:      #5a6a7a;
+      --border:    #c8ddf0;
+      --bg:        #f0f6fd;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      color: var(--navy);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--pale);
+      border-bottom: 3px solid var(--mid);
+      padding: 36px 20px 28px;
+      text-align: center;
+      position: relative;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--navy), var(--mid), var(--light));
+    }
+    .avatar-wrap { position: relative; display: inline-block; margin-bottom: 14px; }
+    .avatar {
+      width: 90px; height: 90px;
+      border-radius: 18px;
+      background: var(--mid);
+      border: 3px solid var(--white);
+      box-shadow: 0 4px 16px rgba(55,138,221,0.25);
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .live-badge {
+      position: absolute; bottom: -6px; right: -6px;
+      background: var(--amber); color: var(--amber-dk);
+      font-size: 0.65rem; font-weight: 700;
+      padding: 3px 8px; border-radius: 10px;
+      border: 2px solid var(--white); letter-spacing: 0.5px;
+    }
+    header h1 { font-size: 1.5rem; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
+    header p.tagline { font-size: 0.85rem; color: var(--blue); margin-top: 4px; }
+    .socials { display: flex; justify-content: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+    .social-btn {
+      background: var(--white); color: var(--blue);
+      border: 1px solid var(--border); border-radius: 20px;
+      padding: 5px 14px; font-size: 0.75rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .social-btn:hover { background: var(--mid); color: var(--white); border-color: var(--mid); }
+
+    /* ── MAIN ── */
+    main { max-width: 580px; margin: 0 auto; padding: 24px 16px 60px; }
+
+    .section-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.4px;
+      color: var(--blue); margin: 28px 0 12px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ── DEAL CARD ── */
+    .deal-card {
+      background: var(--navy); border-radius: 16px;
+      padding: 18px 18px 18px 20px;
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none; margin-bottom: 10px;
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .deal-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(4,44,83,0.22); }
+    .deal-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .deal-info { flex: 1; }
+    .deal-badge {
+      display: inline-block; background: var(--amber); color: var(--amber-dk);
+      font-size: 0.62rem; font-weight: 700; padding: 2px 8px;
+      border-radius: 8px; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 5px;
+    }
+    .deal-name { font-size: 0.92rem; font-weight: 600; color: var(--white); line-height: 1.35; }
+    .deal-price { font-size: 0.78rem; color: var(--light); margin-top: 3px; }
+    .deal-price strong { color: var(--amber); font-size: 0.95rem; }
+    .deal-arrow { color: var(--light); font-size: 1.3rem; flex-shrink: 0; }
+
+    /* ── CATEGORY GRID ── */
+    .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .cat-btn {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 14px 12px;
+      text-decoration: none; color: var(--navy);
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.86rem; font-weight: 500; transition: all 0.18s;
+    }
+    .cat-btn:hover { border-color: var(--mid); background: var(--pale); }
+    .cat-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: var(--pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .cat-btn:hover .cat-icon { background: var(--light); }
+
+    /* ── PLATFORM LIST ── */
+    .platform-list { display: flex; flex-direction: column; gap: 8px; }
+    .plat-link {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 14px; padding: 13px 16px;
+      text-decoration: none; color: var(--navy);
+      display: flex; align-items: center; gap: 13px; transition: all 0.18s;
+    }
+    .plat-link:hover { border-color: var(--mid); transform: translateX(4px); }
+    .plat-logo {
+      width: 42px; height: 42px; border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .logo-amazon { background: #FF9900; }
+    .logo-mercadolibre { background: #FFE600; }
+    .logo-shein { background: #222222; }
+    .logo-aliexpress { background: #FF4747; }
+    .logo-other { background: var(--pale); }
+    .plat-info { flex: 1; }
+    .plat-name { display: block; font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+    .plat-sub { display: block; font-size: 0.75rem; color: var(--gray); margin-top: 1px; }
+    .plat-arrow { color: var(--light); font-size: 1.1rem; }
+
+    /* ── COUPON ── */
+    .coupon-wrap {
+      background: var(--white); border: 2px dashed var(--mid);
+      border-radius: 16px; padding: 20px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .coupon-wrap::before, .coupon-wrap::after {
+      content: ''; position: absolute; top: 50%; transform: translateY(-50%);
+      width: 18px; height: 18px; border-radius: 50%; background: var(--bg);
+    }
+    .coupon-wrap::before { left: -9px; }
+    .coupon-wrap::after { right: -9px; }
+    .coupon-plat { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .coupon-discount { font-size: 0.78rem; font-weight: 600; color: var(--blue); margin-bottom: 8px; }
+    .coupon-code {
+      display: inline-block; background: var(--navy); color: var(--amber);
+      font-size: 1.7rem; font-weight: 700; letter-spacing: 4px;
+      padding: 8px 24px; border-radius: 10px;
+    }
+    .coupon-note { font-size: 0.74rem; color: var(--gray); margin-top: 8px; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      background: var(--pale); border: 1.5px solid var(--border);
+      border-radius: 14px; padding: 16px 18px;
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 8px; text-decoration: none; transition: border-color 0.18s;
+    }
+    .newsletter:hover { border-color: var(--mid); }
+    .newsletter-icon {
+      width: 40px; height: 40px; border-radius: 10px; background: var(--mid);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .newsletter-info { flex: 1; }
+    .newsletter-title { font-size: 0.87rem; font-weight: 600; color: var(--navy); }
+    .newsletter-sub { font-size: 0.75rem; color: var(--gray); margin-top: 1px; }
+
+    /* ── EMPTY STATE ── */
+    .empty { text-align: center; padding: 24px; color: var(--gray); font-size: 0.85rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 0 20px 30px;
+      font-size: 0.72rem; color: var(--gray);
+      max-width: 580px; margin: 0 auto;
+    }
+    footer a { color: var(--blue); text-decoration: none; }
+
+    @media (max-width: 420px) {
+      .cat-grid { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.3rem; }
+      .coupon-code { font-size: 1.3rem; letter-spacing: 3px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="avatar-wrap">
+    <div class="avatar">
+      <img src="bibirecomiendaimage.jpg" alt="Bibi" />
+    </div>
+    <span class="live-badge">✦ ACTIVO</span>
+  </div>
+  <h1>Bibi Recomienda</h1>
+  <p class="tagline">Las mejores ofertas de Amazon, Mercado Libre y más ✦</p>
+  <div class="socials">
+    <a class="social-btn" href="#" target="_blank">📸 Instagram</a>
+    <a class="social-btn" href="#" target="_blank">🎵 TikTok</a>
+    <a class="social-btn" href="#" target="_blank">💬 WhatsApp</a>
+    <a class="social-btn" href="#" target="_blank">▶️ YouTube</a>
+  </div>
+</header>
+
+<main id="main-content">
+  <!-- Renderizado dinámicamente por JavaScript -->
+</main>
+
+<footer>
+  <p>© 2026 Bibi Recomienda · <a href="#">Instagram</a> · <a href="#">TikTok</a></p>
+  <p style="margin-top:6px;">Algunos links son de programas de afiliados. ¡Gracias por tu apoyo! 💙</p>
+</footer>
+
+<script>
+  // ═══════════════════════════════════════════
+  //  Configuración de categorías y plataformas
+  // ═══════════════════════════════════════════
+
+  const CATEGORIAS = {
+    tecnologia: { label: 'Tecnología',  icon: '💻' },
+    belleza:    { label: 'Belleza',     icon: '💄' },
+    moda:       { label: 'Moda',        icon: '👗' },
+    hogar:      { label: 'Hogar',       icon: '🏠' },
+    cocina:     { label: 'Cocina',      icon: '🍳' },
+    deporte:    { label: 'Deporte',     icon: '🏋️' },
+    ninos:      { label: 'Niños',       icon: '🧒' },
+    mascotas:   { label: 'Mascotas',    icon: '🐾' },
+    otros:      { label: 'Otros',       icon: '📦' }
+  };
+
+  const PLATAFORMAS = {
+    amazon:        { label: 'Amazon',        icon: '📦', logoClass: 'logo-amazon',       sub: 'Mis picks y ofertas del día →' },
+    mercadolibre:  { label: 'Mercado Libre', icon: '🛒', logoClass: 'logo-mercadolibre', sub: 'Mejores vendedores y envío gratis →' },
+    shein:         { label: 'Shein',         icon: '👗', logoClass: 'logo-shein',        sub: 'Moda con código BIBI15 →' },
+    aliexpress:    { label: 'AliExpress',    icon: '🌐', logoClass: 'logo-aliexpress',   sub: 'Productos únicos al mejor precio →' },
+    other:         { label: 'Otras tiendas', icon: '🏪', logoClass: 'logo-other',        sub: 'Ver productos →' }
+  };
+
+  // ═══════════════════════════════════════════
+  //  Renderizado principal
+  // ═══════════════════════════════════════════
+
+  function render() {
+    const links = (typeof BIBI_LINKS !== 'undefined') ? BIBI_LINKS : [];
+    const active = links.filter(l => l.active);
+    const main = document.getElementById('main-content');
+    let html = '';
+
+    // — Ofertas destacadas —
+    const featured = active.filter(l => l.featured);
+    if (featured.length > 0) {
+      html += sectionLabel('🔥 Oferta del momento');
+      featured.forEach(l => { html += dealCard(l); });
+    }
+
+    // — Categorías con links —
+    const catsConLinks = [...new Set(active.map(l => l.category))];
+    if (catsConLinks.length > 0) {
+      html += sectionLabel('🗂️ Explorar categorías');
+      html += '<div class="cat-grid">';
+      catsConLinks.forEach(cat => {
+        const cfg = CATEGORIAS[cat] || { label: cat, icon: '📦' };
+        const catLinks = active.filter(l => l.category === cat);
+        // Link a la primera URL de esa categoría (o # si hay varias)
+        const href = catLinks.length === 1 ? catLinks[0].url : '#';
+        html += `<a class="cat-btn" href="${href}" target="_blank">
+          <div class="cat-icon">${cfg.icon}</div>${cfg.label}
+        </a>`;
+      });
+      html += '</div>';
+    }
+
+    // — Cupón exclusivo (oculto) —
+    html += `<p class="section-label" style="display:none">🏷️ Cupón exclusivo</p>
+    <div class="coupon-wrap" style="display:none">
+      <p class="coupon-plat">Shein · Primera compra</p>
+      <p class="coupon-discount">15% de descuento al pagar</p>
+      <span class="coupon-code">BIBI15</span>
+      <p class="coupon-note">Copia el código y úsalo al finalizar tu compra en Shein</p>
+    </div>`;
+
+    // — Plataformas con links activos —
+    const platsConLinks = [...new Set(active.map(l => l.platform))];
+    html += `<p class="section-label" style="display:none">🛒 Ir a las tiendas</p>`;
+    html += `<div class="platform-list" style="display:none">`;
+    platsConLinks.forEach(plat => {
+      const cfg = PLATAFORMAS[plat] || PLATAFORMAS.other;
+      const platLinks = active.filter(l => l.platform === plat);
+      const href = platLinks[0].url;
+      html += `<a class="plat-link" href="${href}" target="_blank">
+        <div class="plat-logo ${cfg.logoClass}">${cfg.icon}</div>
+        <div class="plat-info">
+          <span class="plat-name">${cfg.label}</span>
+          <span class="plat-sub">${cfg.sub}</span>
+        </div>
+        <span class="plat-arrow">›</span>
+      </a>`;
+    });
+    html += `</div>`;
+
+    // — Comunidad (oculta) —
+    html += `<p class="section-label" style="display:none">📣 Únete a la comunidad</p>
+    <a class="newsletter" href="#" target="_blank" style="display:none">
+      <div class="newsletter-icon">💬</div>
+      <div class="newsletter-info">
+        <p class="newsletter-title">Canal de WhatsApp — Ofertas diarias</p>
+        <p class="newsletter-sub">Recibe las mejores ofertas antes que nadie</p>
+      </div>
+      <span class="plat-arrow">›</span>
+    </a>
+    <a class="newsletter" href="#" target="_blank" style="display:none">
+      <div class="newsletter-icon" style="background:#2AABEE;">📱</div>
+      <div class="newsletter-info">
+        <p class="newsletter-title">Canal de Telegram</p>
+        <p class="newsletter-sub">Alertas de ofertas flash en tiempo real</p>
+      </div>
+      <span class="plat-arrow">›</span>
+    </a>`;
+
+    if (active.length === 0) {
+      html += '<p class="empty">Pronto habrá nuevas ofertas. ¡Vuelve pronto! ✨</p>';
+    }
+
+    main.innerHTML = html;
+  }
+
+  function sectionLabel(text) {
+    return `<p class="section-label">${text}</p>`;
+  }
+
+  function dealCard(link) {
+    const plat = PLATAFORMAS[link.platform] || PLATAFORMAS.other;
+    const priceHtml = link.originalPrice
+      ? `Antes ${link.originalPrice} · Hoy <strong>${link.price}</strong> en ${plat.label}`
+      : `<strong>${link.price}</strong> en ${plat.label}`;
+    const cat = CATEGORIAS[link.category] || { icon: '📦' };
+
+    return `<a class="deal-card" href="${link.url}" target="_blank">
+      <span class="deal-icon">${cat.icon}</span>
+      <div class="deal-info">
+        ${link.badge ? `<span class="deal-badge">${link.badge}</span>` : ''}
+        <p class="deal-name">${link.title}</p>
+        ${link.price ? `<p class="deal-price">${priceHtml}</p>` : ''}
+      </div>
+      <span class="deal-arrow">›</span>
+    </a>`;
+  }
+
+  render();
+</script>
+</body>
+</html>
