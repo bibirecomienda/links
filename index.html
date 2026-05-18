@@ -12,18 +12,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:      #042C53;
-      --blue:      #185FA5;
-      --mid:       #378ADD;
-      --light:     #B5D4F4;
-      --pale:      #E6F1FB;
-      --amber:     #EF9F27;
-      --amber-bg:  #FAEEDA;
-      --amber-dk:  #633806;
+      --navy:      #7A2830;
+      --blue:      #C05040;
+      --mid:       #F0855A;
+      --light:     #F5C0B0;
+      --pale:      #FFF3EE;
+      --amber:     #D4344A;
+      --amber-bg:  #FFECED;
+      --amber-dk:  #ffffff;
       --white:     #ffffff;
-      --gray:      #5a6a7a;
-      --border:    #c8ddf0;
-      --bg:        #f0f6fd;
+      --gray:      #8a6a66;
+      --border:    #F5C0B0;
+      --bg:        #FFF8F5;
     }
 
     body {
@@ -90,7 +90,7 @@
 
     /* ── DEAL CARD ── */
     .deal-card {
-      background: var(--navy); border-radius: 16px;
+      background: var(--mid); border-radius: 16px;
       padding: 18px 18px 18px 20px;
       display: flex; align-items: center; gap: 14px;
       text-decoration: none; margin-bottom: 10px;
@@ -117,15 +117,25 @@
       text-decoration: none; color: var(--navy);
       display: flex; align-items: center; gap: 10px;
       font-size: 0.86rem; font-weight: 500; transition: all 0.18s;
+      cursor: pointer; font-family: inherit;
     }
     .cat-btn:hover { border-color: var(--mid); background: var(--pale); }
+    .cat-btn.active { border-color: var(--mid); background: var(--pale); box-shadow: 0 0 0 2px var(--mid); }
     .cat-icon {
       width: 36px; height: 36px; border-radius: 9px;
       background: var(--pale);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.2rem; flex-shrink: 0;
     }
-    .cat-btn:hover .cat-icon { background: var(--light); }
+    .cat-btn:hover .cat-icon, .cat-btn.active .cat-icon { background: var(--light); }
+
+    /* ── CLEAR FILTER ── */
+    .clear-filter {
+      background: none; border: none; color: var(--blue);
+      font-size: 0.78rem; font-weight: 600; cursor: pointer;
+      font-family: inherit; padding: 0; text-decoration: underline;
+      display: block; margin: 8px auto 0; text-align: center;
+    }
 
     /* ── PLATFORM LIST ── */
     .platform-list { display: flex; flex-direction: column; gap: 8px; }
@@ -189,6 +199,35 @@
     .newsletter-title { font-size: 0.87rem; font-weight: 600; color: var(--navy); }
     .newsletter-sub { font-size: 0.75rem; color: var(--gray); margin-top: 1px; }
 
+    /* ── BUSCADOR ── */
+    .productos-header {
+      display: flex; align-items: center; margin: 28px 0 12px;
+    }
+    .productos-header .section-label { margin: 0; flex: 1; }
+    .search-toggle {
+      background: none; border: 1px solid var(--border); border-radius: 8px;
+      color: var(--gray); cursor: pointer; font-size: 0.8rem;
+      padding: 4px 10px; font-family: inherit; transition: all 0.18s;
+      display: flex; align-items: center; gap: 5px; white-space: nowrap;
+    }
+    .search-toggle:hover, .search-toggle.active { border-color: var(--mid); color: var(--blue); background: var(--pale); }
+    .search-wrap {
+      position: relative; margin-bottom: 12px;
+    }
+    .search-input {
+      width: 100%; padding: 9px 36px 9px 12px;
+      border: 1px solid var(--border); border-radius: 10px;
+      font-family: inherit; font-size: 0.85rem; color: var(--navy);
+      background: var(--white); outline: none; transition: border-color 0.18s;
+    }
+    .search-input:focus { border-color: var(--mid); }
+    .search-input::placeholder { color: var(--gray); }
+    .search-clear {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: var(--gray); cursor: pointer;
+      font-size: 0.9rem; padding: 0; line-height: 1; display: none;
+    }
+
     /* ── EMPTY STATE ── */
     .empty { text-align: center; padding: 24px; color: var(--gray); font-size: 0.85rem; }
 
@@ -219,10 +258,8 @@
   <h1>Bibi Recomienda</h1>
   <p class="tagline">Las mejores ofertas de Amazon, Mercado Libre y más ✦</p>
   <div class="socials">
-    <a class="social-btn" href="#" target="_blank">📸 Instagram</a>
-    <a class="social-btn" href="#" target="_blank">🎵 TikTok</a>
-    <a class="social-btn" href="#" target="_blank">💬 WhatsApp</a>
-    <a class="social-btn" href="#" target="_blank">▶️ YouTube</a>
+    <a class="social-btn" href="https://www.instagram.com/bibi.recomienda/" target="_blank">📸 Instagram</a>
+    <a class="social-btn" href="https://www.tiktok.com/@bibi.recomienda" target="_blank">🎵 TikTok</a>
   </div>
 </header>
 
@@ -231,7 +268,7 @@
 </main>
 
 <footer>
-  <p>© 2026 Bibi Recomienda · <a href="#">Instagram</a> · <a href="#">TikTok</a></p>
+  <p>© 2026 Bibi Recomienda · <a href="https://www.instagram.com/bibi.recomienda/" target="_blank">Instagram</a> · <a href="https://www.tiktok.com/@bibi.recomienda" target="_blank">TikTok</a></p>
   <p style="margin-top:6px;">Algunos links son de programas de afiliados. ¡Gracias por tu apoyo! 💙</p>
 </footer>
 
@@ -261,6 +298,69 @@
   };
 
   // ═══════════════════════════════════════════
+  //  Estado del filtro activo
+  // ═══════════════════════════════════════════
+
+  let activeCategory = null;
+  let searchQuery = '';
+  let searchOpen = false;
+
+  function filterByCategory(cat) {
+    activeCategory = activeCategory === cat ? null : cat;
+    searchQuery = '';
+    searchOpen = false;
+    render();
+    if (activeCategory) {
+      document.getElementById('productos-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function toggleSearch() {
+    searchOpen = !searchOpen;
+    const wrap = document.getElementById('search-wrap');
+    const btn = document.getElementById('search-toggle-btn');
+    if (wrap) wrap.style.display = searchOpen ? 'block' : 'none';
+    if (btn) btn.classList.toggle('active', searchOpen);
+    if (searchOpen) document.getElementById('search-input')?.focus();
+    if (!searchOpen) { searchQuery = ''; renderProductos(); }
+  }
+
+  function onSearch(val) {
+    searchQuery = val.trim().toLowerCase();
+    activeCategory = null;
+    renderProductos();
+    document.getElementById('search-clear').style.display = searchQuery ? 'block' : 'none';
+  }
+
+  function clearSearch() {
+    searchQuery = '';
+    document.getElementById('search-input').value = '';
+    document.getElementById('search-clear').style.display = 'none';
+    renderProductos();
+  }
+
+  function renderProductos() {
+    const links = (typeof BIBI_LINKS !== 'undefined') ? BIBI_LINKS : [];
+    const active = links.filter(l => l.active);
+
+    let pool = activeCategory ? active.filter(l => l.category === activeCategory) : active;
+    if (searchQuery) {
+      pool = active.filter(l => l.title.toLowerCase().includes(searchQuery));
+    }
+
+    const container = document.getElementById('productos-container');
+    if (!container) return;
+
+    let html = '';
+    if (pool.length > 0) {
+      pool.forEach(l => { html += dealCard(l); });
+    } else {
+      html += '<p class="empty">No se encontraron productos. Intenta con otra búsqueda.</p>';
+    }
+    container.innerHTML = html;
+  }
+
+  // ═══════════════════════════════════════════
   //  Renderizado principal
   // ═══════════════════════════════════════════
 
@@ -284,15 +384,35 @@
       html += '<div class="cat-grid">';
       catsConLinks.forEach(cat => {
         const cfg = CATEGORIAS[cat] || { label: cat, icon: '📦' };
-        const catLinks = active.filter(l => l.category === cat);
-        // Link a la primera URL de esa categoría (o # si hay varias)
-        const href = catLinks.length === 1 ? catLinks[0].url : '#';
-        html += `<a class="cat-btn" href="${href}" target="_blank">
+        const isActive = activeCategory === cat;
+        html += `<button class="cat-btn${isActive ? ' active' : ''}" onclick="filterByCategory('${cat}')">
           <div class="cat-icon">${cfg.icon}</div>${cfg.label}
-        </a>`;
+        </button>`;
       });
       html += '</div>';
+      if (activeCategory) {
+        html += `<button class="clear-filter" onclick="filterByCategory(null)">✕ Ver todos</button>`;
+      }
     }
+
+    // — Encabezado de productos con toggle de búsqueda —
+    const labelProductos = activeCategory
+      ? `${CATEGORIAS[activeCategory]?.icon || '📦'} ${CATEGORIAS[activeCategory]?.label || activeCategory}`
+      : '🛍️ Todos los productos';
+    html += `<div class="productos-header" id="productos-section">
+      <p class="section-label" style="margin:0">${labelProductos}</p>
+      <button id="search-toggle-btn" class="search-toggle${searchOpen ? ' active' : ''}" onclick="toggleSearch()">🔍 Buscar</button>
+    </div>
+    <div id="search-wrap" style="display:${searchOpen ? 'block' : 'none'}">
+      <div class="search-wrap">
+        <input id="search-input" class="search-input" type="search" placeholder="Buscar productos..."
+          oninput="onSearch(this.value)" value="${searchQuery}" autocomplete="off" />
+        <button id="search-clear" class="search-clear" onclick="clearSearch()" style="display:${searchQuery ? 'block' : 'none'}">✕</button>
+      </div>
+    </div>`;
+
+    // — Productos —
+    html += `<div id="productos-container"></div>`;
 
     // — Cupón exclusivo (oculto) —
     html += `<p class="section-label" style="display:none">🏷️ Cupón exclusivo</p>
@@ -346,6 +466,7 @@
     }
 
     main.innerHTML = html;
+    renderProductos();
   }
 
   function sectionLabel(text) {
