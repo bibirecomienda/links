@@ -5,6 +5,19 @@
 
 var BIBI_LINKS = [
   {
+    id: 3,
+    title: "Trituradora de carne y pollo 10 pulgadas — con cepillo, sin BPA",
+    platform: "amazon",
+    category: "cocina",
+    url: "https://amzn.to/4uYnCXO",
+    price: "COP $68.443",
+    originalPrice: "",
+    badge: "⭐ 4.7 · 2.2K+ reseñas",
+    featured: false,
+    active: true,
+    date: "2026-05-17"
+  },
+  {
     id: 2,
     title: "OLESILK Bolsas de Gel Terapia Frío y Calor x6 — Lactancia, dolor de cabeza y ojos",
     platform: "amazon",
