@@ -48,11 +48,44 @@
       max-width: 430px;
       margin: 0 auto;
       -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(ellipse at top, rgba(201, 152, 94, 0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(160, 74, 54, 0.06) 0%, transparent 40%),
+        var(--bg);
+      background-attachment: fixed;
     }
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; cursor: pointer; }
     ::-webkit-scrollbar { display: none; }
     * { scrollbar-width: none; }
+
+    /* ── ANIMACIONES ────────────────────────────────────── */
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.35; transform: scale(0.75) rotate(0deg); }
+      50%      { opacity: 1;    transform: scale(1.15) rotate(180deg); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(93, 174, 93, 0.5); }
+      50%      { box-shadow: 0 0 0 6px rgba(93, 174, 93, 0); }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.025); }
+    }
+    @keyframes float-y {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-4px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
 
     /* ── HEADER ─────────────────────────────────────────── */
     header {
@@ -101,7 +134,23 @@
       object-fit: cover;
       border: 3px solid var(--surface);
       display: block;
+      animation: breathe 6s ease-in-out infinite;
     }
+
+    /* Sparkles animadas alrededor del avatar */
+    .sparkle {
+      position: absolute;
+      color: var(--gold);
+      font-size: 14px;
+      pointer-events: none;
+      z-index: 2;
+      animation: twinkle 2.6s ease-in-out infinite;
+      text-shadow: 0 0 6px rgba(201, 152, 94, 0.4);
+    }
+    .sparkle.s1 { top: 0;    left: -8px;  font-size: 16px; animation-delay: 0s; }
+    .sparkle.s2 { top: 14px; right: -6px; font-size: 12px; animation-delay: 0.6s; }
+    .sparkle.s3 { bottom: 8px; left: -2px; font-size: 11px; animation-delay: 1.2s; color: var(--accent); }
+    .sparkle.s4 { bottom: -4px; right: 8px; font-size: 14px; animation-delay: 1.8s; }
     h1.brand {
       font-size: 42px;
       font-style: italic;
@@ -125,6 +174,27 @@
       color: var(--ink);
       max-width: 280px;
       margin: 0 auto;
+    }
+    .live-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 10px;
+      padding: 4px 12px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .live-dot::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #5DAE5D;
+      animation: pulse-dot 1.8s ease-in-out infinite;
     }
     .socials {
       display: flex;
@@ -322,6 +392,12 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      transition: transform .2s, box-shadow .2s;
+      animation: fade-up .5s ease both;
+    }
+    .campaign-card:active { transform: scale(0.98); }
+    @media (hover: hover) {
+      .campaign-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(160, 74, 54, 0.12); }
     }
     .campaign-head { display: flex; align-items: center; gap: 8px; }
     .campaign-logo {
@@ -369,7 +445,10 @@
       font-size: 14px;
       font-style: italic;
       white-space: nowrap;
+      text-transform: capitalize;
+      transition: transform .15s, background .15s, color .15s;
     }
+    .cat-chip:active { transform: scale(0.96); }
     .cat-chip.active {
       border-color: var(--ink);
       background: var(--ink);
@@ -390,6 +469,26 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+      animation: fade-up .5s ease both;
+      animation-delay: calc(var(--i, 0) * 60ms);
+    }
+    .product-card:active { transform: scale(0.98); }
+    @media (hover: hover) {
+      .product-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(160, 74, 54, 0.12); }
+    }
+    .pick-card {
+      display: block;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      animation: fade-up .5s ease both;
+    }
+    .pick-card:active { transform: scale(0.99); }
+    @media (hover: hover) {
+      .pick-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(160, 74, 54, 0.14); }
     }
     .product-thumb {
       aspect-ratio: 1;
@@ -425,6 +524,20 @@
       border-radius: 4px;
       font-weight: 700;
     }
+    .product-new-badge {
+      position: absolute;
+      top: 8px; right: 8px;
+      font-family: var(--sans);
+      font-size: 8px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      background: var(--gold);
+      color: #fff;
+      border-radius: 4px;
+      font-weight: 800;
+      animation: float-y 2.4s ease-in-out infinite;
+    }
     .product-info {
       padding: 10px 11px 12px;
       flex: 1;
@@ -451,6 +564,21 @@
     .product-price {
       font-size: 13px;
       font-weight: 700;
+    }
+    .product-date {
+      font-family: var(--sans);
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 3px;
+      letter-spacing: 0.2px;
+    }
+    .pick-date {
+      font-family: var(--sans);
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.2px;
+      font-style: italic;
     }
     .empty-state {
       grid-column: 1 / -1;
@@ -507,12 +635,17 @@
 
   <div class="avatar-wrap">
     <div class="avatar-bg"></div>
+    <span class="sparkle s1">✦</span>
+    <span class="sparkle s2">✧</span>
+    <span class="sparkle s3">✦</span>
+    <span class="sparkle s4">✧</span>
     <img class="avatar" src="bibirecomiendaimage.jpg" alt="Bibi" />
   </div>
 
   <h1 class="brand">Bibi</h1>
   <div class="tagline">✦  recomienda  ✦</div>
   <p class="intro">"Una selección honesta de lo que uso, pruebo<br/>y vuelvo a comprar"</p>
+  <div class="live-dot" id="live-dot">Actualizado hoy</div>
 
   <div class="socials">
     <a class="social-chip" href="https://www.instagram.com/bibi.recomienda/" target="_blank" rel="noopener">Instagram</a>
@@ -535,6 +668,7 @@
   <div class="footer-thanks">Gracias por estar aquí</div>
   <div class="footer-disclaimer">
     Algunos enlaces son de afiliados. Tu compra apoya este proyecto sin costo extra para ti.<br/>
+    Los precios y cupones pueden cambiar sin aviso — verificá al hacer click.<br/>
     © 2026 Bibi Recomienda · <a href="https://www.instagram.com/bibi.recomienda/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@bibi.recomienda" target="_blank" rel="noopener">TikTok</a>
   </div>
 </footer>
@@ -560,6 +694,49 @@
   const storeLabel = p => p === 'amazon' ? 'Amazon' : p === 'mercadolibre' ? 'Mercado Libre' : (p || '');
   const storeBadge = p => p === 'amazon' ? 'AMZ' : p === 'mercadolibre' ? 'ML' : (p || '').slice(0, 3).toUpperCase();
   const catLabel = c => (categorias[c] && categorias[c].label) || c || '';
+
+  // ¿Producto agregado en los últimos 14 días? → muestra badge "NUEVO"
+  function isNew(dateStr) {
+    if (!dateStr) return false;
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return false;
+    const diffDays = (Date.now() - d.getTime()) / (1000 * 60 * 60 * 24);
+    return diffDays >= 0 && diffDays <= 14;
+  }
+
+  // Calcula "Actualizado hoy / ayer / hace N días / el DD mes" a partir
+  // de la fecha más reciente de los productos activos.
+  function lastUpdatedLabel() {
+    const dates = products
+      .map(p => p.date && new Date(p.date))
+      .filter(d => d && !isNaN(d.getTime()));
+    if (!dates.length) return 'Actualizado recientemente';
+
+    const newest = new Date(Math.max(...dates.map(d => d.getTime())));
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const newestDay = new Date(newest);
+    newestDay.setHours(0, 0, 0, 0);
+    const diffDays = Math.round((today - newestDay) / (1000 * 60 * 60 * 24));
+
+    if (diffDays <= 0) return 'Actualizado hoy';
+    if (diffDays === 1) return 'Actualizado ayer';
+    if (diffDays <= 7) return `Actualizado hace ${diffDays} días`;
+
+    const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+    const dia = newest.getDate();
+    const mes = meses[newest.getMonth()];
+    return `Actualizado el ${dia} ${mes}`;
+  }
+
+  // Formatea una fecha como "17 may" para mostrar por producto
+  const MESES_CORTO = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  function formatProductDate(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '';
+    return `${d.getDate()} ${MESES_CORTO[d.getMonth()]}`;
+  }
 
   // Cupón banner — variante completa o compacta
   function couponBanner(text, compact) {
@@ -602,6 +779,7 @@
                 <span class="price">${esc(p.price)}</span>
                 <span class="ver-link">Ver →</span>
               </div>
+              ${p.date ? `<div class="pick-date">Visto el ${esc(formatProductDate(p.date))} · los precios pueden variar</div>` : ''}
             </div>
           </div>
           ${couponBanner(p.coupon, false)}
@@ -662,16 +840,18 @@
   //  Render — Grid de productos
   // ─────────────────────────────────────────────────────
   function renderProducts(list) {
-    const cards = list.length ? list.map(p => `
-      <a class="product-card" href="${esc(p.url)}" target="_blank" rel="noopener">
+    const cards = list.length ? list.map((p, i) => `
+      <a class="product-card" style="--i:${i};" href="${esc(p.url)}" target="_blank" rel="noopener">
         <div class="product-thumb">
           ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
           <span class="product-store-badge">${esc(storeBadge(p.platform))}</span>
+          ${isNew(p.date) ? `<span class="product-new-badge">✨ Nuevo</span>` : ''}
         </div>
         <div class="product-info">
           <div class="product-cat">${esc(catLabel(p.category))}</div>
           <div class="product-title">${esc(p.title)}</div>
           <div class="product-price">${esc(p.price)}</div>
+          ${p.date ? `<div class="product-date">Visto el ${esc(formatProductDate(p.date))}</div>` : ''}
         </div>
         ${couponBanner(p.coupon, true)}
       </a>`).join('') : `<div class="empty-state">Sin resultados. Probá con otra búsqueda o categoría.</div>`;
@@ -726,6 +906,9 @@
     query = e.target.value.trim().toLowerCase();
     render();
   });
+
+  // Setea el texto dinámico "Actualizado ..." basado en el producto más nuevo
+  document.getElementById('live-dot').textContent = lastUpdatedLabel();
 
   render();
 </script>
