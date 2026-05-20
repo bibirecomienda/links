@@ -3,531 +3,732 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bibi Recomienda</title>
-  <meta name="description" content="Las mejores ofertas y productos de Amazon, Mercado Libre y más — curados por Bibi." />
+  <title>Bibi Recomienda — Las mejores ofertas curadas a mano</title>
+  <meta name="description" content="Una selección honesta de productos que uso, pruebo y vuelvo a comprar. Amazon, Mercado Libre y más." />
+  <meta name="theme-color" content="#F4DDD7" />
+
+  <!-- Open Graph para preview en WhatsApp / Stories / etc. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Bibi Recomienda" />
+  <meta property="og:description" content="Una selección honesta de productos que uso, pruebo y vuelvo a comprar." />
+  <meta property="og:image" content="https://bibirecomienda.github.io/links/bibirecomiendaimage.jpg" />
+  <meta property="og:url" content="https://bibirecomienda.github.io/links/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/jpeg" href="bibirecomiendaimage.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <script src="links.js"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:      #7A2830;
-      --blue:      #C05040;
-      --mid:       #F0855A;
-      --light:     #F5C0B0;
-      --pale:      #FFF3EE;
-      --amber:     #D4344A;
-      --amber-bg:  #FFECED;
-      --amber-dk:  #ffffff;
-      --white:     #ffffff;
-      --gray:      #8a6a66;
-      --border:    #F5C0B0;
-      --bg:        #FFF8F5;
+      --bg:       #F4DDD7;   /* powder pink */
+      --surface:  #FBEAE4;   /* lighter blush */
+      --cream:    #FAF1E8;   /* warm cream para cards */
+      --card:     #FFFFFF;   /* fondo de fotos de producto */
+      --ink:      #3B2521;   /* burgundy-brown */
+      --muted:    #9C7A6F;   /* dusty mauve */
+      --accent:   #A04A36;   /* terracotta */
+      --rule:     #E5C9C0;
+      --gold:     #C9985E;
+
+      --serif:    'Cormorant Garamond', 'Georgia', serif;
+      --sans:     'Inter', system-ui, -apple-system, sans-serif;
     }
 
+    html, body { background: var(--bg); }
     body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--bg);
+      font-family: var(--serif);
+      color: var(--ink);
       min-height: 100vh;
-      color: var(--navy);
+      max-width: 430px;
+      margin: 0 auto;
+      -webkit-font-smoothing: antialiased;
     }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+    ::-webkit-scrollbar { display: none; }
+    * { scrollbar-width: none; }
 
-    /* ── HEADER ── */
+    /* ── HEADER ─────────────────────────────────────────── */
     header {
-      background: var(--pale);
-      border-bottom: 3px solid var(--mid);
-      padding: 36px 20px 28px;
+      padding: 26px 24px 24px;
       text-align: center;
       position: relative;
     }
-    header::before {
-      content: '';
+    .search-toggle {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--navy), var(--mid), var(--light));
-    }
-    .avatar-wrap { position: relative; display: inline-block; margin-bottom: 14px; }
-    .avatar {
-      width: 90px; height: 90px;
-      border-radius: 18px;
-      background: var(--mid);
-      border: 3px solid var(--white);
-      box-shadow: 0 4px 16px rgba(55,138,221,0.25);
-      overflow: hidden;
+      top: 22px; right: 22px;
+      z-index: 3;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--ink);
+      border: none;
+      font-size: 18px;
       display: flex; align-items: center; justify-content: center;
+      font-family: var(--sans);
+      transition: all .2s;
     }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .live-badge {
-      position: absolute; bottom: -6px; right: -6px;
-      background: var(--amber); color: var(--amber-dk);
-      font-size: 0.65rem; font-weight: 700;
-      padding: 3px 8px; border-radius: 10px;
-      border: 2px solid var(--white); letter-spacing: 0.5px;
+    .search-toggle.open {
+      background: var(--ink);
+      color: var(--surface);
     }
-    header h1 { font-size: 1.5rem; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
-    header p.tagline { font-size: 0.85rem; color: var(--blue); margin-top: 4px; }
-    .socials { display: flex; justify-content: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-    .social-btn {
-      background: var(--white); color: var(--blue);
-      border: 1px solid var(--border); border-radius: 20px;
-      padding: 5px 14px; font-size: 0.75rem; font-weight: 600;
-      text-decoration: none; transition: all 0.2s;
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-top: 4px;
     }
-    .social-btn:hover { background: var(--mid); color: var(--white); border-color: var(--mid); }
+    .avatar-bg {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      background: var(--surface);
+      z-index: 0;
+    }
+    .avatar {
+      position: relative;
+      z-index: 1;
+      width: 118px; height: 118px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--surface);
+      display: block;
+    }
+    h1.brand {
+      font-size: 42px;
+      font-style: italic;
+      font-weight: 500;
+      margin: 12px 0 2px;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+    .tagline {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .intro {
+      font-size: 15px;
+      line-height: 1.45;
+      font-style: italic;
+      color: var(--ink);
+      max-width: 280px;
+      margin: 0 auto;
+    }
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .social-chip {
+      padding: 7px 16px;
+      border-radius: 100px;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .search-wrap {
+      margin-top: 18px;
+      display: none;
+    }
+    .search-wrap.open { display: block; }
+    .search-input {
+      width: 100%;
+      padding: 12px 18px;
+      border: 1px solid var(--rule);
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 13px;
+      background: var(--cream);
+      color: var(--ink);
+      outline: none;
+      text-align: center;
+    }
 
-    /* ── MAIN ── */
-    main { max-width: 580px; margin: 0 auto; padding: 24px 16px 60px; }
-
+    /* ── SECCIONES ──────────────────────────────────────── */
+    main { padding: 0 0 28px; }
     .section-label {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.7rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1.4px;
-      color: var(--blue); margin: 28px 0 12px;
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 700;
+      display: inline-block;
     }
-    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-label.accent { color: var(--accent); }
+    .section-head {
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      margin-bottom: 12px;
+    }
+    .section-head .right {
+      margin-left: auto;
+      font-family: var(--sans);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.3px;
+    }
 
-    /* ── DEAL CARD ── */
-    .deal-card {
-      background: var(--mid); border-radius: 16px;
-      display: flex; flex-direction: column;
-      text-decoration: none; margin-bottom: 10px;
+    /* ── PICK DEL DÍA ───────────────────────────────────── */
+    .pick-section { padding: 0 20px 22px; }
+    .pick-card {
+      display: block;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
       overflow: hidden;
-      transition: transform 0.18s, box-shadow 0.18s;
     }
-    .deal-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(122,40,48,0.22); }
-    .deal-card-main { display: flex; align-items: center; gap: 14px; padding: 18px 18px 18px 20px; }
-    .deal-icon { font-size: 2.2rem; flex-shrink: 0; }
-    .deal-img {
-      width: 72px; height: 72px; border-radius: 10px;
-      object-fit: cover; flex-shrink: 0;
-      background: rgba(255,255,255,0.15);
+    .pick-card-main {
+      display: flex;
+      gap: 14px;
+      padding: 14px;
     }
-    .deal-info { flex: 1; }
-    .deal-badge {
-      display: inline-block; background: var(--amber); color: var(--amber-dk);
-      font-size: 0.62rem; font-weight: 700; padding: 2px 8px;
-      border-radius: 8px; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 5px;
+    .pick-thumb {
+      width: 100px; height: 100px;
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .deal-name { font-size: 0.92rem; font-weight: 600; color: var(--white); line-height: 1.35; }
-    .deal-price { font-size: 0.78rem; color: var(--light); margin-top: 3px; }
-    .deal-price strong { color: white; font-size: 0.95rem; }
-    .deal-arrow { color: var(--light); font-size: 1.3rem; flex-shrink: 0; }
+    .pick-thumb img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      padding: 6px;
+    }
+    .pick-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .pick-badges {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+    .badge.pick { background: var(--accent); color: #fff; }
+    .badge.store { background: var(--surface); color: var(--ink); font-weight: 600; letter-spacing: 0.4px; text-transform: none; }
+    .pick-title {
+      font-size: 17px;
+      line-height: 1.2;
+      margin-bottom: 3px;
+      font-weight: 500;
+    }
+    .pick-cat {
+      font-family: var(--sans);
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .pick-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .price { font-size: 19px; font-weight: 700; }
+    .ver-link {
+      margin-left: auto;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.3px;
+    }
 
-    /* ── CUPÓN BANNER ── */
-    .deal-coupon {
+    /* ── BANNER DE CUPÓN ────────────────────────────────── */
+    .coupon-banner {
       background: #fff;
-      border-top: 2px dashed rgba(240,133,90,0.4);
-      padding: 9px 16px;
-      display: flex; align-items: center; justify-content: center; gap: 7px;
-      font-size: 0.78rem; font-weight: 700; color: var(--navy);
-      letter-spacing: 0.2px;
+      border-top: 2px dashed rgba(160, 74, 54, 0.35);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--sans);
     }
-    .deal-coupon-tag {
-      background: var(--amber); color: var(--amber-dk);
-      font-size: 0.65rem; font-weight: 800;
-      padding: 2px 8px; border-radius: 6px;
-      text-transform: uppercase; letter-spacing: 0.8px;
+    .coupon-banner.compact { padding: 7px 8px; gap: 6px; }
+    .coupon-tag {
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 5px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
       flex-shrink: 0;
     }
+    .coupon-banner.compact .coupon-tag {
+      font-size: 8px;
+      padding: 2px 6px;
+      letter-spacing: 0.6px;
+    }
+    .coupon-msg {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .coupon-banner.compact .coupon-msg { font-size: 10px; }
 
-    /* ── CATEGORY GRID ── */
-    .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .cat-btn {
-      background: var(--white); border: 1.5px solid var(--border);
-      border-radius: 12px; padding: 14px 12px;
-      text-decoration: none; color: var(--navy);
-      display: flex; align-items: center; gap: 10px;
-      font-size: 0.86rem; font-weight: 500; transition: all 0.18s;
-      cursor: pointer; font-family: inherit;
+    /* ── CAMPAÑAS ───────────────────────────────────────── */
+    .campaigns-section { padding: 0 0 22px; }
+    .campaigns-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 0 20px 4px;
     }
-    .cat-btn:hover { border-color: var(--mid); background: var(--pale); }
-    .cat-btn.active { border-color: var(--mid); background: var(--pale); box-shadow: 0 0 0 2px var(--mid); }
-    .cat-icon {
-      width: 36px; height: 36px; border-radius: 9px;
-      background: var(--pale);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; flex-shrink: 0;
+    .campaign-card {
+      flex-shrink: 0;
+      width: 230px;
+      padding: 14px;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .cat-btn:hover .cat-icon, .cat-btn.active .cat-icon { background: var(--light); }
+    .campaign-head { display: flex; align-items: center; gap: 8px; }
+    .campaign-logo {
+      width: 30px; height: 30px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-weight: 700;
+      color: #000;
+      font-size: 14px;
+    }
+    .campaign-store {
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .campaign-arrow {
+      margin-left: auto;
+      font-size: 14px;
+      color: var(--accent);
+    }
+    .campaign-title { font-size: 17px; line-height: 1.15; margin-bottom: 2px; font-weight: 500; }
+    .campaign-sub { font-family: var(--sans); font-size: 10px; color: var(--muted); }
 
-    /* ── CLEAR FILTER ── */
-    .clear-filter {
-      background: none; border: none; color: var(--blue);
-      font-size: 0.78rem; font-weight: 600; cursor: pointer;
-      font-family: inherit; padding: 0; text-decoration: underline;
-      display: block; margin: 8px auto 0; text-align: center;
+    /* ── CATEGORÍAS ─────────────────────────────────────── */
+    .cats-section { padding: 0 0 14px; }
+    .cats-scroll {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 0 20px 4px;
     }
-
-    /* ── PLATFORM LIST ── */
-    .platform-list { display: flex; flex-direction: column; gap: 8px; }
-    .plat-link {
-      background: var(--white); border: 1.5px solid var(--border);
-      border-radius: 14px; padding: 13px 16px;
-      text-decoration: none; color: var(--navy);
-      display: flex; align-items: center; gap: 13px; transition: all 0.18s;
+    .cat-chip {
+      padding: 7px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--rule);
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 14px;
+      font-style: italic;
+      white-space: nowrap;
     }
-    .plat-link:hover { border-color: var(--mid); transform: translateX(4px); }
-    .plat-logo {
-      width: 42px; height: 42px; border-radius: 11px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; flex-shrink: 0;
-    }
-    .logo-amazon { background: #FF9900; }
-    .logo-mercadolibre { background: #FFE600; }
-    .logo-shein { background: #222222; }
-    .logo-aliexpress { background: #FF4747; }
-    .logo-other { background: var(--pale); }
-    .plat-info { flex: 1; }
-    .plat-name { display: block; font-size: 0.9rem; font-weight: 600; color: var(--navy); }
-    .plat-sub { display: block; font-size: 0.75rem; color: var(--gray); margin-top: 1px; }
-    .plat-arrow { color: var(--light); font-size: 1.1rem; }
-
-    /* ── COUPON ── */
-    .coupon-wrap {
-      background: var(--white); border: 2px dashed var(--mid);
-      border-radius: 16px; padding: 20px; text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .coupon-wrap::before, .coupon-wrap::after {
-      content: ''; position: absolute; top: 50%; transform: translateY(-50%);
-      width: 18px; height: 18px; border-radius: 50%; background: var(--bg);
-    }
-    .coupon-wrap::before { left: -9px; }
-    .coupon-wrap::after { right: -9px; }
-    .coupon-plat { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-    .coupon-discount { font-size: 0.78rem; font-weight: 600; color: var(--blue); margin-bottom: 8px; }
-    .coupon-code {
-      display: inline-block; background: var(--navy); color: var(--amber);
-      font-size: 1.7rem; font-weight: 700; letter-spacing: 4px;
-      padding: 8px 24px; border-radius: 10px;
-    }
-    .coupon-note { font-size: 0.74rem; color: var(--gray); margin-top: 8px; }
-
-    /* ── NEWSLETTER ── */
-    .newsletter {
-      background: var(--pale); border: 1.5px solid var(--border);
-      border-radius: 14px; padding: 16px 18px;
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 8px; text-decoration: none; transition: border-color 0.18s;
-    }
-    .newsletter:hover { border-color: var(--mid); }
-    .newsletter-icon {
-      width: 40px; height: 40px; border-radius: 10px; background: var(--mid);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; flex-shrink: 0;
-    }
-    .newsletter-info { flex: 1; }
-    .newsletter-title { font-size: 0.87rem; font-weight: 600; color: var(--navy); }
-    .newsletter-sub { font-size: 0.75rem; color: var(--gray); margin-top: 1px; }
-
-    /* ── BUSCADOR ── */
-    .productos-header {
-      display: flex; align-items: center; margin: 28px 0 12px;
-    }
-    .productos-header .section-label { margin: 0; flex: 1; }
-    .search-toggle {
-      background: none; border: 1px solid var(--border); border-radius: 8px;
-      color: var(--gray); cursor: pointer; font-size: 0.8rem;
-      padding: 4px 10px; font-family: inherit; transition: all 0.18s;
-      display: flex; align-items: center; gap: 5px; white-space: nowrap;
-    }
-    .search-toggle:hover, .search-toggle.active { border-color: var(--mid); color: var(--blue); background: var(--pale); }
-    .search-wrap {
-      position: relative; margin-bottom: 12px;
-    }
-    .search-input {
-      width: 100%; padding: 9px 36px 9px 12px;
-      border: 1px solid var(--border); border-radius: 10px;
-      font-family: inherit; font-size: 0.85rem; color: var(--navy);
-      background: var(--white); outline: none; transition: border-color 0.18s;
-    }
-    .search-input:focus { border-color: var(--mid); }
-    .search-input::placeholder { color: var(--gray); }
-    .search-clear {
-      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-      background: none; border: none; color: var(--gray); cursor: pointer;
-      font-size: 0.9rem; padding: 0; line-height: 1; display: none;
+    .cat-chip.active {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--bg);
     }
 
-    /* ── EMPTY STATE ── */
-    .empty { text-align: center; padding: 24px; color: var(--gray); font-size: 0.85rem; }
+    /* ── GRID DE PRODUCTOS ──────────────────────────────── */
+    .products-section { padding: 8px 20px 28px; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .product-card {
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-thumb {
+      aspect-ratio: 1;
+      background: var(--card);
+      position: relative;
+    }
+    .product-thumb img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      padding: 10px;
+    }
+    .product-thumb-placeholder {
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(45deg, var(--cream), var(--cream) 6px, var(--surface) 6px, var(--surface) 12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+    .product-store-badge {
+      position: absolute;
+      top: 8px; left: 8px;
+      font-family: var(--sans);
+      font-size: 8px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 6px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .product-info {
+      padding: 10px 11px 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-cat {
+      font-family: var(--sans);
+      font-size: 8px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .product-title {
+      font-size: 14px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+      font-weight: 500;
+      min-height: 34px;
+      flex: 1;
+    }
+    .product-price {
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      font-style: italic;
+    }
 
-    /* ── FOOTER ── */
+    /* ── FOOTER ─────────────────────────────────────────── */
     footer {
-      text-align: center; padding: 0 20px 30px;
-      font-size: 0.72rem; color: var(--gray);
-      max-width: 580px; margin: 0 auto;
+      padding: 16px 24px 36px;
+      text-align: center;
     }
-    footer a { color: var(--blue); text-decoration: none; }
-
-    @media (max-width: 420px) {
-      .cat-grid { grid-template-columns: 1fr; }
-      header h1 { font-size: 1.3rem; }
-      .coupon-code { font-size: 1.3rem; letter-spacing: 3px; }
+    .footer-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .footer-divider span:nth-child(2) {
+      color: var(--gold);
+      font-size: 14px;
+    }
+    .footer-divider span:first-child,
+    .footer-divider span:last-child {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+    .footer-thanks {
+      font-style: italic;
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+    .footer-disclaimer {
+      font-family: var(--sans);
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.6;
+      letter-spacing: 0.3px;
+    }
+    .footer-disclaimer a {
+      color: var(--accent);
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
 <header>
+  <button class="search-toggle" id="search-toggle" aria-label="Buscar productos">⌕</button>
+
   <div class="avatar-wrap">
-    <div class="avatar">
-      <img src="bibirecomiendaimage.jpg" alt="Bibi" />
-    </div>
-    <span class="live-badge">✦ ACTIVO</span>
+    <div class="avatar-bg"></div>
+    <img class="avatar" src="bibirecomiendaimage.jpg" alt="Bibi" />
   </div>
-  <h1>Bibi Recomienda</h1>
-  <p class="tagline">Las mejores ofertas de Amazon, Mercado Libre y más ✦</p>
+
+  <h1 class="brand">Bibi</h1>
+  <div class="tagline">✦  recomienda  ✦</div>
+  <p class="intro">"Una selección honesta de lo que uso, pruebo<br/>y vuelvo a comprar"</p>
+
   <div class="socials">
-    <a class="social-btn" href="https://www.instagram.com/bibi.recomienda/" target="_blank">📸 Instagram</a>
-    <a class="social-btn" href="https://www.tiktok.com/@bibi.recomienda" target="_blank">🎵 TikTok</a>
+    <a class="social-chip" href="https://www.instagram.com/bibi.recomienda/" target="_blank" rel="noopener">Instagram</a>
+    <a class="social-chip" href="https://www.tiktok.com/@bibi.recomienda" target="_blank" rel="noopener">TikTok</a>
+  </div>
+
+  <div class="search-wrap" id="search-wrap">
+    <input class="search-input" id="search-input" type="search" placeholder="Buscar entre todos los productos…" autocomplete="off" />
   </div>
 </header>
 
-<main id="main-content">
-  <!-- Renderizado dinámicamente por JavaScript -->
-</main>
+<main id="main"></main>
 
 <footer>
-  <p>© 2026 Bibi Recomienda · <a href="https://www.instagram.com/bibi.recomienda/" target="_blank">Instagram</a> · <a href="https://www.tiktok.com/@bibi.recomienda" target="_blank">TikTok</a></p>
-  <p style="margin-top:6px;">Algunos links son de programas de afiliados. ¡Gracias por tu apoyo! 💙</p>
+  <div class="footer-divider">
+    <span></span>
+    <span>✦ ✦ ✦</span>
+    <span></span>
+  </div>
+  <div class="footer-thanks">Gracias por estar aquí</div>
+  <div class="footer-disclaimer">
+    Algunos enlaces son de afiliados. Tu compra apoya este proyecto sin costo extra para ti.<br/>
+    © 2026 Bibi Recomienda · <a href="https://www.instagram.com/bibi.recomienda/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@bibi.recomienda" target="_blank" rel="noopener">TikTok</a>
+  </div>
 </footer>
 
 <script>
-  // ═══════════════════════════════════════════
-  //  Configuración de categorías y plataformas
-  // ═══════════════════════════════════════════
+  // ─────────────────────────────────────────────────────
+  //  Estado y datos
+  // ─────────────────────────────────────────────────────
+  const products = (typeof BIBI_LINKS !== 'undefined' ? BIBI_LINKS : []).filter(p => p.active);
+  const campaigns = (typeof BIBI_CAMPANAS !== 'undefined' ? BIBI_CAMPANAS : []).filter(c => c.active);
+  const categorias = typeof BIBI_CATEGORIAS !== 'undefined' ? BIBI_CATEGORIAS : {};
 
-  const CATEGORIAS = {
-    tecnologia: { label: 'Tecnología',  icon: '💻' },
-    belleza:    { label: 'Belleza',     icon: '💄' },
-    moda:       { label: 'Moda',        icon: '👗' },
-    hogar:      { label: 'Hogar',       icon: '🏠' },
-    cocina:     { label: 'Cocina',      icon: '🍳' },
-    deporte:    { label: 'Deporte',     icon: '🏋️' },
-    ninos:      { label: 'Niños',       icon: '🧒' },
-    mascotas:   { label: 'Mascotas',    icon: '🐾' },
-    otros:      { label: 'Otros',       icon: '📦' }
-  };
+  let activeCat = 'all';
+  let query = '';
 
-  const PLATAFORMAS = {
-    amazon:        { label: 'Amazon',        icon: '📦', logoClass: 'logo-amazon',       sub: 'Mis picks y ofertas del día →' },
-    mercadolibre:  { label: 'Mercado Libre', icon: '🛒', logoClass: 'logo-mercadolibre', sub: 'Mejores vendedores y envío gratis →' },
-    shein:         { label: 'Shein',         icon: '👗', logoClass: 'logo-shein',        sub: 'Moda con código BIBI15 →' },
-    aliexpress:    { label: 'AliExpress',    icon: '🌐', logoClass: 'logo-aliexpress',   sub: 'Productos únicos al mejor precio →' },
-    other:         { label: 'Otras tiendas', icon: '🏪', logoClass: 'logo-other',        sub: 'Ver productos →' }
-  };
+  // ─────────────────────────────────────────────────────
+  //  Helpers
+  // ─────────────────────────────────────────────────────
+  const esc = s => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-  // ═══════════════════════════════════════════
-  //  Estado del filtro activo
-  // ═══════════════════════════════════════════
+  const storeLabel = p => p === 'amazon' ? 'Amazon' : p === 'mercadolibre' ? 'Mercado Libre' : (p || '');
+  const storeBadge = p => p === 'amazon' ? 'AMZ' : p === 'mercadolibre' ? 'ML' : (p || '').slice(0, 3).toUpperCase();
+  const catLabel = c => (categorias[c] && categorias[c].label) || c || '';
 
-  let activeCategory = null;
-  let searchQuery = '';
+  // Cupón banner — variante completa o compacta
+  function couponBanner(text, compact) {
+    if (!text) return '';
+    const cls = compact ? 'coupon-banner compact' : 'coupon-banner';
+    const msg = compact ? esc(text) : `¡Activa el cupón y ${esc(text)}!`;
+    return `
+      <div class="${cls}">
+        <span class="coupon-tag">🏷️ Cupón</span>
+        <span class="coupon-msg">${msg}</span>
+      </div>`;
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Render — Pick del día
+  // ─────────────────────────────────────────────────────
+  function renderPick(p) {
+    if (!p) return '';
+    return `
+      <section class="pick-section">
+        <div class="section-head">
+          <span class="section-label">Pick del día</span>
+          <span class="right">Hoy</span>
+        </div>
+        <a class="pick-card" href="${esc(p.url)}" target="_blank" rel="noopener">
+          <div class="pick-card-main">
+            <div class="pick-thumb">
+              ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
+            </div>
+            <div class="pick-info">
+              <div>
+                <div class="pick-badges">
+                  <span class="badge pick">Pick</span>
+                  <span class="badge store">${esc(storeLabel(p.platform))}</span>
+                </div>
+                <div class="pick-title">${esc(p.title)}</div>
+                <div class="pick-cat">${esc(catLabel(p.category))}</div>
+              </div>
+              <div class="pick-price-row">
+                <span class="price">${esc(p.price)}</span>
+                <span class="ver-link">Ver →</span>
+              </div>
+            </div>
+          </div>
+          ${couponBanner(p.coupon, false)}
+        </a>
+      </section>`;
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Render — Campañas (sólo si hay activas)
+  // ─────────────────────────────────────────────────────
+  function renderCampaigns() {
+    if (!campaigns.length) return '';
+    const cards = campaigns.map(c => `
+      <a class="campaign-card" href="${esc(c.url)}" target="_blank" rel="noopener">
+        <div class="campaign-head">
+          <div class="campaign-logo" style="background:${esc(c.color || '#FFE600')}">${esc((c.store || '?')[0])}</div>
+          <span class="campaign-store">${esc(c.store || '')}</span>
+          <span class="campaign-arrow">↗</span>
+        </div>
+        <div>
+          <div class="campaign-title">${esc(c.title)}</div>
+          <div class="campaign-sub">${esc(c.subtitle || '')}</div>
+        </div>
+      </a>`).join('');
+    return `
+      <section class="campaigns-section">
+        <div class="section-head">
+          <span class="section-label accent">◆ Campañas activas</span>
+        </div>
+        <div class="campaigns-scroll">${cards}</div>
+      </section>`;
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Render — Categorías
+  // ─────────────────────────────────────────────────────
+  function renderCats(filteredCount) {
+    const usedCats = [...new Set(products.map(p => p.category))];
+    if (!usedCats.length) return '';
+    const chips = [
+      { id: 'all', label: 'Todo' },
+      ...usedCats.map(id => ({ id, label: catLabel(id) }))
+    ].map(c => `
+      <button class="cat-chip ${activeCat === c.id ? 'active' : ''}" data-cat="${esc(c.id)}">
+        ${esc(c.label)}
+      </button>`).join('');
+    return `
+      <section class="cats-section">
+        <div class="section-head">
+          <span class="section-label accent">◆ Categorías</span>
+          <span class="right">${filteredCount} producto${filteredCount === 1 ? '' : 's'}</span>
+        </div>
+        <div class="cats-scroll">${chips}</div>
+      </section>`;
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Render — Grid de productos
+  // ─────────────────────────────────────────────────────
+  function renderProducts(list) {
+    const cards = list.length ? list.map(p => `
+      <a class="product-card" href="${esc(p.url)}" target="_blank" rel="noopener">
+        <div class="product-thumb">
+          ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
+          <span class="product-store-badge">${esc(storeBadge(p.platform))}</span>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">${esc(catLabel(p.category))}</div>
+          <div class="product-title">${esc(p.title)}</div>
+          <div class="product-price">${esc(p.price)}</div>
+        </div>
+        ${couponBanner(p.coupon, true)}
+      </a>`).join('') : `<div class="empty-state">Sin resultados. Probá con otra búsqueda o categoría.</div>`;
+    return `
+      <section class="products-section">
+        <div class="products-grid">${cards}</div>
+      </section>`;
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Render principal
+  // ─────────────────────────────────────────────────────
+  function render() {
+    const featured = products.find(p => p.featured) || products[0];
+    let list = products;
+    if (activeCat !== 'all') list = list.filter(p => p.category === activeCat);
+    if (query) list = list.filter(p => p.title.toLowerCase().includes(query));
+
+    document.getElementById('main').innerHTML =
+      renderPick(featured) +
+      renderCampaigns() +
+      renderCats(list.length) +
+      renderProducts(list);
+
+    // Wire category chips
+    document.querySelectorAll('.cat-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCat = btn.dataset.cat;
+        render();
+      });
+    });
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Buscador oculto
+  // ─────────────────────────────────────────────────────
+  const searchToggle = document.getElementById('search-toggle');
+  const searchWrap = document.getElementById('search-wrap');
+  const searchInput = document.getElementById('search-input');
   let searchOpen = false;
 
-  function filterByCategory(cat) {
-    activeCategory = activeCategory === cat ? null : cat;
-    searchQuery = '';
-    searchOpen = false;
-    render();
-    if (activeCategory) {
-      document.getElementById('productos-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-
-  function toggleSearch() {
+  searchToggle.addEventListener('click', () => {
     searchOpen = !searchOpen;
-    const wrap = document.getElementById('search-wrap');
-    const btn = document.getElementById('search-toggle-btn');
-    if (wrap) wrap.style.display = searchOpen ? 'block' : 'none';
-    if (btn) btn.classList.toggle('active', searchOpen);
-    if (searchOpen) document.getElementById('search-input')?.focus();
-    if (!searchOpen) { searchQuery = ''; renderProductos(); }
-  }
+    searchWrap.classList.toggle('open', searchOpen);
+    searchToggle.classList.toggle('open', searchOpen);
+    searchToggle.textContent = searchOpen ? '✕' : '⌕';
+    if (searchOpen) searchInput.focus();
+    else { searchInput.value = ''; query = ''; render(); }
+  });
 
-  function onSearch(val) {
-    searchQuery = val.trim().toLowerCase();
-    activeCategory = null;
-    renderProductos();
-    document.getElementById('search-clear').style.display = searchQuery ? 'block' : 'none';
-  }
-
-  function clearSearch() {
-    searchQuery = '';
-    document.getElementById('search-input').value = '';
-    document.getElementById('search-clear').style.display = 'none';
-    renderProductos();
-  }
-
-  function renderProductos() {
-    const links = (typeof BIBI_LINKS !== 'undefined') ? BIBI_LINKS : [];
-    const active = links.filter(l => l.active);
-
-    let pool = activeCategory ? active.filter(l => l.category === activeCategory) : active;
-    if (searchQuery) {
-      pool = active.filter(l => l.title.toLowerCase().includes(searchQuery));
-    }
-
-    const container = document.getElementById('productos-container');
-    if (!container) return;
-
-    let html = '';
-    if (pool.length > 0) {
-      pool.forEach(l => { html += dealCard(l); });
-    } else {
-      html += '<p class="empty">No se encontraron productos. Intenta con otra búsqueda.</p>';
-    }
-    container.innerHTML = html;
-  }
-
-  // ═══════════════════════════════════════════
-  //  Renderizado principal
-  // ═══════════════════════════════════════════
-
-  function render() {
-    const links = (typeof BIBI_LINKS !== 'undefined') ? BIBI_LINKS : [];
-    const active = links.filter(l => l.active);
-    const main = document.getElementById('main-content');
-    let html = '';
-
-    // — Ofertas destacadas —
-    const featured = active.filter(l => l.featured);
-    if (featured.length > 0) {
-      html += sectionLabel('🔥 Oferta del momento');
-      featured.forEach(l => { html += dealCard(l); });
-    }
-
-    // — Categorías con links —
-    const catsConLinks = [...new Set(active.map(l => l.category))];
-    if (catsConLinks.length > 0) {
-      html += sectionLabel('🗂️ Explorar categorías');
-      html += '<div class="cat-grid">';
-      catsConLinks.forEach(cat => {
-        const cfg = CATEGORIAS[cat] || { label: cat, icon: '📦' };
-        const isActive = activeCategory === cat;
-        html += `<button class="cat-btn${isActive ? ' active' : ''}" onclick="filterByCategory('${cat}')">
-          <div class="cat-icon">${cfg.icon}</div>${cfg.label}
-        </button>`;
-      });
-      html += '</div>';
-      if (activeCategory) {
-        html += `<button class="clear-filter" onclick="filterByCategory(null)">✕ Ver todos</button>`;
-      }
-    }
-
-    // — Encabezado de productos con toggle de búsqueda —
-    const labelProductos = activeCategory
-      ? `${CATEGORIAS[activeCategory]?.icon || '📦'} ${CATEGORIAS[activeCategory]?.label || activeCategory}`
-      : '🛍️ Todos los productos';
-    html += `<div class="productos-header" id="productos-section">
-      <p class="section-label" style="margin:0">${labelProductos}</p>
-      <button id="search-toggle-btn" class="search-toggle${searchOpen ? ' active' : ''}" onclick="toggleSearch()">🔍 Buscar</button>
-    </div>
-    <div id="search-wrap" style="display:${searchOpen ? 'block' : 'none'}">
-      <div class="search-wrap">
-        <input id="search-input" class="search-input" type="search" placeholder="Buscar productos..."
-          oninput="onSearch(this.value)" value="${searchQuery}" autocomplete="off" />
-        <button id="search-clear" class="search-clear" onclick="clearSearch()" style="display:${searchQuery ? 'block' : 'none'}">✕</button>
-      </div>
-    </div>`;
-
-    // — Productos —
-    html += `<div id="productos-container"></div>`;
-
-    // — Cupón exclusivo (oculto) —
-    html += `<p class="section-label" style="display:none">🏷️ Cupón exclusivo</p>
-    <div class="coupon-wrap" style="display:none">
-      <p class="coupon-plat">Shein · Primera compra</p>
-      <p class="coupon-discount">15% de descuento al pagar</p>
-      <span class="coupon-code">BIBI15</span>
-      <p class="coupon-note">Copia el código y úsalo al finalizar tu compra en Shein</p>
-    </div>`;
-
-    // — Plataformas con links activos —
-    const platsConLinks = [...new Set(active.map(l => l.platform))];
-    html += `<p class="section-label" style="display:none">🛒 Ir a las tiendas</p>`;
-    html += `<div class="platform-list" style="display:none">`;
-    platsConLinks.forEach(plat => {
-      const cfg = PLATAFORMAS[plat] || PLATAFORMAS.other;
-      const platLinks = active.filter(l => l.platform === plat);
-      const href = platLinks[0].url;
-      html += `<a class="plat-link" href="${href}" target="_blank">
-        <div class="plat-logo ${cfg.logoClass}">${cfg.icon}</div>
-        <div class="plat-info">
-          <span class="plat-name">${cfg.label}</span>
-          <span class="plat-sub">${cfg.sub}</span>
-        </div>
-        <span class="plat-arrow">›</span>
-      </a>`;
-    });
-    html += `</div>`;
-
-    // — Comunidad (oculta) —
-    html += `<p class="section-label" style="display:none">📣 Únete a la comunidad</p>
-    <a class="newsletter" href="#" target="_blank" style="display:none">
-      <div class="newsletter-icon">💬</div>
-      <div class="newsletter-info">
-        <p class="newsletter-title">Canal de WhatsApp — Ofertas diarias</p>
-        <p class="newsletter-sub">Recibe las mejores ofertas antes que nadie</p>
-      </div>
-      <span class="plat-arrow">›</span>
-    </a>
-    <a class="newsletter" href="#" target="_blank" style="display:none">
-      <div class="newsletter-icon" style="background:#2AABEE;">📱</div>
-      <div class="newsletter-info">
-        <p class="newsletter-title">Canal de Telegram</p>
-        <p class="newsletter-sub">Alertas de ofertas flash en tiempo real</p>
-      </div>
-      <span class="plat-arrow">›</span>
-    </a>`;
-
-    if (active.length === 0) {
-      html += '<p class="empty">Pronto habrá nuevas ofertas. ¡Vuelve pronto! ✨</p>';
-    }
-
-    main.innerHTML = html;
-    renderProductos();
-  }
-
-  function sectionLabel(text) {
-    return `<p class="section-label">${text}</p>`;
-  }
-
-  function dealCard(link) {
-    const plat = PLATAFORMAS[link.platform] || PLATAFORMAS.other;
-    const priceHtml = link.originalPrice
-      ? `Antes ${link.originalPrice} · Hoy <strong>${link.price}</strong> en ${plat.label}`
-      : `<strong>${link.price}</strong> en ${plat.label}`;
-    const cat = CATEGORIAS[link.category] || { icon: '📦' };
-    const couponHtml = link.coupon
-      ? `<div class="deal-coupon">
-           <span class="deal-coupon-tag">🏷️ Cupón</span>
-           ¡Activa el cupón y ${link.coupon}!
-         </div>`
-      : '';
-
-    const thumbHtml = link.image
-      ? `<img class="deal-img" src="${link.image}" alt="${link.title}" loading="lazy" />`
-      : `<span class="deal-icon">${cat.icon}</span>`;
-
-    return `<a class="deal-card" href="${link.url}" target="_blank">
-      <div class="deal-card-main">
-        ${thumbHtml}
-        <div class="deal-info">
-          ${link.badge ? `<span class="deal-badge">${link.badge}</span>` : ''}
-          <p class="deal-name">${link.title}</p>
-          ${link.price ? `<p class="deal-price">${priceHtml}</p>` : ''}
-        </div>
-        <span class="deal-arrow">›</span>
-      </div>
-      ${couponHtml}
-    </a>`;
-  }
+  searchInput.addEventListener('input', e => {
+    query = e.target.value.trim().toLowerCase();
+    render();
+  });
 
   render();
 </script>
+
 </body>
 </html>

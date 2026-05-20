@@ -1,7 +1,23 @@
 // ═══════════════════════════════════════════════════
-//  BIBI RECOMIENDA — Base de datos de links
-//  Edita este archivo o usa admin.html para gestionarlo
+//  BIBI RECOMIENDA — Base de datos
+//  Editá este archivo para agregar / quitar productos y campañas.
 // ═══════════════════════════════════════════════════
+
+// ───────────────────────────────────────────────────
+//  PRODUCTOS
+//  Campos por producto:
+//    id         · número único (cualquier valor, sólo para React keys)
+//    title      · nombre que se ve en la card
+//    platform   · "amazon" | "mercadolibre" (define el badge)
+//    category   · clave de CATEGORIAS abajo (ej "cocina")
+//    url        · link de afiliado
+//    image      · URL de la imagen (idealmente cuadrada, fondo blanco)
+//    price      · texto del precio ej "COP $68.443"  (sin precio anterior — los precios cambian día a día)
+//    coupon     · texto del cupón si aplica, ej "Ahorra 10%"  (opcional)
+//    featured   · true para que aparezca como "Pick del día" (sólo uno a la vez)
+//    active     · true para que se muestre, false para esconder sin borrar
+//    date       · "YYYY-MM-DD" — fecha en que lo agregaste, para ordenar
+// ───────────────────────────────────────────────────
 
 var BIBI_LINKS = [
   {
@@ -12,8 +28,6 @@ var BIBI_LINKS = [
     url: "https://amzn.to/3Poe49o",
     image: "https://m.media-amazon.com/images/I/812lBocYTIL._AC_SL1500_.jpg",
     price: "COP $68.443",
-    originalPrice: "",
-    badge: "⭐ 4.7 · 2.2K+ reseñas",
     coupon: "Ahorra 10%",
     featured: false,
     active: true,
@@ -27,8 +41,6 @@ var BIBI_LINKS = [
     url: "https://amzn.to/4ustKYn",
     image: "https://m.media-amazon.com/images/I/71W-iwLyURL._AC_SL1500_.jpg",
     price: "COP $57.029",
-    originalPrice: "",
-    badge: "⭐ 4.5 · 1.7K+ reseñas",
     coupon: "",
     featured: false,
     active: true,
@@ -42,10 +54,52 @@ var BIBI_LINKS = [
     url: "https://amzn.to/4uhWGSZ",
     image: "https://m.media-amazon.com/images/I/616zZxB0g1L._AC_SL1500_.jpg",
     price: "COP $549.674",
-    originalPrice: "",
-    badge: "⭐ 4.1 · 1K+ vendidos",
+    coupon: "",
     featured: true,
     active: true,
     date: "2026-05-17"
   }
 ];
+
+// ───────────────────────────────────────────────────
+//  CAMPAÑAS ACTIVAS (Hot Sale, Días Naranja, etc.)
+//  Borrá el array si no querés mostrar esta sección.
+//  Campos:
+//    id       · clave única
+//    title    · ej "Hot Sale Mercado Libre"
+//    subtitle · ej "Hasta 70% OFF · Termina el 28 may"
+//    store    · "Amazon" | "Mercado Libre" — define la inicial del logo
+//    color    · color del logo (#FF9900 Amazon, #FFE600 ML, etc.)
+//    url      · link a la campaña
+//    active   · true para mostrar
+// ───────────────────────────────────────────────────
+
+var BIBI_CAMPANAS = [
+  // Ejemplo — descomenta y editá cuando haya campañas activas:
+  // {
+  //   id: "hot-sale-2026",
+  //   title: "Hot Sale Mercado Libre",
+  //   subtitle: "Hasta 70% OFF · Termina el 28 may",
+  //   store: "Mercado Libre",
+  //   color: "#FFE600",
+  //   url: "https://www.mercadolibre.com.co/hot-sale",
+  //   active: true
+  // },
+];
+
+// ───────────────────────────────────────────────────
+//  CATEGORÍAS
+//  Sólo aparecen las que tienen al menos un producto activo.
+// ───────────────────────────────────────────────────
+
+var BIBI_CATEGORIAS = {
+  tecnologia: { label: "Tecnología" },
+  belleza:    { label: "Belleza"    },
+  moda:       { label: "Moda"       },
+  hogar:      { label: "Hogar"      },
+  cocina:     { label: "Cocina"     },
+  deporte:    { label: "Deporte"    },
+  ninos:      { label: "Niños"      },
+  mascotas:   { label: "Mascotas"   },
+  otros:      { label: "Otros"      }
+};
