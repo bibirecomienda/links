@@ -25,28 +25,30 @@ var BIBI_LINKS = [
     title: "LEGO Trofeo Oficial Mundial FIFA — Coleccionable para fanáticos del fútbol",
     platform: "amazon",
     category: "ninos",
-    url: "https://amzn.to/4fzO31q",
+    url: "https://amzn.to/49PkVj0",
     image: "https://m.media-amazon.com/images/I/81C3y4Yjr4L._AC_SL1500_.jpg",
     price: "COP $737.263",
     coupon: "",
+    shipping: "COP $116.051",
     featured: false,
     active: true,
     date: "2026-05-24",
-    badge: "⭐ 4.8 · 301 opiniones"
+    badge: "⭐ 4.8 · + COP $116.051 envío"
   },
   {
     id: 4,
     title: "Logitech Lift — Mouse Ergonómico Vertical Inalámbrico, clics silenciosos",
     platform: "amazon",
     category: "tecnologia",
-    url: "https://amzn.to/3PpsOF3",
+    url: "https://amzn.to/3RGbXOQ",
     image: "https://m.media-amazon.com/images/I/61MD2KObDvL._AC_SL1500_.jpg",
     price: "COP $254.369",
     coupon: "",
+    shipping: "gratis",
     featured: false,
     active: true,
     date: "2026-05-24",
-    badge: "⭐ 4.4 · 14K+ opiniones"
+    badge: "📦 Envío gratis"
   },
   {
     id: 3,
