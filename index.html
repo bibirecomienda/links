@@ -387,6 +387,88 @@
     .shipping-banner.free { color: #27ae60; }
     .shipping-banner.cost { color: #999; }
 
+    /* ── DESTACADOS DE LA SEMANA ────────────────────────── */
+    .week-section { padding: 0 0 22px; }
+    .week-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 0 20px 6px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .week-card {
+      flex-shrink: 0;
+      width: 315px;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      overflow: hidden;
+      scroll-snap-align: start;
+      display: block;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .week-card:active { transform: scale(0.98); }
+    @media (hover: hover) {
+      .week-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(160, 74, 54, 0.12); }
+    }
+    .week-card-main {
+      display: flex;
+      gap: 14px;
+      padding: 14px;
+    }
+    .week-thumb {
+      width: 90px; height: 90px;
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .week-thumb img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      padding: 6px;
+    }
+    .week-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .week-cat {
+      font-family: var(--sans);
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .week-title {
+      font-size: 15px;
+      line-height: 1.25;
+      font-weight: 500;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .week-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .week-price { font-size: 17px; font-weight: 700; }
+    .week-ver {
+      margin-left: auto;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
     /* ── CAMPAÑAS ───────────────────────────────────────── */
     .campaigns-section { padding: 0 0 22px; }
     .campaigns-scroll {
@@ -773,6 +855,41 @@
   }
 
   // ─────────────────────────────────────────────────────
+  //  Render — Destacados de la semana
+  // ─────────────────────────────────────────────────────
+  function renderWeekHighlights() {
+    const highlights = products.filter(p => p.highlight);
+    if (!highlights.length) return '';
+    const cards = highlights.map(p => `
+      <a class="week-card" href="${esc(p.url)}" target="_blank" rel="noopener">
+        <div class="week-card-main">
+          <div class="week-thumb">
+            ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" />` : ''}
+          </div>
+          <div class="week-info">
+            <div>
+              <div class="week-cat">${esc(catLabel(p.category))}</div>
+              <div class="week-title">${esc(p.title)}</div>
+            </div>
+            <div class="week-price-row">
+              <span class="week-price">${esc(p.price)}</span>
+              <span class="week-ver">Ver →</span>
+            </div>
+          </div>
+        </div>
+        ${couponBanner(p.coupon, true)}
+        ${shippingBanner(p.shipping, true)}
+      </a>`).join('');
+    return `
+      <section class="week-section">
+        <div class="section-head">
+          <span class="section-label accent">◆ Destacados de la semana</span>
+        </div>
+        <div class="week-scroll">${cards}</div>
+      </section>`;
+  }
+
+  // ─────────────────────────────────────────────────────
   //  Render — Pick del día
   // ─────────────────────────────────────────────────────
   function renderPick(p) {
@@ -896,6 +1013,7 @@
 
     document.getElementById('main').innerHTML =
       renderPick(featured) +
+      renderWeekHighlights() +
       renderCampaigns() +
       renderCats(list.length) +
       renderProducts(list);
