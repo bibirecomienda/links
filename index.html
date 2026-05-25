@@ -375,17 +375,17 @@
     .coupon-banner.compact .coupon-msg { font-size: 10px; }
 
     /* ── INFO DE ENVÍO ──────────────────────────────────── */
-    .shipping-line {
+    .shipping-banner {
+      border-top: 1.5px solid rgba(0,0,0,0.06);
+      padding: 8px 14px;
+      text-align: center;
       font-family: var(--sans);
-      font-size: 11px;
-      color: #888;
-      padding: 0 14px 10px;
+      font-size: 12px;
+      font-weight: 600;
     }
-    .shipping-line.compact {
-      font-size: 10px;
-      padding: 0 10px 8px;
-    }
-    .shipping-line.free { color: #27ae60; font-weight: 600; }
+    .shipping-banner.compact { padding: 6px 10px; font-size: 11px; }
+    .shipping-banner.free { color: #27ae60; }
+    .shipping-banner.cost { color: #999; }
 
     /* ── CAMPAÑAS ───────────────────────────────────────── */
     .campaigns-section { padding: 0 0 22px; }
@@ -763,11 +763,11 @@
       </div>`;
   }
 
-  // Envío — línea simple debajo del precio
+  // Envío — banner sin chip, solo texto
   function shippingBanner(text, compact) {
     if (!text) return '';
     const isFree = text === 'gratis';
-    const cls = `shipping-line${compact ? ' compact' : ''}${isFree ? ' free' : ''}`;
+    const cls = `shipping-banner${compact ? ' compact' : ''}${isFree ? ' free' : ' cost'}`;
     const msg = isFree ? '📦 Envío gratis' : `🚚 + ${esc(text)} de envío`;
     return `<div class="${cls}">${msg}</div>`;
   }
