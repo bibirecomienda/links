@@ -374,6 +374,47 @@
     }
     .coupon-banner.compact .coupon-msg { font-size: 10px; }
 
+    /* ── BANNER DE ENVÍO ───────────────────────────────── */
+    .shipping-banner {
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--sans);
+    }
+    .shipping-banner.compact { padding: 7px 8px; gap: 6px; }
+    .shipping-banner.free {
+      background: #eaf6ee;
+      border-top: 2px solid rgba(39, 174, 96, 0.3);
+    }
+    .shipping-banner.cost {
+      background: #fff8ed;
+      border-top: 2px solid rgba(239, 159, 39, 0.4);
+    }
+    .shipping-tag {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 5px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      color: #fff;
+    }
+    .shipping-banner.free .shipping-tag { background: #27ae60; }
+    .shipping-banner.cost .shipping-tag { background: var(--amber); }
+    .shipping-banner.compact .shipping-tag { font-size: 8px; padding: 2px 6px; }
+    .shipping-msg {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .shipping-banner.compact .shipping-msg { font-size: 10px; }
+
     /* ── CAMPAÑAS ───────────────────────────────────────── */
     .campaigns-section { padding: 0 0 22px; }
     .campaigns-scroll {
@@ -750,6 +791,19 @@
       </div>`;
   }
 
+  // Envío banner — variante completa o compacta
+  function shippingBanner(text, compact) {
+    if (!text) return '';
+    const isFree = text === 'gratis';
+    const cls = `shipping-banner${compact ? ' compact' : ''} ${isFree ? 'free' : 'cost'}`;
+    const msg = isFree ? 'Envío gratis' : `+ ${esc(text)} de envío`;
+    return `
+      <div class="${cls}">
+        <span class="shipping-tag">${isFree ? '📦 Envío' : '🚚 Envío'}</span>
+        <span class="shipping-msg">${msg}</span>
+      </div>`;
+  }
+
   // ─────────────────────────────────────────────────────
   //  Render — Pick del día
   // ─────────────────────────────────────────────────────
@@ -783,6 +837,7 @@
             </div>
           </div>
           ${couponBanner(p.coupon, false)}
+          ${shippingBanner(p.shipping, false)}
         </a>
       </section>`;
   }
@@ -854,6 +909,7 @@
           ${p.date ? `<div class="product-date">Visto el ${esc(formatProductDate(p.date))}</div>` : ''}
         </div>
         ${couponBanner(p.coupon, true)}
+        ${shippingBanner(p.shipping, true)}
       </a>`).join('') : `<div class="empty-state">Sin resultados. Probá con otra búsqueda o categoría.</div>`;
     return `
       <section class="products-section">
