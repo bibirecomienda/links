@@ -21,6 +21,34 @@
 
 var BIBI_LINKS = [
   {
+    id: 5,
+    title: "LEGO Trofeo Oficial Mundial FIFA — Coleccionable para fanáticos del fútbol",
+    platform: "amazon",
+    category: "ninos",
+    url: "https://amzn.to/4fzO31q",
+    image: "https://m.media-amazon.com/images/I/81C3y4Yjr4L._AC_SL1500_.jpg",
+    price: "COP $737.263",
+    coupon: "",
+    featured: false,
+    active: true,
+    date: "2026-05-24",
+    badge: "⭐ 4.8 · 301 opiniones"
+  },
+  {
+    id: 4,
+    title: "Logitech Lift — Mouse Ergonómico Vertical Inalámbrico, clics silenciosos",
+    platform: "amazon",
+    category: "tecnologia",
+    url: "https://amzn.to/3PpsOF3",
+    image: "https://m.media-amazon.com/images/I/61MD2KObDvL._AC_SL1500_.jpg",
+    price: "COP $254.369",
+    coupon: "",
+    featured: false,
+    active: true,
+    date: "2026-05-24",
+    badge: "⭐ 4.4 · 14K+ opiniones"
+  },
+  {
     id: 3,
     title: "Trituradora de carne y pollo 10 pulgadas — con cepillo, sin BPA",
     platform: "amazon",
