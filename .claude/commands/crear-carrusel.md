@@ -6,6 +6,8 @@ Crea el carrusel de Instagram de la semana: busca 6 productos en Amazon con ≥3
 
 Si no se pasa fecha, calcular el próximo domingo desde hoy.
 
+> ⛔ **Regla absoluta:** Para CUALQUIER acceso a una página web (Amazon u otro sitio), usar SIEMPRE la extensión de Chrome (`mcp__Claude_in_Chrome__*`). Nunca usar `WebFetch`, `web_fetch` ni ninguna otra herramienta de fetch HTTP. Las páginas de Amazon requieren sesión activa y no funcionan con fetch.
+
 ---
 
 ## Paso 0 — Preparar la fecha y rutas

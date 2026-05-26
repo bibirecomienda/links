@@ -6,6 +6,8 @@ Agrega un producto de Amazon a `links.js`: navega al producto en Chrome, extrae 
 
 El URL puede ser largo (de una búsqueda) o corto (`amzn.to/...`). Si el ASIN es visible, se construye la URL corta automáticamente.
 
+> ⛔ **Regla absoluta:** Para CUALQUIER acceso a una página web (Amazon o cualquier otro sitio), usar SIEMPRE la extensión de Chrome (`mcp__Claude_in_Chrome__*`). Nunca usar `WebFetch`, `web_fetch` ni ninguna otra herramienta de fetch HTTP. Los links `amzn.to` y las páginas de producto de Amazon requieren una sesión de usuario activa y no funcionan con fetch.
+
 ---
 
 ## Paso 1 — Preparar el URL
@@ -27,7 +29,7 @@ Guardar el `tabId`. Luego navegar:
 mcp__Claude_in_Chrome__navigate → URL preparado en Paso 1
 ```
 
-> ⚠️ Los links `amzn.to` no se pueden fetch con web_fetch — siempre navegar en Chrome.
+> ⛔ Nunca usar `WebFetch` ni `web_fetch` para ningún URL. Siempre navegar con la extensión de Chrome.
 
 ---
 
