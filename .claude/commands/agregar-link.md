@@ -62,6 +62,8 @@ document.querySelector('#price-shipping-message, .a-color-secondary')?.innerText
 
 ## Paso 4 — Abrir SiteStripe y verificar el tag
 
+> ⚠️ El tag de afiliado siempre debe ser **`bibirecomie02-20`**. Verificar y forzar antes de copiar el link.
+
 ```js
 // Abrir panel
 const btn = Array.from(document.querySelectorAll('#amzn-ss-wrap a, #amzn-ss-wrap button'))

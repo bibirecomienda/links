@@ -83,6 +83,7 @@ if (btn) btn.click();
 
 ```js
 // 2. Verificar tag de afiliado en el diálogo
+// ⚠️ Tag SIEMPRE debe ser: bibirecomie02-20
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
   .find(d => d.innerText?.includes('Enlace'));
 const sel = sd?.querySelector('select[name="amzn-ss-store-dropdown-text"]');
