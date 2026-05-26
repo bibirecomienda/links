@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrusel Instagram - 1 de junio 2026</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+    .slide {
+      width: 1080px;
+      height: 1080px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Slide 1: Portada */
+    .slide-cover {
+      background: linear-gradient(135deg, #378ADD 0%, #042C53 100%);
+      color: white;
+    }
+    .slide-cover h1 { font-size: 72px; font-weight: 700; margin-bottom: 20px; }
+    .slide-cover .subtitle { font-size: 36px; font-weight: 300; margin-bottom: 40px; }
+    .slide-cover .discount-badge {
+      background: #EF9F27;
+      color: #042C53;
+      padding: 20px 40px;
+      border-radius: 50px;
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+    .slide-cover .date { font-size: 28px; opacity: 0.9; }
+    .slide-cover .categories {
+      font-size: 24px;
+      margin-top: 30px;
+      opacity: 0.85;
+    }
+
+    /* Slides de productos */
+    .slide-product {
+      background: linear-gradient(to bottom, #f0f6fd 0%, #e8f1fb 100%);
+      color: #042C53;
+      position: relative;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 500px;
+      object-fit: contain;
+      margin-bottom: 20px;
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .product-title {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 80%;
+    }
+
+    .product-badge {
+      background: #EF9F27;
+      color: #042C53;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    .product-price {
+      font-size: 36px;
+      font-weight: 700;
+      color: #378ADD;
+    }
+
+    .product-copy {
+      font-size: 18px;
+      line-height: 1.5;
+      max-width: 85%;
+      color: #555;
+    }
+
+    .product-meta {
+      font-size: 16px;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    /* Slide final: CTA */
+    .slide-cta {
+      background: linear-gradient(135deg, #042C53 0%, #378ADD 100%);
+      color: white;
+    }
+
+    .slide-cta h2 { font-size: 64px; font-weight: 700; margin-bottom: 40px; }
+    .slide-cta p { font-size: 32px; font-weight: 300; line-height: 1.6; }
+    .slide-cta .bio {
+      background: rgba(255,255,255,0.2);
+      padding: 30px;
+      border-radius: 20px;
+      margin-top: 40px;
+      font-size: 28px;
+    }
+    .slide-cta .hashtags {
+      margin-top: 30px;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+<!-- SLIDE 1: PORTADA -->
+<div class="slide slide-cover">
+  <h1>✨ Ofertas<br>del mes ✨</h1>
+  <div class="discount-badge">Hasta −42% OFF</div>
+  <div class="date">1 de junio · 2026</div>
+  <div class="categories">Tecnología · Hogar · Cocina</div>
+</div>
+
+<!-- SLIDE 2: Auriculares Bluetooth -->
+<div class="slide slide-product">
+  <img src="https://m.media-amazon.com/images/I/71z-Tj3lVsL._AC_SL1500_.jpg" alt="Auriculares" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Auriculares Bluetooth<br>Inalámbricos</div>
+    <div class="product-badge">🔥 42% OFF</div>
+    <div class="product-price">COP $89.500</div>
+    <div class="product-copy">Sonido cristalino, batería 30h, cómodos para todo el día. Perfectos para trabajo y entretenimiento.</div>
+    <div class="product-meta">⭐ 4.7 · 2.5K opiniones</div>
+  </div>
+</div>
+
+<!-- SLIDE 3: Cargador Rápido USB-C -->
+<div class="slide slide-product">
+  <img src="https://m.media-amazon.com/images/I/71Z5wFLQQrL._AC_SL1500_.jpg" alt="Cargador" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Cargador Rápido<br>65W USB-C</div>
+    <div class="product-badge">🏷️ 35% OFF</div>
+    <div class="product-price">COP $67.800</div>
+    <div class="product-copy">Carga tu laptop, tablet y teléfono en una sola toma. Viaja ligero con este cargador compacto y potente.</div>
+    <div class="product-meta">⭐ 4.6 · 1.8K opiniones</div>
+  </div>
+</div>
+
+<!-- SLIDE 4: Almohada Espuma Viscoelástica -->
+<div class="slide slide-product">
+  <img src="https://m.media-amazon.com/images/I/71hX+qMQCvL._AC_SL1500_.jpg" alt="Almohada" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Almohada Espuma<br>Viscoelástica</div>
+    <div class="product-badge">🔥 38% OFF</div>
+    <div class="product-price">COP $125.600</div>
+    <div class="product-copy">Dormir como en las nubes. Ergonómica, fresca y duradera. Tu cervical te lo agradecerá.</div>
+    <div class="product-meta">⭐ 4.8 · 3.2K opiniones</div>
+  </div>
+</div>
+
+<!-- SLIDE 5: Organizador Baño Magnético -->
+<div class="slide slide-product">
+  <img src="https://m.media-amazon.com/images/I/71PVwTCJh0L._AC_SL1500_.jpg" alt="Organizador" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Organizador Magnético<br>de Baño</div>
+    <div class="product-badge">🏷️ 32% OFF</div>
+    <div class="product-price">COP $54.900</div>
+    <div class="product-copy">Adiós al desorden. Estante que se adhiere sin tornillos. Moderno y funcional.</div>
+    <div class="product-meta">⭐ 4.5 · 950 opiniones</div>
+  </div>
+</div>
+
+<!-- SLIDE 6: Lámpara LED Ajustable -->
+<div class="slide slide-product">
+  <img src="https://m.media-amazon.com/images/I/71eUPJlJpSL._AC_SL1500_.jpg" alt="Lámpara" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Lámpara LED<br>Ajustable</div>
+    <div class="product-badge">🏷️ 40% OFF</div>
+    <div class="product-price">COP $78.300</div>
+    <div class="product-copy">Iluminación perfecta para leer, trabajar o relajarse. Control táctil y tres modos de color.</div>
+    <div class="product-meta">⭐ 4.6 · 1.4K opiniones</div>
+  </div>
+</div>
+
+<!-- SLIDE 7: Cables USB-C Set -->
+<div class="slide slide-product">
+  <img src="https://m.media-amazon.com/images/I/71fvDL08T5L._AC_SL1500_.jpg" alt="Cables" class="product-image">
+  <div class="product-info">
+    <div class="product-title">Set x3 Cables<br>USB-C Duraderos</div>
+    <div class="product-badge">🔥 36% OFF</div>
+    <div class="product-price">COP $42.700</div>
+    <div class="product-copy">Carga rápida y transferencia de datos. Reforzados, no se quiebran. Uno para casa, uno para bolsa, uno de respaldo.</div>
+    <div class="product-meta">⭐ 4.7 · 2.1K opiniones</div>
+  </div>
+</div>
+
+<!-- SLIDE 8: CALL TO ACTION -->
+<div class="slide slide-cta">
+  <h2>¿Cuál te enamoró?</h2>
+  <p>Los links directos están en mi bio 💫</p>
+  <div class="bio">
+    👉 @bibirecomienda<br>
+    Links de afiliado 🎀
+  </div>
+  <div class="hashtags">
+    #bibirecomienda #ofertasdelasemana #amazonfinds #descuentos #productosrecomendados #comprasintelgentes
+  </div>
+</div>
+
+</body>
+</html>
