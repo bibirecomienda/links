@@ -218,17 +218,26 @@ Crear `MD_DEST` con este formato:
 
 ## Caption Instagram
 
-✨ [TÍTULO ATRACTIVO SEMANA] ✨
+✨ [TÍTULO ATRACTIVO que enganche en la primera línea] ✨
 
-[párrafo corto presentando los productos, tono Bibi]
+[1-2 oraciones de intro presentando la selección, tono Bibi — directo y cálido]
 
-🛍️ Los links directos están en mi bio
+[Para cada producto, una línea con emoji relevante + descripción de 1 oración que aluda a lo que lo hace especial + % de descuento]
 
-[lista con emoji + nombre corto de cada producto y precio]
+🛍️ Los links están en mi bio ❤️
 
 💬 ¿Cuál te enamoró? Cuéntame abajo 👇
 
-#bibirecomienda #ofertasdelasemana #amazonfinds #descuentos #productosrecomendados #comprasintelgentes #amazonlatino #deals #ahorra #amazoncolombia #tendencias
+**Hashtags — reglas:**
+- Siempre incluir: `#bibirecomienda`
+- Agregar 8-10 hashtags de buen posicionamiento relevantes a los productos de esa semana (moda, hogar, tecnología, etc.)
+- NO usar hashtags genéricos de bajo impacto como #deals #ahorra #finds
+- Ejemplos de hashtags de buen alcance por categoría:
+  - Moda: #modaverano #vestidofloral #outfitideas #accesoriosmujer #fashionlatina
+  - Hogar: #organizacionhogar #decoracionhogar #hogarboho #homeinspo
+  - Tecnología: #auricularesbluetooth #techdeals #gadgets #tecnologialatina
+  - Niños: #mamascolombia #mamasbloggeras #kidsfashion #escuelacolombia
+  - Viaje: #viajesColombia #travellatam #equipajedeviaje
 ```
 
 ---

@@ -17,19 +17,24 @@ Tasa de cambio usada: 1 USD = 3.687 COP (25 mayo 2026)
 
 ## Caption Instagram
 
-✨ Las ofertas que no puedes dejar pasar esta semana ✨
+✨ Esta semana Amazon me dejó sin palabras ✨
 
-Rebusqué Amazon de arriba abajo y encontré 6 productos con descuentos de hasta el 61% — y todos valen la pena. Desde moda de verano hasta tecnología, hogar y viaje. Esta semana hay para todas.
+Estuve buscando y estas 6 ofertas son demasiado buenas para dejarlas pasar. Escucha:
 
-🛍️ Los links directos están en mi bio
+👗 Un vestido maxi floral bohemio y fluido — para bodas en la playa, cenas de verano o simplemente sentirte diosa un martes. −40%
 
-👗 Vestido maxi floral PRETTYGARDEN — COP $110.612 (antes $184.285)
-👡 Sandalias cuero Rihero — COP $87.000 (antes $147.437)
-🍱 Termos Funtainer Thermos — COP $37.908 (antes $77.413)
-🧳 Set x3 maletas American Tourister — COP $645.323 (antes $1.290.570)
-🪑 Silla huevo mimbre Christopher Knight — COP $446.396 (antes $943.920)
-🎧 Auriculares ANC GNMN — COP $258.082 (antes $663.761)
+👡 Sandalias de cuero con punta cuadrada que combinan con absolutamente todo. Elegantes y comodísimas todo el día. −41%
+
+🍱 El termos Funtainer de Thermos con cuchara integrada — el hit del colegio y los paseos. Tiene 32.000 reseñas. Un regalo a este precio. −51%
+
+🧳 Set de 3 maletas American Tourister (carry-on + mediana + grande) a la mitad del precio. Ruedas 360°, cerradura TSA. Para el viaje que ya planeaste. −50%
+
+🪑 La silla huevo colgante de mimbre que siempre quisiste para tu terraza. Christopher Knight — la que ves y dices ¿por qué no la tenía antes? −53%
+
+🎧 Auriculares con cancelación de ruido activa y 90 horas de batería. El precio no tiene ningún sentido. −61%
+
+🛍️ Los links están en mi bio ❤️
 
 💬 ¿Cuál te enamoró? Cuéntame abajo 👇
 
-#bibirecomienda #ofertasdelasemana #amazonfinds #descuentos #productosrecomendados #comprasintelgentes #amazonlatino #deals #ahorra #amazoncolombia #tendencias #modaverano #hogarboho #viaje2026 #finds #junio2026
+#bibirecomienda #amazonfinds #ofertasAmazon #modaverano #vestidofloral #accesoriosmujer #organizacionhogar #viajesColombia #auricularesbluetooth #mamascolombia #descuentos #deals
