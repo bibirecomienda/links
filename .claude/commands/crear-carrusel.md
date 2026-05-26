@@ -6,7 +6,21 @@ Crea el carrusel de Instagram de la semana: busca 6 productos en Amazon con ≥3
 
 Si no se pasa fecha, calcular el próximo domingo desde hoy.
 
-> ⛔ **Regla absoluta:** Para CUALQUIER acceso a una página web (Amazon u otro sitio), usar SIEMPRE la extensión de Chrome (`mcp__Claude_in_Chrome__*`). Nunca usar `WebFetch`, `web_fetch` ni ninguna otra herramienta de fetch HTTP. Las páginas de Amazon requieren sesión activa y no funcionan con fetch.
+---
+
+## REGLAS ABSOLUTAS DE HERRAMIENTAS
+
+> ⛔ **PROHIBIDO tomar screenshots** (`mcp__computer-use__screenshot` y cualquier otra herramienta de captura de pantalla). NUNCA se usan en este flujo.
+>
+> ⛔ **PROHIBIDO usar `WebFetch` o `web_fetch`** para ningún URL. Amazon requiere sesión activa.
+>
+> ⛔ **PROHIBIDO usar `mcp__computer-use__*`** para nada en este flujo — ni para ver la pantalla, ni para hacer clic, ni para nada.
+>
+> ✅ **Para navegar:** `mcp__Claude_in_Chrome__navigate`
+> ✅ **Para leer datos de la página:** `mcp__Claude_in_Chrome__javascript_tool` (ejecuta JS en el DOM)
+> ✅ **Para hacer clic en elementos:** `mcp__Claude_in_Chrome__javascript_tool` (con `.click()` en JS)
+>
+> Si un campo del DOM devuelve `undefined` o `null`, ese dato no está disponible — usar `""`. **Nunca tomar un screenshot como fallback.**
 
 ---
 
@@ -20,34 +34,51 @@ Si no se pasa fecha, calcular el próximo domingo desde hoy.
 
 ---
 
-## Paso 1 — Abrir Chrome y buscar productos en Amazon
+## Paso 1 — Abrir Chrome y buscar candidatos en Amazon
 
-Abrir un tab de Chrome con `mcp__Claude_in_Chrome__tabs_context_mcp` (createIfEmpty: true). Guardar el `tabId`.
+Abrir un tab con **`mcp__Claude_in_Chrome__tabs_context_mcp`** (createIfEmpty: true). Guardar el `tabId`.
 
-Buscar 6–8 candidatos navegando en Amazon. Estrategia de búsqueda:
-
+Navegar a la página de deals con **`mcp__Claude_in_Chrome__navigate`**:
 ```
-Navegar a: https://www.amazon.com/s?k=deals&rh=p_n_specials_match%3A2617333011&language=es_US
+https://www.amazon.com/s?k=deals&rh=p_n_specials_match%3A2617333011&language=es_US
 ```
 
-Alternativamente buscar por categorías rotando cada semana:
+Alternativas por categoría (rotar cada semana):
 - `https://www.amazon.com/s?k=hogar+descuento&language=es_US`
 - `https://www.amazon.com/s?k=belleza+oferta&language=es_US`
 - `https://www.amazon.com/s?k=cocina+amazon+deals&language=es_US`
 - `https://www.amazon.com/s?k=moda+mujer+descuento&language=es_US`
 
-Para cada candidato que parezca interesante, navegar al producto. Si la URL del producto es larga (>2000 chars) o tiene parámetros de rastreo, extraer el ASIN y construir una URL limpia antes de navegar:
+**Leer los resultados de búsqueda con `mcp__Claude_in_Chrome__javascript_tool`** (no tomar screenshot):
+
+```js
+Array.from(document.querySelectorAll('[data-asin]'))
+  .filter(el => el.dataset.asin && el.dataset.asin.length > 0)
+  .slice(0, 15)
+  .map(el => ({
+    asin: el.dataset.asin,
+    title: el.querySelector('h2 a span, .a-size-medium, .a-size-base-plus')?.innerText?.trim() || '',
+    price: el.querySelector('.a-price .a-offscreen')?.innerText?.trim() || '',
+    originalPrice: el.querySelector('.a-text-price .a-offscreen')?.innerText?.trim() || '',
+    rating: el.querySelector('.a-icon-star-small .a-icon-alt, .a-icon-star .a-icon-alt')?.innerText?.trim() || '',
+    url: el.querySelector('h2 a')?.href || '',
+    image: el.querySelector('.s-image')?.src || ''
+  }))
+  .filter(p => p.title && p.price && p.asin)
+```
+
+Con la lista de candidatos, seleccionar 8–10 que parezcan tener descuento (originalPrice presente). Luego navegar a cada uno para verificar.
+
+---
+
+## Paso 2 — Extraer datos de cada producto (repetir hasta tener 6 con ≥30% descuento)
+
+Para cada candidato, navegar con **`mcp__Claude_in_Chrome__navigate`**:
 ```
 https://www.amazon.com/dp/ASIN?language=es_US
 ```
 
-Verificar que el producto tenga ≥30% de descuento antes de procesarlo.
-
----
-
-## Paso 2 — Extraer datos de cada producto (repetir 6 veces)
-
-Por cada producto seleccionado, ejecutar este JavaScript con `mcp__Claude_in_Chrome__javascript_tool`:
+Luego extraer datos con **`mcp__Claude_in_Chrome__javascript_tool`**:
 
 ```js
 const imgEl = document.querySelector('#landingImage, #imgBlkFront');
@@ -55,54 +86,65 @@ const deliveryEl = document.querySelector(
   '#deliveryBlockMessage, #mir-layout-DELIVERY_BLOCK, #deliveryMessage, #price-shipping-message'
 );
 ({
-  title: document.querySelector('#productTitle')?.innerText?.trim(),
-  price: document.querySelector('.a-price .a-offscreen')?.innerText?.trim(),
-  priceWhole: document.querySelector('.a-price-whole')?.innerText?.trim(),
-  originalPrice: document.querySelector('.a-text-price .a-offscreen')?.innerText?.trim(),
-  rating: document.querySelector('#acrPopover')?.title?.trim(),
-  reviews: document.querySelector('#acrCustomerReviewText')?.innerText?.trim(),
-  breadcrumb: document.querySelector('#wayfinding-breadcrumbs_feature_div')?.innerText?.trim(),
-  coupon: document.querySelector('.couponBadge, .promoPriceBlockMessage, [data-csa-c-type="coupon"], .vpcButton')?.innerText?.trim() || '',
-  image: imgEl?.getAttribute('data-old-hires') || imgEl?.src || '',
-  shipping: deliveryEl?.innerText?.trim() || '',
-  siteStripe: !!document.querySelector('#amzn-ss-wrap')
+  title:         document.querySelector('#productTitle')?.innerText?.trim() || '',
+  price:         document.querySelector('.a-price .a-offscreen')?.innerText?.trim() || '',
+  priceWhole:    document.querySelector('.a-price-whole')?.innerText?.trim() || '',
+  originalPrice: document.querySelector('.a-text-price .a-offscreen')?.innerText?.trim() || '',
+  rating:        document.querySelector('#acrPopover')?.title?.trim() || '',
+  reviews:       document.querySelector('#acrCustomerReviewText')?.innerText?.trim() || '',
+  breadcrumb:    document.querySelector('#wayfinding-breadcrumbs_feature_div')?.innerText?.trim() || '',
+  coupon:        document.querySelector('.couponBadge, .promoPriceBlockMessage, [data-csa-c-type="coupon"], .vpcButton')?.innerText?.trim() || '',
+  image:         imgEl?.getAttribute('data-old-hires') || imgEl?.src || '',
+  shipping:      deliveryEl?.innerText?.trim() || '',
+  siteStripe:    !!document.querySelector('#amzn-ss-wrap')
 })
 ```
 
-Si el texto de envío no se detectó en `deliveryEl`, intentar también:
+Si `shipping` quedó vacío, ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
 ```js
-document.querySelector('#price-shipping-message, .a-color-secondary')?.innerText?.trim()
+document.querySelector('#price-shipping-message, .a-color-secondary')?.innerText?.trim() || ''
 ```
 
-Luego obtener el link de afiliado via SiteStripe:
+> Si algún campo devuelve `''`, ese dato no existe — usar `""`. No tomar screenshot.
 
+### Calcular descuento
+
+```
+descuento% = round((originalPrice - price) / originalPrice * 100)
+```
+
+Si el descuento es < 30%, descartar y pasar al siguiente candidato.
+
+### Obtener link de afiliado via SiteStripe
+
+Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
 ```js
 // 1. Abrir panel SiteStripe
 const btn = Array.from(document.querySelectorAll('#amzn-ss-wrap a, #amzn-ss-wrap button'))
   .find(el => el.innerText?.includes('Obtener enlace'));
-if (btn) btn.click();
+if (btn) { btn.click(); 'clicked'; } else 'not found';
 ```
 
+Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
 ```js
-// 2. Verificar tag de afiliado en el diálogo
-// ⚠️ Tag SIEMPRE debe ser: bibirecomie02-20
+// 2. Verificar y forzar tag bibirecomie02-20
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
   .find(d => d.innerText?.includes('Enlace'));
 const sel = sd?.querySelector('select[name="amzn-ss-store-dropdown-text"]');
 if (sel && sel.value !== 'bibirecomie02-20') sel.value = 'bibirecomie02-20';
+sel?.value || 'no dialog';
 ```
 
+Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
 ```js
 // 3. Seleccionar "Enlace corto" y leer el link del input
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
   .find(d => d.innerText?.includes('Enlace'));
-const shortOpt = Array.from(sd.querySelectorAll('input, label, span, div'))
+const shortOpt = Array.from(sd?.querySelectorAll('input, label, span, div') || [])
   .find(el => el.innerText?.trim() === 'Enlace corto' || el.textContent?.trim() === 'Enlace corto');
 if (shortOpt) shortOpt.click();
-
-// Leer el link directamente del campo de texto del diálogo
-const inp = sd.querySelector('input[type="text"], textarea');
-inp?.value  // → "https://amzn.to/XXXXXX"
+const inp = sd?.querySelector('input[type="text"], textarea');
+inp?.value || 'no input found';
 ```
 
 ### Mapeo de categoría desde breadcrumb
@@ -118,14 +160,6 @@ inp?.value  // → "https://amzn.to/XXXXXX"
 | Deportes / Fitness / Exterior | `deporte` |
 | Juguetes / Bebés / Niños | `ninos` |
 | Otro / no coincide | `otros` |
-
-### Calcular descuento
-
-```
-descuento% = round((originalPrice - price) / originalPrice * 100)
-```
-
-Si `originalPrice` no aparece, buscar precio tachado en `.a-text-price`. Si el descuento es < 30%, descartar ese producto y buscar otro.
 
 ### Interpretar envío
 

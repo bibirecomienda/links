@@ -4,9 +4,21 @@ Agrega un producto de Amazon a `links.js`: navega al producto en Chrome, extrae 
 
 **Uso:** `/agregar-link URL_DEL_PRODUCTO`
 
-El URL puede ser largo (de una búsqueda) o corto (`amzn.to/...`). Si el ASIN es visible, se construye la URL corta automáticamente.
+---
 
-> ⛔ **Regla absoluta:** Para CUALQUIER acceso a una página web (Amazon o cualquier otro sitio), usar SIEMPRE la extensión de Chrome (`mcp__Claude_in_Chrome__*`). Nunca usar `WebFetch`, `web_fetch` ni ninguna otra herramienta de fetch HTTP. Los links `amzn.to` y las páginas de producto de Amazon requieren una sesión de usuario activa y no funcionan con fetch.
+## REGLAS ABSOLUTAS DE HERRAMIENTAS
+
+> ⛔ **PROHIBIDO tomar screenshots** (`mcp__computer-use__screenshot` y cualquier otra herramienta de captura de pantalla). NUNCA se usan en este flujo.
+>
+> ⛔ **PROHIBIDO usar `WebFetch` o `web_fetch`** para ningún URL. Amazon requiere sesión activa.
+>
+> ⛔ **PROHIBIDO usar `mcp__computer-use__*`** para nada en este flujo — ni para ver la pantalla, ni para hacer clic, ni para nada.
+>
+> ✅ **Para navegar:** `mcp__Claude_in_Chrome__navigate`
+> ✅ **Para leer datos de la página:** `mcp__Claude_in_Chrome__javascript_tool` (ejecuta JS en el DOM)
+> ✅ **Para hacer clic en elementos:** `mcp__Claude_in_Chrome__javascript_tool` (con `.click()` en JS)
+>
+> Si un campo del DOM devuelve `undefined` o `null`, ese dato no está disponible — usar `""`. **Nunca tomar un screenshot como fallback.**
 
 ---
 
@@ -29,11 +41,13 @@ Guardar el `tabId`. Luego navegar:
 mcp__Claude_in_Chrome__navigate → URL preparado en Paso 1
 ```
 
-> ⛔ Nunca usar `WebFetch` ni `web_fetch` para ningún URL. Siempre navegar con la extensión de Chrome.
+Esperar a que la página cargue completamente antes de continuar.
 
 ---
 
 ## Paso 3 — Extraer información del producto
+
+Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
 
 ```js
 const imgEl = document.querySelector('#landingImage, #imgBlkFront');
@@ -42,65 +56,70 @@ const deliveryEl = document.querySelector(
 );
 const deliveryText = deliveryEl?.innerText?.trim() || '';
 ({
-  title:    document.querySelector('#productTitle')?.innerText?.trim(),
-  price:    document.querySelector('.a-price .a-offscreen')?.innerText?.trim(),
+  title:         document.querySelector('#productTitle')?.innerText?.trim() || '',
+  price:         document.querySelector('.a-price .a-offscreen')?.innerText?.trim() || '',
   originalPrice: document.querySelector('.a-text-price .a-offscreen')?.innerText?.trim() || '',
-  rating:   document.querySelector('#acrPopover')?.title?.trim(),
-  reviews:  document.querySelector('#acrCustomerReviewText')?.innerText?.trim(),
-  category: document.querySelector('#wayfinding-breadcrumbs_feature_div')?.innerText?.trim(),
-  coupon:   document.querySelector('.couponBadge, .promoPriceBlockMessage, [data-csa-c-type="coupon"], .vpcButton')?.innerText?.trim() || '',
-  image:    imgEl?.getAttribute('data-old-hires') || imgEl?.src || '',
-  siteStripe: !!document.querySelector('#amzn-ss-wrap'),
-  shipping: deliveryText
+  rating:        document.querySelector('#acrPopover')?.title?.trim() || '',
+  reviews:       document.querySelector('#acrCustomerReviewText')?.innerText?.trim() || '',
+  category:      document.querySelector('#wayfinding-breadcrumbs_feature_div')?.innerText?.trim() || '',
+  coupon:        document.querySelector('.couponBadge, .promoPriceBlockMessage, [data-csa-c-type="coupon"], .vpcButton')?.innerText?.trim() || '',
+  image:         imgEl?.getAttribute('data-old-hires') || imgEl?.src || '',
+  siteStripe:    !!document.querySelector('#amzn-ss-wrap'),
+  shipping:      deliveryText
 })
 ```
 
-Buscar también el costo de envío explícito si el texto de entrega no lo incluye:
+Si `shipping` quedó vacío, intentar con **`mcp__Claude_in_Chrome__javascript_tool`**:
 ```js
-document.querySelector('#price-shipping-message, .a-color-secondary')?.innerText?.trim()
+document.querySelector('#price-shipping-message, .a-color-secondary')?.innerText?.trim() || ''
 ```
+
+> Si algún campo devuelve `''` o `undefined`, ese dato no existe en la página — continuar con `""`. No tomar screenshot.
 
 ---
 
 ## Paso 4 — Abrir SiteStripe y verificar el tag
 
-> ⚠️ El tag de afiliado siempre debe ser **`bibirecomie02-20`**. Verificar y forzar antes de copiar el link.
+> ⚠️ El tag de afiliado siempre debe ser **`bibirecomie02-20`**. Verificar y forzar antes de copiar.
 
+Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
 ```js
-// Abrir panel
 const btn = Array.from(document.querySelectorAll('#amzn-ss-wrap a, #amzn-ss-wrap button'))
   .find(el => el.innerText?.includes('Obtener enlace'));
-if (btn) btn.click();
+if (btn) { btn.click(); 'clicked'; } else 'not found';
 ```
 
+Luego ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
 ```js
-// Verificar y forzar tag bibirecomie02-20
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
   .find(d => d.innerText?.includes('Enlace'));
 const sel = sd?.querySelector('select[name="amzn-ss-store-dropdown-text"]');
 if (sel && sel.value !== 'bibirecomie02-20') sel.value = 'bibirecomie02-20';
+sel?.value || 'no dialog found';
 ```
 
 ---
 
 ## Paso 5 — Capturar el link corto de afiliado
 
+Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
 ```js
-// Seleccionar "Enlace corto"
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
   .find(d => d.innerText?.includes('Enlace'));
-const shortOpt = Array.from(sd.querySelectorAll('input, label, span, div'))
+const shortOpt = Array.from(sd?.querySelectorAll('input, label, span, div') || [])
   .find(el => el.innerText?.trim() === 'Enlace corto' || el.textContent?.trim() === 'Enlace corto');
 if (shortOpt) shortOpt.click();
-
-// Leer el link del input directamente
-const inp = sd.querySelector('input[type="text"], textarea');
-inp?.value  // → "https://amzn.to/XXXXXX"
+const inp = sd?.querySelector('input[type="text"], textarea');
+inp?.value || 'no input found';
 ```
+
+El resultado debe ser algo como `"https://amzn.to/XXXXXX"`. Ese es el link de afiliado.
 
 ---
 
 ## Paso 6 — Detectar categoría
+
+Usar el campo `category` (breadcrumb) obtenido en el Paso 3:
 
 | Breadcrumb contiene | Categoría |
 |---|---|
@@ -112,7 +131,7 @@ inp?.value  // → "https://amzn.to/XXXXXX"
 | Cocina / Alimentos / Utensilios | `cocina` |
 | Deportes / Fitness / Exterior | `deporte` |
 | Juguetes / Bebés / Niños | `ninos` |
-| Otro | `otros` |
+| Otro / no coincide | `otros` |
 
 ---
 
@@ -121,7 +140,7 @@ inp?.value  // → "https://amzn.to/XXXXXX"
 - Formato siempre en COP: `COP $549.674` (punto como separador de miles, sin decimales)
 - La cuenta ya tiene COP configurado — el precio aparece directo en pesos colombianos
 - Si hay precio tachado: llenar `originalPrice` también en COP
-- Si excepcionalmente aparece en USD, convertir:
+- Si excepcionalmente aparece en USD, ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
 ```js
 fetch('https://open.er-api.com/v6/latest/USD')
   .then(r => r.json())
@@ -197,7 +216,7 @@ git commit -m "Agregar producto: TITULO_CORTO
 
 [descripción breve del producto]
 
-Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>"
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
 git push
 ```
 
