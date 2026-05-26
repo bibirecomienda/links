@@ -4,7 +4,7 @@ Crea el carrusel de Instagram de la semana: busca 6 productos en Amazon con ≥3
 
 **Uso:** `/crear-carrusel YYYY-MM-DD`
 
-Si no se pasa fecha, calcular el próximo domingo desde hoy.
+Si no se pasa fecha, calcular el próximo domingo desde hoy (para nombre de carpeta y commit). La **fecha que aparece visible en el slide de portada** es siempre la fecha actual (hoy), no la fecha del domingo.
 
 ---
 
@@ -26,11 +26,14 @@ Si no se pasa fecha, calcular el próximo domingo desde hoy.
 
 ## Paso 0 — Preparar la fecha y rutas
 
-- `FECHA` = argumento recibido o próximo domingo (formato `YYYY-MM-DD`)
+- `FECHA` = argumento recibido o próximo domingo (formato `YYYY-MM-DD`) — usada para nombre de carpeta y commit
+- `FECHA_HOY` = fecha real de hoy (formato `D de mes · YYYY`, ej: "25 de mayo · 2026") — **es la que aparece visible en el slide de portada**
 - `CARPETA` = `carruseles/FECHA/`
 - `HTML_DEST` = `carruseles/FECHA/carousel-instagram.html`
 - `MD_DEST` = `carruseles/FECHA/ofertas-semana.md`
 - Crear la carpeta si no existe: `mkdir -p "carruseles/FECHA/capturas"`
+
+> ⚠️ **Regla de fecha visible:** La `cover-subtitle` del slide 1 siempre muestra `FECHA_HOY` (hoy), no `FECHA`. El carrusel se publica el día que se crea, no el domingo.
 
 ---
 
