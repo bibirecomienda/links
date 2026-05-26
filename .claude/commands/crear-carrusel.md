@@ -190,7 +190,7 @@ Con los 6 productos extraídos, crear el archivo HTML en `HTML_DEST`. **COPIAR E
   - Títulos: Cormorant Garamond (serif)
   - Body: Inter (sans-serif)
 - **Estructura de 8 slides:**
-  1. **Portada:** Logo "Bibi", tagline "recomienda", fecha, máximo descuento (ej. "Hasta −42%")
+  1. **Portada:** Logo "Bibi", tagline "recomienda", `FECHA_HOY` en `cover-subtitle` (ej. "25 de mayo · 2026") — **nunca la fecha del domingo**, máximo descuento en `cover-pill` (ej. "Hasta −42%")
   2-7. **Productos:** Imagen (300px altura), badges (plataforma + descuento + categoría), nombre (2 líneas), descripción cálida (2-3 oraciones), precios (tachado + actual)
   8. **CTA:** "¿Cuál te enamoró?" + "@bibi.recomienda" + hashtags
 
@@ -272,13 +272,81 @@ mcp__Claude_in_Chrome__tabs_close_mcp (tabId usado)
 
 ---
 
-## Paso 7 — Ejecutar el script de organización
+## Paso 7 — Generar capturas PNG automáticamente
+
+Levantar un servidor Python con endpoint `/save` para recibir los PNGs desde el browser:
 
 ```bash
-node scripts/organize-weekly-carousel.js FECHA
+# Crear el servidor en /tmp/bibi_server.py
+cat > /tmp/bibi_server.py << 'PYEOF'
+import os, base64, json
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+os.chdir("/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda")
+class Handler(SimpleHTTPRequestHandler):
+    def do_POST(self):
+        if self.path == '/save':
+            length = int(self.headers['Content-Length'])
+            payload = json.loads(self.rfile.read(length))
+            os.makedirs(os.path.dirname(payload['filename']), exist_ok=True)
+            with open(payload['filename'], 'wb') as f:
+                f.write(base64.b64decode(payload['data']))
+            self.send_response(200)
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            self.wfile.write(b'ok')
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
+    def end_headers(self):
+        self.send_header('Access-Control-Allow-Origin', '*')
+        super().end_headers()
+    def log_message(self, *a): pass
+HTTPServer(('localhost', 8765), Handler).serve_forever()
+PYEOF
+python3 /tmp/bibi_server.py &
+sleep 1
 ```
 
-Si el script falla o no encuentra archivos, reportar el error sin continuar.
+Abrir un tab de Chrome y navegar al HTML generado:
+```
+http://localhost:8765/carruseles/FECHA/carousel-instagram.html
+```
+
+Capturar los 8 slides con `mcp__Claude_in_Chrome__javascript_tool`:
+```js
+(async () => {
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+  document.head.appendChild(s);
+  await new Promise(r => s.onload = r);
+  await document.fonts.ready;
+  const slides = document.querySelectorAll('.slide');
+  const BASE = '/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda/carruseles/FECHA/capturas';
+  const results = [];
+  for (let i = 0; i < slides.length; i++) {
+    const canvas = await html2canvas(slides[i], {
+      width: 520, height: 520, scale: 1,
+      useCORS: true, allowTaint: true, logging: false
+    });
+    const b64 = canvas.toDataURL('image/png').split(',')[1];
+    const res = await fetch('http://localhost:8765/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename: `${BASE}/bibi-slide-${i+1}.png`, data: b64 })
+    });
+    results.push(`slide-${i+1}: ${res.ok ? 'ok' : 'FAILED'}`);
+  }
+  return results.join(', ');
+})()
+```
+
+Cerrar el tab y matar el servidor:
+```bash
+kill $(lsof -ti:8765) 2>/dev/null
+```
 
 ---
 
@@ -290,7 +358,8 @@ git commit -m "Carrusel semanal FECHA
 
 - 6 productos nuevos con highlight: true
 - Descuentos entre XX% y XX%
-- Carousel HTML generado (8 slides)
+- Carousel HTML generado (8 slides, portada con fecha HOY)
+- 8 capturas PNG 520×520px en capturas/
 - Caption Instagram listo
 
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
@@ -314,10 +383,9 @@ Productos:
 Archivos:
   📄 carruseles/FECHA/carousel-instagram.html (520×520px, 8 slides)
   📝 carruseles/FECHA/ofertas-semana.md (tabla + caption Instagram)
-  🖼️  carruseles/FECHA/capturas/ (pendiente — capturar manualmente)
+  🖼️  carruseles/FECHA/capturas/ (8 PNGs generados automáticamente)
 
 Siguiente paso:
-  Abrir carousel-instagram.html en Chrome en fullscreen
-  Capturar 8 screenshots de 520×520px por slide
-  Guardar en carruseles/FECHA/capturas/ como bibi-slide-1.png ... bibi-slide-8.png
+  Subir los 8 PNGs de capturas/ a Instagram como carrusel
+  Copiar el caption de ofertas-semana.md
 ```
