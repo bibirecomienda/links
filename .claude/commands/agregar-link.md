@@ -193,7 +193,9 @@ cd "/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda"
 git add links.js
 git commit -m "Agregar producto: TITULO_CORTO
 
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+[descripción breve del producto]
+
+Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>"
 git push
 ```
 

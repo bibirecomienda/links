@@ -138,17 +138,28 @@ Si `originalPrice` no aparece, buscar precio tachado en `.a-text-price`. Si el d
 
 ## Paso 3 — Generar el carousel HTML
 
-Con los 6 productos extraídos, crear el archivo HTML en `HTML_DEST`. Usar exactamente esta estructura (basada en `templates/carousel-instagram-template.html`):
+Con los 6 productos extraídos, crear el archivo HTML en `HTML_DEST`. **COPIAR EXACTAMENTE** la estructura de `templates/carousel-instagram-template.html`:
 
-- **Slide 1:** Portada con la fecha, categorías encontradas y mayor descuento del lote
-- **Slides 2–7:** Un producto por slide (en el orden que mejor cuente una historia visual)
-- **Slide 8:** CTA final fija
+**Especificaciones:**
+- **Tamaño:** 520×520px (no 1080×1080px)
+- **Paleta de colores:**
+  - Primario: #A04A36 (terracota/marrón)
+  - Secundario: #C9985E (dorado)
+  - Neutro: #9C7A6F (beige oscuro)
+  - Fondo: #FAF1E8 (crema)
+- **Tipografía:**
+  - Títulos: Cormorant Garamond (serif)
+  - Body: Inter (sans-serif)
+- **Estructura de 8 slides:**
+  1. **Portada:** Logo "Bibi", tagline "recomienda", fecha, máximo descuento (ej. "Hasta −42%")
+  2-7. **Productos:** Imagen (300px altura), badges (plataforma + descuento + categoría), nombre (2 líneas), descripción cálida (2-3 oraciones), precios (tachado + actual)
+  8. **CTA:** "¿Cuál te enamoró?" + "@bibi.recomienda" + hashtags
 
-Para cada slide de producto, usar el nombre del producto en 2 líneas máximo (cortar en la conjunción o artículo más natural). La `product-copy` debe ser una descripción cálida de 2-3 oraciones en el tono de Bibiana: directa, con personalidad, con un detalle específico del producto que enamore.
+**Copy de productos:** Tono Bibiana — directo, cálido, con detalle específico que enamore. Máximo 3 oraciones.
 
-La portada debe mencionar el mayor descuento del lote (ej. "Hasta −42% en Amazon") y la fecha en español (ej. "31 de mayo · 2026").
+**Imágenes:** URLs de Amazon con patrón SX679 (ej. `https://m.media-amazon.com/images/I/71rK6qZJDDL._AC_SX679_.jpg`)
 
-**Template de referencia:** `templates/carousel-instagram-template.html`
+**Template de referencia:** `templates/carousel-instagram-template.html` (copiar estilos CSS exactamente)
 
 ---
 
@@ -262,11 +273,12 @@ Productos:
   6. ...
 
 Archivos:
-  📄 carruseles/FECHA/carousel-instagram.html
-  📝 carruseles/FECHA/ofertas-semana.md
+  📄 carruseles/FECHA/carousel-instagram.html (520×520px, 8 slides)
+  📝 carruseles/FECHA/ofertas-semana.md (tabla + caption Instagram)
   🖼️  carruseles/FECHA/capturas/ (pendiente — capturar manualmente)
 
 Siguiente paso:
-  Abrir carousel-instagram.html en Chrome y capturar 8 screenshots de 1080×1080px
+  Abrir carousel-instagram.html en Chrome en fullscreen
+  Capturar 8 screenshots de 520×520px por slide
   Guardar en carruseles/FECHA/capturas/ como bibi-slide-1.png ... bibi-slide-8.png
 ```
