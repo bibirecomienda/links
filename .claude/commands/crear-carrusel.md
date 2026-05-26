@@ -34,7 +34,12 @@ Alternativamente buscar por categorías rotando cada semana:
 - `https://www.amazon.com/s?k=cocina+amazon+deals&language=es_US`
 - `https://www.amazon.com/s?k=moda+mujer+descuento&language=es_US`
 
-Para cada candidato que parezca interesante (imagen atractiva, precio razonable), navegar al producto y verificar que tenga ≥30% de descuento.
+Para cada candidato que parezca interesante, navegar al producto. Si la URL del producto es larga (>2000 chars) o tiene parámetros de rastreo, extraer el ASIN y construir una URL limpia antes de navegar:
+```
+https://www.amazon.com/dp/ASIN?language=es_US
+```
+
+Verificar que el producto tenga ≥30% de descuento antes de procesarlo.
 
 ---
 
@@ -55,11 +60,16 @@ const deliveryEl = document.querySelector(
   rating: document.querySelector('#acrPopover')?.title?.trim(),
   reviews: document.querySelector('#acrCustomerReviewText')?.innerText?.trim(),
   breadcrumb: document.querySelector('#wayfinding-breadcrumbs_feature_div')?.innerText?.trim(),
-  coupon: document.querySelector('.couponBadge, [data-csa-c-type="coupon"]')?.innerText?.trim() || '',
+  coupon: document.querySelector('.couponBadge, .promoPriceBlockMessage, [data-csa-c-type="coupon"], .vpcButton')?.innerText?.trim() || '',
   image: imgEl?.getAttribute('data-old-hires') || imgEl?.src || '',
   shipping: deliveryEl?.innerText?.trim() || '',
   siteStripe: !!document.querySelector('#amzn-ss-wrap')
 })
+```
+
+Si el texto de envío no se detectó en `deliveryEl`, intentar también:
+```js
+document.querySelector('#price-shipping-message, .a-color-secondary')?.innerText?.trim()
 ```
 
 Luego obtener el link de afiliado via SiteStripe:
@@ -80,30 +90,16 @@ if (sel && sel.value !== 'bibirecomie02-20') sel.value = 'bibirecomie02-20';
 ```
 
 ```js
-// 3. Seleccionar "Enlace corto"
+// 3. Seleccionar "Enlace corto" y leer el link del input
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
-  .find(d => d.innerText?.includes('Compartir enlace de afiliado'));
-const shortBtn = Array.from(sd.querySelectorAll('button, label, span'))
-  .find(el => el.innerText?.includes('Enlace corto'));
-if (shortBtn) shortBtn.click();
-```
+  .find(d => d.innerText?.includes('Enlace'));
+const shortOpt = Array.from(sd.querySelectorAll('input, label, span, div'))
+  .find(el => el.innerText?.trim() === 'Enlace corto' || el.textContent?.trim() === 'Enlace corto');
+if (shortOpt) shortOpt.click();
 
-```js
-// 4. Interceptar clipboard y copiar
-navigator.clipboard.writeText = function(text) {
-  window.__bibicaptured = text;
-  return Promise.resolve();
-};
-const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
-  .find(d => d.innerText?.includes('Compartir enlace de afiliado'));
-const copyBtn = Array.from(sd.querySelectorAll('button'))
-  .find(b => b.innerText?.includes('Copiar'));
-if (copyBtn) copyBtn.click();
-```
-
-```js
-// 5. Leer el link capturado
-window.__bibicaptured
+// Leer el link directamente del campo de texto del diálogo
+const inp = sd.querySelector('input[type="text"], textarea');
+inp?.value  // → "https://amzn.to/XXXXXX"
 ```
 
 ### Mapeo de categoría desde breadcrumb
@@ -118,6 +114,7 @@ window.__bibicaptured
 | Cocina / Alimentos / Utensilios | `cocina` |
 | Deportes / Fitness / Exterior | `deporte` |
 | Juguetes / Bebés / Niños | `ninos` |
+| Otro / no coincide | `otros` |
 
 ### Calcular descuento
 
@@ -198,7 +195,13 @@ Para cada uno de los 6 productos, agregar al inicio del array `BIBI_LINKS` un ob
 - `image`: URL de imagen principal
 - `price`: en COP con punto como separador (ej. `"COP $549.674"`)
 - `originalPrice`: precio tachado si existe, `""` si no
-- `badge`: `"🔥 XX% OFF"` si descuento ≥40%, o `"⭐ X.X · Xk+ vendidos"` si hay rating
+- `badge`: elegir según prioridad:
+  - Descuento ≥ 40% → `"🔥 XX% OFF"`
+  - Descuento 15–39% → `"🏷️ XX% OFF"`
+  - Envío gratis como dato destacado → `"📦 Envío gratis"`
+  - Sin descuento, con rating → `"⭐ X.X · Xk+ opiniones"`
+  - Top de categoría → `"🏆 #1 en [categoría]"`
+  - Sin datos suficientes → `"✨ Nuevo"`
 - `coupon`: texto del cupón detectado o `""`
 - `shipping`: valor calculado en Paso 2
 - `featured`: `false` (solo uno puede ser `true` a la vez)
