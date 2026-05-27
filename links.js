@@ -31,7 +31,7 @@ var BIBI_LINKS = [
     originalPrice: "",
     badge: "⭐ 4.1 · 1K+ opiniones",
     coupon: "",
-    shipping: "",
+    shipping: "COP $301.004",
     highlight: false,
     featured: true,
     active: true,
