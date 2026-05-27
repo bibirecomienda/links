@@ -21,6 +21,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 12,
+    title: "UPFAS Caja arena autolimpiante — App, monitoreo peso, silenciosa para gatos",
+    platform: "amazon",
+    category: "mascotas",
+    url: "https://amzn.to/4nOg87a",
+    image: "https://m.media-amazon.com/images/I/616zZxB0g1L._AC_SL1500_.jpg",
+    price: "COP $465.165",
+    originalPrice: "",
+    badge: "⭐ 4.1 · 1K+ opiniones",
+    coupon: "",
+    shipping: "",
+    highlight: false,
+    featured: true,
+    active: true,
+    date: "2026-05-27"
+  },
+  {
     id: 11,
     title: "GNMN Auriculares Bluetooth ANC — Cancelación ruido, 90H batería, resistente al agua",
     platform: "amazon",
@@ -190,7 +207,7 @@ var BIBI_LINKS = [
     price: "COP $549.674",
     coupon: "",
     featured: false,
-    active: true,
+    active: false,
     date: "2026-05-17"
   }
 ];
