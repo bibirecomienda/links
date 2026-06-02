@@ -487,5 +487,17 @@
   </div>
 </div>
 
+<script>
+(function() {
+  const s = new URLSearchParams(location.search).get('s');
+  if (!s) return;
+  document.body.style.cssText = 'margin:0;padding:0;background:transparent;';
+  document.querySelectorAll('.page-title, .slide-label, .hashtags-box').forEach(el => el.remove());
+  const outers = document.querySelectorAll('.slide-outer');
+  outers.forEach((el, i) => { el.style.display = (i + 1 === +s) ? 'flex' : 'none'; });
+  const target = outers[+s - 1];
+  if (target) { target.style.margin = '0'; target.style.justifyContent = 'center'; }
+})();
+</script>
 </body>
 </html>

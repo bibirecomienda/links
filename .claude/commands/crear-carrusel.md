@@ -283,77 +283,51 @@ mcp__Claude_in_Chrome__tabs_close_mcp (tabId usado)
 
 ## Paso 7 — Generar capturas PNG automáticamente
 
-Levantar un servidor Python con endpoint `/save` para recibir los PNGs desde el browser:
+El carousel HTML soporta el parámetro `?s=N` para mostrar un solo slide. Se usa Chrome headless (igual que las historias de `/agregar-link`) sin ningún servidor especial.
+
+> ⚠️ **IMPORTANTE:** El HTML del carrusel DEBE incluir el siguiente script al final del `<body>` para que `?s=N` funcione. Ya está incluido en la plantilla — no eliminarlo:
+> ```html
+> <script>
+> (function() {
+>   const s = new URLSearchParams(location.search).get('s');
+>   if (!s) return;
+>   document.body.style.cssText = 'margin:0;padding:0;background:transparent;';
+>   document.querySelectorAll('.page-title, .slide-label, .hashtags-box').forEach(el => el.remove());
+>   const outers = document.querySelectorAll('.slide-outer');
+>   outers.forEach((el, i) => { el.style.display = (i + 1 === +s) ? 'flex' : 'none'; });
+>   const target = outers[+s - 1];
+>   if (target) { target.style.margin = '0'; target.style.justifyContent = 'center'; }
+> })();
+> </script>
+> ```
+
+### 7a — Levantar servidor de archivos
 
 ```bash
-# Crear el servidor en /tmp/bibi_server.py
-cat > /tmp/bibi_server.py << 'PYEOF'
-import os, base64, json
-from http.server import HTTPServer, SimpleHTTPRequestHandler
-os.chdir("/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda")
-class Handler(SimpleHTTPRequestHandler):
-    def do_POST(self):
-        if self.path == '/save':
-            length = int(self.headers['Content-Length'])
-            payload = json.loads(self.rfile.read(length))
-            os.makedirs(os.path.dirname(payload['filename']), exist_ok=True)
-            with open(payload['filename'], 'wb') as f:
-                f.write(base64.b64decode(payload['data']))
-            self.send_response(200)
-            self.send_header('Access-Control-Allow-Origin', '*')
-            self.end_headers()
-            self.wfile.write(b'ok')
-    def do_OPTIONS(self):
-        self.send_response(200)
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-        self.end_headers()
-    def end_headers(self):
-        self.send_header('Access-Control-Allow-Origin', '*')
-        super().end_headers()
-    def log_message(self, *a): pass
-HTTPServer(('localhost', 8765), Handler).serve_forever()
-PYEOF
-python3 /tmp/bibi_server.py &
+kill $(lsof -ti:8765) 2>/dev/null
+cd "/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda" && python3 -m http.server 8765 &
 sleep 1
 ```
 
-Abrir un tab de Chrome y navegar al HTML generado:
-```
-http://localhost:8765/carruseles/FECHA/carousel-instagram.html
-```
+### 7b — Capturar cada slide con Chrome headless
 
-Capturar los 8 slides con `mcp__Claude_in_Chrome__javascript_tool`:
-```js
-(async () => {
-  const s = document.createElement('script');
-  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-  document.head.appendChild(s);
-  await new Promise(r => s.onload = r);
-  await document.fonts.ready;
-  const slides = document.querySelectorAll('.slide');
-  const BASE = '/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda/carruseles/FECHA/capturas';
-  const results = [];
-  for (let i = 0; i < slides.length; i++) {
-    const canvas = await html2canvas(slides[i], {
-      width: 520, height: 520, scale: 1,
-      useCORS: true, allowTaint: true, logging: false
-    });
-    const b64 = canvas.toDataURL('image/png').split(',')[1];
-    const res = await fetch('http://localhost:8765/save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ filename: `${BASE}/bibi-slide-${i+1}.png`, data: b64 })
-    });
-    results.push(`slide-${i+1}: ${res.ok ? 'ok' : 'FAILED'}`);
-  }
-  return results.join(', ');
-})()
-```
+Reemplazar `FECHA` con la fecha real y `N_SLIDES` con el número total de slides (portada + productos + CTA):
 
-Cerrar el tab y matar el servidor:
 ```bash
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+BASE="http://localhost:8765/carruseles/FECHA/carousel-instagram.html"
+OUT="/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda/carruseles/FECHA/capturas"
+
+for i in $(seq 1 N_SLIDES); do
+  "$CHROME" \
+    --headless=new \
+    --screenshot="$OUT/bibi-slide-$i.png" \
+    --window-size=520,520 \
+    --hide-scrollbars \
+    --disable-gpu \
+    "${BASE}?s=${i}" 2>/dev/null
+done
+
 kill $(lsof -ti:8765) 2>/dev/null
 ```
 
