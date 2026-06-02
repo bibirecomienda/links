@@ -135,7 +135,7 @@ var BIBI_LINKS = [
     coupon: "",
     shipping: "gratis",
     highlight: false,
-    featured: false,
+    featured: true,
     active: true,
     date: "2026-06-02"
   },
@@ -152,7 +152,7 @@ var BIBI_LINKS = [
     coupon: "",
     shipping: "COP $301.004",
     highlight: false,
-    featured: true,
+    featured: false,
     active: true,
     date: "2026-05-27"
   },
