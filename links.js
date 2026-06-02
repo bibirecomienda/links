@@ -21,6 +21,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 13,
+    title: "Fuente de agua inalámbrica para gatos FEELNEEDY 3.5L",
+    platform: "amazon",
+    category: "mascotas",
+    url: "https://amzn.to/49UASET",
+    image: "https://m.media-amazon.com/images/I/61h6AIoARIL._AC_SL1500_.jpg",
+    price: "COP $169.438",
+    originalPrice: "",
+    badge: "⭐ 4.0 · 1K+ opiniones",
+    coupon: "",
+    shipping: "",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-06-02"
+  },
+  {
     id: 12,
     title: "UPFAS Caja arena autolimpiante — App, monitoreo peso, silenciosa para gatos",
     platform: "amazon",
