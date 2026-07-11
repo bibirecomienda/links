@@ -21,6 +21,8 @@ Si no se pasa fecha, calcular el próximo domingo desde hoy (para nombre de carp
 > ✅ **Para hacer clic en elementos:** `mcp__Claude_in_Chrome__javascript_tool` (con `.click()` en JS)
 >
 > Si un campo del DOM devuelve `undefined` o `null`, ese dato no está disponible — usar `""`. **Nunca tomar un screenshot como fallback.**
+>
+> ⛔ **PROHIBIDO inventar productos, precios, ASINs o links.** Cada producto del carrusel debe salir de una página real de Amazon navegada en Chrome, con su link `amzn.to/...` real capturado vía SiteStripe. Si Chrome no está disponible o SiteStripe no aparece, **detener el flujo y avisar a Bibiana** — nunca generar el carrusel con datos placeholder tipo `amzn.to/[TAG]`.
 
 ---
 
@@ -333,7 +335,16 @@ kill $(lsof -ti:8765) 2>/dev/null
 
 ---
 
-## Paso 8 — Commit a Git
+## Paso 8 — Validar y commit a Git
+
+**Validar antes de commitear** (si sale con error, corregir `links.js` y repetir):
+
+```bash
+cd "/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda"
+osascript -l JavaScript scripts/validate-links.js
+```
+
+Solo si la validación pasa:
 
 ```bash
 git add carruseles/FECHA/ links.js
@@ -345,7 +356,7 @@ git commit -m "Carrusel semanal FECHA
 - 8 capturas PNG 520×520px en capturas/
 - Caption Instagram listo
 
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+Co-Authored-By: Claude <noreply@anthropic.com>"
 git push
 ```
 

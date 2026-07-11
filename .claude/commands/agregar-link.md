@@ -91,7 +91,16 @@ if (btn) { btn.click(); 'clicked'; } else 'not found';
 
 ## Paso 5 — Capturar el link corto de afiliado
 
-Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
+**Primero verificar y forzar el tag `bibirecomie02-20`** con **`mcp__Claude_in_Chrome__javascript_tool`**:
+```js
+const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
+  .find(d => d.innerText?.includes('Enlace'));
+const sel = sd?.querySelector('select[name="amzn-ss-store-dropdown-text"]');
+if (sel && sel.value !== 'bibirecomie02-20') sel.value = 'bibirecomie02-20';
+sel?.value || 'no dialog';
+```
+
+Luego capturar el link con **`mcp__Claude_in_Chrome__javascript_tool`**:
 ```js
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
   .find(d => d.innerText?.includes('Enlace'));
@@ -171,7 +180,11 @@ Una vez en COP, volver al producto (`mcp__Claude_in_Chrome__navigate → https:/
 
 ## Paso 10 — Agregar a links.js
 
-Leer `links.js`, obtener el `id` máximo y agregar al **inicio** del array `BIBI_LINKS`:
+**Chequear duplicados primero:** buscar en `links.js` el ID de media de la imagen (ej. `616zZxB0g1L` de la URL de imagen) y palabras clave del título. Si el producto ya existe:
+- Si está `active: true` → avisar a Bibiana y **no agregarlo de nuevo** (ofrecer actualizar precio/datos del existente).
+- Si está `active: false` → reactivarlo actualizando sus datos en lugar de crear otro.
+
+Si no existe, leer `links.js`, obtener el `id` máximo y agregar al **inicio** del array `BIBI_LINKS`:
 
 ```js
 {
@@ -203,11 +216,11 @@ mcp__Claude_in_Chrome__tabs_close_mcp (tabId usado)
 
 ---
 
-## Paso 13 — Generar historia de IG
+## Paso 12 — Generar historia de IG
 
 Crear el archivo HTML de la historia y capturarlo como PNG listo para subir.
 
-### 13a — Crear el HTML de la historia
+### 12a — Crear el HTML de la historia
 
 Escribir el archivo `story-export/historia-[SLUG].html` con los datos del producto.
 - `[SLUG]` = título simplificado en minúsculas con guiones, máx 30 chars (ej: `caja-arena-autolimpiante`)
@@ -342,14 +355,14 @@ Escribir el archivo `story-export/historia-[SLUG].html` con los datos del produc
 ```
 - Sin datos de envío → `""` (omitir)
 
-### 13b — Verificar que el servidor local esté corriendo
+### 12b — Verificar que el servidor local esté corriendo
 
 ```bash
 lsof -i :8765 | grep LISTEN || (cd "/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda" && python3 -m http.server 8765 &)
 sleep 1
 ```
 
-### 13c — Capturar como PNG con Chrome headless
+### 12c — Capturar como PNG con Chrome headless
 
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
@@ -365,16 +378,24 @@ El archivo PNG queda en `story-export/historia-[SLUG].png`, listo para subir com
 
 ---
 
-## Paso 12 — Subir a GitHub
+## Paso 13 — Validar y subir a GitHub
+
+**Validar antes de commitear** (si sale con error, corregir `links.js` y repetir):
 
 ```bash
 cd "/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda"
+osascript -l JavaScript scripts/validate-links.js
+```
+
+Solo si la validación pasa:
+
+```bash
 git add links.js story-export/
 git commit -m "Agregar producto: TITULO_CORTO
 
 [descripción breve del producto]
 
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+Co-Authored-By: Claude <noreply@anthropic.com>"
 git push
 ```
 
