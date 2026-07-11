@@ -6,17 +6,23 @@
 // ───────────────────────────────────────────────────
 //  PRODUCTOS
 //  Campos por producto:
-//    id         · número único (cualquier valor, sólo para React keys)
-//    title      · nombre que se ve en la card
-//    platform   · "amazon" | "mercadolibre" (define el badge)
-//    category   · clave de CATEGORIAS abajo (ej "cocina")
-//    url        · link de afiliado
-//    image      · URL de la imagen (idealmente cuadrada, fondo blanco)
-//    price      · texto del precio ej "COP $68.443"  (sin precio anterior — los precios cambian día a día)
-//    coupon     · texto del cupón si aplica, ej "Ahorra 10%"  (opcional)
-//    featured   · true para que aparezca como "Pick del día" (sólo uno a la vez)
-//    active     · true para que se muestre, false para esconder sin borrar
-//    date       · "YYYY-MM-DD" — fecha en que lo agregaste, para ordenar
+//    id            · número único, incrementar (max + 1)
+//    title         · nombre que se ve en la card (máx ~60 chars)
+//    platform      · "amazon" | "mercadolibre" | "shein" | "aliexpress" | "other"
+//    category      · clave de CATEGORIAS abajo (ej "cocina")
+//    url           · link de afiliado (Amazon: amzn.to generado por SiteStripe)
+//    image         · URL de la imagen (idealmente cuadrada, fondo blanco)
+//    price         · precio en COP ej "COP $68.443" (punto de miles, sin decimales)
+//    originalPrice · precio tachado si hay descuento, "" si no
+//    badge         · etiqueta corta ej "🔥 44% OFF" (se usa en carruseles/historias)
+//    coupon        · texto del cupón si aplica, ej "Ahorra 10%", "" si no
+//    shipping      · "gratis" | "COP $X.XXX" | "" (sin dato)
+//    highlight     · true = aparece en "Destacados de la semana" (los del carrusel vigente)
+//    featured      · true para que aparezca como "Pick del día" (sólo uno a la vez)
+//    active        · true para que se muestre, false para esconder sin borrar
+//    date          · "YYYY-MM-DD" — fecha en que lo agregaste
+//
+//  Validar después de editar:  osascript -l JavaScript scripts/validate-links.js
 // ───────────────────────────────────────────────────
 
 var BIBI_LINKS = [
@@ -317,6 +323,7 @@ var BIBI_LINKS = [
     url: "https://amzn.to/49PkVj0",
     image: "https://m.media-amazon.com/images/I/81C3y4Yjr4L._AC_SL1500_.jpg",
     price: "COP $737.263",
+    originalPrice: "",
     coupon: "",
     shipping: "COP $116.051",
     highlight: false,
@@ -333,6 +340,7 @@ var BIBI_LINKS = [
     url: "https://amzn.to/3RGbXOQ",
     image: "https://m.media-amazon.com/images/I/61MD2KObDvL._AC_SL1500_.jpg",
     price: "COP $254.369",
+    originalPrice: "",
     coupon: "",
     shipping: "gratis",
     highlight: false,
@@ -349,7 +357,11 @@ var BIBI_LINKS = [
     url: "https://amzn.to/3Poe49o",
     image: "https://m.media-amazon.com/images/I/812lBocYTIL._AC_SL1500_.jpg",
     price: "COP $68.443",
+    originalPrice: "",
+    badge: "",
     coupon: "Ahorra 10%",
+    shipping: "",
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-05-17"
@@ -362,7 +374,11 @@ var BIBI_LINKS = [
     url: "https://amzn.to/4ustKYn",
     image: "https://m.media-amazon.com/images/I/71W-iwLyURL._AC_SL1500_.jpg",
     price: "COP $57.029",
+    originalPrice: "",
+    badge: "",
     coupon: "",
+    shipping: "",
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-05-17"
@@ -375,7 +391,11 @@ var BIBI_LINKS = [
     url: "https://amzn.to/4uhWGSZ",
     image: "https://m.media-amazon.com/images/I/616zZxB0g1L._AC_SL1500_.jpg",
     price: "COP $549.674",
+    originalPrice: "",
+    badge: "",
     coupon: "",
+    shipping: "",
+    highlight: false,
     featured: false,
     active: false,
     date: "2026-05-17"
