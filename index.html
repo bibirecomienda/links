@@ -258,13 +258,6 @@
 
     /* ── PICK DEL DÍA ───────────────────────────────────── */
     .pick-section { padding: 0 20px 22px; }
-    .pick-card {
-      display: block;
-      background: var(--cream);
-      border: 1px solid var(--rule);
-      border-radius: 16px;
-      overflow: hidden;
-    }
     .pick-card-main {
       display: flex;
       gap: 14px;
@@ -786,6 +779,13 @@
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
+  // Pide a Amazon una versión reducida de la imagen para thumbnails
+  // (las URLs originales _AC_SL1500_ pesan ~10x más de lo necesario).
+  // Si la URL no sigue el patrón de Amazon, se devuelve intacta.
+  const thumb = (url, px) => typeof url === 'string'
+    ? url.replace(/\._AC_[A-Z]{2}\d+_\.(jpg|png)$/i, `._AC_SX${px}_.$1`)
+    : url;
+
   const storeLabel = p => p === 'amazon' ? 'Amazon' : p === 'mercadolibre' ? 'Mercado Libre' : (p || '');
   const storeBadge = p => p === 'amazon' ? 'AMZ' : p === 'mercadolibre' ? 'ML' : (p || '').slice(0, 3).toUpperCase();
   const catLabel = c => (categorias[c] && categorias[c].label) || c || '';
@@ -861,15 +861,15 @@
     const highlights = products.filter(p => p.highlight);
     if (!highlights.length) return '';
     const cards = highlights.map(p => `
-      <a class="week-card" href="${esc(p.url)}" target="_blank" rel="noopener">
+      <a class="week-card" href="${esc(p.url)}" target="_blank" rel="sponsored noopener">
         <div class="week-card-main">
           <div class="week-thumb">
-            ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" />` : ''}
+            ${p.image ? `<img src="${esc(thumb(p.image, 300))}" alt="${esc(p.title)}" loading="lazy" />` : ''}
           </div>
           <div class="week-info">
             <div>
               <div class="week-cat">${esc(catLabel(p.category))}</div>
-              <div class="week-title">${esc(p.title)}</div>
+              <h3 class="week-title">${esc(p.title)}</h3>
             </div>
             <div class="week-price-row">
               <span class="week-price">${esc(p.price)}</span>
@@ -883,7 +883,7 @@
     return `
       <section class="week-section">
         <div class="section-head">
-          <span class="section-label accent">◆ Destacados de la semana</span>
+          <h2 class="section-label accent">◆ Destacados de la semana</h2>
         </div>
         <div class="week-scroll">${cards}</div>
       </section>`;
@@ -897,13 +897,13 @@
     return `
       <section class="pick-section">
         <div class="section-head">
-          <span class="section-label">Pick del día</span>
+          <h2 class="section-label">Pick del día</h2>
           <span class="right">Hoy</span>
         </div>
-        <a class="pick-card" href="${esc(p.url)}" target="_blank" rel="noopener">
+        <a class="pick-card" href="${esc(p.url)}" target="_blank" rel="sponsored noopener">
           <div class="pick-card-main">
             <div class="pick-thumb">
-              ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
+              ${p.image ? `<img src="${esc(thumb(p.image, 300))}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
             </div>
             <div class="pick-info">
               <div>
@@ -911,7 +911,7 @@
                   <span class="badge pick">Pick</span>
                   <span class="badge store">${esc(storeLabel(p.platform))}</span>
                 </div>
-                <div class="pick-title">${esc(p.title)}</div>
+                <h3 class="pick-title">${esc(p.title)}</h3>
                 <div class="pick-cat">${esc(catLabel(p.category))}</div>
               </div>
               <div class="pick-price-row">
@@ -933,7 +933,7 @@
   function renderCampaigns() {
     if (!campaigns.length) return '';
     const cards = campaigns.map(c => `
-      <a class="campaign-card" href="${esc(c.url)}" target="_blank" rel="noopener">
+      <a class="campaign-card" href="${esc(c.url)}" target="_blank" rel="sponsored noopener">
         <div class="campaign-head">
           <div class="campaign-logo" style="background:${esc(c.color || '#FFE600')}">${esc((c.store || '?')[0])}</div>
           <span class="campaign-store">${esc(c.store || '')}</span>
@@ -947,7 +947,7 @@
     return `
       <section class="campaigns-section">
         <div class="section-head">
-          <span class="section-label accent">◆ Campañas activas</span>
+          <h2 class="section-label accent">◆ Campañas activas</h2>
         </div>
         <div class="campaigns-scroll">${cards}</div>
       </section>`;
@@ -969,7 +969,7 @@
     return `
       <section class="cats-section">
         <div class="section-head">
-          <span class="section-label accent">◆ Categorías</span>
+          <h2 class="section-label accent">◆ Categorías</h2>
           <span class="right">${filteredCount} producto${filteredCount === 1 ? '' : 's'}</span>
         </div>
         <div class="cats-scroll">${chips}</div>
@@ -981,15 +981,15 @@
   // ─────────────────────────────────────────────────────
   function renderProducts(list) {
     const cards = list.length ? list.map((p, i) => `
-      <a class="product-card" style="--i:${i};" href="${esc(p.url)}" target="_blank" rel="noopener">
+      <a class="product-card" style="--i:${i};" href="${esc(p.url)}" target="_blank" rel="sponsored noopener">
         <div class="product-thumb">
-          ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
+          ${p.image ? `<img src="${esc(thumb(p.image, 300))}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
           <span class="product-store-badge">${esc(storeBadge(p.platform))}</span>
           ${isNew(p.date) ? `<span class="product-new-badge">✨ Nuevo</span>` : ''}
         </div>
         <div class="product-info">
           <div class="product-cat">${esc(catLabel(p.category))}</div>
-          <div class="product-title">${esc(p.title)}</div>
+          <h3 class="product-title">${esc(p.title)}</h3>
           <div class="product-price">${esc(p.price)}</div>
           ${p.date ? `<div class="product-date">Visto el ${esc(formatProductDate(p.date))}</div>` : ''}
         </div>
@@ -1009,7 +1009,10 @@
     const featured = products.find(p => p.featured) || products[0];
     let list = products;
     if (activeCat !== 'all') list = list.filter(p => p.category === activeCat);
-    if (query) list = list.filter(p => p.title.toLowerCase().includes(query));
+    if (query) list = list.filter(p =>
+      p.title.toLowerCase().includes(query) ||
+      catLabel(p.category).toLowerCase().includes(query)
+    );
 
     document.getElementById('main').innerHTML =
       renderPick(featured) +
