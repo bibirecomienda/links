@@ -182,7 +182,7 @@ inp?.value || 'no input found';
 Con los 6 productos extraídos, crear el archivo HTML en `HTML_DEST`. **COPIAR EXACTAMENTE** la estructura de `templates/carousel-instagram-template.html`:
 
 **Especificaciones:**
-- **Tamaño:** 520×520px (no 1080×1080px)
+- **Tamaño:** 1080×1350px (formato 4:5, resolución nativa de Instagram — NO 520×520)
 - **Paleta de colores:**
   - Primario: #A04A36 (terracota/marrón)
   - Secundario: #C9985E (dorado)
@@ -192,11 +192,11 @@ Con los 6 productos extraídos, crear el archivo HTML en `HTML_DEST`. **COPIAR E
   - Títulos: Cormorant Garamond (serif)
   - Body: Inter (sans-serif)
 - **Estructura de 8 slides:**
-  1. **Portada:** Logo "Bibi", tagline "recomienda", `FECHA_HOY` en `cover-subtitle` (ej. "25 de mayo · 2026") — **nunca la fecha del domingo**, máximo descuento en `cover-pill` (ej. "Hasta −42%")
-  2-7. **Productos:** Imagen (300px altura), badges (plataforma + descuento + categoría), nombre (2 líneas), descripción cálida (2-3 oraciones), precios (tachado + actual)
-  8. **CTA:** "¿Cuál te enamoró?" + "@bibi.recomienda" + hashtags
+  1. **Portada:** Logo "Bibi", tagline "recomienda", `FECHA_HOY` en `cover-subtitle` (ej. "25 de mayo · 2026") — **nunca la fecha del domingo**, máximo descuento en `cover-pill` (ej. "Hasta −42% en Amazon")
+  2-7. **Productos:** Imagen (área de 760px), badge plataforma (arriba izq.) y badge descuento o rating (arriba der.), kicker de categoría (texto dorado, NO badge sobre la foto), nombre serif grande, copy cálido de **máximo 2 oraciones**, precio tachado + precio actual, pill `📦 Envío gratis` solo si `shipping: "gratis"`
+  8. **CTA:** "¿Cuál te enamoró?" + "links en mi bio" + "@bibi.recomienda" + disclaimer de precios/afiliados. **Sin hashtags** (van solo en ofertas-semana.md)
 
-**Copy de productos:** Tono Bibiana — directo, cálido, con detalle específico que enamore. Máximo 3 oraciones.
+**Copy de productos:** Tono Bibiana — directo, cálido, con detalle específico que enamore. **Máximo 2 oraciones** (a 1080px el espacio es generoso pero el copy corto vende más).
 
 **Imágenes:** URLs de Amazon con patrón SX679 (ej. `https://m.media-amazon.com/images/I/71rK6qZJDDL._AC_SX679_.jpg`)
 
@@ -294,7 +294,7 @@ El carousel HTML soporta el parámetro `?s=N` para mostrar un solo slide. Se usa
 >   const s = new URLSearchParams(location.search).get('s');
 >   if (!s) return;
 >   document.body.style.cssText = 'margin:0;padding:0;background:transparent;';
->   document.querySelectorAll('.page-title, .slide-label, .hashtags-box').forEach(el => el.remove());
+>   document.querySelectorAll('.page-title, .slide-label').forEach(el => el.remove());
 >   const outers = document.querySelectorAll('.slide-outer');
 >   outers.forEach((el, i) => { el.style.display = (i + 1 === +s) ? 'flex' : 'none'; });
 >   const target = outers[+s - 1];
@@ -324,7 +324,7 @@ for i in $(seq 1 N_SLIDES); do
   "$CHROME" \
     --headless=new \
     --screenshot="$OUT/bibi-slide-$i.png" \
-    --window-size=520,520 \
+    --window-size=1080,1350 \
     --hide-scrollbars \
     --disable-gpu \
     "${BASE}?s=${i}" 2>/dev/null
@@ -353,7 +353,7 @@ git commit -m "Carrusel semanal FECHA
 - 6 productos nuevos con highlight: true
 - Descuentos entre XX% y XX%
 - Carousel HTML generado (8 slides, portada con fecha HOY)
-- 8 capturas PNG 520×520px en capturas/
+- 8 capturas PNG 1080×1350px en capturas/
 - Caption Instagram listo
 
 Co-Authored-By: Claude <noreply@anthropic.com>"
@@ -375,7 +375,7 @@ Productos:
   6. ...
 
 Archivos:
-  📄 carruseles/FECHA/carousel-instagram.html (520×520px, 8 slides)
+  📄 carruseles/FECHA/carousel-instagram.html (1080×1350px 4:5, 8 slides)
   📝 carruseles/FECHA/ofertas-semana.md (tabla + caption Instagram)
   🖼️  carruseles/FECHA/capturas/ (8 PNGs generados automáticamente)
 

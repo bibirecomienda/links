@@ -1,14 +1,28 @@
 <!DOCTYPE html>
+<!--
+  PLANTILLA CARRUSEL IG — 1080×1350 (4:5, resolución nativa de Instagram)
+  Usada por /crear-carrusel. Estructura: portada + 6 productos + CTA.
+
+  · Los .slide-label y .page-title son solo para revisar en el navegador:
+    el script ?s=N los elimina al capturar.
+  · Capturar cada slide con: carousel-instagram.html?s=N y window-size 1080,1350
+  · Los hashtags van en ofertas-semana.md (no en el HTML).
+-->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bibi Recomienda · Carrusel 24 mayo 2026</title>
+    <title>Bibi Recomienda · Carrusel · [FECHA]</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #F4DDD7; --surface: #FBEAE4; --cream: #FAF1E8; --card: #FFFFFF;
+            --ink: #3B2521; --muted: #9C7A6F; --accent: #A04A36; --rule: #E5C9C0; --gold: #C9985E;
+        }
 
         body {
             font-family: 'Inter', system-ui, sans-serif;
@@ -16,34 +30,16 @@
             padding: 20px;
         }
 
-        .page-title {
-            text-align: center;
-            color: #3B2521;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            opacity: 0.6;
-        }
+        /* Ayudas de preview — el script ?s=N las elimina al capturar */
+        .page-title { text-align: center; color: var(--ink); font-size: 0.9rem; margin-bottom: 30px; opacity: 0.6; }
+        .slide-label { color: var(--muted); font-size: 0.8rem; margin: 30px auto 10px; max-width: 1080px; opacity: 0.7; }
 
-        .slide-label {
-            color: #9C7A6F;
-            font-size: 0.8rem;
-            margin-top: 30px;
-            margin-bottom: 10px;
-            opacity: 0.7;
-        }
-
-        .slide-outer {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
+        .slide-outer { display: flex; justify-content: center; margin-bottom: 20px; }
 
         .slide {
-            width: 520px;
-            height: 520px;
-            background: #FAF1E8;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            width: 1080px;
+            height: 1350px;
+            background: var(--cream);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -52,269 +48,132 @@
 
         /* ─ PORTADA ─ */
         .slide-cover {
-            background: linear-gradient(135deg, #F4DDD7 0%, #FBEAE4 100%);
+            background:
+                radial-gradient(ellipse at top left, rgba(201,152,94,0.16) 0%, transparent 55%),
+                radial-gradient(ellipse at bottom right, rgba(160,74,54,0.10) 0%, transparent 55%),
+                linear-gradient(135deg, #F4DDD7 0%, #FBEAE4 100%);
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px;
+            padding: 80px;
         }
-
-        .cover-deco {
-            color: #A04A36;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-        }
-
+        .cover-deco { color: var(--accent); font-size: 44px; margin-bottom: 36px; letter-spacing: 12px; }
         .cover-brand {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 5.5rem;
-            color: #3B2521;
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 10px;
+            font-size: 190px; color: var(--ink); font-weight: 700; line-height: 1;
+            margin-bottom: 20px;
         }
-
         .cover-tagline {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 1.8rem;
-            color: #9C7A6F;
-            font-style: italic;
-            margin-bottom: 20px;
+            font-size: 58px; color: var(--muted); font-style: italic; margin-bottom: 56px;
         }
-
-        .cover-line {
-            width: 60px;
-            height: 1px;
-            background: #E5C9C0;
-            margin: 15px auto 20px;
-        }
-
+        .cover-line { width: 120px; height: 2px; background: var(--rule); margin: 0 auto 56px; }
         .cover-title {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 2rem;
-            color: #A04A36;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 15px;
+            font-size: 72px; color: var(--accent); font-weight: 600; line-height: 1.25;
+            margin-bottom: 32px;
         }
-
-        .cover-subtitle {
-            font-size: 0.9rem;
-            color: #9C7A6F;
-            margin-bottom: 20px;
-        }
-
+        .cover-subtitle { font-size: 32px; color: var(--muted); margin-bottom: 52px; }
         .cover-pill {
-            background: #A04A36;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: inline-block;
+            background: var(--accent); color: white;
+            padding: 22px 48px; border-radius: 80px;
+            font-size: 34px; font-weight: 700; display: inline-block; margin-bottom: 52px;
         }
-
-        .cover-footer {
-            font-size: 0.9rem;
-            color: #9C7A6F;
-        }
+        .cover-footer { font-size: 30px; color: var(--muted); }
 
         /* ─ PRODUCTO ─ */
-        .slide-product {
-            padding: 0;
-            overflow: hidden;
-        }
+        .slide-product { padding: 0; }
 
         .product-img-area {
             position: relative;
             width: 100%;
-            height: 300px;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 760px;
+            background: var(--card);
+            display: flex; align-items: center; justify-content: center;
             overflow: hidden;
         }
-
         .product-img-area img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            width: auto;
-            height: auto;
+            max-width: 100%; max-height: 100%;
+            object-fit: contain; width: auto; height: auto;
+            padding: 40px;
         }
-
         .badge-platform {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: #A04A36;
-            color: white;
-            padding: 5px 11px;
-            border-radius: 16px;
-            font-size: 0.65rem;
-            font-weight: 600;
+            position: absolute; top: 32px; left: 32px;
+            background: var(--accent); color: white;
+            padding: 14px 30px; border-radius: 44px;
+            font-size: 26px; font-weight: 700;
         }
-
         .badge-discount {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: #C9985E;
-            color: white;
-            padding: 5px 11px;
-            border-radius: 16px;
-            font-size: 0.7rem;
-            font-weight: 700;
-        }
-
-        .badge-tag {
-            position: absolute;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #E5C9C0;
-            color: #9C7A6F;
-            padding: 5px 12px;
-            border-radius: 16px;
-            font-size: 0.65rem;
-            font-weight: 500;
+            position: absolute; top: 32px; right: 32px;
+            background: var(--gold); color: white;
+            padding: 16px 34px; border-radius: 44px;
+            font-size: 34px; font-weight: 800;
         }
 
         .product-info {
-            padding: 20px;
+            padding: 52px 72px 44px;
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            display: flex; flex-direction: column;
         }
-
+        .product-kicker {
+            font-size: 26px; font-weight: 700; color: var(--gold);
+            letter-spacing: 5px; text-transform: uppercase;
+            margin-bottom: 18px;
+        }
         .product-name {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 1.5rem;
-            color: #3B2521;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 10px;
+            font-size: 66px; color: var(--ink); font-weight: 700; line-height: 1.12;
+            margin-bottom: 24px;
         }
-
         .product-copy {
-            font-size: 0.85rem;
-            color: #9C7A6F;
-            line-height: 1.4;
-            margin-bottom: 15px;
+            font-size: 31px; color: var(--muted); line-height: 1.45;
             font-style: italic;
         }
-
         .product-price-row {
-            display: flex;
-            gap: 12px;
-            align-items: center;
+            margin-top: auto;
+            display: flex; align-items: baseline; gap: 26px; flex-wrap: wrap;
         }
-
-        .price-before {
-            font-size: 0.8rem;
-            color: #9C7A6F;
-            text-decoration: line-through;
+        .price-before { font-size: 32px; color: var(--muted); text-decoration: line-through; }
+        .price-after { font-size: 68px; color: var(--accent); font-weight: 800; letter-spacing: -1px; }
+        .price-shipping {
+            margin-left: auto;
+            font-size: 27px; font-weight: 600; color: var(--accent);
+            background: var(--surface); border: 1.5px solid var(--rule);
+            padding: 12px 26px; border-radius: 40px;
+            align-self: center;
         }
-
-        .price-after {
-            font-size: 1.6rem;
-            color: #A04A36;
-            font-weight: 700;
-        }
-
         .product-watermark {
-            position: absolute;
-            bottom: 8px;
-            right: 10px;
-            font-size: 0.65rem;
-            color: #9C7A6F;
-            opacity: 0.5;
+            position: absolute; bottom: 20px; left: 32px;
             font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic; font-size: 24px; color: var(--muted); opacity: 0.55;
         }
 
         /* ─ CTA ─ */
         .slide-cta {
-            background: #A04A36;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px;
+            background:
+                radial-gradient(ellipse at top right, rgba(201,152,94,0.25) 0%, transparent 55%),
+                var(--accent);
+            justify-content: center; align-items: center; text-align: center;
+            padding: 80px;
         }
-
-        .cta-deco {
-            color: #C9985E;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-        }
-
+        .cta-deco { color: var(--gold); font-size: 40px; margin-bottom: 44px; letter-spacing: 12px; }
         .cta-title {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 3.2rem;
-            color: white;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 15px;
+            font-size: 120px; color: white; font-weight: 700; line-height: 1.05;
+            margin-bottom: 44px;
         }
-
-        .cta-line {
-            width: 50px;
-            height: 2px;
-            background: #C9985E;
-            margin: 12px auto 20px;
-        }
-
-        .cta-body {
-            font-size: 0.95rem;
-            color: white;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
+        .cta-line { width: 110px; height: 2.5px; background: var(--gold); margin: 0 auto 48px; }
+        .cta-body { font-size: 40px; color: white; line-height: 1.5; margin-bottom: 56px; }
         .cta-handle {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 1.4rem;
-            color: white;
-            font-style: italic;
-            margin-bottom: 12px;
+            font-size: 52px; color: white; font-style: italic; margin-bottom: 48px;
         }
-
-        .cta-deco-bot {
-            color: #C9985E;
-            font-size: 1.2rem;
-        }
-
-        /* ─ HASHTAGS ─ */
-        .hashtags-box {
-            margin-top: 40px;
-            padding: 20px;
-            background: white;
-            border-radius: 12px;
-            border-left: 4px solid #A04A36;
-        }
-
-        .hashtags-label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #3B2521;
-            margin-bottom: 12px;
-        }
-
-        .hashtags-text {
-            font-size: 0.85rem;
-            color: #9C7A6F;
-            line-height: 1.5;
-            word-break: break-word;
-            font-family: 'Courier New', monospace;
-        }
+        .cta-disclaimer { font-size: 27px; color: rgba(255,255,255,0.75); line-height: 1.6; }
     </style>
 </head>
 <body>
 
-<p class="page-title">Bibi Recomienda · Carrusel Instagram · 24 mayo 2026 · Preview 520 × 520 px</p>
+<p class="page-title">Bibi Recomienda · Carrusel Instagram · [FECHA] · 1080 × 1350 px (4:5)</p>
 
 <!-- ─ SLIDE 1: PORTADA ─ -->
 <p class="slide-label">Slide 1 — Portada</p>
@@ -324,149 +183,74 @@
   <div class="cover-tagline">✦ recomienda ✦</div>
   <div class="cover-line"></div>
   <div class="cover-title">Las mejores ofertas<br>de la semana</div>
-  <div class="cover-subtitle">24 de mayo · 2026</div>
+  <div class="cover-subtitle">[FECHA_HOY — ej. 25 de mayo · 2026]</div>
   <div class="cover-pill">Hasta −42% en Amazon</div>
   <div class="cover-footer">Curado a mano, como siempre 🤍</div>
 </div></div>
 
-<!-- ─ SLIDE 2: SEREED BIKE ─ -->
-<p class="slide-label">Slide 2 — Niños</p>
+<!-- ─ SLIDES 2–7: PRODUCTOS (repetir este bloque por cada producto) ─ -->
+<p class="slide-label">Slide 2 — Producto (ejemplo)</p>
 <div class="slide-outer"><div class="slide slide-product">
   <div class="product-img-area">
-    <img src="https://m.media-amazon.com/images/I/61tilO4erpL._AC_SX679_.jpg" alt="SEREED Bicicleta de Equilibrio">
+    <img src="https://m.media-amazon.com/images/I/61tilO4erpL._AC_SX679_.jpg" alt="Bicicleta de equilibrio SEREED">
     <span class="badge-platform">AMZ</span>
     <span class="badge-discount">−35%</span>
-    <span class="badge-tag">Niños</span>
   </div>
   <div class="product-info">
-    <div class="product-name">Bicicleta de<br>equilibrio SEREED</div>
-    <div class="product-copy">Para bebés de 1-2 años. Cuatro ruedas, segura y estable. Ese color rosa-verde es hermoso. Los papás dicen que sus hijos aprenden a andar en un abrir y cerrar de ojos.</div>
+    <div class="product-kicker">Niños</div>
+    <div class="product-name">Bicicleta de equilibrio SEREED</div>
+    <div class="product-copy">Para bebés de 1 a 2 años: cuatro ruedas, segura y estable. Los papás dicen que aprenden a andar en un abrir y cerrar de ojos.</div>
     <div class="product-price-row">
-      <span class="price-before">COP 169.542</span>
-      <span class="price-after">COP 110.484</span>
+      <span class="price-before">COP $169.542</span>
+      <span class="price-after">COP $110.484</span>
+      <span class="price-shipping">📦 Envío gratis</span>
     </div>
   </div>
   <div class="product-watermark">bibi recomienda</div>
 </div></div>
 
-<!-- ─ SLIDE 3: JASONWELL FLOAT ─ -->
-<p class="slide-label">Slide 3 — Playa</p>
+<p class="slide-label">Slide 3 — Producto sin envío gratis ni precio anterior (ejemplo)</p>
 <div class="slide-outer"><div class="slide slide-product">
   <div class="product-img-area">
-    <img src="https://m.media-amazon.com/images/I/71goaDpLYxL._AC_SX679_.jpg" alt="Jasonwell Flotador de Piscina">
+    <img src="https://m.media-amazon.com/images/I/51+RciUs53L._AC_SX679_.jpg" alt="Máquina de espresso DeLonghi Dedica">
     <span class="badge-platform">AMZ</span>
-    <span class="badge-discount">−40%</span>
-    <span class="badge-tag">Playa</span>
+    <span class="badge-discount">⭐ 4.6</span>
   </div>
   <div class="product-info">
-    <div class="product-name">Flotador inflable<br>4 en 1 Jasonwell</div>
-    <div class="product-copy">Perfecto para piscina, playa o simplemente relajarse al sol. Ese diseño rayado es demasiado lindo. Cómodo, no ocupa nada cuando está desinflado, y aguanta de todo.</div>
+    <div class="product-kicker">Cocina</div>
+    <div class="product-name">Máquina de espresso DeLonghi Dedica</div>
+    <div class="product-copy">15 bares de presión, acero inoxidable y compacta. Un clásico que dura años — no es juguete, es de verdad.</div>
     <div class="product-price-row">
-      <span class="price-before">COP 184.288</span>
-      <span class="price-after">COP 110.484</span>
+      <span class="price-after">COP $552.791</span>
     </div>
   </div>
   <div class="product-watermark">bibi recomienda</div>
 </div></div>
 
-<!-- ─ SLIDE 4: MAAMGIC SHORTS ─ -->
-<p class="slide-label">Slide 4 — Moda Verano</p>
-<div class="slide-outer"><div class="slide slide-product">
-  <div class="product-img-area">
-    <img src="https://m.media-amazon.com/images/I/712jeeE6OXL._AC_SX679_.jpg" alt="maamgic Shorts de Natación">
-    <span class="badge-platform">AMZ</span>
-    <span class="badge-discount">−42%</span>
-    <span class="badge-tag">Moda</span>
-  </div>
-  <div class="product-info">
-    <div class="product-name">Shorts de natación<br>elásticos maamgic</div>
-    <div class="product-copy">Con forro de compresión para que te veas bien dentro y fuera del agua. Los colores son puro verano. Cómodos todo el día, sin esa incomodidad de shorts normales.</div>
-    <div class="product-price-row">
-      <span class="price-before">COP 147.425</span>
-      <span class="price-after">COP 86.227</span>
-    </div>
-  </div>
-  <div class="product-watermark">bibi recomienda</div>
-</div></div>
-
-<!-- ─ SLIDE 5: WIHOLL LOUNGEWEAR ─ -->
-<p class="slide-label">Slide 5 — Moda Verano</p>
-<div class="slide-outer"><div class="slide slide-product">
-  <div class="product-img-area">
-    <img src="https://m.media-amazon.com/images/I/81wUCsoQZvL._AC_SY879_.jpg" alt="WIHOLL Loungewear Set">
-    <span class="badge-platform">AMZ</span>
-    <span class="badge-discount">−40%</span>
-    <span class="badge-tag">Moda</span>
-  </div>
-  <div class="product-info">
-    <div class="product-name">Conjunto dos piezas<br>verano WIHOLL</div>
-    <div class="product-copy">Sudadera + shorts cortos en tela súper suave. Con bolsillo de verdad (sí, bolsillo). De la casa al mercado, del brunch al parque. Viene hasta 2XL. Este precio no es real.</div>
-    <div class="product-price-row">
-      <span class="price-before">COP 110.558</span>
-      <span class="price-after">COP 66.246</span>
-    </div>
-  </div>
-  <div class="product-watermark">bibi recomienda</div>
-</div></div>
-
-<!-- ─ SLIDE 6: NAVATIEE CART ─ -->
-<p class="slide-label">Slide 6 — Exterior</p>
-<div class="slide-outer"><div class="slide slide-product">
-  <div class="product-img-area">
-    <img src="https://m.media-amazon.com/images/I/81QteeoKZ4L._AC_SX679_.jpg" alt="Navatiee Carrito Plegable">
-    <span class="badge-platform">AMZ</span>
-    <span class="badge-discount">−42%</span>
-    <span class="badge-tag">Exterior</span>
-  </div>
-  <div class="product-info">
-    <div class="product-name">Carrito plegable<br>Navatiee</div>
-    <div class="product-copy">Ruedas grandes que aguantan arena. Se pliega en un segundo. Playa, camping, mercado, lo que sea. Este carrito te va a acompañar en todo. Es de esos que ves y dices "¿por qué no lo compré antes?".</div>
-    <div class="product-price-row">
-      <span class="price-before">COP 442.343</span>
-      <span class="price-after">COP 258.018</span>
-    </div>
-  </div>
-  <div class="product-watermark">bibi recomienda</div>
-</div></div>
-
-<!-- ─ SLIDE 7: DELONGHI ESPRESSO ─ -->
-<p class="slide-label">Slide 7 — Cocina</p>
-<div class="slide-outer"><div class="slide slide-product">
-  <div class="product-img-area">
-    <img src="https://m.media-amazon.com/images/I/51+RciUs53L._AC_SX679_.jpg" alt="DeLonghi Dedica Espresso">
-    <span class="badge-platform">AMZ</span>
-    <span class="badge-discount">−40%</span>
-    <span class="badge-tag">Cocina</span>
-  </div>
-  <div class="product-info">
-    <div class="product-name">Máquina de espresso<br>DeLonghi Dedica</div>
-    <div class="product-copy">15 bares de presión, acero inoxidable, compacta. Para los que quieren espresso de especialidad en casa. Es un clásico que dura años. No es juguete, es de verdad.</div>
-    <div class="product-price-row">
-      <span class="price-before">COP 921.441</span>
-      <span class="price-after">COP 552.791</span>
-    </div>
-  </div>
-  <div class="product-watermark">bibi recomienda</div>
-</div></div>
-
-<!-- ─ SLIDE 8: CTA ─ -->
-<p class="slide-label">Slide 8 — CTA Final</p>
+<!-- ─ SLIDE FINAL: CTA ─ -->
+<p class="slide-label">Slide 8 — CTA final</p>
 <div class="slide-outer"><div class="slide slide-cta">
   <div class="cta-deco">✦ ✦ ✦</div>
   <div class="cta-title">¿Cuál<br>te enamoró?</div>
   <div class="cta-line"></div>
-  <div class="cta-body">El link directo a cada producto<br>está en mi bio 🔗<br><br>Los precios pueden variar.<br>Algunos enlaces son de afiliados ♡</div>
+  <div class="cta-body">El link directo a cada producto<br>está en mi bio 🔗</div>
   <div class="cta-handle">@bibi.recomienda</div>
-  <div class="cta-deco-bot">✦ ✦ ✦</div>
+  <div class="cta-disclaimer">Los precios pueden variar · Algunos enlaces son de afiliados ♡</div>
 </div></div>
 
-<!-- ─ HASHTAGS ─ -->
-<div class="hashtags-box">
-  <span class="hashtags-label">Hashtags para copiar en el caption</span>
-  <div class="hashtags-text">
-    #bibirecomienda #ofertasdelasemana #amazonfinds #descuentos #productosrecomendados #comprasintelgentes #amazonlatino #deals #ahorra #amazoncolombia #tendencias #modaverano #bellezarutina #verano2026 #finds
-  </div>
-</div>
+<!-- Script para capturar slides individuales con ?s=N — NO ELIMINAR -->
+<script>
+(function() {
+  const s = new URLSearchParams(location.search).get('s');
+  if (!s) return;
+  document.body.style.cssText = 'margin:0;padding:0;background:transparent;';
+  document.querySelectorAll('.page-title, .slide-label').forEach(el => el.remove());
+  const outers = document.querySelectorAll('.slide-outer');
+  outers.forEach((el, i) => { el.style.display = (i + 1 === +s) ? 'flex' : 'none'; });
+  const target = outers[+s - 1];
+  if (target) { target.style.margin = '0'; target.style.justifyContent = 'center'; }
+})();
+</script>
 
 </body>
 </html>
