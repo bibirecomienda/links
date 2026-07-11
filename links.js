@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 23,
+    title: "KOIOS Hervidor Eléctrico Cuello de Cisne 0.8L",
+    platform: "amazon",
+    category: "cocina",
+    url: "https://amzn.to/4vvJSYR",
+    image: "https://m.media-amazon.com/images/I/61n2K6HnaML._AC_SL1500_.jpg",
+    price: "COP $162.667",
+    originalPrice: "COP $195.207",
+    badge: "🏷️ 17% OFF",
+    coupon: "Ahorra 20% al pagar",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-11"
+  },
+  {
     id: 22,
     title: "Envasadora al Vacío Compacta con 20 Bolsas",
     platform: "amazon",
