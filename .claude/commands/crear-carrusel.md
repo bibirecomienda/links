@@ -333,6 +333,37 @@ done
 kill $(lsof -ti:8765) 2>/dev/null
 ```
 
+### 7c — Armar el paquete de publicación (celular / Google Drive)
+
+Dejar en un solo lugar todo lo que Bibiana necesita para publicar desde el celular o programar en Meta Business Suite:
+
+1. **Caption:** extraer la sección `## Caption Instagram` completa de `ofertas-semana.md` (texto + hashtags, sin la tabla) y guardarla como `caption-instagram.txt`.
+2. **Slides:** copiar las capturas del carrusel.
+3. **Historias:** generar historias de IG para los **2 productos con mayor descuento** del carrusel, usando `templates/historia-ig-template.html` (mismas variables y captura `file://` del Paso 12 de `/agregar-link`), y copiarlas al paquete.
+
+```bash
+FECHA_HOY=$(date +%Y-%m-%d)
+BASE="/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda"
+PKG="$BASE/Publicar/$FECHA_HOY"
+mkdir -p "$PKG"
+
+cp "$BASE/carruseles/FECHA/capturas/"*.png "$PKG/"
+# (caption-instagram.txt y las 2 historias ya generadas arriba, dentro de $PKG)
+
+# Si Google Drive for Desktop está instalado, copiar también a Drive
+DRIVE_ROOT=$(find "$HOME/Library/CloudStorage" -maxdepth 1 -name "GoogleDrive-*" 2>/dev/null | head -1)
+DRIVE_DIR=""; [ -n "$DRIVE_ROOT" ] && [ -d "$DRIVE_ROOT/My Drive" ] && DRIVE_DIR="$DRIVE_ROOT/My Drive"
+if [ -n "$DRIVE_DIR" ]; then
+  mkdir -p "$DRIVE_DIR/Bibi Recomienda - Publicar/$FECHA_HOY"
+  cp -R "$PKG/." "$DRIVE_DIR/Bibi Recomienda - Publicar/$FECHA_HOY/"
+  echo "DRIVE_OK"
+else
+  echo "DRIVE_DESKTOP_NO_INSTALADO"
+fi
+```
+
+> Si sale `DRIVE_DESKTOP_NO_INSTALADO`: avisar que el paquete quedó en `Publicar/FECHA_HOY/` (local) y que para recibirlo en el celular hay que instalar **Google Drive para escritorio** (google.com/drive/download, cuenta `bkpaezah@gmail.com`). La carpeta "Bibi Recomienda - Publicar" ya existe en Drive. Como respaldo, subir **solo** `caption-instagram.txt` con el conector MCP de Google Drive (`search_files` con `title = 'Bibi Recomienda - Publicar'` para el id, luego `create_file`). **Nunca subir PNGs por el conector** (base64 demasiado grande).
+
 ---
 
 ## Paso 8 — Validar y commit a Git
@@ -378,8 +409,11 @@ Archivos:
   📄 carruseles/FECHA/carousel-instagram.html (1080×1350px 4:5, 8 slides)
   📝 carruseles/FECHA/ofertas-semana.md (tabla + caption Instagram)
   🖼️  carruseles/FECHA/capturas/ (8 PNGs generados automáticamente)
+  📱 Publicar/FECHA_HOY/ → Google Drive "Bibi Recomienda - Publicar/FECHA_HOY"
+     (8 slides + caption-instagram.txt + 2 historias) ✓/✗
 
-Siguiente paso:
-  Subir los 8 PNGs de capturas/ a Instagram como carrusel
-  Copiar el caption de ofertas-semana.md
+Siguiente paso (desde el celular o Meta Business Suite):
+  Abrir la carpeta de la fecha en Google Drive
+  Publicar los 8 slides como carrusel + copiar caption-instagram.txt
+  Subir las 2 historias (sticker de link sobre el pill "El link está aquí")
 ```

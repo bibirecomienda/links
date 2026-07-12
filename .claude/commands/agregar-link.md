@@ -1,8 +1,8 @@
 # Agregar link de Amazon
 
-Agrega un producto de Amazon a `links.js`: navega al producto en Chrome, extrae los datos, genera el link de afiliado con SiteStripe y sube los cambios a GitHub.
+Agrega uno o varios productos de Amazon a `links.js`: navega a cada producto en Chrome, extrae los datos, genera el link de afiliado con SiteStripe, crea las historias de IG, deja el material en la carpeta de publicación (local + Google Drive) y sube los cambios a GitHub.
 
-**Uso:** `/agregar-link URL_DEL_PRODUCTO`
+**Uso:** `/agregar-link URL [URL2 URL3 …]` — acepta varios URLs separados por espacio o salto de línea (**modo lote**: un solo recorrido de Chrome, un solo commit, todas las historias juntas).
 
 ---
 
@@ -22,26 +22,28 @@ Agrega un producto de Amazon a `links.js`: navega al producto en Chrome, extrae 
 
 ---
 
-## Paso 1 — Preparar el URL
+## Paso 1 — Preparar los URLs
 
-Si el URL es largo (>2000 chars) o tiene parámetros de rastreo, extraer el ASIN y construir:
+Para **cada** URL recibido: si es largo (>2000 chars) o tiene parámetros de rastreo, extraer el ASIN y construir:
 ```
 https://www.amazon.com/dp/ASIN?language=es_US
 ```
+El resultado es la **lista de productos a procesar**.
 
 ---
 
-## Paso 2 — Abrir Chrome y navegar al producto
+## Paso 2 — Abrir Chrome
 
 ```
 mcp__Claude_in_Chrome__tabs_context_mcp (createIfEmpty: true)
 ```
-Guardar el `tabId`. Luego navegar:
-```
-mcp__Claude_in_Chrome__navigate → URL preparado en Paso 1
-```
+Guardar el `tabId` — se reutiliza el **mismo tab** para todos los productos.
 
-Esperar a que la página cargue completamente antes de continuar.
+> 🔁 **Los Pasos 3 a 9 se repiten por cada producto de la lista** antes de pasar al Paso 10. Para cada uno, navegar primero:
+> ```
+> mcp__Claude_in_Chrome__navigate → URL preparado en Paso 1
+> ```
+> y esperar a que la página cargue completamente.
 
 ---
 
@@ -184,7 +186,7 @@ Una vez en COP, volver al producto (`mcp__Claude_in_Chrome__navigate → https:/
 - Si está `active: true` → avisar a Bibiana y **no agregarlo de nuevo** (ofrecer actualizar precio/datos del existente).
 - Si está `active: false` → reactivarlo actualizando sus datos en lugar de crear otro.
 
-Si no existe, leer `links.js`, obtener el `id` máximo y agregar al **inicio** del array `BIBI_LINKS`:
+Si no existe, leer `links.js`, obtener el `id` máximo y agregar **todos los productos del lote** al **inicio** del array `BIBI_LINKS` (ids consecutivos a partir de `MAX_ID + 1`, en una sola edición del archivo):
 
 ```js
 {
@@ -216,9 +218,9 @@ mcp__Claude_in_Chrome__tabs_close_mcp (tabId usado)
 
 ---
 
-## Paso 12 — Generar historia de IG
+## Paso 12 — Generar historia de IG (una por producto)
 
-Crear el archivo HTML de la historia y capturarlo como PNG listo para subir.
+Crear el archivo HTML de cada historia y capturarlo como PNG listo para subir. **Repetir 12a y 12b por cada producto del lote.**
 
 ### 12a — Crear el HTML de la historia
 
@@ -252,14 +254,9 @@ Leer la plantilla **`templates/historia-ig-template.html`** (1080×1920, con zon
 
 > La historia **no muestra el URL del producto**: el link va en el **sticker de Instagram**, que Bibiana coloca encima del pill oscuro "El link está aquí 👇".
 
-### 12b — Verificar que el servidor local esté corriendo
+### 12b — Capturar como PNG con Chrome headless
 
-```bash
-lsof -i :8765 | grep LISTEN || (cd "/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda" && python3 -m http.server 8765 &)
-sleep 1
-```
-
-### 12c — Capturar como PNG con Chrome headless
+La plantilla no usa archivos locales, así que se captura directo con `file://` (sin servidor):
 
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
@@ -268,14 +265,43 @@ sleep 1
   --window-size=1080,1920 \
   --hide-scrollbars \
   --disable-gpu \
-  "http://localhost:8765/story-export/historia-[SLUG].html" 2>/dev/null
+  --virtual-time-budget=8000 \
+  "file:///Users/cmartin/Documents/Claude/Projects/Bibi Recomienda/story-export/historia-[SLUG].html" 2>/dev/null
 ```
-
-El archivo PNG queda en `story-export/historia-[SLUG].png`, listo para subir como historia de IG.
 
 ---
 
-## Paso 13 — Validar y subir a GitHub
+## Paso 13 — Copiar al paquete de publicación (celular / Google Drive)
+
+Dejar las historias del lote donde Bibiana las toma desde el celular:
+
+```bash
+FECHA=$(date +%Y-%m-%d)
+BASE="/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda"
+PKG="$BASE/Publicar/$FECHA"
+mkdir -p "$PKG"
+# Copiar SOLO las historias de este lote (una línea por slug):
+cp "$BASE/story-export/historia-[SLUG1].png" "$PKG/"
+cp "$BASE/story-export/historia-[SLUG2].png" "$PKG/"   # …etc.
+
+# Si Google Drive for Desktop está instalado, copiar también a Drive
+DRIVE_ROOT=$(find "$HOME/Library/CloudStorage" -maxdepth 1 -name "GoogleDrive-*" 2>/dev/null | head -1)
+DRIVE_DIR=""; [ -n "$DRIVE_ROOT" ] && [ -d "$DRIVE_ROOT/My Drive" ] && DRIVE_DIR="$DRIVE_ROOT/My Drive"
+if [ -n "$DRIVE_DIR" ]; then
+  mkdir -p "$DRIVE_DIR/Bibi Recomienda - Publicar/$FECHA"
+  cp -R "$PKG/." "$DRIVE_DIR/Bibi Recomienda - Publicar/$FECHA/"
+  echo "DRIVE_OK"
+else
+  echo "DRIVE_DESKTOP_NO_INSTALADO"
+fi
+```
+
+>
+> Si sale `DRIVE_DESKTOP_NO_INSTALADO`: avisar a Bibiana que las historias quedaron en `Publicar/FECHA/` (local) y que para que lleguen solas al celular debe instalar **Google Drive para escritorio** (google.com/drive/download) con la cuenta `bkpaezah@gmail.com`. La carpeta en Drive ya existe: **"Bibi Recomienda - Publicar"**. Como respaldo, subir los textos (no las imágenes) con el conector MCP de Google Drive: buscar la carpeta con `search_files` (`title = 'Bibi Recomienda - Publicar'`) y crear la subcarpeta/archivos con `create_file`. **No subir PNGs por el conector** (el base64 es demasiado grande).
+
+---
+
+## Paso 14 — Validar y subir a GitHub
 
 **Validar antes de commitear** (si sale con error, corregir `links.js` y repetir):
 
@@ -284,13 +310,13 @@ cd "/Users/cmartin/Documents/Claude/Projects/Bibi Recomienda"
 osascript -l JavaScript scripts/validate-links.js
 ```
 
-Solo si la validación pasa:
+Solo si la validación pasa (`story-export/` y `Publicar/` son locales, no van a git):
 
 ```bash
-git add links.js story-export/
-git commit -m "Agregar producto: TITULO_CORTO
+git add links.js
+git commit -m "Agregar producto(s): TITULO_CORTO_1[, TITULO_CORTO_2, …]
 
-[descripción breve del producto]
+[descripción breve de cada producto]
 
 Co-Authored-By: Claude <noreply@anthropic.com>"
 git push
@@ -300,18 +326,16 @@ git push
 
 ## Resultado esperado
 
-Al terminar, mostrar un resumen:
+Al terminar, mostrar un resumen (una fila por producto del lote):
 
 ```
-✅ Producto agregado
+✅ N producto(s) agregado(s)
 
-  🏷️  TÍTULO
-  💰  COP $XXX.XXX
-  📦  Envío: gratis / COP $X.XXX / no detectado
-  🔗  https://amzn.to/XXXXXX
-  📂  Categoría: tecnologia
-  🆔  ID: X
-  🖼️  Historia: story-export/historia-[SLUG].png
+  1. 🏷️ TÍTULO · COP $XXX.XXX · envío: gratis
+     🔗 https://amzn.to/XXXXXX · 📂 categoria · 🆔 ID
+     🖼️ historia-[SLUG].png
+  2. …
 
+📱 Paquete: Publicar/FECHA/ → Google Drive "Bibi Recomienda - Publicar/FECHA" ✓/✗
 Subido a GitHub ✓
 ```
