@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 24,
+    title: "Pantuflas Evshine de Felpa con Banda Cruzada",
+    platform: "amazon",
+    category: "moda",
+    url: "https://amzn.to/4f8vCz4",
+    image: "https://m.media-amazon.com/images/I/71rHrvgMwqL._AC_SL1500_.jpg",
+    price: "COP $55.253",
+    originalPrice: "COP $71.555",
+    badge: "🏷️ 23% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-11"
+  },
+  {
     id: 23,
     title: "KOIOS Hervidor Eléctrico Cuello de Cisne 0.8L",
     platform: "amazon",
