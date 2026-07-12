@@ -352,7 +352,10 @@ cp "$BASE/carruseles/FECHA/capturas/"*.png "$PKG/"
 
 # Si Google Drive for Desktop está instalado, copiar también a Drive
 DRIVE_ROOT=$(find "$HOME/Library/CloudStorage" -maxdepth 1 -name "GoogleDrive-*" 2>/dev/null | head -1)
-DRIVE_DIR=""; [ -n "$DRIVE_ROOT" ] && [ -d "$DRIVE_ROOT/My Drive" ] && DRIVE_DIR="$DRIVE_ROOT/My Drive"
+DRIVE_DIR=""
+for d in "Mi unidad" "My Drive"; do
+  [ -n "$DRIVE_ROOT" ] && [ -d "$DRIVE_ROOT/$d" ] && DRIVE_DIR="$DRIVE_ROOT/$d" && break
+done
 if [ -n "$DRIVE_DIR" ]; then
   mkdir -p "$DRIVE_DIR/Bibi Recomienda - Publicar/$FECHA_HOY"
   cp -R "$PKG/." "$DRIVE_DIR/Bibi Recomienda - Publicar/$FECHA_HOY/"
