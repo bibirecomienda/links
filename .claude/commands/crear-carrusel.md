@@ -340,6 +340,15 @@ Dejar en un solo lugar todo lo que Bibiana necesita para publicar desde el celul
 1. **Caption:** extraer la sección `## Caption Instagram` completa de `ofertas-semana.md` (texto + hashtags, sin la tabla) y guardarla como `caption-instagram.txt`.
 2. **Slides:** copiar las capturas del carrusel.
 3. **Historias:** generar historias de IG para los **2 productos con mayor descuento** del carrusel, usando `templates/historia-ig-template.html` (mismas variables y captura `file://` del Paso 12 de `/agregar-link`), y copiarlas al paquete.
+4. **Links:** crear `links.txt` en el paquete con el título y el link de afiliado de **los 6 productos** (para pegar en el sticker de cada historia y responder DMs):
+   ```
+   [Título corto 1]
+   https://amzn.to/XXXXXX
+
+   [Título corto 2]
+   https://amzn.to/YYYYYY
+   …
+   ```
 
 ```bash
 FECHA_HOY=$(date +%Y-%m-%d)
@@ -413,7 +422,7 @@ Archivos:
   📝 carruseles/FECHA/ofertas-semana.md (tabla + caption Instagram)
   🖼️  carruseles/FECHA/capturas/ (8 PNGs generados automáticamente)
   📱 Publicar/FECHA_HOY/ → Google Drive "Bibi Recomienda - Publicar/FECHA_HOY"
-     (8 slides + caption-instagram.txt + 2 historias) ✓/✗
+     (8 slides + caption-instagram.txt + links.txt + 2 historias) ✓/✗
 
 Siguiente paso (desde el celular o Meta Business Suite):
   Abrir la carpeta de la fecha en Google Drive

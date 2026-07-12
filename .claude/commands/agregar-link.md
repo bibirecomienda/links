@@ -284,6 +284,17 @@ mkdir -p "$PKG"
 cp "$BASE/story-export/historia-[SLUG1].png" "$PKG/"
 cp "$BASE/story-export/historia-[SLUG2].png" "$PKG/"   # …etc.
 
+# Listado de links para el sticker de cada historia — crear o AGREGAR al
+# final si ya existe (puede haber varios lotes el mismo día):
+cat >> "$PKG/links.txt" <<'EOF'
+[TITULO_CORTO_1]
+https://amzn.to/XXXXXX
+
+[TITULO_CORTO_2]
+https://amzn.to/YYYYYY
+
+EOF
+
 # Si Google Drive for Desktop está instalado, copiar también a Drive
 DRIVE_ROOT=$(find "$HOME/Library/CloudStorage" -maxdepth 1 -name "GoogleDrive-*" 2>/dev/null | head -1)
 DRIVE_DIR=""
@@ -339,6 +350,6 @@ Al terminar, mostrar un resumen (una fila por producto del lote):
      🖼️ historia-[SLUG].png
   2. …
 
-📱 Paquete: Publicar/FECHA/ → Google Drive "Bibi Recomienda - Publicar/FECHA" ✓/✗
+📱 Paquete: Publicar/FECHA/ (historias + links.txt) → Google Drive "Bibi Recomienda - Publicar/FECHA" ✓/✗
 Subido a GitHub ✓
 ```
