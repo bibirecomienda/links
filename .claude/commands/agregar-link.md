@@ -14,9 +14,9 @@ Agrega uno o varios productos de Amazon a `links.js`: navega a cada producto en 
 >
 > ⛔ **PROHIBIDO usar `mcp__computer-use__*`** para nada en este flujo — ni para ver la pantalla, ni para hacer clic, ni para nada.
 >
-> ✅ **Para navegar:** `mcp__Claude_in_Chrome__navigate`
-> ✅ **Para leer datos de la página:** `mcp__Claude_in_Chrome__javascript_tool` (ejecuta JS en el DOM)
-> ✅ **Para hacer clic en elementos:** `mcp__Claude_in_Chrome__javascript_tool` (con `.click()` en JS)
+> ✅ **Para navegar:** `mcp__claude-in-chrome__navigate`
+> ✅ **Para leer datos de la página:** `mcp__claude-in-chrome__javascript_tool` (ejecuta JS en el DOM)
+> ✅ **Para hacer clic en elementos:** `mcp__claude-in-chrome__javascript_tool` (con `.click()` en JS)
 >
 > Si un campo del DOM devuelve `undefined` o `null`, ese dato no está disponible — usar `""`. **Nunca tomar un screenshot como fallback.**
 
@@ -35,13 +35,13 @@ El resultado es la **lista de productos a procesar**.
 ## Paso 2 — Abrir Chrome
 
 ```
-mcp__Claude_in_Chrome__tabs_context_mcp (createIfEmpty: true)
+mcp__claude-in-chrome__tabs_context_mcp (createIfEmpty: true)
 ```
 Guardar el `tabId` — se reutiliza el **mismo tab** para todos los productos.
 
 > 🔁 **Los Pasos 3 a 9 se repiten por cada producto de la lista** antes de pasar al Paso 10. Para cada uno, navegar primero:
 > ```
-> mcp__Claude_in_Chrome__navigate → URL preparado en Paso 1
+> mcp__claude-in-chrome__navigate → URL preparado en Paso 1
 > ```
 > y esperar a que la página cargue completamente.
 
@@ -49,7 +49,7 @@ Guardar el `tabId` — se reutiliza el **mismo tab** para todos los productos.
 
 ## Paso 3 — Extraer información del producto
 
-Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
+Ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 
 ```js
 const imgEl = document.querySelector('#landingImage, #imgBlkFront');
@@ -59,8 +59,8 @@ const deliveryEl = document.querySelector(
 const deliveryText = deliveryEl?.innerText?.trim() || '';
 ({
   title:         document.querySelector('#productTitle')?.innerText?.trim() || '',
-  price:         document.querySelector('.a-price .a-offscreen')?.innerText?.trim() || '',
-  originalPrice: document.querySelector('.a-text-price .a-offscreen')?.innerText?.trim() || '',
+  price:         document.querySelector('#corePrice_feature_div .priceToPay .a-offscreen, #corePrice_feature_div .a-offscreen')?.innerText?.trim() || document.querySelector('.a-price .a-offscreen')?.innerText?.trim() || '',
+  originalPrice: document.querySelector('.basisPrice .a-offscreen')?.innerText?.trim() || document.querySelector('.a-text-price .a-offscreen')?.innerText?.trim() || '',
   rating:        document.querySelector('#acrPopover')?.title?.trim() || '',
   reviews:       document.querySelector('#acrCustomerReviewText')?.innerText?.trim() || '',
   category:      document.querySelector('#wayfinding-breadcrumbs_feature_div')?.innerText?.trim() || '',
@@ -71,7 +71,7 @@ const deliveryText = deliveryEl?.innerText?.trim() || '';
 })
 ```
 
-Si `shipping` quedó vacío, intentar con **`mcp__Claude_in_Chrome__javascript_tool`**:
+Si `shipping` quedó vacío, intentar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
 document.querySelector('#price-shipping-message, .a-color-secondary')?.innerText?.trim() || ''
 ```
@@ -82,7 +82,7 @@ document.querySelector('#price-shipping-message, .a-color-secondary')?.innerText
 
 ## Paso 4 — Abrir SiteStripe
 
-Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
+Ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
 const btn = Array.from(document.querySelectorAll('#amzn-ss-wrap a, #amzn-ss-wrap button'))
   .find(el => el.innerText?.includes('Obtener enlace'));
@@ -93,7 +93,7 @@ if (btn) { btn.click(); 'clicked'; } else 'not found';
 
 ## Paso 5 — Capturar el link corto de afiliado
 
-**Primero verificar y forzar el tag `bibirecomie02-20`** con **`mcp__Claude_in_Chrome__javascript_tool`**:
+**Primero verificar y forzar el tag `bibirecomie02-20`** con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
   .find(d => d.innerText?.includes('Enlace'));
@@ -102,7 +102,7 @@ if (sel && sel.value !== 'bibirecomie02-20') sel.value = 'bibirecomie02-20';
 sel?.value || 'no dialog';
 ```
 
-Luego capturar el link con **`mcp__Claude_in_Chrome__javascript_tool`**:
+Luego capturar el link con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
   .find(d => d.innerText?.includes('Enlace'));
@@ -139,8 +139,10 @@ Usar el campo `category` (breadcrumb) obtenido en el Paso 3:
 
 - Formato siempre en COP: `COP $549.674` (punto como separador de miles, sin decimales)
 - La cuenta ya tiene COP configurado — el precio aparece directo en pesos colombianos
+- **Amazon lo muestra crudo como `COP373,363.96`** (coma de miles, punto decimal) → convertir a `COP $373.364` (redondear los decimales, punto como separador de miles, `$` después de COP)
+- En productos con variantes (tallas/colores), `.a-price .a-offscreen` puede venir vacío — el selector de `#corePrice_feature_div` del Paso 3 ya lo cubre; el `savingsPercentage` de la página da el % de descuento directo
 - Si hay precio tachado: llenar `originalPrice` también en COP
-- **Si el precio aparece en USD:** cambiar la moneda directamente en Amazon navegando a la página de preferencias de moneda y seleccionando COP, luego volver al producto para leer el precio correcto. Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
+- **Si el precio aparece en USD:** cambiar la moneda directamente en Amazon navegando a la página de preferencias de moneda y seleccionando COP, luego volver al producto para leer el precio correcto. Ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
 // Paso 1 — Abrir el selector de moneda en la misma página
 const currencyLink = document.querySelector('#icp-touch-link-cop, a[href*="currency=COP"], #nav-global-location-popover-link');
@@ -149,9 +151,9 @@ if (currencyLink) currencyLink.click();
 ```
 Si no funciona, navegar directamente a la página de cambio de moneda:
 ```
-mcp__Claude_in_Chrome__navigate → https://www.amazon.com/gp/customer-preferences/select-language/ref=topnav_lang?preferencesReturnUrl=%2Fdp%2FASIN
+mcp__claude-in-chrome__navigate → https://www.amazon.com/gp/customer-preferences/select-language/ref=topnav_lang?preferencesReturnUrl=%2Fdp%2FASIN
 ```
-Una vez en COP, volver al producto (`mcp__Claude_in_Chrome__navigate → https://www.amazon.com/dp/ASIN?language=es_US`) y releer el precio con el JS del Paso 3.
+Una vez en COP, volver al producto (`mcp__claude-in-chrome__navigate → https://www.amazon.com/dp/ASIN?language=es_US`) y releer el precio con el JS del Paso 3.
 > **Nunca calcular manualmente la conversión USD → COP.** Siempre obtener el precio real en COP directamente desde la página de Amazon.
 
 ---
@@ -183,8 +185,15 @@ Una vez en COP, volver al producto (`mcp__Claude_in_Chrome__navigate → https:/
 ## Paso 10 — Agregar a links.js
 
 **Chequear duplicados primero:** buscar en `links.js` el ID de media de la imagen (ej. `616zZxB0g1L` de la URL de imagen) y palabras clave del título. Si el producto ya existe:
-- Si está `active: true` → avisar a Bibiana y **no agregarlo de nuevo** (ofrecer actualizar precio/datos del existente).
+- Si está `active: true` → avisar a Bibiana con la comparación de precios y **no agregarlo de nuevo**. Si ella confirma actualizar (o si el lote era justamente para eso), seguir el **flujo de actualización** de abajo.
 - Si está `active: false` → reactivarlo actualizando sus datos en lugar de crear otro.
+
+### Flujo de actualización de un producto existente
+
+1. Editar la entrada existente en `links.js` (mismo `id`): `url` (el link nuevo capturado con SiteStripe — puede ser otro listing), `price`, `originalPrice`, `shipping`, y `date` = hoy (así la página muestra "Visto el [hoy]" y el badge "✨ Nuevo" refleja la oferta renovada). El `badge` sigue las reglas del Paso 9.
+2. Si el precio **bajó** respecto al que estaba publicado → generar historia (Paso 12) con `{{ DISCOUNT_BADGE_HTML }}` = `<div class="discount-badge">📉 Bajó de precio</div>` y el precio anterior de la página como tachado — es buen contenido de "volvió más barato".
+3. El producto actualizado entra igual al `links.txt` y al paquete del Paso 13.
+4. Commit tipo `fix: Actualizar [producto] — [motivo]` en el Paso 14.
 
 Si no existe, leer `links.js`, obtener el `id` máximo y agregar **todos los productos del lote** al **inicio** del array `BIBI_LINKS` (ids consecutivos a partir de `MAX_ID + 1`, en una sola edición del archivo):
 
@@ -213,7 +222,7 @@ Si no existe, leer `links.js`, obtener el `id` máximo y agregar **todos los pro
 ## Paso 11 — Cerrar el tab de Chrome
 
 ```
-mcp__Claude_in_Chrome__tabs_close_mcp (tabId usado)
+mcp__claude-in-chrome__tabs_close_mcp (tabId usado)
 ```
 
 ---

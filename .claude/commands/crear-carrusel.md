@@ -16,9 +16,9 @@ Si no se pasa fecha, calcular el próximo domingo desde hoy (para nombre de carp
 >
 > ⛔ **PROHIBIDO usar `mcp__computer-use__*`** para nada en este flujo — ni para ver la pantalla, ni para hacer clic, ni para nada.
 >
-> ✅ **Para navegar:** `mcp__Claude_in_Chrome__navigate`
-> ✅ **Para leer datos de la página:** `mcp__Claude_in_Chrome__javascript_tool` (ejecuta JS en el DOM)
-> ✅ **Para hacer clic en elementos:** `mcp__Claude_in_Chrome__javascript_tool` (con `.click()` en JS)
+> ✅ **Para navegar:** `mcp__claude-in-chrome__navigate`
+> ✅ **Para leer datos de la página:** `mcp__claude-in-chrome__javascript_tool` (ejecuta JS en el DOM)
+> ✅ **Para hacer clic en elementos:** `mcp__claude-in-chrome__javascript_tool` (con `.click()` en JS)
 >
 > Si un campo del DOM devuelve `undefined` o `null`, ese dato no está disponible — usar `""`. **Nunca tomar un screenshot como fallback.**
 >
@@ -41,9 +41,9 @@ Si no se pasa fecha, calcular el próximo domingo desde hoy (para nombre de carp
 
 ## Paso 1 — Abrir Chrome y buscar candidatos en Amazon
 
-Abrir un tab con **`mcp__Claude_in_Chrome__tabs_context_mcp`** (createIfEmpty: true). Guardar el `tabId`.
+Abrir un tab con **`mcp__claude-in-chrome__tabs_context_mcp`** (createIfEmpty: true). Guardar el `tabId`.
 
-Navegar a la página de deals con **`mcp__Claude_in_Chrome__navigate`**:
+Navegar a la página de deals con **`mcp__claude-in-chrome__navigate`**:
 ```
 https://www.amazon.com/s?k=deals&rh=p_n_specials_match%3A2617333011&language=es_US
 ```
@@ -54,7 +54,7 @@ Alternativas por categoría (rotar cada semana):
 - `https://www.amazon.com/s?k=cocina+amazon+deals&language=es_US`
 - `https://www.amazon.com/s?k=moda+mujer+descuento&language=es_US`
 
-**Leer los resultados de búsqueda con `mcp__Claude_in_Chrome__javascript_tool`** (no tomar screenshot):
+**Leer los resultados de búsqueda con `mcp__claude-in-chrome__javascript_tool`** (no tomar screenshot):
 
 ```js
 Array.from(document.querySelectorAll('[data-asin]'))
@@ -78,12 +78,12 @@ Con la lista de candidatos, seleccionar 8–10 que parezcan tener descuento (ori
 
 ## Paso 2 — Extraer datos de cada producto (repetir hasta tener 6 con ≥30% descuento)
 
-Para cada candidato, navegar con **`mcp__Claude_in_Chrome__navigate`**:
+Para cada candidato, navegar con **`mcp__claude-in-chrome__navigate`**:
 ```
 https://www.amazon.com/dp/ASIN?language=es_US
 ```
 
-Luego extraer datos con **`mcp__Claude_in_Chrome__javascript_tool`**:
+Luego extraer datos con **`mcp__claude-in-chrome__javascript_tool`**:
 
 ```js
 const imgEl = document.querySelector('#landingImage, #imgBlkFront');
@@ -92,9 +92,9 @@ const deliveryEl = document.querySelector(
 );
 ({
   title:         document.querySelector('#productTitle')?.innerText?.trim() || '',
-  price:         document.querySelector('.a-price .a-offscreen')?.innerText?.trim() || '',
+  price:         document.querySelector('#corePrice_feature_div .priceToPay .a-offscreen, #corePrice_feature_div .a-offscreen')?.innerText?.trim() || document.querySelector('.a-price .a-offscreen')?.innerText?.trim() || '',
   priceWhole:    document.querySelector('.a-price-whole')?.innerText?.trim() || '',
-  originalPrice: document.querySelector('.a-text-price .a-offscreen')?.innerText?.trim() || '',
+  originalPrice: document.querySelector('.basisPrice .a-offscreen')?.innerText?.trim() || document.querySelector('.a-text-price .a-offscreen')?.innerText?.trim() || '',
   rating:        document.querySelector('#acrPopover')?.title?.trim() || '',
   reviews:       document.querySelector('#acrCustomerReviewText')?.innerText?.trim() || '',
   breadcrumb:    document.querySelector('#wayfinding-breadcrumbs_feature_div')?.innerText?.trim() || '',
@@ -105,7 +105,7 @@ const deliveryEl = document.querySelector(
 })
 ```
 
-Si `shipping` quedó vacío, ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
+Si `shipping` quedó vacío, ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
 document.querySelector('#price-shipping-message, .a-color-secondary')?.innerText?.trim() || ''
 ```
@@ -122,7 +122,7 @@ Si el descuento es < 30%, descartar y pasar al siguiente candidato.
 
 ### Obtener link de afiliado via SiteStripe
 
-Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
+Ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
 // 1. Abrir panel SiteStripe
 const btn = Array.from(document.querySelectorAll('#amzn-ss-wrap a, #amzn-ss-wrap button'))
@@ -130,7 +130,7 @@ const btn = Array.from(document.querySelectorAll('#amzn-ss-wrap a, #amzn-ss-wrap
 if (btn) { btn.click(); 'clicked'; } else 'not found';
 ```
 
-Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
+Ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
 // 2. Verificar y forzar tag bibirecomie02-20
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
@@ -140,7 +140,7 @@ if (sel && sel.value !== 'bibirecomie02-20') sel.value = 'bibirecomie02-20';
 sel?.value || 'no dialog';
 ```
 
-Ejecutar con **`mcp__Claude_in_Chrome__javascript_tool`**:
+Ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
 // 3. Seleccionar "Enlace corto" y leer el link del input
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
@@ -255,7 +255,7 @@ Para cada uno de los 6 productos, agregar al inicio del array `BIBI_LINKS` un ob
 - `category`: categoría detectada
 - `url`: link `amzn.to/...` capturado
 - `image`: URL de imagen principal
-- `price`: en COP con punto como separador (ej. `"COP $549.674"`)
+- `price`: en COP con punto como separador (ej. `"COP $549.674"`) — Amazon lo muestra crudo como `COP549,674.23` (coma de miles, punto decimal): redondear decimales y convertir
 - `originalPrice`: precio tachado si existe, `""` si no
 - `badge`: elegir según prioridad:
   - Descuento ≥ 40% → `"🔥 XX% OFF"`
@@ -278,7 +278,7 @@ Cambiar `highlight: true` a `highlight: false` en todos los productos anteriores
 ## Paso 6 — Cerrar el tab de Chrome
 
 ```
-mcp__Claude_in_Chrome__tabs_close_mcp (tabId usado)
+mcp__claude-in-chrome__tabs_close_mcp (tabId usado)
 ```
 
 ---
