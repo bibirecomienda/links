@@ -27,6 +27,40 @@
 
 var BIBI_LINKS = [
   {
+    id: 32,
+    title: "SKIN1004 Sun Serum UV Centella Hyalu-Cica",
+    platform: "amazon",
+    category: "belleza",
+    url: "https://amzn.to/4wF7Wtd",
+    image: "https://m.media-amazon.com/images/I/61UhU+54OlL._SL1500_.jpg",
+    price: "COP $52.776",
+    originalPrice: "COP $68.002",
+    badge: "🏷️ 22% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-13"
+  },
+  {
+    id: 31,
+    title: "TOCOBO Cica Cooling Sun Stick SPF50+",
+    platform: "amazon",
+    category: "belleza",
+    url: "https://amzn.to/4hbVGvK",
+    image: "https://m.media-amazon.com/images/I/51uMK6hgRvL._SL1200_.jpg",
+    price: "COP $56.987",
+    originalPrice: "COP $89.773",
+    badge: "🏷️ 37% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-13"
+  },
+  {
     id: 30,
     title: "Aspiradora robot Lefant",
     platform: "amazon",
