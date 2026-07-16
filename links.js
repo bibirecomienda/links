@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 35,
+    title: "Elizavecca Enjuague Tratamiento Colágeno 16.9oz",
+    platform: "amazon",
+    category: "belleza",
+    url: "https://amzn.to/4wa3a7j",
+    image: "https://m.media-amazon.com/images/I/51Z67GdO10L._SL1500_.jpg",
+    price: "COP $45.066",
+    originalPrice: "",
+    badge: "⭐ 4.5 · 1K+ opiniones",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-16"
+  },
+  {
     id: 34,
     title: "Tratamiento Proteínas Colágeno Elizavecca CER-100",
     platform: "amazon",
