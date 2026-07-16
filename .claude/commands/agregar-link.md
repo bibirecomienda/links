@@ -4,6 +4,8 @@ Agrega uno o varios productos de Amazon a `links.js`: navega a cada producto en 
 
 **Uso:** `/agregar-link URL [URL2 URL3 …]` — acepta varios URLs separados por espacio o salto de línea (**modo lote**: un solo recorrido de Chrome, un solo commit, todas las historias juntas).
 
+> 💡 Si Bibiana indica en el mensaje que un link **ya es un link de afiliado generado** (ej. "este ya es el link del programa de afiliados", "ya tiene el tag", "ya es afiliado"), ese URL específico **se usa tal cual como `url` final** y se **saltan los Pasos 4 y 5** (abrir SiteStripe / capturar enlace) para ese producto — se navega solo para extraer los datos del Paso 3. Esto también aplica automáticamente, sin que Bibiana lo diga, si el URL ya trae `tag=bibirecomie02-20` en la query string.
+
 ---
 
 ## REGLAS ABSOLUTAS DE HERRAMIENTAS
@@ -24,11 +26,18 @@ Agrega uno o varios productos de Amazon a `links.js`: navega a cada producto en 
 
 ## Paso 1 — Preparar los URLs
 
-Para **cada** URL recibido: si es largo (>2000 chars) o tiene parámetros de rastreo, extraer el ASIN y construir:
+Para **cada** URL recibido, marcar si ya es un **link de afiliado confirmado** (`yaEsAfiliado = true`) cuando se cumple cualquiera de estos casos:
+- Bibiana lo indica explícitamente en el mensaje (ej. "este ya es el link del programa de afiliados", "ya tiene el tag").
+- El URL trae `tag=bibirecomie02-20` en la query string.
+
+Para el **URL a navegar**: si es largo (>2000 chars) o tiene parámetros de rastreo, extraer el ASIN y construir:
 ```
 https://www.amazon.com/dp/ASIN?language=es_US
 ```
-El resultado es la **lista de productos a procesar**.
+- Si `yaEsAfiliado = true`, el **`url` final del producto es el link original recibido** (no el de `/dp/ASIN` recién construido, que es solo para navegar y leer datos) — se guarda tal cual en `links.js` en el Paso 10.
+- Si `yaEsAfiliado = false`, el `url` final sale de SiteStripe (Pasos 4–5), como de costumbre.
+
+El resultado es la **lista de productos a procesar**, cada uno con su URL de navegación y su flag `yaEsAfiliado`.
 
 ---
 
@@ -81,6 +90,8 @@ document.querySelector('#price-shipping-message, .a-color-secondary')?.innerText
 ---
 
 ## Paso 4 — Abrir SiteStripe
+
+> ⏭️ **Saltar este paso y el Paso 5** si `yaEsAfiliado = true` para este producto (Paso 1) — el `url` final ya está definido y no hay que tocar SiteStripe. Ir directo al Paso 6.
 
 Ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
@@ -164,8 +175,15 @@ Una vez en COP, volver al producto (`mcp__claude-in-chrome__navigate → https:/
 |---|---|
 | "Envío GRATIS" / "FREE delivery" / "gratis con Prime" | `"gratis"` |
 | "Gratis con pedidos de COP $XX" (umbral) | `"gratis"` |
-| "+COP $X.XXX de envío" / "COP X.XXX de envío" | `"COP $X.XXX"` (formateado) |
+| "+COP $X.XXX de envío" / "COP X.XXX de envío" | ver confirmación abajo |
 | Sin texto detectado | `""` |
+
+> ⚠️ **Si el envío tiene costo (no salió como gratis):** antes de guardar el monto, **preguntar a Bibiana con `AskUserQuestion`** si con Prime ese producto tiene envío gratis. Esto es obligatorio, no se asume nada:
+> - Pregunta: "¿[TÍTULO CORTO] tiene envío gratis con Prime?"
+> - Opciones: "Sí, gratis con Prime" / "No, cobra COP $X.XXX de envío" (usar el monto detectado en la opción)
+> - Si el lote tiene varios productos con envío pagado, hacer **una sola pregunta por producto** (o agrupar con `multiSelect` si son muchos) — no seguir sin la confirmación de Bibiana.
+>
+> Según la respuesta: **Sí** → `shipping: "gratis"`. **No** → `shipping: "COP $X.XXX"` (el monto detectado, formateado).
 
 ---
 
