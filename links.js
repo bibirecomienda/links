@@ -38,7 +38,7 @@ var BIBI_LINKS = [
     badge: "⭐ 4.5 · 1K+ opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-07-16"
@@ -55,7 +55,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 26% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-07-16"
@@ -72,7 +72,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 29% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-07-16"
@@ -89,7 +89,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 22% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-07-13"
@@ -106,8 +106,8 @@ var BIBI_LINKS = [
     badge: "🏷️ 37% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
-    featured: false,
+    highlight: true,
+    featured: true,
     active: true,
     date: "2026-07-13"
   },
@@ -123,7 +123,7 @@ var BIBI_LINKS = [
     badge: "🔥 55% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-07-12"
@@ -140,7 +140,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 39% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-07-12"
@@ -157,7 +157,7 @@ var BIBI_LINKS = [
     badge: "🔥 52% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-07-12"
@@ -174,7 +174,7 @@ var BIBI_LINKS = [
     badge: "🔥 47% OFF",
     coupon: "",
     shipping: "",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-07-12"
@@ -191,7 +191,7 @@ var BIBI_LINKS = [
     badge: "🔥 40% OFF",
     coupon: "",
     shipping: "",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-07-12"
@@ -208,7 +208,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 34% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-07-12"
@@ -413,7 +413,7 @@ var BIBI_LINKS = [
     coupon: "",
     shipping: "gratis",
     highlight: false,
-    featured: true,
+    featured: false,
     active: true,
     date: "2026-06-02"
   },
