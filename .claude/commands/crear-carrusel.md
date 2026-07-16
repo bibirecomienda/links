@@ -172,8 +172,15 @@ inp?.value || 'no input found';
 |---|---|
 | "Envío GRATIS", "FREE delivery", "gratis con Prime" | `"gratis"` |
 | "Gratis con pedidos de COP $XX" | `"gratis"` |
-| "+COP $X.XXX de envío" | `"COP $X.XXX"` |
+| "+COP $X.XXX de envío" | ver confirmación abajo |
 | Sin texto | `""` |
+
+> ⚠️ **Si el envío tiene costo (no salió como gratis):** antes de guardar el monto, **preguntar a Bibiana con `AskUserQuestion`** si con Prime ese producto tiene envío gratis. Obligatorio, no asumir:
+> - Pregunta: "¿[TÍTULO CORTO] tiene envío gratis con Prime?"
+> - Opciones: "Sí, gratis con Prime" / "No, cobra COP $X.XXX de envío" (usar el monto detectado)
+> - Con los 6 productos del carrusel, se puede agrupar en **una sola pregunta con `multiSelect`** (una opción por producto con envío pagado) para no interrumpir varias veces.
+>
+> Según la respuesta: **Sí** → `shipping: "gratis"`. **No** → `shipping: "COP $X.XXX"` (el monto detectado, formateado).
 
 ---
 
