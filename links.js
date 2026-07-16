@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 33,
+    title: "Under Armour Charged Assert 10 - Zapatos para mujer",
+    platform: "amazon",
+    category: "moda",
+    url: "https://amzn.to/4aWyJc8",
+    image: "https://m.media-amazon.com/images/I/61RShTIZazL._AC_SL1500_.jpg",
+    price: "COP $172.474",
+    originalPrice: "COP $241.425",
+    badge: "🏷️ 29% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-16"
+  },
+  {
     id: 32,
     title: "SKIN1004 Sun Serum UV Centella Hyalu-Cica",
     platform: "amazon",
