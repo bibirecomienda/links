@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 34,
+    title: "Tratamiento Proteínas Colágeno Elizavecca CER-100",
+    platform: "amazon",
+    category: "belleza",
+    url: "https://amzn.to/4gI2XmS",
+    image: "https://m.media-amazon.com/images/I/61IHI9z38SL._SL1500_.jpg",
+    price: "COP $22.501",
+    originalPrice: "COP $30.420",
+    badge: "🏷️ 26% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-16"
+  },
+  {
     id: 33,
     title: "Under Armour Charged Assert 10 - Zapatos para mujer",
     platform: "amazon",
