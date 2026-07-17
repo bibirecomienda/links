@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 37,
+    title: "CATAN Traveler - Edición Compacta de Viaje",
+    platform: "amazon",
+    category: "ninos",
+    url: "https://amzn.to/4ysP5TY",
+    image: "https://m.media-amazon.com/images/I/71JPOzduGkL._AC_SL1500_.jpg",
+    price: "COP $154.897",
+    originalPrice: "COP $193.630",
+    badge: "🏷️ 20% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-17"
+  },
+  {
     id: 36,
     title: "Exploding Kittens Edición Original en Español",
     platform: "amazon",
