@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 36,
+    title: "Exploding Kittens Edición Original en Español",
+    platform: "amazon",
+    category: "ninos",
+    url: "https://amzn.to/4hkn4HX",
+    image: "https://m.media-amazon.com/images/I/61WeY4xe2ZL._AC_SL1024_.jpg",
+    price: "COP $64.522",
+    originalPrice: "",
+    badge: "⭐ 4.7 · 2K+ opiniones",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-17"
+  },
+  {
     id: 35,
     title: "Elizavecca Enjuague Tratamiento Colágeno 16.9oz",
     platform: "amazon",
