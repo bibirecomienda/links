@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 39,
+    title: "AXIS-Y Suero de Colágeno Vegano para Ojos",
+    platform: "amazon",
+    category: "belleza",
+    url: "https://amzn.to/4pzGbQC",
+    image: "https://m.media-amazon.com/images/I/61geVDBoMpL._SL1500_.jpg",
+    price: "COP $38.409",
+    originalPrice: "COP $52.047",
+    badge: "🏷️ 26% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-21"
+  },
+  {
     id: 38,
     title: "BISSELL Little Green - Limpiador Portátil de Alfombras y Tapicería",
     platform: "amazon",
