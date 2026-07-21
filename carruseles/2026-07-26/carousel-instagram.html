@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibi Recomienda · Carrusel · 2026-07-26</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #F4DDD7; --surface: #FBEAE4; --cream: #FAF1E8; --card: #FFFFFF;
+            --ink: #3B2521; --muted: #9C7A6F; --accent: #A04A36; --rule: #E5C9C0; --gold: #C9985E;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .page-title { text-align: center; color: var(--ink); font-size: 0.9rem; margin-bottom: 30px; opacity: 0.6; }
+        .slide-label { color: var(--muted); font-size: 0.8rem; margin: 30px auto 10px; max-width: 1080px; opacity: 0.7; }
+
+        .slide-outer { display: flex; justify-content: center; margin-bottom: 20px; }
+
+        .slide {
+            width: 1080px;
+            height: 1350px;
+            background: var(--cream);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-cover {
+            background:
+                radial-gradient(ellipse at top left, rgba(201,152,94,0.16) 0%, transparent 55%),
+                radial-gradient(ellipse at bottom right, rgba(160,74,54,0.10) 0%, transparent 55%),
+                linear-gradient(135deg, #F4DDD7 0%, #FBEAE4 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px;
+        }
+        .cover-deco { color: var(--accent); font-size: 44px; margin-bottom: 36px; letter-spacing: 12px; }
+        .cover-brand {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 190px; color: var(--ink); font-weight: 700; line-height: 1;
+            margin-bottom: 20px;
+        }
+        .cover-tagline {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 58px; color: var(--muted); font-style: italic; margin-bottom: 56px;
+        }
+        .cover-line { width: 120px; height: 2px; background: var(--rule); margin: 0 auto 56px; }
+        .cover-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 72px; color: var(--accent); font-weight: 600; line-height: 1.25;
+            margin-bottom: 32px;
+        }
+        .cover-subtitle { font-size: 32px; color: var(--muted); margin-bottom: 52px; }
+        .cover-pill {
+            background: var(--accent); color: white;
+            padding: 22px 48px; border-radius: 80px;
+            font-size: 34px; font-weight: 700; display: inline-block; margin-bottom: 52px;
+        }
+        .cover-footer { font-size: 30px; color: var(--muted); }
+
+        .slide-product { padding: 0; }
+
+        .product-img-area {
+            position: relative;
+            width: 100%;
+            height: 760px;
+            background: var(--card);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .product-img-area img {
+            max-width: 100%; max-height: 100%;
+            object-fit: contain; width: auto; height: auto;
+            padding: 40px;
+        }
+        .badge-platform {
+            position: absolute; top: 32px; left: 32px;
+            background: var(--accent); color: white;
+            padding: 14px 30px; border-radius: 44px;
+            font-size: 26px; font-weight: 700;
+        }
+        .badge-discount {
+            position: absolute; top: 32px; right: 32px;
+            background: var(--gold); color: white;
+            padding: 16px 34px; border-radius: 44px;
+            font-size: 34px; font-weight: 800;
+        }
+
+        .product-info {
+            padding: 52px 72px 44px;
+            flex: 1;
+            display: flex; flex-direction: column;
+        }
+        .product-kicker {
+            font-size: 26px; font-weight: 700; color: var(--gold);
+            letter-spacing: 5px; text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .product-name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 66px; color: var(--ink); font-weight: 700; line-height: 1.12;
+            margin-bottom: 24px;
+        }
+        .product-copy {
+            font-size: 31px; color: var(--muted); line-height: 1.45;
+            font-style: italic;
+        }
+        .product-price-row {
+            margin-top: auto;
+            display: flex; align-items: baseline; gap: 26px; flex-wrap: wrap;
+        }
+        .price-before { font-size: 32px; color: var(--muted); text-decoration: line-through; }
+        .price-after { font-size: 68px; color: var(--accent); font-weight: 800; letter-spacing: -1px; }
+        .price-shipping {
+            margin-left: auto;
+            font-size: 27px; font-weight: 600; color: var(--accent);
+            background: var(--surface); border: 1.5px solid var(--rule);
+            padding: 12px 26px; border-radius: 40px;
+            align-self: center;
+        }
+        .product-watermark {
+            position: absolute; bottom: 20px; left: 32px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic; font-size: 24px; color: var(--muted); opacity: 0.55;
+        }
+
+        .slide-cta {
+            background:
+                radial-gradient(ellipse at top right, rgba(201,152,94,0.25) 0%, transparent 55%),
+                var(--accent);
+            justify-content: center; align-items: center; text-align: center;
+            padding: 80px;
+        }
+        .cta-deco { color: var(--gold); font-size: 40px; margin-bottom: 44px; letter-spacing: 12px; }
+        .cta-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 120px; color: white; font-weight: 700; line-height: 1.05;
+            margin-bottom: 44px;
+        }
+        .cta-line { width: 110px; height: 2.5px; background: var(--gold); margin: 0 auto 48px; }
+        .cta-body { font-size: 40px; color: white; line-height: 1.5; margin-bottom: 56px; }
+        .cta-handle {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 52px; color: white; font-style: italic; margin-bottom: 48px;
+        }
+        .cta-disclaimer { font-size: 27px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+<p class="page-title">Bibi Recomienda · Carrusel Instagram · 2026-07-26 · 1080 × 1350 px (4:5)</p>
+
+<!-- ─ SLIDE 1: PORTADA ─ -->
+<p class="slide-label">Slide 1 — Portada</p>
+<div class="slide-outer"><div class="slide slide-cover">
+  <div class="cover-deco">✦ ✦ ✦</div>
+  <div class="cover-brand">Bibi</div>
+  <div class="cover-tagline">✦ recomienda ✦</div>
+  <div class="cover-line"></div>
+  <div class="cover-title">Las mejores ofertas<br>de la semana</div>
+  <div class="cover-subtitle">21 de julio · 2026</div>
+  <div class="cover-pill">Hasta −26% en Amazon</div>
+  <div class="cover-footer">Curado a mano, como siempre 🤍</div>
+</div></div>
+
+<!-- ─ SLIDE 2: UPFAS Caja de arena automática ─ -->
+<p class="slide-label">Slide 2 — Producto</p>
+<div class="slide-outer"><div class="slide slide-product">
+  <div class="product-img-area">
+    <img src="https://m.media-amazon.com/images/I/616zZxB0g1L._AC_SX679_.jpg" alt="Caja de arena automática UPFAS">
+    <span class="badge-platform">AMZ</span>
+    <span class="badge-discount">⭐ 4.1</span>
+  </div>
+  <div class="product-info">
+    <div class="product-kicker">Mascotas</div>
+    <div class="product-name">Caja de Arena Automática UPFAS</div>
+    <div class="product-copy">Autolimpiante, silenciosa y con monitoreo de peso desde el celular. La que se encarga de todo mientras tu gato solo disfruta.</div>
+    <div class="product-price-row">
+      <span class="price-before">COP $414.980</span>
+      <span class="price-after">COP $373.479</span>
+      <span class="price-shipping">🚚 + COP $267.203 envío</span>
+    </div>
+  </div>
+  <div class="product-watermark">bibi recomienda</div>
+</div></div>
+
+<!-- ─ SLIDE 3: BISSELL Little Green ─ -->
+<p class="slide-label">Slide 3 — Producto</p>
+<div class="slide-outer"><div class="slide slide-product">
+  <div class="product-img-area">
+    <img src="https://m.media-amazon.com/images/I/717X5secGjL._AC_SX679_.jpg" alt="BISSELL Little Green">
+    <span class="badge-platform">AMZ</span>
+    <span class="badge-discount">−23%</span>
+  </div>
+  <div class="product-info">
+    <div class="product-kicker">Hogar</div>
+    <div class="product-name">BISSELL Little Green</div>
+    <div class="product-copy">Limpiador portátil de alfombras y tapicería, ideal también para el carro. El aliado perfecto contra manchas de última hora.</div>
+    <div class="product-price-row">
+      <span class="price-before">COP $423.117</span>
+      <span class="price-after">COP $325.467</span>
+      <span class="price-shipping">🚚 + COP $115.227 envío</span>
+    </div>
+  </div>
+  <div class="product-watermark">bibi recomienda</div>
+</div></div>
+
+<!-- ─ SLIDE 4: CATAN Traveler ─ -->
+<p class="slide-label">Slide 4 — Producto</p>
+<div class="slide-outer"><div class="slide slide-product">
+  <div class="product-img-area">
+    <img src="https://m.media-amazon.com/images/I/71JPOzduGkL._AC_SX679_.jpg" alt="CATAN Traveler Edición de Viaje">
+    <span class="badge-platform">AMZ</span>
+    <span class="badge-discount">−20%</span>
+  </div>
+  <div class="product-info">
+    <div class="product-kicker">Niños</div>
+    <div class="product-name">CATAN Traveler — Edición de Viaje</div>
+    <div class="product-copy">La versión compacta del clásico que enamora a toda la familia. Cabe en cualquier maleta y las partidas no se acaban nunca.</div>
+    <div class="product-price-row">
+      <span class="price-before">COP $193.630</span>
+      <span class="price-after">COP $154.897</span>
+      <span class="price-shipping">📦 Envío gratis</span>
+    </div>
+  </div>
+  <div class="product-watermark">bibi recomienda</div>
+</div></div>
+
+<!-- ─ SLIDE 5: Exploding Kittens ─ -->
+<p class="slide-label">Slide 5 — Producto</p>
+<div class="slide-outer"><div class="slide slide-product">
+  <div class="product-img-area">
+    <img src="https://m.media-amazon.com/images/I/61WeY4xe2ZL._AC_SX679_.jpg" alt="Exploding Kittens Edición Original en Español">
+    <span class="badge-platform">AMZ</span>
+    <span class="badge-discount">⭐ 4.7</span>
+  </div>
+  <div class="product-info">
+    <div class="product-kicker">Niños</div>
+    <div class="product-name">Exploding Kittens en Español</div>
+    <div class="product-copy">El juego de cartas que arma noche familiar garantizada. Fácil de aprender y adictivo desde la primera ronda.</div>
+    <div class="product-price-row">
+      <span class="price-after">COP $64.522</span>
+      <span class="price-shipping">📦 Envío gratis</span>
+    </div>
+  </div>
+  <div class="product-watermark">bibi recomienda</div>
+</div></div>
+
+<!-- ─ SLIDE 6: Elizavecca Enjuague Colágeno ─ -->
+<p class="slide-label">Slide 6 — Producto</p>
+<div class="slide-outer"><div class="slide slide-product">
+  <div class="product-img-area">
+    <img src="https://m.media-amazon.com/images/I/51Z67GdO10L._SX679_.jpg" alt="Elizavecca Enjuague Tratamiento Colágeno">
+    <span class="badge-platform">AMZ</span>
+    <span class="badge-discount">⭐ 4.5</span>
+  </div>
+  <div class="product-info">
+    <div class="product-kicker">Belleza</div>
+    <div class="product-name">Elizavecca Enjuague Colágeno</div>
+    <div class="product-copy">Tratamiento de colágeno en formato grande, 16.9oz. El cabello queda suave y con brillo desde el primer uso.</div>
+    <div class="product-price-row">
+      <span class="price-after">COP $45.066</span>
+      <span class="price-shipping">📦 Envío gratis</span>
+    </div>
+  </div>
+  <div class="product-watermark">bibi recomienda</div>
+</div></div>
+
+<!-- ─ SLIDE 7: Elizavecca CER-100 ─ -->
+<p class="slide-label">Slide 7 — Producto</p>
+<div class="slide-outer"><div class="slide slide-product">
+  <div class="product-img-area">
+    <img src="https://m.media-amazon.com/images/I/61IHI9z38SL._SX679_.jpg" alt="Tratamiento Proteínas Colágeno Elizavecca CER-100">
+    <span class="badge-platform">AMZ</span>
+    <span class="badge-discount">−26%</span>
+  </div>
+  <div class="product-info">
+    <div class="product-kicker">Belleza</div>
+    <div class="product-name">Elizavecca CER-100</div>
+    <div class="product-copy">Tratamiento de proteínas y colágeno para reparar el cabello dañado. Chiquito en tamaño, grande en resultados.</div>
+    <div class="product-price-row">
+      <span class="price-before">COP $30.420</span>
+      <span class="price-after">COP $22.501</span>
+      <span class="price-shipping">📦 Envío gratis</span>
+    </div>
+  </div>
+  <div class="product-watermark">bibi recomienda</div>
+</div></div>
+
+<!-- ─ SLIDE 8: CTA final ─ -->
+<p class="slide-label">Slide 8 — CTA final</p>
+<div class="slide-outer"><div class="slide slide-cta">
+  <div class="cta-deco">✦ ✦ ✦</div>
+  <div class="cta-title">¿Cuál<br>te enamoró?</div>
+  <div class="cta-line"></div>
+  <div class="cta-body">El link directo a cada producto<br>está en mi bio 🔗</div>
+  <div class="cta-handle">@bibi.recomienda</div>
+  <div class="cta-disclaimer">Los precios pueden variar · Algunos enlaces son de afiliados ♡</div>
+</div></div>
+
+<!-- Script para capturar slides individuales con ?s=N — NO ELIMINAR -->
+<script>
+(function() {
+  const s = new URLSearchParams(location.search).get('s');
+  if (!s) return;
+  document.body.style.cssText = 'margin:0;padding:0;background:transparent;';
+  document.querySelectorAll('.page-title, .slide-label').forEach(el => el.remove());
+  const outers = document.querySelectorAll('.slide-outer');
+  outers.forEach((el, i) => { el.style.display = (i + 1 === +s) ? 'flex' : 'none'; });
+  const target = outers[+s - 1];
+  if (target) { target.style.margin = '0'; target.style.justifyContent = 'center'; }
+})();
+</script>
+
+</body>
+</html>

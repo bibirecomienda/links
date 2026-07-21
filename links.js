@@ -38,7 +38,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 23% OFF",
     coupon: "",
     shipping: "COP $115.227",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-07-21"
@@ -55,7 +55,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 20% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-07-17"
@@ -72,7 +72,7 @@ var BIBI_LINKS = [
     badge: "⭐ 4.7 · 2K+ opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-07-17"
@@ -123,7 +123,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 29% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-07-16"
@@ -140,7 +140,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 22% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-07-13"
@@ -157,7 +157,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 37% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-07-13"
@@ -480,7 +480,7 @@ var BIBI_LINKS = [
     badge: "⭐ 4.1 · 1.3K+ opiniones",
     coupon: "",
     shipping: "COP $267.203",
-    highlight: false,
+    highlight: true,
     featured: true,
     active: true,
     date: "2026-07-21"
