@@ -158,7 +158,7 @@ var BIBI_LINKS = [
     coupon: "",
     shipping: "gratis",
     highlight: true,
-    featured: true,
+    featured: false,
     active: true,
     date: "2026-07-13"
   },
@@ -473,17 +473,17 @@ var BIBI_LINKS = [
     title: "UPFAS Caja arena autolimpiante — App, monitoreo peso, silenciosa para gatos",
     platform: "amazon",
     category: "mascotas",
-    url: "https://amzn.to/4vqrhNW",
+    url: "https://amzn.to/4fMgdWy",
     image: "https://m.media-amazon.com/images/I/616zZxB0g1L._AC_SL1500_.jpg",
-    price: "COP $373.364",
-    originalPrice: "COP $414.852",
-    badge: "⭐ 4.1 · 1K+ opiniones",
+    price: "COP $373.479",
+    originalPrice: "COP $414.980",
+    badge: "⭐ 4.1 · 1.3K+ opiniones",
     coupon: "",
-    shipping: "",
+    shipping: "COP $267.203",
     highlight: false,
-    featured: false,
+    featured: true,
     active: true,
-    date: "2026-07-11"
+    date: "2026-07-21"
   },
   {
     id: 11,
