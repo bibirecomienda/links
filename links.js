@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 38,
+    title: "BISSELL Little Green - Limpiador Portátil de Alfombras y Tapicería",
+    platform: "amazon",
+    category: "hogar",
+    url: "https://amzn.to/4wb56fC",
+    image: "https://m.media-amazon.com/images/I/717X5secGjL._AC_SL1500_.jpg",
+    price: "COP $325.467",
+    originalPrice: "COP $423.117",
+    badge: "🏷️ 23% OFF",
+    coupon: "",
+    shipping: "COP $115.227",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-21"
+  },
+  {
     id: 37,
     title: "CATAN Traveler - Edición Compacta de Viaje",
     platform: "amazon",
