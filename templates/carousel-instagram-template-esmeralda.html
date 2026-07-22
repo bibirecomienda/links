@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<!--
+  PLANTILLA CARRUSEL IG — VARIANTE "ESMERALDA" — 1080×1350 (4:5)
+  Alternativa de estilo a carousel-instagram-template.html (esa no se toca).
+  Misma estructura de datos y mismo script de captura ?s=N.
+
+  Diferencia de estilo: verde bosque oscuro como base (color de referencia
+  del usuario), texto crema, acento dorado. Layout tipo "Noche": imagen
+  full-bleed arriba con panel de info flotante superpuesto.
+
+  · Capturar cada slide con: carousel-instagram-template-esmeralda.html?s=N y window-size 1080,1350
+  · Los hashtags van en ofertas-semana.md (no en el HTML).
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibi Recomienda · Carrusel Esmeralda · [FECHA]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink-deep: #213D33; --ink-deeper: #172D25; --cream: #F7FAF6; --card: #FFFFFF;
+            --muted: #A8C2B8; --accent: #C9985E; --accent-green: #6FA890; --rule: rgba(247,250,246,0.18);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .page-title { text-align: center; color: var(--ink-deep); font-size: 0.9rem; margin-bottom: 30px; opacity: 0.6; }
+        .slide-label { color: #7C9A91; font-size: 0.8rem; margin: 30px auto 10px; max-width: 1080px; opacity: 0.7; }
+
+        .slide-outer { display: flex; justify-content: center; margin-bottom: 20px; }
+
+        .slide {
+            width: 1080px;
+            height: 1350px;
+            background: var(--ink-deeper);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ─ PORTADA ─ */
+        .slide-cover {
+            background:
+                radial-gradient(ellipse at top right, rgba(201,152,94,0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at bottom left, rgba(111,168,144,0.22) 0%, transparent 55%),
+                linear-gradient(160deg, #172D25 0%, #213D33 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px;
+        }
+        .cover-deco { color: var(--accent); font-size: 44px; margin-bottom: 36px; letter-spacing: 12px; }
+        .cover-brand {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 190px; color: var(--cream); font-weight: 700; line-height: 1;
+            margin-bottom: 20px;
+        }
+        .cover-tagline {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 58px; color: var(--muted); font-style: italic; margin-bottom: 56px;
+        }
+        .cover-line { width: 120px; height: 2px; background: var(--rule); margin: 0 auto 56px; }
+        .cover-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 72px; color: var(--accent); font-weight: 600; line-height: 1.25;
+            margin-bottom: 32px;
+        }
+        .cover-subtitle { font-size: 32px; color: var(--muted); margin-bottom: 52px; }
+        .cover-pill {
+            background: var(--accent-green); color: var(--ink-deeper);
+            padding: 22px 48px; border-radius: 80px;
+            font-size: 34px; font-weight: 700; display: inline-block; margin-bottom: 52px;
+        }
+        .cover-footer { font-size: 30px; color: var(--muted); }
+
+        /* ─ PRODUCTO — imagen full-bleed arriba, overlay de precio flotante ─ */
+        .slide-product { padding: 0; }
+
+        .product-img-area {
+            position: relative;
+            width: 100%;
+            height: 900px;
+            background: var(--card);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .product-img-area img {
+            max-width: 100%; max-height: 100%;
+            object-fit: contain; width: auto; height: auto;
+            padding: 40px;
+        }
+        .badge-platform {
+            position: absolute; top: 32px; left: 32px;
+            background: var(--ink-deeper); color: var(--cream);
+            padding: 14px 30px; border-radius: 44px;
+            font-size: 26px; font-weight: 700;
+        }
+        .badge-discount {
+            position: absolute; top: 32px; right: 32px;
+            background: var(--accent); color: var(--ink-deeper);
+            padding: 16px 34px; border-radius: 44px;
+            font-size: 34px; font-weight: 800;
+        }
+
+        .product-info {
+            position: relative;
+            margin-top: -64px;
+            background: var(--ink-deeper);
+            border-radius: 48px 48px 0 0;
+            padding: 56px 72px 44px;
+            flex: 1;
+            display: flex; flex-direction: column;
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.25);
+        }
+        .product-kicker {
+            font-size: 26px; font-weight: 700; color: var(--accent);
+            letter-spacing: 5px; text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .product-name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 62px; color: var(--cream); font-weight: 700; line-height: 1.12;
+            margin-bottom: 22px;
+        }
+        .product-copy {
+            font-size: 29px; color: var(--muted); line-height: 1.45;
+            font-style: italic;
+        }
+        .product-price-row {
+            margin-top: auto;
+            padding-top: 28px;
+            display: flex; align-items: baseline; gap: 26px; flex-wrap: wrap;
+        }
+        .price-before { font-size: 30px; color: var(--muted); text-decoration: line-through; }
+        .price-after { font-size: 64px; color: var(--accent); font-weight: 800; letter-spacing: -1px; }
+        .price-shipping {
+            margin-left: auto;
+            font-size: 26px; font-weight: 600; color: var(--ink-deeper);
+            background: var(--accent-green);
+            padding: 12px 26px; border-radius: 40px;
+            align-self: center;
+        }
+        .product-watermark {
+            position: absolute; bottom: 20px; left: 32px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic; font-size: 24px; color: var(--muted); opacity: 0.5;
+        }
+
+        /* ─ CTA ─ */
+        .slide-cta {
+            background:
+                radial-gradient(ellipse at bottom left, rgba(111,168,144,0.22) 0%, transparent 55%),
+                linear-gradient(160deg, #172D25 0%, #213D33 100%);
+            justify-content: center; align-items: center; text-align: center;
+            padding: 80px;
+        }
+        .cta-deco { color: var(--accent); font-size: 40px; margin-bottom: 44px; letter-spacing: 12px; }
+        .cta-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 120px; color: var(--cream); font-weight: 700; line-height: 1.05;
+            margin-bottom: 44px;
+        }
+        .cta-line { width: 110px; height: 2.5px; background: var(--accent); margin: 0 auto 48px; }
+        .cta-body { font-size: 40px; color: var(--muted); line-height: 1.5; margin-bottom: 56px; }
+        .cta-handle {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 52px; color: var(--accent); font-style: italic; margin-bottom: 48px;
+        }
+        .cta-disclaimer { font-size: 27px; color: rgba(247,250,246,0.55); line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+<p class="page-title">Bibi Recomienda · Carrusel Instagram (Esmeralda) · [FECHA] · 1080 × 1350 px (4:5)</p>
+
+<!-- ─ SLIDE 1: PORTADA ─ -->
+<p class="slide-label">Slide 1 — Portada</p>
+<div class="slide-outer"><div class="slide slide-cover">
+  <div class="cover-deco">✦ ✦ ✦</div>
+  <div class="cover-brand">Bibi</div>
+  <div class="cover-tagline">✦ recomienda ✦</div>
+  <div class="cover-line"></div>
+  <div class="cover-title">Las mejores ofertas<br>de la semana</div>
+  <div class="cover-subtitle">[FECHA_HOY — ej. 25 de mayo · 2026]</div>
+  <div class="cover-pill">Hasta −42% en Amazon</div>
+  <div class="cover-footer">Curado a mano, como siempre 🤍</div>
+</div></div>
+
+<!-- ─ SLIDES 2–7: PRODUCTOS (repetir este bloque por cada producto) ─ -->
+<p class="slide-label">Slide 2 — Producto (ejemplo)</p>
+<div class="slide-outer"><div class="slide slide-product">
+  <div class="product-img-area">
+    <img src="https://m.media-amazon.com/images/I/61tilO4erpL._AC_SX679_.jpg" alt="Bicicleta de equilibrio SEREED">
+    <span class="badge-platform">AMZ</span>
+    <span class="badge-discount">−35%</span>
+  </div>
+  <div class="product-info">
+    <div class="product-kicker">Niños</div>
+    <div class="product-name">Bicicleta de equilibrio SEREED</div>
+    <div class="product-copy">Para bebés de 1 a 2 años: cuatro ruedas, segura y estable. Los papás dicen que aprenden a andar en un abrir y cerrar de ojos.</div>
+    <div class="product-price-row">
+      <span class="price-before">COP $169.542</span>
+      <span class="price-after">COP $110.484</span>
+      <span class="price-shipping">📦 Envío gratis</span>
+    </div>
+  </div>
+  <div class="product-watermark">bibi recomienda</div>
+</div></div>
+
+<p class="slide-label">Slide 3 — Producto sin envío gratis ni precio anterior (ejemplo)</p>
+<div class="slide-outer"><div class="slide slide-product">
+  <div class="product-img-area">
+    <img src="https://m.media-amazon.com/images/I/51+RciUs53L._AC_SX679_.jpg" alt="Máquina de espresso DeLonghi Dedica">
+    <span class="badge-platform">AMZ</span>
+    <span class="badge-discount">⭐ 4.6</span>
+  </div>
+  <div class="product-info">
+    <div class="product-kicker">Cocina</div>
+    <div class="product-name">Máquina de espresso DeLonghi Dedica</div>
+    <div class="product-copy">15 bares de presión, acero inoxidable y compacta. Un clásico que dura años — no es juguete, es de verdad.</div>
+    <div class="product-price-row">
+      <span class="price-after">COP $552.791</span>
+    </div>
+  </div>
+  <div class="product-watermark">bibi recomienda</div>
+</div></div>
+
+<!-- ─ SLIDE FINAL: CTA ─ -->
+<p class="slide-label">Slide 8 — CTA final</p>
+<div class="slide-outer"><div class="slide slide-cta">
+  <div class="cta-deco">✦ ✦ ✦</div>
+  <div class="cta-title">¿Cuál<br>te enamoró?</div>
+  <div class="cta-line"></div>
+  <div class="cta-body">El link directo a cada producto<br>está en mi bio 🔗</div>
+  <div class="cta-handle">@bibi.recomienda</div>
+  <div class="cta-disclaimer">Los precios pueden variar · Algunos enlaces son de afiliados ♡</div>
+</div></div>
+
+<!-- Script para capturar slides individuales con ?s=N — NO ELIMINAR -->
+<script>
+(function() {
+  const s = new URLSearchParams(location.search).get('s');
+  if (!s) return;
+  document.body.style.cssText = 'margin:0;padding:0;background:transparent;';
+  document.querySelectorAll('.page-title, .slide-label').forEach(el => el.remove());
+  const outers = document.querySelectorAll('.slide-outer');
+  outers.forEach((el, i) => { el.style.display = (i + 1 === +s) ? 'flex' : 'none'; });
+  const target = outers[+s - 1];
+  if (target) { target.style.margin = '0'; target.style.justifyContent = 'center'; }
+})();
+</script>
+
+</body>
+</html>

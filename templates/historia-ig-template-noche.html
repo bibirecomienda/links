@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--
+  PLANTILLA HISTORIA IG — VARIANTE "NOCHE" — 1080×1920
+  Alternativa de estilo a historia-ig-template.html (esa no se toca).
+  Mismas variables {{ }} y mismas zonas seguras de Instagram.
+
+  · Top 0–250px    → IG superpone tu foto de perfil, nombre y la X
+  · Bottom 1640–1920px → IG superpone la barra "Enviar mensaje"
+  El sticker de link se coloca ENCIMA del pill "El link está aquí".
+
+  Diferencia de estilo: fondo tinta oscura, imagen en marco dorado,
+  precio como bloque protagonista en vez de fila baseline.
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Historia IG · Noche</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #3B2521; --ink-deep: #2A1916; --cream: #FAF1E8; --card: #FFFFFF;
+    --muted: #C9AFA4; --accent: #C9985E; --accent-deep: #A04A36;
+  }
+  body { width: 1080px; height: 1920px; overflow: hidden; font-family: 'Inter', sans-serif; }
+  .story {
+    width: 1080px; height: 1920px; position: relative;
+    background:
+      radial-gradient(ellipse at top right, rgba(201,152,94,0.20) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(160,74,54,0.22) 0%, transparent 50%),
+      linear-gradient(165deg, #2A1916 0%, #3B2521 100%);
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .deco1 { position:absolute; top:-160px; left:-160px; width:520px; height:520px; border-radius:50%; background:radial-gradient(circle,rgba(201,152,94,0.14) 0%,transparent 70%); }
+  .deco2 { position:absolute; bottom:120px; right:-140px; width:440px; height:440px; border-radius:50%; background:radial-gradient(circle,rgba(160,74,54,0.16) 0%,transparent 70%); }
+
+  /* Zona segura superior: el contenido empieza en ~270px */
+  .kicker {
+    position:relative; z-index:10; margin-top:270px;
+    display:flex; align-items:center; gap:22px;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:42px; font-weight:600; color:var(--muted);
+    letter-spacing:6px; text-transform:uppercase;
+  }
+  .kicker-line { width:80px; height:1.5px; background:rgba(250,241,232,0.25); }
+
+  .cat-pill {
+    position:relative; z-index:10; margin-top:26px;
+    background:var(--accent); color:var(--ink-deep);
+    padding:14px 40px; border-radius:60px;
+    font-size:30px; font-weight:700; letter-spacing:1px;
+  }
+
+  .img-wrap {
+    position:relative; z-index:10; margin-top:44px;
+    width:880px; height:820px; border-radius:44px; overflow:hidden;
+    background:var(--card);
+    border: 4px solid var(--accent);
+    box-shadow:0 8px 24px rgba(0,0,0,0.25), 0 36px 90px rgba(0,0,0,0.35);
+  }
+  .img-wrap img { width:100%; height:100%; object-fit:contain; padding:36px; }
+  .img-badge {
+    position:absolute; top:30px; left:30px;
+    background:var(--ink-deep); color:var(--cream);
+    font-size:28px; font-weight:700; padding:14px 30px; border-radius:44px;
+  }
+  .discount-badge {
+    position:absolute; top:30px; right:30px;
+    background:var(--accent-deep); color:#fff;
+    font-size:32px; font-weight:800; padding:16px 32px; border-radius:44px;
+  }
+
+  .prod-title {
+    position:relative; z-index:10; margin-top:48px;
+    width:940px; text-align:center;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:60px; font-weight:700; color:var(--cream); line-height:1.15;
+  }
+
+  .price-block {
+    position:relative; z-index:10; margin-top:30px;
+    background: rgba(201,152,94,0.14);
+    border: 1.5px solid rgba(201,152,94,0.4);
+    border-radius: 30px;
+    padding: 24px 56px;
+    display:flex; align-items:baseline; gap:28px;
+    flex-wrap:wrap; justify-content:center; max-width:1000px;
+  }
+  .price-before { font-size:36px; color:var(--muted); text-decoration:line-through; font-weight:500; }
+  .price-now { font-size:84px; font-weight:800; color:var(--accent); letter-spacing:-2px; }
+
+  .ship-line {
+    position:relative; z-index:10; margin-top:22px;
+    font-size:32px; font-weight:600; color:var(--cream);
+    display:flex; align-items:center; gap:14px;
+  }
+  .ship-line .ok { color:var(--accent); }
+
+  .cta {
+    position:relative; z-index:10; margin-top:30px; margin-bottom:270px;
+    background:var(--accent); color:var(--ink-deep);
+    padding:34px 72px; border-radius:70px;
+    display:flex; align-items:center; gap:24px;
+    font-size:38px; font-weight:700;
+    box-shadow:0 16px 40px rgba(0,0,0,0.3);
+  }
+  .cta .arrow { color:var(--ink-deep); font-size:44px; }
+
+  .firma {
+    position:absolute; bottom:200px; left:0; width:100%;
+    text-align:center;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-style:italic; font-size:34px; color:var(--muted);
+    letter-spacing:2px;
+  }
+</style>
+</head>
+<body>
+<div class="story">
+  <div class="deco1"></div><div class="deco2"></div>
+
+  <div class="kicker"><div class="kicker-line"></div>Pick del día<div class="kicker-line"></div></div>
+  <div class="cat-pill">{{ CATEGORIA_LABEL }}</div>
+
+  <div class="img-wrap">
+    <img src="{{ IMAGE_URL }}" alt="{{ TITLE_CORTO }}">
+    <div class="img-badge">{{ RATING_BADGE }}</div>
+    {{ DISCOUNT_BADGE_HTML }}
+  </div>
+
+  <div class="prod-title">{{ TITULO_DISPLAY }}</div>
+
+  <div class="price-block">
+    {{ PRICE_BEFORE_HTML }}
+    <span class="price-now">{{ PRICE }}</span>
+  </div>
+
+  {{ SHIPPING_HTML }}
+
+  <div class="cta">El link está aquí <span class="arrow">👇</span></div>
+  <div class="firma">✦ &nbsp;bibi recomienda&nbsp; ✦</div>
+</div>
+</body>
+</html>

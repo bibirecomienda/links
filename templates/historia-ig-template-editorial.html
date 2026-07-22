@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--
+  PLANTILLA HISTORIA IG — VARIANTE "EDITORIAL" — 1080×1920
+  Alternativa de estilo a historia-ig-template.html (esa no se toca).
+  Mismas variables {{ }} y mismas zonas seguras de Instagram.
+
+  · Top 0–250px    → IG superpone tu foto de perfil, nombre y la X
+  · Bottom 1640–1920px → IG superpone la barra "Enviar mensaje"
+  El sticker de link se coloca ENCIMA del pill "El link está aquí".
+
+  Diferencia de estilo: fondo crema tipo revista, imagen circular,
+  precio como sello dorado en vez de badge esquinero.
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Historia IG · Editorial</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #FAF1E8; --card: #FFFFFF; --ink: #3B2521; --muted: #9C7A6F;
+    --gold: #C9985E; --accent: #A04A36; --rule: #E9DCC9;
+  }
+  body { width: 1080px; height: 1920px; overflow: hidden; font-family: 'Inter', sans-serif; }
+  .story {
+    width: 1080px; height: 1920px; position: relative;
+    background: var(--bg);
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .frame { position:absolute; inset: 44px; border: 2px solid var(--gold); border-radius: 6px; opacity: 0.55; }
+
+  /* Zona segura superior: el contenido empieza en ~270px */
+  .kicker {
+    position:relative; z-index:10; margin-top:280px;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-style: italic;
+    font-size:40px; font-weight:600; color:var(--muted);
+  }
+
+  .cat-pill {
+    position:relative; z-index:10; margin-top:20px;
+    background:var(--ink); color:var(--bg);
+    padding:14px 40px; border-radius:60px;
+    font-size:28px; font-weight:700; letter-spacing:1px;
+  }
+
+  .img-frame { position:relative; z-index:10; margin-top:52px; }
+  .img-wrap {
+    position:relative;
+    width:760px; height:760px; border-radius:50%; overflow:hidden;
+    background:var(--card);
+    box-shadow:0 30px 70px rgba(59,37,33,0.18);
+    border: 8px solid var(--card);
+    outline: 2px solid var(--gold);
+  }
+  .img-wrap img { width:100%; height:100%; object-fit:contain; padding:64px; }
+  .img-badge {
+    position:absolute; bottom:-32px; left:50%; transform: translateX(-50%);
+    max-width:620px;
+    background:var(--ink); color:var(--bg);
+    font-size:26px; font-weight:700; padding:14px 34px; border-radius:40px;
+    text-align:center; line-height:1.3;
+    box-shadow:0 12px 26px rgba(59,37,33,0.22);
+  }
+  .discount-seal {
+    position:absolute; top:20px; right:20px;
+    background:var(--accent); color:#fff;
+    width:150px; height:150px; border-radius:50%;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transform: rotate(8deg);
+    box-shadow: 0 10px 26px rgba(160,74,54,0.35);
+  }
+  .discount-seal .pct { font-size: 40px; font-weight: 800; line-height: 1; }
+  .discount-seal .lbl { font-size: 16px; font-weight: 700; letter-spacing: 1px; margin-top: 2px; }
+
+  .prod-title {
+    position:relative; z-index:10; margin-top:74px;
+    width:900px; text-align:center;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:60px; font-weight:700; color:var(--ink); line-height:1.15;
+  }
+
+  .price-row {
+    position:relative; z-index:10; margin-top:20px;
+    display:flex; align-items:baseline; gap:26px;
+    flex-wrap:wrap; justify-content:center; max-width:1000px;
+  }
+  .price-before { font-size:36px; color:var(--muted); text-decoration:line-through; font-weight:500; }
+  .price-now { font-size:80px; font-weight:800; color:var(--accent); letter-spacing:-2px; }
+
+  .ship-line {
+    position:relative; z-index:10; margin-top:14px;
+    font-size:30px; font-weight:600; color:var(--ink);
+    display:flex; align-items:center; gap:14px;
+  }
+  .ship-line .ok { color:var(--accent); }
+
+  .cta {
+    position:relative; z-index:10; margin-top:24px; margin-bottom:270px;
+    background:var(--ink); color:#fff;
+    padding:32px 68px; border-radius:70px;
+    display:flex; align-items:center; gap:24px;
+    font-size:36px; font-weight:700;
+    box-shadow:0 16px 40px rgba(59,37,33,0.22);
+  }
+  .cta .arrow { color:var(--gold); font-size:42px; }
+
+  .firma {
+    position:absolute; bottom:200px; left:0; width:100%;
+    text-align:center;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-style:italic; font-size:32px; color:var(--muted);
+    letter-spacing:2px;
+  }
+</style>
+</head>
+<body>
+<div class="story">
+  <div class="frame"></div>
+
+  <div class="kicker">✦ Pick del día ✦</div>
+  <div class="cat-pill">{{ CATEGORIA_LABEL }}</div>
+
+  <div class="img-frame">
+    <div class="img-wrap">
+      <img src="{{ IMAGE_URL }}" alt="{{ TITLE_CORTO }}">
+    </div>
+    <div class="img-badge">{{ RATING_BADGE }}</div>
+  </div>
+  {{ DISCOUNT_BADGE_HTML }}
+
+  <div class="prod-title">{{ TITULO_DISPLAY }}</div>
+
+  <div class="price-row">
+    {{ PRICE_BEFORE_HTML }}
+    <span class="price-now">{{ PRICE }}</span>
+  </div>
+
+  {{ SHIPPING_HTML }}
+
+  <div class="cta">El link está aquí <span class="arrow">👇</span></div>
+  <div class="firma">✦ &nbsp;bibi recomienda&nbsp; ✦</div>
+</div>
+</body>
+</html>
