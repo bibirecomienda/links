@@ -31,7 +31,7 @@ var BIBI_LINKS = [
     title: "Paño de limpieza de lentes Koala - Microfibra japonesa (6 unidades)",
     platform: "amazon",
     category: "otros",
-    url: "https://www.amazon.com/dp/B06X9V866C?tag=bibirecomie02-20",
+    url: "https://amzn.to/4vNgKwi",
     image: "https://m.media-amazon.com/images/I/71iuhiJShtL._AC_SL1500_.jpg",
     price: "COP $32.178",
     originalPrice: "",
