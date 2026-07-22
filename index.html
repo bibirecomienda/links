@@ -801,9 +801,15 @@
 
   // Calcula "Actualizado hoy / ayer / hace N días / el DD mes" a partir
   // de la fecha más reciente de los productos activos.
+  function parseLocalDate(dateStr) {
+    const [y, m, day] = dateStr.split('-').map(Number);
+    if (!y || !m || !day) return null;
+    return new Date(y, m - 1, day);
+  }
+
   function lastUpdatedLabel() {
     const dates = products
-      .map(p => p.date && new Date(p.date))
+      .map(p => p.date && parseLocalDate(p.date))
       .filter(d => d && !isNaN(d.getTime()));
     if (!dates.length) return 'Actualizado recientemente';
 
