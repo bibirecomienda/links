@@ -828,9 +828,9 @@
   const MESES_CORTO = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
   function formatProductDate(dateStr) {
     if (!dateStr) return '';
-    const d = new Date(dateStr);
-    if (isNaN(d.getTime())) return '';
-    return `${d.getDate()} ${MESES_CORTO[d.getMonth()]}`;
+    const [y, m, day] = dateStr.split('-').map(Number);
+    if (!y || !m || !day) return '';
+    return `${day} ${MESES_CORTO[m - 1]}`;
   }
 
   // Cupón banner — variante completa o compacta
