@@ -786,6 +786,11 @@
     ? url.replace(/\._AC_[A-Z]{2}\d+_\.(jpg|png)$/i, `._AC_SX${px}_.$1`)
     : url;
 
+  // Identificador legible para el evento de click en GoatCounter (id + título abreviado)
+  const clickId = item => `p${item.id}-${String(item.title || '')
+    .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40)}`;
+
   const storeLabel = p => p === 'amazon' ? 'Amazon' : p === 'mercadolibre' ? 'Mercado Libre' : (p || '');
   const storeBadge = p => p === 'amazon' ? 'AMZ' : p === 'mercadolibre' ? 'ML' : (p || '').slice(0, 3).toUpperCase();
   const catLabel = c => (categorias[c] && categorias[c].label) || c || '';
@@ -867,7 +872,7 @@
     const highlights = products.filter(p => p.highlight);
     if (!highlights.length) return '';
     const cards = highlights.map(p => `
-      <a class="week-card" href="${esc(p.url)}" target="_blank" rel="sponsored noopener">
+      <a class="week-card" href="${esc(p.url)}" target="_blank" rel="sponsored noopener" data-goatcounter-click="${esc(clickId(p))}" data-goatcounter-title="${esc(p.title)}">
         <div class="week-card-main">
           <div class="week-thumb">
             ${p.image ? `<img src="${esc(thumb(p.image, 300))}" alt="${esc(p.title)}" loading="lazy" />` : ''}
@@ -906,7 +911,7 @@
           <h2 class="section-label">Pick del día</h2>
           <span class="right">Hoy</span>
         </div>
-        <a class="pick-card" href="${esc(p.url)}" target="_blank" rel="sponsored noopener">
+        <a class="pick-card" href="${esc(p.url)}" target="_blank" rel="sponsored noopener" data-goatcounter-click="${esc(clickId(p))}" data-goatcounter-title="${esc(p.title)}">
           <div class="pick-card-main">
             <div class="pick-thumb">
               ${p.image ? `<img src="${esc(thumb(p.image, 300))}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
@@ -939,7 +944,7 @@
   function renderCampaigns() {
     if (!campaigns.length) return '';
     const cards = campaigns.map(c => `
-      <a class="campaign-card" href="${esc(c.url)}" target="_blank" rel="sponsored noopener">
+      <a class="campaign-card" href="${esc(c.url)}" target="_blank" rel="sponsored noopener" data-goatcounter-click="${esc(clickId(c))}" data-goatcounter-title="${esc(c.title)}">
         <div class="campaign-head">
           <div class="campaign-logo" style="background:${esc(c.color || '#FFE600')}">${esc((c.store || '?')[0])}</div>
           <span class="campaign-store">${esc(c.store || '')}</span>
@@ -987,7 +992,7 @@
   // ─────────────────────────────────────────────────────
   function renderProducts(list) {
     const cards = list.length ? list.map((p, i) => `
-      <a class="product-card" style="--i:${i};" href="${esc(p.url)}" target="_blank" rel="sponsored noopener">
+      <a class="product-card" style="--i:${i};" href="${esc(p.url)}" target="_blank" rel="sponsored noopener" data-goatcounter-click="${esc(clickId(p))}" data-goatcounter-title="${esc(p.title)}">
         <div class="product-thumb">
           ${p.image ? `<img src="${esc(thumb(p.image, 300))}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
           <span class="product-store-badge">${esc(storeBadge(p.platform))}</span>
@@ -1063,6 +1068,10 @@
 
   render();
 </script>
+
+<!-- Analítica (GoatCounter) — solo cuenta visitas y clicks agregados, sin cookies ni IPs -->
+<script data-goatcounter="https://bibirecomienda.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 
 </body>
 </html>
