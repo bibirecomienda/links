@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 40,
+    title: "Paño de limpieza de lentes Koala - Microfibra japonesa (6 unidades)",
+    platform: "amazon",
+    category: "otros",
+    url: "https://www.amazon.com/dp/B06X9V866C?tag=bibirecomie02-20",
+    image: "https://m.media-amazon.com/images/I/71iuhiJShtL._AC_SL1500_.jpg",
+    price: "COP $32.178",
+    originalPrice: "",
+    badge: "⭐ 4.7 · 27K+ opiniones",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-22"
+  },
+  {
     id: 39,
     title: "AXIS-Y Suero de Colágeno Vegano para Ojos",
     platform: "amazon",
