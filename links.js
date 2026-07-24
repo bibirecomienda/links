@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 41,
+    title: "SanDisk Extreme PRO Tarjeta SD 128GB 4K UHD",
+    platform: "amazon",
+    category: "tecnologia",
+    url: "https://amzn.to/4gQuKSc",
+    image: "https://m.media-amazon.com/images/I/719J6w3pB5L._AC_SL1500_.jpg",
+    price: "COP $166.213",
+    originalPrice: "",
+    badge: "⭐ 4.8 · 672 opiniones",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-07-24"
+  },
+  {
     id: 40,
     title: "Paño de limpieza de lentes Koala - Microfibra japonesa (6 unidades)",
     platform: "amazon",
