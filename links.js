@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 45,
+    title: "Juego de Cartas Beat The Heat — Fiesta Familiar",
+    platform: "amazon",
+    category: "ninos",
+    url: "https://amzn.to/4pYFEYD",
+    image: "https://m.media-amazon.com/images/I/713dl3XS+DL._AC_SL1500_.jpg",
+    price: "COP $31.490",
+    originalPrice: "",
+    badge: "⭐ 4.7 · 320 opiniones",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-08-03"
+  },
+  {
     id: 44,
     title: "Adidas Terrex Skychaser AX5 Mid Gore-Tex Hombre",
     platform: "amazon",
