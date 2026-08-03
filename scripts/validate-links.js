@@ -91,7 +91,7 @@ for (const p of data.links) {
     if (urlsVistas.has(p.url)) err(id, `url repetida (también en "${urlsVistas.get(p.url)}")`);
     else urlsVistas.set(p.url, p.title);
     if (p.platform === 'amazon') {
-      const esCorto = /^https:\/\/amzn\.to\//.test(p.url);
+      const esCorto = /^https:\/\/amzn\.to\//.test(p.url) || /^https:\/\/link\.amazon\//.test(p.url);
       const esLargo = /amazon\.com/.test(p.url);
       if (!esCorto && !esLargo) err(id, `url de Amazon no reconocida: "${p.url}"`);
       if (esLargo && !p.url.includes(`tag=${TAG_AFILIADO}`)) {

@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 44,
+    title: "Adidas Terrex Skychaser AX5 Mid Gore-Tex Hombre",
+    platform: "amazon",
+    category: "deporte",
+    url: "https://amzn.to/44ZAKB1",
+    image: "https://m.media-amazon.com/images/I/61qhvFYqEZL._AC_SL1200_.jpg",
+    price: "COP $363.221",
+    originalPrice: "COP $442.182",
+    badge: "🏷️ 18% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-08-03"
+  },
+  {
     id: 43,
     title: "Cartuchos Filtro Repuesto PHILIPS GoZero AWP231 x3",
     platform: "amazon",
