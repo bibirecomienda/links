@@ -27,6 +27,40 @@
 
 var BIBI_LINKS = [
   {
+    id: 47,
+    title: "Recipientes Herméticos DWËLLZA KITCHEN x5 con Tapas",
+    platform: "amazon",
+    category: "cocina",
+    url: "https://amzn.to/4h7BFXj",
+    image: "https://m.media-amazon.com/images/I/81q6QsghZOL._AC_SL1500_.jpg",
+    price: "COP $125.990",
+    originalPrice: "",
+    badge: "⭐ 4.7 · 5.952 opiniones",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-08-03"
+  },
+  {
+    id: 46,
+    title: "Mochila Plegable FIORETTO 15L Senderismo y Viaje",
+    platform: "amazon",
+    category: "deporte",
+    url: "https://amzn.to/4zbg3js",
+    image: "https://m.media-amazon.com/images/I/81dE643aFhL._AC_SL1500_.jpg",
+    price: "COP $62.790",
+    originalPrice: "COP $82.088",
+    badge: "🏷️ 24% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-08-03"
+  },
+  {
     id: 45,
     title: "Juego de Cartas Beat The Heat — Fiesta Familiar",
     platform: "amazon",
