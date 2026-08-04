@@ -1,0 +1,132 @@
+FLUJO PROPUESTO: scripts/generar_imagenes.py
+================================================
+
+Genera las imágenes (historias IG y slides del carrusel) a partir de un JSON
+de datos del producto. La obtención de datos puede ser automática (Chrome +
+SiteStripe, como hoy) o manual (fallback si Chrome no está disponible).
+
+--------------------------------------------------------
+1) HISTORIA DE INSTAGRAM (1 producto)
+--------------------------------------------------------
+
+Camino normal (JSON ya generado por /agregar-link vía Chrome):
+
+  python3 scripts/generar_imagenes.py historia \
+    --data story-export/hervidor-koios.json \
+    --out story-export/historia-hervidor-koios.png
+
+Camino fallback (sin Chrome/SiteStripe disponible — pide los datos por
+terminal uno por uno: título, precio, precio anterior, imagen, categoría,
+rating, envío, etc.):
+
+  python3 scripts/generar_imagenes.py historia --manual \
+    --out story-export/historia-hervidor-koios.png
+
+  (el script pregunta cada campo y, al terminar, guarda también el JSON
+  en story-export/hervidor-koios.json para que quede como registro)
+
+--------------------------------------------------------
+2) CARRUSEL SEMANAL (6 productos + portada + CTA = 8 slides)
+--------------------------------------------------------
+
+Camino normal (JSON con los 6 productos ya extraídos de Amazon):
+
+  python3 scripts/generar_imagenes.py carrusel \
+    --date 2026-07-26 \
+    --data carruseles/2026-07-26/productos.json \
+    --out carruseles/2026-07-26/capturas/
+
+Camino fallback (sin Chrome disponible — pide los 6 productos uno por uno
+por terminal, con la misma info que pediría SiteStripe):
+
+  python3 scripts/generar_imagenes.py carrusel --manual \
+    --date 2026-07-26 \
+    --out carruseles/2026-07-26/capturas/
+
+--------------------------------------------------------
+3) SOLO UN SLIDE (reimprimir uno sin rehacer todo el carrusel)
+--------------------------------------------------------
+
+  python3 scripts/generar_imagenes.py carrusel \
+    --data carruseles/2026-07-26/productos.json \
+    --out carruseles/2026-07-26/capturas/ \
+    --solo-slide 3
+
+--------------------------------------------------------
+4) JSON DE EJEMPLO — HISTORIA (story-export/hervidor-koios.json)
+--------------------------------------------------------
+
+{
+  "categoria_label": "🍳 Cocina",
+  "image_url": "https://m.media-amazon.com/images/I/71rK6qZJDDL._AC_SX679_.jpg",
+  "title_corto": "Hervidor Eléctrico KOIOS",
+  "rating_badge": "4.3 / 5 · 927 opiniones",
+  "discount_badge_html": "<div class=\"discount-badge\">🔥 42% OFF</div>",
+  "titulo_display": "Hervidor Eléctrico KOIOS ☕",
+  "price_before_html": "<span class=\"price-before\">COP $280.000</span>",
+  "price": "COP $162.667",
+  "shipping_html": "<div class=\"ship-line\">📦 Envío <span class=\"ok\">gratis incluido ✓</span></div>"
+}
+
+Notas sobre los campos:
+- "discount_badge_html", "price_before_html" y "shipping_html" van vacíos
+  ("") si no aplican (sin descuento / sin precio anterior / sin datos de
+  envío) — el script simplemente no imprime nada ahí.
+- "rating_badge" usa "✨ Nuevo" si el producto no tiene rating todavía.
+
+--------------------------------------------------------
+5) JSON DE EJEMPLO — CARRUSEL (carruseles/2026-07-26/productos.json)
+--------------------------------------------------------
+
+{
+  "fecha": "2026-07-26",
+  "fecha_hoy_visible": "26 de julio · 2026",
+  "cover_pill": "Hasta −42% en Amazon",
+  "productos": [
+    {
+      "title": "Hervidor Eléctrico KOIOS 1.7L",
+      "category_kicker": "Cocina",
+      "image": "https://m.media-amazon.com/images/I/71rK6qZJDDL._AC_SX679_.jpg",
+      "badge_izq": "amazon",
+      "badge_der": "🔥 42% OFF",
+      "copy": "Hierve el agua en 3 minutos y se apaga solo. El favorito de quienes odian esperar el café.",
+      "price_before": "COP $280.000",
+      "price": "COP $162.667",
+      "shipping": "gratis"
+    },
+    {
+      "title": "AXIS-Y Suero de Colágeno Vegano para Ojos",
+      "category_kicker": "Belleza",
+      "image": "https://m.media-amazon.com/images/I/61abc123XYZ._AC_SX679_.jpg",
+      "badge_izq": "amazon",
+      "badge_der": "🏷️ 28% OFF",
+      "copy": "Reduce ojeras y líneas finas en semanas. Textura ligera, se absorbe en segundos.",
+      "price_before": "COP $95.000",
+      "price": "COP $68.400",
+      "shipping": ""
+    }
+    // ... hasta 6 productos en total
+  ]
+}
+
+Notas sobre los campos:
+- "shipping": "gratis" agrega el pill 📦 en el slide; "" lo omite.
+- "badge_der" es el badge que va arriba a la derecha del slide (descuento
+  o rating, según lo que se detectó); "badge_izq" siempre es la
+  plataforma ("amazon").
+- El script arma el slide 1 (portada) con "fecha_hoy_visible" y
+  "cover_pill", los slides 2–7 con cada producto de "productos", y el
+  slide 8 (CTA) es fijo (no necesita datos).
+
+--------------------------------------------------------
+Notas
+--------------------------------------------------------
+- El script llena los templates HTML (templates/historia-ig-template.html y
+  templates/carousel-instagram-template.html), reemplaza las variables
+  {{ }}, y captura el PNG con Chrome headless (subprocess), igual que hoy
+  pero sin loops de bash manuales.
+- El modo --manual NUNCA inventa precios ni links: los pide a Bibiana por
+  input() y los usa tal cual los escriba.
+- Reemplaza los pasos de captura (7a/7b de /crear-carrusel y 12b de
+  /agregar-link) — el resto del flujo (Chrome/SiteStripe, links.js, git)
+  no cambia.
