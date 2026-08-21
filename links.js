@@ -38,7 +38,7 @@ var BIBI_LINKS = [
     badge: "⭐ 4.5 · 36K+ opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -55,7 +55,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 20% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -72,7 +72,7 @@ var BIBI_LINKS = [
     badge: "⭐ 4.8 · 30K+ opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -89,7 +89,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 33% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -106,7 +106,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 37% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -123,7 +123,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 39% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -140,7 +140,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 16% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -157,7 +157,7 @@ var BIBI_LINKS = [
     badge: "🔥 45% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -764,15 +764,15 @@ var BIBI_LINKS = [
     category: "mascotas",
     url: "https://amzn.to/4fMgdWy",
     image: "https://m.media-amazon.com/images/I/616zZxB0g1L._AC_SL1500_.jpg",
-    price: "COP $373.479",
-    originalPrice: "COP $414.980",
-    badge: "⭐ 4.1 · 1.3K+ opiniones",
+    price: "COP $331.221",
+    originalPrice: "COP $368.053",
+    badge: "⭐ 4.1 · 1.4K+ opiniones",
     coupon: "",
-    shipping: "COP $267.203",
+    shipping: "COP $253.392",
     highlight: false,
     featured: true,
     active: true,
-    date: "2026-07-21"
+    date: "2026-08-20"
   },
   {
     id: 11,
