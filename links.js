@@ -174,7 +174,7 @@ var BIBI_LINKS = [
     badge: "⭐ 4.7 · 5.952 opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-03"
@@ -191,7 +191,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 24% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-03"
@@ -208,7 +208,7 @@ var BIBI_LINKS = [
     badge: "⭐ 4.7 · 320 opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-03"
@@ -225,7 +225,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 18% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-03"
