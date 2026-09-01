@@ -157,7 +157,7 @@ var BIBI_LINKS = [
     badge: "⭐ 4.5 · 36K+ opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -174,7 +174,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 20% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -191,7 +191,7 @@ var BIBI_LINKS = [
     badge: "⭐ 4.8 · 30K+ opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -208,7 +208,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 33% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -225,7 +225,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 37% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -242,7 +242,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 39% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -259,7 +259,7 @@ var BIBI_LINKS = [
     badge: "🏷️ 16% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -276,7 +276,7 @@ var BIBI_LINKS = [
     badge: "🔥 45% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: true,
+    highlight: false,
     featured: false,
     active: true,
     date: "2026-08-20"
@@ -424,15 +424,15 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4pzGbQC",
     image: "https://m.media-amazon.com/images/I/61geVDBoMpL._SL1500_.jpg",
-    price: "COP $38.409",
-    originalPrice: "COP $52.047",
-    badge: "🏷️ 26% OFF",
+    price: "COP $47.994",
+    originalPrice: "COP $51.196",
+    badge: "⭐ 4.4 · 4K+ opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
-    date: "2026-07-21"
+    date: "2026-08-31"
   },
   {
     id: 38,
@@ -456,17 +456,17 @@ var BIBI_LINKS = [
     title: "CATAN Traveler - Edición Compacta de Viaje",
     platform: "amazon",
     category: "ninos",
-    url: "https://link.amazon/B0g6R1xR5",
+    url: "https://amzn.to/4r6UAEN",
     image: "https://m.media-amazon.com/images/I/71JPOzduGkL._AC_SL1500_.jpg",
-    price: "COP $153.333",
-    originalPrice: "COP $191.674",
+    price: "COP $153.652",
+    originalPrice: "COP $192.073",
     badge: "🏷️ 20% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
-    date: "2026-07-29"
+    date: "2026-08-31"
   },
   {
     id: 36,
@@ -492,15 +492,15 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4wa3a7j",
     image: "https://m.media-amazon.com/images/I/51Z67GdO10L._SL1500_.jpg",
-    price: "COP $45.066",
-    originalPrice: "",
-    badge: "⭐ 4.5 · 1K+ opiniones",
+    price: "COP $44.825",
+    originalPrice: "COP $64.003",
+    badge: "🏷️ 30% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
-    date: "2026-07-16"
+    date: "2026-08-31"
   },
   {
     id: 34,
@@ -509,15 +509,15 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4gI2XmS",
     image: "https://m.media-amazon.com/images/I/61IHI9z38SL._SL1500_.jpg",
-    price: "COP $22.501",
-    originalPrice: "COP $30.420",
-    badge: "🏷️ 26% OFF",
+    price: "COP $22.380",
+    originalPrice: "",
+    badge: "🏆 #1 en Belleza",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
-    date: "2026-07-16"
+    date: "2026-08-31"
   },
   {
     id: 33,
@@ -543,15 +543,15 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4wF7Wtd",
     image: "https://m.media-amazon.com/images/I/61UhU+54OlL._SL1500_.jpg",
-    price: "COP $52.776",
-    originalPrice: "COP $68.002",
-    badge: "🏷️ 22% OFF",
+    price: "COP $51.196",
+    originalPrice: "COP $67.205",
+    badge: "🏷️ 24% OFF",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
-    date: "2026-07-13"
+    date: "2026-08-31"
   },
   {
     id: 31,
@@ -560,15 +560,15 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4hbVGvK",
     image: "https://m.media-amazon.com/images/I/51uMK6hgRvL._SL1200_.jpg",
-    price: "COP $56.987",
-    originalPrice: "COP $89.773",
-    badge: "🏷️ 37% OFF",
+    price: "COP $55.678",
+    originalPrice: "",
+    badge: "⭐ 4.5 · 2K+ opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
-    date: "2026-07-13"
+    date: "2026-08-31"
   },
   {
     id: 30,
@@ -594,15 +594,15 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4fvcVXI",
     image: "https://m.media-amazon.com/images/I/71Mcspt-6AL._AC_SL1500_.jpg",
-    price: "COP $61.501",
-    originalPrice: "COP $100.874",
-    badge: "🏷️ 39% OFF",
+    price: "COP $60.513",
+    originalPrice: "",
+    badge: "⭐ 4.6 · 31K+ opiniones",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
-    date: "2026-07-12"
+    date: "2026-08-31"
   },
   {
     id: 28,
