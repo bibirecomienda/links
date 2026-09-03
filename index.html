@@ -2,15 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bibi Recomienda — Las mejores ofertas, escogidas una por una</title>
-  <meta name="description" content="Las mejores ofertas que encuentro cada semana, elegidas con cuidado. Amazon, Mercado Libre y más." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Bibi Recomienda — Lo que recomiendo, en un solo lugar</title>
+  <meta name="description" content="Los productos que muestro en mis videos y las colecciones que armo cada semana. Amazon y más, con links directos." />
   <meta name="theme-color" content="#F4DDD7" />
 
   <!-- Open Graph para preview en WhatsApp / Stories / etc. -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Bibi Recomienda" />
-  <meta property="og:description" content="Las mejores ofertas que encuentro cada semana, elegidas con cuidado." />
+  <meta property="og:description" content="Los productos que muestro en mis videos, en un solo lugar." />
   <meta property="og:image" content="https://bibirecomienda.github.io/links/bibirecomiendaimage.jpg" />
   <meta property="og:url" content="https://bibirecomienda.github.io/links/" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -18,7 +18,7 @@
   <link rel="icon" type="image/jpeg" href="bibirecomiendaimage.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <script src="links.js"></script>
 
@@ -38,6 +38,8 @@
 
       --serif:    'Cormorant Garamond', 'Georgia', serif;
       --sans:     'Inter', system-ui, -apple-system, sans-serif;
+
+      --safe-b:   env(safe-area-inset-bottom, 0px);
     }
 
     html, body { background: var(--bg); }
@@ -55,7 +57,7 @@
       background-attachment: fixed;
     }
     a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; cursor: pointer; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
     ::-webkit-scrollbar { display: none; }
     * { scrollbar-width: none; }
 
@@ -69,7 +71,7 @@
       50%      { box-shadow: 0 0 0 6px rgba(93, 174, 93, 0); }
     }
     @keyframes fade-up {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     @keyframes breathe {
@@ -80,48 +82,43 @@
       0%, 100% { transform: translateY(0); }
       50%      { transform: translateY(-4px); }
     }
+    @keyframes pill-in {
+      from { opacity: 0; transform: translate(-50%, 20px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(24px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes veil-in { from { opacity: 0; } to { opacity: 1; } }
+    /* Empujoncito de la flecha "ir" en las tarjetas destacadas */
+    @keyframes nudge-x {
+      0%, 62%, 100% { transform: translateX(0); }
+      78%           { transform: translateX(4px); }
+    }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
 
     /* ── HEADER ─────────────────────────────────────────── */
+    /* Fila compacta: foto · nombre + actualizado · lupa y redes.
+       Está en todas las vistas y se va con el scroll (no es fijo). */
     header {
-      padding: 26px 24px 24px;
-      text-align: center;
-      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 14px 18px 16px;
     }
-    .search-toggle {
-      position: absolute;
-      top: 22px; right: 22px;
-      z-index: 3;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--surface);
-      color: var(--ink);
-      border: none;
-      font-size: 18px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--sans);
-      transition: all .2s;
-    }
-    .search-toggle.open {
-      background: var(--ink);
-      color: var(--surface);
-    }
-    .avatar-wrap {
-      position: relative;
-      display: inline-block;
-      margin-top: 4px;
-    }
+    .avatar-wrap { position: relative; flex-shrink: 0; line-height: 0; }
     .avatar-bg {
       position: absolute;
-      top: -6px;
-      left: 50%;
+      top: -7px; left: 50%;
       transform: translateX(-50%);
-      width: 150px; height: 150px;
+      width: 100px; height: 100px;
       border-radius: 50%;
       background: var(--surface);
       z-index: 0;
@@ -129,109 +126,132 @@
     .avatar {
       position: relative;
       z-index: 1;
-      width: 118px; height: 118px;
+      width: 86px; height: 86px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--surface);
+      border: 2.5px solid var(--surface);
       display: block;
       animation: breathe 6s ease-in-out infinite;
     }
-
-    /* Sparkles animadas alrededor del avatar */
     .sparkle {
       position: absolute;
       color: var(--gold);
-      font-size: 14px;
+      font-size: 11px;
       pointer-events: none;
       z-index: 2;
       animation: twinkle 2.6s ease-in-out infinite;
       text-shadow: 0 0 6px rgba(201, 152, 94, 0.4);
     }
-    .sparkle.s1 { top: 0;    left: -8px;  font-size: 16px; animation-delay: 0s; }
-    .sparkle.s2 { top: 14px; right: -6px; font-size: 12px; animation-delay: 0.6s; }
-    .sparkle.s3 { bottom: 8px; left: -2px; font-size: 11px; animation-delay: 1.2s; color: var(--accent); }
-    .sparkle.s4 { bottom: -4px; right: 8px; font-size: 14px; animation-delay: 1.8s; }
+    .sparkle.s1 { top: -3px; left: -6px; font-size: 13px; animation-delay: 0s; }
+    .sparkle.s2 { bottom: 0; right: -4px; font-size: 10px; animation-delay: 1.1s; color: var(--accent); }
+    .brand-block { flex: 1; min-width: 0; }
     h1.brand {
-      font-size: 42px;
+      font-size: 27px;
       font-style: italic;
       font-weight: 500;
-      margin: 12px 0 2px;
-      letter-spacing: -0.5px;
       line-height: 1;
+      letter-spacing: -0.3px;
     }
     .tagline {
       font-family: var(--sans);
-      font-size: 10px;
-      letter-spacing: 4px;
+      font-size: 8px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 12px;
-    }
-    .intro {
-      font-size: 15px;
-      line-height: 1.45;
-      font-style: italic;
-      color: var(--ink);
-      max-width: 280px;
-      margin: 0 auto;
+      margin: 3px 0 7px;
     }
     .live-dot {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      margin-top: 10px;
-      padding: 4px 12px;
+      gap: 6px;
+      padding: 4px 10px;
       background: rgba(255, 255, 255, 0.5);
       border-radius: 100px;
       font-family: var(--sans);
-      font-size: 9px;
-      letter-spacing: 1.4px;
+      font-size: 8px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       color: var(--ink);
       font-weight: 700;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .live-dot::before {
       content: '';
-      width: 6px; height: 6px; border-radius: 50%;
+      width: 5px; height: 5px; border-radius: 50%;
       background: #5DAE5D;
       animation: pulse-dot 1.8s ease-in-out infinite;
     }
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 16px;
+    .hdr-actions {
+      flex-shrink: 0;
+      display: grid;
+      grid-template-columns: 42px 42px;
+      gap: 6px;
     }
-    .social-chip {
-      padding: 7px 16px;
-      border-radius: 100px;
-      background: var(--cream);
-      color: var(--ink);
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-    }
-    .search-wrap {
-      margin-top: 18px;
-      display: none;
-    }
-    .search-wrap.open { display: block; }
-    .search-input {
-      width: 100%;
-      padding: 12px 18px;
+    .hdr-search { grid-column: 2; }
+    .socials { display: contents; }
+    .hdr-input {
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 42px;
+      padding: 0 18px;
       border: 1px solid var(--rule);
       border-radius: 100px;
-      font-family: var(--sans);
-      font-size: 13px;
       background: var(--cream);
       color: var(--ink);
+      font-family: var(--sans);
+      font-size: 13px;
       outline: none;
-      text-align: center;
+      display: none;
+    }
+    .hdr-input:focus { border-color: var(--accent); }
+    header.searching .hdr-input { display: block; animation: fade-up .25s ease both; }
+    header.searching .brand-block,
+    header.searching .socials { display: none; }
+    header.searching .hdr-actions { grid-template-columns: 42px; }
+    header.searching .hdr-search { grid-column: 1; background: var(--ink); color: var(--surface); border-color: var(--ink); }
+
+    /* ── VOLVER (vistas de colección y búsqueda) ────────── */
+    .view-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin: 0 0 12px;
+      padding: 9px 15px 9px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--rule);
+      background: var(--cream);
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink);
+      transition: background .18s, transform .18s;
+    }
+    .view-back:active { transform: scale(0.96); }
+    @media (hover: hover) { .view-back:hover { background: var(--surface); } }
+    .social-icon, .hdr-search {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .18s, background .18s, color .18s;
+    }
+    .social-icon svg { width: 20px; height: 20px; display: block; }
+    .hdr-search { font-size: 19px; }
+    .social-icon:active, .hdr-search:active { transform: scale(0.94); }
+    @media (hover: hover) {
+      .social-icon:hover, .hdr-search:hover { background: var(--ink); color: var(--surface); border-color: var(--ink); }
     }
 
     /* ── SECCIONES ──────────────────────────────────────── */
-    main { padding: 0 0 28px; }
+    main { padding: 0 0 24px; }
+    section { animation: fade-up .5s ease both; }
     .section-label {
       font-family: var(--sans);
       font-size: 10px;
@@ -239,97 +259,231 @@
       text-transform: uppercase;
       color: var(--ink);
       font-weight: 700;
-      display: inline-block;
     }
     .section-label.accent { color: var(--accent); }
     .section-head {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       padding: 0 24px;
       margin-bottom: 12px;
     }
-    .section-head .right {
-      margin-left: auto;
+
+    /* ── EN EL VIDEO ────────────────────────────────────── */
+    .video-section { padding: 4px 16px 26px; scroll-margin-top: 12px; }
+    .video-card {
+      background: var(--cream);
+      border: 1.5px solid var(--accent);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(160, 74, 54, 0.10);
+    }
+    .video-top {
+      background: var(--accent);
+      color: #fff;
+      padding: 9px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-family: var(--sans);
       font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+    .video-top .when { margin-left: auto; font-weight: 600; letter-spacing: 0.6px; opacity: 0.9; text-transform: none; }
+    .video-body { padding: 16px 16px 6px; }
+    .video-title { font-size: 27px; font-style: italic; font-weight: 500; line-height: 1.05; }
+    .video-sub {
+      font-family: var(--sans);
+      font-size: 12px;
       color: var(--muted);
-      letter-spacing: 0.3px;
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+    .video-list { list-style: none; padding: 10px 8px 8px; }
+    .video-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 8px;
+      border-radius: 14px;
+      transition: background .18s, transform .18s;
+    }
+    .video-item:active { transform: scale(0.985); background: var(--surface); }
+    @media (hover: hover) { .video-item:hover { background: var(--surface); } }
+    .video-num {
+      width: 26px; height: 26px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-thumb {
+      width: 58px; height: 58px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: var(--card);
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+    .video-info { flex: 1; min-width: 0; }
+    .video-name {
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 500;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .video-meta {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+    .video-coupon {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(160, 74, 54, 0.10);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .video-go {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--accent);
+      flex-shrink: 0;
+      padding-left: 2px;
+    }
+    .video-link {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      border-top: 1px dashed var(--rule);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
     }
 
-    /* ── PICK DEL DÍA ───────────────────────────────────── */
-    .pick-section { padding: 0 20px 22px; }
-    .pick-card-main {
+    /* ── PRODUCTO DESTACADO (compacto) ──────────────────── */
+    .feat-section { padding: 0 16px 24px; }
+    .feat-card {
       display: flex;
-      gap: 14px;
-      padding: 14px;
+      align-items: center;
+      gap: 13px;
+      padding: 12px;
+      background: var(--cream);
+      border: 1.5px solid var(--accent);
+      border-radius: 18px;
+      box-shadow: 0 10px 26px rgba(160, 74, 54, 0.10);
+      transition: transform .2s, box-shadow .2s;
     }
-    .pick-thumb {
-      width: 100px; height: 100px;
-      background: var(--card);
-      border-radius: 12px;
-      overflow: hidden;
+    .feat-card:active { transform: scale(0.99); }
+    @media (hover: hover) {
+      .feat-card:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(160, 74, 54, 0.16); }
+    }
+    .feat-thumb {
+      width: 78px; height: 78px;
       flex-shrink: 0;
+      background: var(--card);
+      border-radius: 13px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feat-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+    .feat-info { flex: 1; min-width: 0; }
+    .feat-eyebrow {
+      font-family: var(--sans);
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+    .feat-title {
+      font-size: 16px;
+      line-height: 1.18;
+      font-weight: 500;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .feat-meta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .mini-chip {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .mini-chip.coupon { color: var(--accent); background: rgba(160, 74, 54, 0.10); }
+    .mini-chip.free   { color: #27ae60; background: rgba(39, 174, 96, 0.10); }
+    .feat-go {
+      flex-shrink: 0;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(160, 74, 54, 0.09);
+      color: var(--accent);
+      font-family: var(--sans);
+      font-size: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
+      animation: nudge-x 2.4s ease-in-out infinite;
+      transition: background .2s, color .2s, transform .2s;
     }
-    .pick-thumb img {
-      width: 100%; height: 100%;
-      object-fit: contain;
-      padding: 6px;
+    .feat-card:active .feat-go { background: var(--accent); color: #fff; transform: translateX(4px); }
+    @media (hover: hover) {
+      .feat-card:hover .feat-go { background: var(--accent); color: #fff; animation: none; transform: translateX(4px); }
     }
-    .pick-info {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .pick-badges {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 6px;
-      flex-wrap: wrap;
-    }
-    .badge {
-      font-family: var(--sans);
-      font-size: 9px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 4px;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-    }
-    .badge.pick { background: var(--accent); color: #fff; }
-    .badge.store { background: var(--surface); color: var(--ink); font-weight: 600; letter-spacing: 0.4px; text-transform: none; }
-    .pick-title {
-      font-size: 17px;
-      line-height: 1.2;
-      margin-bottom: 3px;
-      font-weight: 500;
-    }
-    .pick-cat {
-      font-family: var(--sans);
-      font-size: 10px;
-      color: var(--muted);
-    }
-    .pick-price-row {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      margin-top: 6px;
-    }
-    .price { font-size: 19px; font-weight: 700; }
-    .ver-link {
-      margin-left: auto;
+    .feat-section .feat-card + .feat-card { margin-top: 10px; }
+    .feat-card .col-mosaic { width: 78px; height: 78px; border-radius: 13px; }
+    .feat-card .col-mosaic img { padding: 3px; }
+    .feat-name { font-size: 21px; font-style: italic; font-weight: 500; line-height: 1.1; }
+    .feat-sub {
       font-family: var(--sans);
       font-size: 11px;
-      font-weight: 700;
+      color: var(--muted);
+      margin-top: 3px;
+      line-height: 1.35;
+    }
+    .feat-cta {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
       color: var(--accent);
-      letter-spacing: 0.3px;
+      margin-top: 6px;
+      display: inline-block;
     }
 
-    /* ── BANNER DE CUPÓN ────────────────────────────────── */
+    /* ── BANNERS DE CUPÓN Y ENVÍO ───────────────────────── */
     .coupon-banner {
       background: #fff;
       border-top: 2px dashed rgba(160, 74, 54, 0.35);
@@ -352,11 +506,7 @@
       text-transform: uppercase;
       flex-shrink: 0;
     }
-    .coupon-banner.compact .coupon-tag {
-      font-size: 8px;
-      padding: 2px 6px;
-      letter-spacing: 0.6px;
-    }
+    .coupon-banner.compact .coupon-tag { font-size: 8px; padding: 2px 6px; letter-spacing: 0.6px; }
     .coupon-msg {
       font-size: 12px;
       font-weight: 700;
@@ -366,8 +516,6 @@
       text-overflow: ellipsis;
     }
     .coupon-banner.compact .coupon-msg { font-size: 10px; }
-
-    /* ── INFO DE ENVÍO ──────────────────────────────────── */
     .shipping-banner {
       border-top: 1.5px solid rgba(0,0,0,0.06);
       padding: 8px 14px;
@@ -380,19 +528,20 @@
     .shipping-banner.free { color: #27ae60; }
     .shipping-banner.cost { color: #999; }
 
-    /* ── DESTACADOS DE LA SEMANA ────────────────────────── */
-    .week-section { padding: 0 0 22px; }
+    /* ── DESTACADOS (carrusel) ──────────────────────────── */
+    .week-section { padding: 0 0 26px; }
     .week-scroll {
       display: flex;
       gap: 12px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding: 0 20px 6px;
+      scroll-padding-left: 16px;
+      padding: 0 16px 6px;
       -webkit-overflow-scrolling: touch;
     }
     .week-card {
       flex-shrink: 0;
-      width: 315px;
+      width: 310px;
       background: var(--cream);
       border: 1px solid var(--rule);
       border-radius: 16px;
@@ -405,39 +554,18 @@
     @media (hover: hover) {
       .week-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(160, 74, 54, 0.12); }
     }
-    .week-card-main {
-      display: flex;
-      gap: 14px;
-      padding: 14px;
-    }
+    .week-card-main { display: flex; gap: 14px; padding: 14px; }
     .week-thumb {
-      width: 90px; height: 90px;
+      width: 88px; height: 88px;
       background: var(--card);
       border-radius: 12px;
       overflow: hidden;
       flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
-    .week-thumb img {
-      width: 100%; height: 100%;
-      object-fit: contain;
-      padding: 6px;
-    }
-    .week-info {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .week-cat {
-      font-family: var(--sans);
-      font-size: 10px;
-      color: var(--muted);
-      margin-bottom: 5px;
-    }
+    .week-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+    .week-info { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; }
+    .week-cat { font-family: var(--sans); font-size: 10px; color: var(--muted); margin-bottom: 5px; }
     .week-title {
       font-size: 15px;
       line-height: 1.25;
@@ -447,29 +575,21 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .week-price-row {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      margin-top: 8px;
-    }
+    .week-price-row { display: flex; align-items: flex-end; gap: 10px; margin-top: 8px; }
+    .week-price-stack { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
     .week-price { font-size: 17px; font-weight: 700; }
-    .week-ver {
-      margin-left: auto;
+    .week-ver { margin-left: auto; font-family: var(--sans); font-size: 11px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .price-was {
       font-family: var(--sans);
       font-size: 11px;
-      font-weight: 700;
-      color: var(--accent);
+      color: var(--muted);
+      text-decoration: line-through;
     }
+    .week-price, .price-was, .product-price { white-space: nowrap; }
 
     /* ── CAMPAÑAS ───────────────────────────────────────── */
-    .campaigns-section { padding: 0 0 22px; }
-    .campaigns-scroll {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding: 0 20px 4px;
-    }
+    .campaigns-section { padding: 0 0 26px; }
+    .campaigns-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 4px; }
     .campaign-card {
       flex-shrink: 0;
       width: 230px;
@@ -481,7 +601,6 @@
       flex-direction: column;
       gap: 8px;
       transition: transform .2s, box-shadow .2s;
-      animation: fade-up .5s ease both;
     }
     .campaign-card:active { transform: scale(0.98); }
     @media (hover: hover) {
@@ -491,9 +610,7 @@
     .campaign-logo {
       width: 30px; height: 30px;
       border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-family: var(--sans);
       font-weight: 700;
       color: #000;
@@ -507,93 +624,120 @@
       color: var(--muted);
       font-weight: 600;
     }
-    .campaign-arrow {
-      margin-left: auto;
-      font-size: 14px;
-      color: var(--accent);
-    }
+    .campaign-arrow { margin-left: auto; font-size: 14px; color: var(--accent); }
     .campaign-title { font-size: 17px; line-height: 1.15; margin-bottom: 2px; font-weight: 500; }
     .campaign-sub { font-family: var(--sans); font-size: 10px; color: var(--muted); }
 
-    /* ── CATEGORÍAS ─────────────────────────────────────── */
-    .cats-section { padding: 0 0 14px; }
-    .cats-scroll {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 0 20px 4px;
-    }
-    .cat-chip {
-      padding: 7px 14px;
-      border-radius: 100px;
-      border: 1px solid var(--rule);
+    /* ── COLECCIONES (lista) ────────────────────────────── */
+    .cols-section { padding: 0 16px 26px; }
+    .cols-list {
       background: var(--cream);
-      color: var(--ink);
-      font-family: var(--serif);
-      font-size: 14px;
-      font-style: italic;
-      white-space: nowrap;
-      text-transform: capitalize;
-      transition: transform .15s, background .15s, color .15s;
+      border: 1px solid var(--rule);
+      border-radius: 18px;
+      overflow: hidden;
+      list-style: none;
     }
-    .cat-chip:active { transform: scale(0.96); }
-    .cat-chip.active {
-      border-color: var(--ink);
-      background: var(--ink);
-      color: var(--bg);
+    .col-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 11px 13px;
+      transition: background .18s, transform .18s;
+      animation: fade-up .45s ease both;
+      animation-delay: calc(var(--i, 0) * 45ms);
     }
-
-    /* ── GRID DE PRODUCTOS ──────────────────────────────── */
-    .products-section { padding: 8px 20px 28px; }
-    .products-grid {
+    .cols-list li + li .col-row { border-top: 1px solid var(--rule); }
+    .col-row:active { transform: scale(0.99); background: var(--surface); }
+    @media (hover: hover) { .col-row:hover { background: var(--surface); } }
+    .col-mosaic {
+      width: 62px; height: 62px;
+      flex-shrink: 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      grid-template-rows: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border-radius: 12px;
+      overflow: hidden;
     }
+    .col-mosaic div {
+      background: var(--card);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .col-mosaic img { width: 100%; height: 100%; object-fit: contain; padding: 2px; }
+    .col-info { flex: 1; min-width: 0; }
+    .col-name { font-size: 18px; font-style: italic; font-weight: 500; line-height: 1.1; }
+    .col-sub {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.35;
+      margin-top: 2px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .col-count {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .col-go { font-family: var(--sans); font-size: 15px; color: var(--accent); flex-shrink: 0; }
+
+    /* ── VISTA DE COLECCIÓN / RESULTADOS ────────────────── */
+    .view-head { padding: 6px 24px 18px; }
+    .view-title { font-size: 32px; font-style: italic; font-weight: 500; line-height: 1.05; }
+    .view-sub {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .products-section { padding: 0 16px 28px; }
+    .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .product-card {
       background: var(--cream);
       border: 1px solid var(--rule);
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       transition: transform .2s, box-shadow .2s;
-      animation: fade-up .5s ease both;
-      animation-delay: calc(var(--i, 0) * 60ms);
+      animation: fade-up .45s ease both;
+      animation-delay: calc(var(--i, 0) * 45ms);
     }
     .product-card:active { transform: scale(0.98); }
     @media (hover: hover) {
       .product-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(160, 74, 54, 0.12); }
     }
-    .pick-card {
-      display: block;
-      background: var(--cream);
-      border: 1px solid var(--rule);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: transform .2s, box-shadow .2s;
-      animation: fade-up .5s ease both;
-    }
-    .pick-card:active { transform: scale(0.99); }
-    @media (hover: hover) {
-      .pick-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(160, 74, 54, 0.14); }
-    }
+    /* Cuadro siempre cuadrado: el relleno del 100% fija el alto según el
+       ancho, sin que una foto vertical estire la tarjeta (y descuadre la
+       de al lado). La imagen se acomoda adentro sin recortarse. */
     .product-thumb {
-      aspect-ratio: 1;
-      background: var(--card);
       position: relative;
+      width: 100%;
+      padding-top: 100%;
+      background: var(--card);
+      flex: none;
     }
     .product-thumb img {
+      position: absolute;
+      inset: 0;
       width: 100%; height: 100%;
       object-fit: contain;
       padding: 10px;
     }
     .product-thumb-placeholder {
-      width: 100%; height: 100%;
+      position: absolute;
+      inset: 0;
       background: repeating-linear-gradient(45deg, var(--cream), var(--cream) 6px, var(--surface) 6px, var(--surface) 12px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       color: var(--muted);
       font-family: monospace;
       font-size: 9px;
@@ -626,12 +770,7 @@
       font-weight: 800;
       animation: float-y 2.4s ease-in-out infinite;
     }
-    .product-info {
-      padding: 10px 11px 12px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+    .product-info { padding: 10px 11px 12px; flex: 1; display: flex; flex-direction: column; }
     .product-cat {
       font-family: var(--sans);
       font-size: 8px;
@@ -646,63 +785,201 @@
       line-height: 1.2;
       margin-bottom: 6px;
       font-weight: 500;
-      min-height: 34px;
-      flex: 1;
+      /* Exactamente 2 líneas en toda tarjeta: así los precios de una
+         misma fila quedan a la misma altura y no se descuadran. */
+      height: 34px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
-    .product-price {
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .product-date {
-      font-family: var(--sans);
-      font-size: 9px;
-      color: var(--muted);
-      margin-top: 3px;
-      letter-spacing: 0.2px;
-    }
-    .pick-date {
-      font-family: var(--sans);
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 4px;
-      letter-spacing: 0.2px;
-      font-style: italic;
-    }
+    .product-price-row { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+    .product-price { font-size: 13px; font-weight: 700; }
+    .product-date { font-family: var(--sans); font-size: 9px; color: var(--muted); margin-top: 3px; }
     .empty-state {
       grid-column: 1 / -1;
       text-align: center;
-      padding: 40px 20px;
+      padding: 44px 20px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 15px;
       font-style: italic;
+      line-height: 1.5;
+    }
+    .back-home {
+      display: block;
+      margin: 0 auto 30px;
+      padding: 12px 22px;
+      border-radius: 100px;
+      border: 1px solid var(--rule);
+      background: var(--cream);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      width: fit-content;
     }
 
-    /* ── FOOTER ─────────────────────────────────────────── */
-    footer {
-      padding: 16px 24px 36px;
-      text-align: center;
-    }
-    .footer-divider {
+    /* ── PASTILLA DE PROMO ──────────────────────────────── */
+    .promo-pill {
+      position: fixed;
+      left: 50%;
+      bottom: calc(14px + var(--safe-b));
+      transform: translateX(-50%);
+      z-index: 55;
+      width: min(398px, calc(100vw - 32px));
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 14px;
+      padding: 11px 12px 11px 14px;
+      background: var(--ink);
+      color: var(--surface);
+      border-radius: 100px;
+      box-shadow: 0 10px 30px rgba(59, 37, 33, 0.32);
+      animation: pill-in .45s cubic-bezier(.2,.9,.3,1.2) both;
+      animation-delay: 1.1s;
+      font-family: var(--sans);
+      text-align: left;
     }
-    .footer-divider span:nth-child(2) {
-      color: var(--gold);
-      font-size: 14px;
+    .promo-pill .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      animation: pulse-dot 1.8s ease-in-out infinite;
     }
-    .footer-divider span:first-child,
-    .footer-divider span:last-child {
+    .promo-pill .txt {
       flex: 1;
-      height: 1px;
-      background: var(--rule);
+      min-width: 0;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .footer-thanks {
-      font-style: italic;
+    .promo-pill .go {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 7px 13px;
+      border-radius: 100px;
+    }
+    .promo-pill .close {
+      flex-shrink: 0;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      color: rgba(251, 234, 228, 0.6);
+      font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── POPUP DE PROMO ─────────────────────────────────── */
+    .veil {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(59, 37, 33, 0.42);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      animation: veil-in .25s ease both;
+    }
+    .modal {
+      width: min(430px, 100%);
+      background: var(--surface);
+      border-radius: 24px 24px 0 0;
+      padding: 22px 22px calc(24px + var(--safe-b));
+      text-align: center;
+      animation: modal-in .38s cubic-bezier(.2,.9,.3,1.05) both;
+      position: relative;
+    }
+    @media (min-height: 700px) {
+      .veil { align-items: center; }
+      .modal { border-radius: 24px; margin: 0 16px; padding-bottom: 24px; }
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      color: var(--muted);
       font-size: 17px;
-      margin-bottom: 8px;
+      display: flex; align-items: center; justify-content: center;
     }
+    .modal-eyebrow {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .modal-img {
+      width: 118px; height: 118px;
+      margin: 14px auto 12px;
+      background: var(--card);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .modal-img img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+    .modal-title { font-size: 26px; font-style: italic; font-weight: 500; line-height: 1.1; }
+    .modal-text {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--ink);
+      margin-top: 8px;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .modal-code {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 9px 20px;
+      border: 1.5px dashed var(--accent);
+      border-radius: 10px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--accent);
+      background: #fff;
+    }
+    .modal-cta {
+      display: block;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 100px;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform .18s;
+    }
+    .modal-cta:active { transform: scale(0.98); }
+    .modal-later {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      padding: 8px;
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer { padding: 16px 24px calc(96px + var(--safe-b)); text-align: center; }
+    .footer-divider { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-divider span:nth-child(2) { color: var(--gold); font-size: 14px; }
+    .footer-divider span:first-child,
+    .footer-divider span:last-child { flex: 1; height: 1px; background: var(--rule); }
+    .footer-thanks { font-style: italic; font-size: 17px; margin-bottom: 8px; }
     .footer-disclaimer {
       font-family: var(--sans);
       font-size: 10px;
@@ -710,38 +987,45 @@
       line-height: 1.6;
       letter-spacing: 0.3px;
     }
-    .footer-disclaimer a {
-      color: var(--accent);
-      font-weight: 600;
-    }
+    .footer-disclaimer a { color: var(--accent); font-weight: 600; }
   </style>
 </head>
-<body>
+<body data-view="home">
+
+
 
 <header>
-  <button class="search-toggle" id="search-toggle" aria-label="Buscar productos">⌕</button>
-
   <div class="avatar-wrap">
     <div class="avatar-bg"></div>
     <span class="sparkle s1">✦</span>
     <span class="sparkle s2">✧</span>
-    <span class="sparkle s3">✦</span>
-    <span class="sparkle s4">✧</span>
     <img class="avatar" src="bibirecomiendaimage.jpg" alt="Bibi" />
   </div>
 
-  <h1 class="brand">Bibi</h1>
-  <div class="tagline">✦  recomienda  ✦</div>
-  <p class="intro">"Las mejores ofertas que encuentro<br/>cada semana, elegidas con cuidado"</p>
-  <div class="live-dot" id="live-dot">Actualizado hoy</div>
-
-  <div class="socials">
-    <a class="social-chip" href="https://www.instagram.com/bibi.recomienda/" target="_blank" rel="noopener">Instagram</a>
-    <a class="social-chip" href="https://www.tiktok.com/@bibi.recomienda" target="_blank" rel="noopener">TikTok</a>
+  <div class="brand-block">
+    <h1 class="brand">Bibi</h1>
+    <div class="tagline">✦  recomienda  ✦</div>
+    <div class="live-dot" id="live-dot">Actualizado hoy</div>
   </div>
 
-  <div class="search-wrap" id="search-wrap">
-    <input class="search-input" id="search-input" type="search" placeholder="Buscar entre todos los productos…" autocomplete="off" />
+  <input class="hdr-input" id="search-input" type="search" placeholder="Buscar producto…" autocomplete="off" aria-label="Buscar productos" />
+
+  <div class="hdr-actions">
+    <button class="hdr-search" id="btn-search" aria-label="Buscar productos">⌕</button>
+    <div class="socials">
+    <a class="social-icon" href="https://www.instagram.com/bibi.recomienda/" target="_blank" rel="noopener" aria-label="Instagram de Bibi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5.4" />
+        <circle cx="12" cy="12" r="4.1" />
+        <circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none" />
+      </svg>
+    </a>
+    <a class="social-icon" href="https://www.tiktok.com/@bibi.recomienda" target="_blank" rel="noopener" aria-label="TikTok de Bibi">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.1 8.6a6.3 6.3 0 0 1-3.9-1.3v6.9a5.9 5.9 0 1 1-5.1-5.8v2.9a3 3 0 1 0 2.1 2.9V2.5h2.9a3.4 3.4 0 0 0 4 3.3v2.8z" />
+      </svg>
+    </a>
+    </div>
   </div>
 </header>
 
@@ -761,16 +1045,20 @@
   </div>
 </footer>
 
+<div id="promo-slot"></div>
+
 <script>
   // ─────────────────────────────────────────────────────
-  //  Estado y datos
+  //  Datos
   // ─────────────────────────────────────────────────────
-  const products = (typeof BIBI_LINKS !== 'undefined' ? BIBI_LINKS : []).filter(p => p.active);
-  const campaigns = (typeof BIBI_CAMPANAS !== 'undefined' ? BIBI_CAMPANAS : []).filter(c => c.active);
+  const products   = (typeof BIBI_LINKS !== 'undefined' ? BIBI_LINKS : []).filter(p => p.active);
+  const campaigns  = (typeof BIBI_CAMPANAS !== 'undefined' ? BIBI_CAMPANAS : []).filter(c => c.active);
   const categorias = typeof BIBI_CATEGORIAS !== 'undefined' ? BIBI_CATEGORIAS : {};
+  const videos     = (typeof BIBI_VIDEOS !== 'undefined' ? BIBI_VIDEOS : []).filter(v => v.active);
+  const colecciones= (typeof BIBI_COLECCIONES !== 'undefined' ? BIBI_COLECCIONES : []).filter(c => c.active);
+  const promos     = (typeof BIBI_PROMOS !== 'undefined' ? BIBI_PROMOS : []).filter(p => p.active);
 
-  let activeCat = 'all';
-  let query = '';
+  const byId = new Map(products.map(p => [p.id, p]));
 
   // ─────────────────────────────────────────────────────
   //  Helpers
@@ -781,98 +1069,187 @@
 
   // Pide a Amazon una versión reducida de la imagen para thumbnails
   // (las URLs originales _AC_SL1500_ pesan ~10x más de lo necesario).
-  // Si la URL no sigue el patrón de Amazon, se devuelve intacta.
+  // Cubre los dos formatos de Amazon: "._AC_SL1500_.jpg" y "._SL1500_.jpg".
   const thumb = (url, px) => typeof url === 'string'
-    ? url.replace(/\._AC_[A-Z]{2}\d+_\.(jpg|png)$/i, `._AC_SX${px}_.$1`)
+    ? url.replace(/\.(_AC)?_[A-Z]{2}\d+_\.(jpg|png)$/i, `._AC_SX${px}_.$2`)
     : url;
 
-  // Identificador legible para el evento de click en GoatCounter (id + título abreviado)
+  // Identificador legible para el evento de click en GoatCounter
   const clickId = item => `p${item.id}-${String(item.title || '')
     .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
     .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40)}`;
 
-  const storeLabel = p => p === 'amazon' ? 'Amazon' : p === 'mercadolibre' ? 'Mercado Libre' : (p || '');
   const storeBadge = p => p === 'amazon' ? 'AMZ' : p === 'mercadolibre' ? 'ML' : (p || '').slice(0, 3).toUpperCase();
-  const catLabel = c => (categorias[c] && categorias[c].label) || c || '';
+  const catLabel   = c => (categorias[c] && categorias[c].label) || c || '';
+  const track      = p => `data-goatcounter-click="${esc(clickId(p))}" data-goatcounter-title="${esc(p.title)}"`;
 
-  // ¿Producto agregado en los últimos 14 días? → muestra badge "NUEVO"
-  function isNew(dateStr) {
-    if (!dateStr) return false;
-    const d = new Date(dateStr);
-    if (isNaN(d.getTime())) return false;
-    const diffDays = (Date.now() - d.getTime()) / (1000 * 60 * 60 * 24);
-    return diffDays >= 0 && diffDays <= 14;
-  }
+  const MESES_CORTO = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 
-  // Calcula "Actualizado hoy / ayer / hace N días / el DD mes" a partir
-  // de la fecha más reciente de los productos activos.
   function parseLocalDate(dateStr) {
-    const [y, m, day] = dateStr.split('-').map(Number);
+    if (!dateStr) return null;
+    const [y, m, day] = String(dateStr).split('-').map(Number);
     if (!y || !m || !day) return null;
     return new Date(y, m - 1, day);
   }
 
+  function formatProductDate(dateStr) {
+    const d = parseLocalDate(dateStr);
+    return d ? `${d.getDate()} ${MESES_CORTO[d.getMonth()]}` : '';
+  }
+
+  // ¿Producto agregado en los últimos 14 días? → badge "NUEVO"
+  function isNew(dateStr) {
+    const d = parseLocalDate(dateStr);
+    if (!d) return false;
+    const diffDays = (Date.now() - d.getTime()) / (1000 * 60 * 60 * 24);
+    return diffDays >= 0 && diffDays <= 14;
+  }
+
   function lastUpdatedLabel() {
-    const dates = products
-      .map(p => p.date && parseLocalDate(p.date))
-      .filter(d => d && !isNaN(d.getTime()));
+    const dates = products.map(p => parseLocalDate(p.date)).filter(Boolean);
     if (!dates.length) return 'Actualizado recientemente';
-
     const newest = new Date(Math.max(...dates.map(d => d.getTime())));
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const newestDay = new Date(newest);
-    newestDay.setHours(0, 0, 0, 0);
-    const diffDays = Math.round((today - newestDay) / (1000 * 60 * 60 * 24));
-
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const diffDays = Math.round((today - newest) / (1000 * 60 * 60 * 24));
+    // Cortas a propósito: el chip comparte fila con la lupa y las redes.
     if (diffDays <= 0) return 'Actualizado hoy';
     if (diffDays === 1) return 'Actualizado ayer';
-    if (diffDays <= 7) return `Actualizado hace ${diffDays} días`;
-
-    const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-    const dia = newest.getDate();
-    const mes = meses[newest.getMonth()];
-    return `Actualizado el ${dia} ${mes}`;
+    if (diffDays <= 7) return `Hace ${diffDays} días`;
+    return `El ${newest.getDate()} ${MESES_CORTO[newest.getMonth()]}`;
   }
 
-  // Formatea una fecha como "17 may" para mostrar por producto
-  const MESES_CORTO = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  function formatProductDate(dateStr) {
-    if (!dateStr) return '';
-    const [y, m, day] = dateStr.split('-').map(Number);
-    if (!y || !m || !day) return '';
-    return `${day} ${MESES_CORTO[m - 1]}`;
-  }
-
-  // Cupón banner — variante completa o compacta
   function couponBanner(text, compact) {
     if (!text) return '';
     const cls = compact ? 'coupon-banner compact' : 'coupon-banner';
     const msg = compact ? esc(text) : `¡Activa el cupón y ${esc(text)}!`;
-    return `
-      <div class="${cls}">
-        <span class="coupon-tag">🏷️ Cupón</span>
-        <span class="coupon-msg">${msg}</span>
-      </div>`;
+    return `<div class="${cls}"><span class="coupon-tag">🏷️ Cupón</span><span class="coupon-msg">${msg}</span></div>`;
   }
 
-  // Envío — banner sin chip, solo texto
   function shippingBanner(text, compact) {
     if (!text) return '';
     const isFree = text === 'gratis';
     const cls = `shipping-banner${compact ? ' compact' : ''}${isFree ? ' free' : ' cost'}`;
-    const msg = isFree ? '📦 Envío gratis' : `🚚 + ${esc(text)} de envío`;
-    return `<div class="${cls}">${msg}</div>`;
+    return `<div class="${cls}">${isFree ? '📦 Envío gratis' : `🚚 + ${esc(text)} de envío`}</div>`;
+  }
+
+  const priceRow = p => `<span class="product-price">${esc(p.price)}</span>` +
+    (p.originalPrice ? `<span class="price-was">${esc(p.originalPrice)}</span>` : '');
+
+  // Productos de una colección: sus categorías + ids sueltos, sin repetir
+  function coleccionProductos(col) {
+    const cats = col.categorias || [];
+    const extra = (col.productos || []).map(id => byId.get(id)).filter(Boolean);
+    const porCat = products.filter(p => cats.includes(p.category));
+    const vistos = new Set();
+    return [...extra, ...porCat].filter(p => {
+      if (vistos.has(p.id)) return false;
+      vistos.add(p.id);
+      return true;
+    }).sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+  }
+
+  const videoActivo = videos.length
+    ? videos.slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))[0]
+    : null;
+  const videoProductos = videoActivo
+    ? (videoActivo.productos || []).map(id => byId.get(id)).filter(Boolean)
+    : [];
+
+  // ─────────────────────────────────────────────────────
+  //  Render — En el video
+  // ─────────────────────────────────────────────────────
+  function renderVideo() {
+    if (!videoActivo || !videoProductos.length) return '';
+    const items = videoProductos.map((p, i) => `
+      <li>
+        <a class="video-item" href="${esc(p.url)}" target="_blank" rel="sponsored noopener" ${track(p)}>
+          <span class="video-num">${i + 1}</span>
+          <div class="video-thumb">
+            ${p.image ? `<img src="${esc(thumb(p.image, 200))}" alt="${esc(p.title)}" loading="lazy" />` : ''}
+          </div>
+          <div class="video-info">
+            <div class="video-name">${esc(p.title)}</div>
+            <div class="video-meta">
+              <span>${esc(p.price)}</span>
+              ${p.originalPrice ? `<span class="price-was">${esc(p.originalPrice)}</span>` : ''}
+              ${p.coupon ? `<span class="video-coupon">Cupón</span>` : ''}
+            </div>
+          </div>
+          <span class="video-go">→</span>
+        </a>
+      </li>`).join('');
+
+    const red = videoActivo.red === 'tiktok' ? 'TikTok' : videoActivo.red === 'instagram' ? 'Instagram' : '';
+    return `
+      <section class="video-section" id="video-${esc(videoActivo.id)}">
+        <div class="video-card">
+          <div class="video-top">
+            <span>▶ En el video${red ? ' de ' + esc(red) : ''}</span>
+            <span class="when">${esc(formatProductDate(videoActivo.date))}</span>
+          </div>
+          <div class="video-body">
+            <h2 class="video-title">${esc(videoActivo.title)}</h2>
+            ${videoActivo.subtitle ? `<p class="video-sub">${esc(videoActivo.subtitle)} · tocá el que buscas</p>` : ''}
+          </div>
+          <ol class="video-list">${items}</ol>
+          ${videoActivo.url ? `<a class="video-link" href="${esc(videoActivo.url)}" target="_blank" rel="noopener">Ver el video ↗</a>` : ''}
+        </div>
+      </section>`;
   }
 
   // ─────────────────────────────────────────────────────
-  //  Render — Destacados de la semana
+  //  Render — Producto destacado (una sola fila, compacta)
   // ─────────────────────────────────────────────────────
-  function renderWeekHighlights() {
-    const highlights = products.filter(p => p.highlight);
+  function renderDestacado(p) {
+    if (!p) return '';
+    return `
+        <a class="feat-card" href="${esc(p.url)}" target="_blank" rel="sponsored noopener" ${track(p)}>
+          <div class="feat-thumb">
+            ${p.image ? `<img src="${esc(thumb(p.image, 200))}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
+          </div>
+          <div class="feat-info">
+            <div class="feat-eyebrow">◆ Destacado</div>
+            <h2 class="feat-title">${esc(p.title)}</h2>
+            <div class="feat-meta">
+              <span>${esc(p.price)}</span>
+              ${p.originalPrice ? `<span class="price-was">${esc(p.originalPrice)}</span>` : ''}
+              ${p.coupon ? `<span class="mini-chip coupon">Cupón</span>` : ''}
+              ${p.shipping === 'gratis' ? `<span class="mini-chip free">Envío gratis</span>` : ''}
+            </div>
+          </div>
+          <span class="feat-go">→</span>
+        </a>`;
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Render — Colección destacada (encima del carrusel)
+  // ─────────────────────────────────────────────────────
+  function renderColeccionDestacada(col) {
+    const items = coleccionProductos(col);
+    if (!items.length) return '';
+    const fotos = items.slice(0, 4).map(p => `
+      <div>${p.image ? `<img src="${esc(thumb(p.image, 160))}" alt="" loading="lazy" />` : ''}</div>`).join('');
+    return `
+      <a class="feat-card" href="#col-${esc(col.id)}">
+        <div class="col-mosaic">${fotos}</div>
+        <div class="feat-info">
+          <div class="feat-eyebrow">◆ Colección destacada</div>
+          <h2 class="feat-name">${esc(col.title)}</h2>
+          <p class="feat-sub">${esc(col.subtitle || '')}</p>
+          <span class="feat-cta">Ver los ${items.length} productos →</span>
+        </div>
+        <span class="feat-go">→</span>
+      </a>`;
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Render — Destacados de la semana (sin repetir el video)
+  // ─────────────────────────────────────────────────────
+  function renderWeekHighlights(excluir) {
+    const highlights = products.filter(p => p.highlight && !excluir.has(p.id));
     if (!highlights.length) return '';
     const cards = highlights.map(p => `
-      <a class="week-card" href="${esc(p.url)}" target="_blank" rel="sponsored noopener" data-goatcounter-click="${esc(clickId(p))}" data-goatcounter-title="${esc(p.title)}">
+      <a class="week-card" href="${esc(p.url)}" target="_blank" rel="sponsored noopener" ${track(p)}>
         <div class="week-card-main">
           <div class="week-thumb">
             ${p.image ? `<img src="${esc(thumb(p.image, 300))}" alt="${esc(p.title)}" loading="lazy" />` : ''}
@@ -883,7 +1260,10 @@
               <h3 class="week-title">${esc(p.title)}</h3>
             </div>
             <div class="week-price-row">
-              <span class="week-price">${esc(p.price)}</span>
+              <div class="week-price-stack">
+                <span class="week-price">${esc(p.price)}</span>
+                ${p.originalPrice ? `<span class="price-was">${esc(p.originalPrice)}</span>` : ''}
+              </div>
               <span class="week-ver">Ver →</span>
             </div>
           </div>
@@ -896,55 +1276,17 @@
         <div class="section-head">
           <h2 class="section-label accent">◆ Destacados de la semana</h2>
         </div>
-        <div class="week-scroll">${cards}</div>
+        <div class="week-scroll" id="week-scroll" data-auto="1">${cards}</div>
       </section>`;
   }
 
   // ─────────────────────────────────────────────────────
-  //  Render — Pick del día
-  // ─────────────────────────────────────────────────────
-  function renderPick(p) {
-    if (!p) return '';
-    return `
-      <section class="pick-section">
-        <div class="section-head">
-          <h2 class="section-label">Pick del día</h2>
-          <span class="right">Hoy</span>
-        </div>
-        <a class="pick-card" href="${esc(p.url)}" target="_blank" rel="sponsored noopener" data-goatcounter-click="${esc(clickId(p))}" data-goatcounter-title="${esc(p.title)}">
-          <div class="pick-card-main">
-            <div class="pick-thumb">
-              ${p.image ? `<img src="${esc(thumb(p.image, 300))}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
-            </div>
-            <div class="pick-info">
-              <div>
-                <div class="pick-badges">
-                  <span class="badge pick">Pick</span>
-                  <span class="badge store">${esc(storeLabel(p.platform))}</span>
-                </div>
-                <h3 class="pick-title">${esc(p.title)}</h3>
-                <div class="pick-cat">${esc(catLabel(p.category))}</div>
-              </div>
-              <div class="pick-price-row">
-                <span class="price">${esc(p.price)}</span>
-                <span class="ver-link">Ver →</span>
-              </div>
-              ${p.date ? `<div class="pick-date">Visto el ${esc(formatProductDate(p.date))} · los precios pueden variar</div>` : ''}
-            </div>
-          </div>
-          ${couponBanner(p.coupon, false)}
-          ${shippingBanner(p.shipping, false)}
-        </a>
-      </section>`;
-  }
-
-  // ─────────────────────────────────────────────────────
-  //  Render — Campañas (sólo si hay activas)
+  //  Render — Campañas
   // ─────────────────────────────────────────────────────
   function renderCampaigns() {
     if (!campaigns.length) return '';
     const cards = campaigns.map(c => `
-      <a class="campaign-card" href="${esc(c.url)}" target="_blank" rel="sponsored noopener" data-goatcounter-click="${esc(clickId(c))}" data-goatcounter-title="${esc(c.title)}">
+      <a class="campaign-card" href="${esc(c.url)}" target="_blank" rel="sponsored noopener" ${track(c)}>
         <div class="campaign-head">
           <div class="campaign-logo" style="background:${esc(c.color || '#FFE600')}">${esc((c.store || '?')[0])}</div>
           <span class="campaign-store">${esc(c.store || '')}</span>
@@ -957,33 +1299,42 @@
       </a>`).join('');
     return `
       <section class="campaigns-section">
-        <div class="section-head">
-          <h2 class="section-label accent">◆ Campañas activas</h2>
-        </div>
+        <div class="section-head"><h2 class="section-label accent">◆ Campañas activas</h2></div>
         <div class="campaigns-scroll">${cards}</div>
       </section>`;
   }
 
   // ─────────────────────────────────────────────────────
-  //  Render — Categorías
+  //  Render — Colecciones
   // ─────────────────────────────────────────────────────
-  function renderCats(filteredCount) {
-    const usedCats = [...new Set(products.map(p => p.category))];
-    if (!usedCats.length) return '';
-    const chips = [
-      { id: 'all', label: 'Todo' },
-      ...usedCats.map(id => ({ id, label: catLabel(id) }))
-    ].map(c => `
-      <button class="cat-chip ${activeCat === c.id ? 'active' : ''}" data-cat="${esc(c.id)}">
-        ${esc(c.label)}
-      </button>`).join('');
+  function renderColecciones() {
+    let i = 0;
+    const filas = colecciones.map(col => {
+      const items = coleccionProductos(col);
+      if (!items.length) return '';
+      const fotos = items.slice(0, 4).map(p => `
+        <div>${p.image ? `<img src="${esc(thumb(p.image, 160))}" alt="" loading="lazy" />` : ''}</div>`).join('');
+      return `
+        <li>
+          <a class="col-row" style="--i:${i++};" href="#col-${esc(col.id)}">
+            <div class="col-mosaic">${fotos}</div>
+            <div class="col-info">
+              <h3 class="col-name">${esc(col.title)}</h3>
+              <p class="col-sub">${esc(col.subtitle || '')}</p>
+            </div>
+            <span class="col-count">${items.length}</span>
+            <span class="col-go">→</span>
+          </a>
+        </li>`;
+    }).join('');
+
+    if (!filas) return '';
     return `
-      <section class="cats-section">
+      <section class="cols-section">
         <div class="section-head">
-          <h2 class="section-label accent">◆ Categorías</h2>
-          <span class="right">${filteredCount} producto${filteredCount === 1 ? '' : 's'}</span>
+          <h2 class="section-label accent">◆ Colecciones</h2>
         </div>
-        <div class="cats-scroll">${chips}</div>
+        <ul class="cols-list">${filas}</ul>
       </section>`;
   }
 
@@ -992,7 +1343,7 @@
   // ─────────────────────────────────────────────────────
   function renderProducts(list) {
     const cards = list.length ? list.map((p, i) => `
-      <a class="product-card" style="--i:${i};" href="${esc(p.url)}" target="_blank" rel="sponsored noopener" data-goatcounter-click="${esc(clickId(p))}" data-goatcounter-title="${esc(p.title)}">
+      <a class="product-card" style="--i:${Math.min(i, 12)};" href="${esc(p.url)}" target="_blank" rel="sponsored noopener" ${track(p)}>
         <div class="product-thumb">
           ${p.image ? `<img src="${esc(thumb(p.image, 300))}" alt="${esc(p.title)}" loading="lazy" />` : `<div class="product-thumb-placeholder">[imagen]</div>`}
           <span class="product-store-badge">${esc(storeBadge(p.platform))}</span>
@@ -1001,71 +1352,275 @@
         <div class="product-info">
           <div class="product-cat">${esc(catLabel(p.category))}</div>
           <h3 class="product-title">${esc(p.title)}</h3>
-          <div class="product-price">${esc(p.price)}</div>
+          <div class="product-price-row">${priceRow(p)}</div>
           ${p.date ? `<div class="product-date">Visto el ${esc(formatProductDate(p.date))}</div>` : ''}
         </div>
         ${couponBanner(p.coupon, true)}
         ${shippingBanner(p.shipping, true)}
-      </a>`).join('') : `<div class="empty-state">Sin resultados. Probá con otra búsqueda o categoría.</div>`;
+      </a>`).join('') : `<div class="empty-state">Nada por acá todavía.<br/>Probá con otra búsqueda.</div>`;
+    return `<section class="products-section"><div class="products-grid">${cards}</div></section>`;
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Vistas
+  // ─────────────────────────────────────────────────────
+  // La portada: un destacado + el carrusel + las colecciones.
+  // La lista del video solo aparece si llegan por el link de la historia
+  // (…/#video-<id>), que es cuando la están buscando.
+  function viewHome(conVideo) {
+    const dest = products.find(p => p.featured) || products[0];
+    const excluir = new Set(dest ? [dest.id] : []);
+    if (conVideo) videoProductos.forEach(p => excluir.add(p.id));
+
+    // Lo destacado (un producto + las colecciones con destacada: true)
+    // va siempre encima del carrusel de la semana.
+    const destacados = renderDestacado(dest) +
+      colecciones.filter(c => c.destacada).map(renderColeccionDestacada).join('');
+    const seccionDestacada = destacados ? `<section class="feat-section">${destacados}</section>` : '';
+
+    return (conVideo ? renderVideo() : '') + seccionDestacada +
+           renderWeekHighlights(excluir) + renderCampaigns() + renderColecciones();
+  }
+
+  function viewColeccion(id) {
+    const col = colecciones.find(c => c.id === id);
+    if (!col) return viewHome(false);
+    const items = coleccionProductos(col);
     return `
-      <section class="products-section">
-        <div class="products-grid">${cards}</div>
-      </section>`;
+      <div class="view-head">
+        <a class="view-back" href="#">← Volver</a>
+        <h2 class="view-title">${esc(col.title)}</h2>
+        <p class="view-sub">${esc(col.subtitle || '')} · ${items.length} producto${items.length === 1 ? '' : 's'}</p>
+      </div>` + renderProducts(items) +
+      `<a class="back-home" href="#">← Ver todas las colecciones</a>`;
   }
 
-  // ─────────────────────────────────────────────────────
-  //  Render principal
-  // ─────────────────────────────────────────────────────
-  function render() {
-    const featured = products.find(p => p.featured) || products[0];
-    let list = products;
-    if (activeCat !== 'all') list = list.filter(p => p.category === activeCat);
-    if (query) list = list.filter(p =>
-      p.title.toLowerCase().includes(query) ||
-      catLabel(p.category).toLowerCase().includes(query)
+  function viewBusqueda(q) {
+    const items = products.filter(p =>
+      p.title.toLowerCase().includes(q) ||
+      catLabel(p.category).toLowerCase().includes(q) ||
+      colecciones.some(c => c.title.toLowerCase().includes(q) && (c.categorias || []).includes(p.category))
     );
-
-    document.getElementById('main').innerHTML =
-      renderPick(featured) +
-      renderWeekHighlights() +
-      renderCampaigns() +
-      renderCats(list.length) +
-      renderProducts(list);
-
-    // Wire category chips
-    document.querySelectorAll('.cat-chip').forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeCat = btn.dataset.cat;
-        render();
-      });
-    });
+    return `
+      <div class="view-head">
+        <a class="view-back" href="#">← Volver</a>
+        <h2 class="view-title">Resultados</h2>
+        <p class="view-sub">${items.length} producto${items.length === 1 ? '' : 's'} para "${esc(q)}"</p>
+      </div>` + renderProducts(items);
   }
 
   // ─────────────────────────────────────────────────────
-  //  Buscador oculto
+  //  Carrusel que se mueve solo
+  //  Avanza una tarjeta cada 3.5 s, vuelve al inicio al terminar y se
+  //  pausa cuando la persona lo toca (retoma a los 8 s sin tocarlo).
   // ─────────────────────────────────────────────────────
-  const searchToggle = document.getElementById('search-toggle');
-  const searchWrap = document.getElementById('search-wrap');
-  const searchInput = document.getElementById('search-input');
-  let searchOpen = false;
+  let carruselTimer = null;
 
-  searchToggle.addEventListener('click', () => {
-    searchOpen = !searchOpen;
-    searchWrap.classList.toggle('open', searchOpen);
-    searchToggle.classList.toggle('open', searchOpen);
-    searchToggle.textContent = searchOpen ? '✕' : '⌕';
-    if (searchOpen) searchInput.focus();
-    else { searchInput.value = ''; query = ''; render(); }
+  function autoCarrusel() {
+    clearInterval(carruselTimer);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const scroller = document.getElementById('week-scroll');
+    if (!scroller || scroller.children.length < 2) return;
+
+    let pausadoHasta = 0;
+    const pausar = () => { pausadoHasta = Date.now() + 8000; };
+    ['pointerdown', 'touchstart', 'wheel'].forEach(ev =>
+      scroller.addEventListener(ev, pausar, { passive: true }));
+    scroller.addEventListener('mouseenter', () => { pausadoHasta = Infinity; });
+    scroller.addEventListener('mouseleave', pausar);
+
+    carruselTimer = setInterval(() => {
+      if (document.hidden || Date.now() < pausadoHasta) return;
+      const card = scroller.firstElementChild;
+      if (!card) return;
+      const paso = card.getBoundingClientRect().width + 12;   // + gap
+      const finalizado = scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 8;
+      scroller.scrollTo({ left: finalizado ? 0 : scroller.scrollLeft + paso, behavior: 'smooth' });
+    }, 3500);
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Router y estado
+  // ─────────────────────────────────────────────────────
+  const main = document.getElementById('main');
+  const headerEl = document.querySelector('header');
+  const btnSearch = document.getElementById('btn-search');
+  const searchInput = document.getElementById('search-input');
+  let query = '';
+
+  function render() {
+    const hash = location.hash.replace(/^#/, '');
+
+    if (query) {
+      document.body.dataset.view = 'search';
+      main.innerHTML = viewBusqueda(query);
+      return;
+    }
+
+    if (hash.startsWith('col-')) {
+      document.body.dataset.view = 'col';
+      main.innerHTML = viewColeccion(hash.slice(4));
+      return;
+    }
+
+    document.body.dataset.view = 'home';
+    main.innerHTML = viewHome(hash.startsWith('video-'));
+    autoCarrusel();
+
+    // Link directo desde una historia: …/#video-2026-08-31
+    // Se reintenta porque el navegador puede restaurar el scroll después
+    // de pintar, y porque las fotos siguen acomodando el alto.
+    if (hash.startsWith('video-')) {
+      const el = document.getElementById(hash);
+      if (el) [120, 400, 900].forEach(ms => setTimeout(() => {
+        if (location.hash.slice(1) === hash && window.scrollY < 40) {
+          el.scrollIntoView({ behavior: ms > 120 ? 'smooth' : 'auto', block: 'start' });
+        }
+      }, ms));
+    }
+  }
+
+  window.addEventListener('hashchange', () => {
+    if (query) { query = ''; searchInput.value = ''; closeSearch(); }
+    render();
+    window.scrollTo({ top: 0 });
   });
 
+  // Volver: sale de la búsqueda o de la colección hacia la portada
+  function volver() {
+    if (query) { query = ''; searchInput.value = ''; closeSearch(); render(); window.scrollTo({ top: 0 }); return; }
+    if (location.hash) location.hash = '';
+    else { render(); window.scrollTo({ top: 0 }); }
+  }
+  main.addEventListener('click', e => {
+    if (e.target.closest('.view-back')) { e.preventDefault(); volver(); }
+  });
+
+  // ── Buscador (dentro del header) ──
+  function closeSearch() {
+    headerEl.classList.remove('searching');
+    btnSearch.textContent = '⌕';
+    searchInput.blur();
+  }
+  btnSearch.addEventListener('click', () => {
+    const open = !headerEl.classList.contains('searching');
+    headerEl.classList.toggle('searching', open);
+    btnSearch.textContent = open ? '✕' : '⌕';
+    if (open) { searchInput.focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    else { searchInput.value = ''; query = ''; closeSearch(); render(); }
+  });
+  // Enter en el celular: baja el teclado y deja los resultados a la vista
+  searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') searchInput.blur(); });
   searchInput.addEventListener('input', e => {
     query = e.target.value.trim().toLowerCase();
     render();
   });
 
-  // Setea el texto dinámico "Actualizado ..." basado en el producto más nuevo
-  document.getElementById('live-dot').textContent = lastUpdatedLabel();
+  // ─────────────────────────────────────────────────────
+  //  Promos momentáneas — pastilla + popup
+  // ─────────────────────────────────────────────────────
+  const promo = promos.find(pr => {
+    if (!pr.hasta) return true;
+    const fin = parseLocalDate(pr.hasta);
+    if (!fin) return true;
+    fin.setHours(23, 59, 59, 999);
+    return Date.now() <= fin.getTime();
+  });
 
+  const slot = document.getElementById('promo-slot');
+
+  function promoDismissed() {
+    try { return sessionStorage.getItem('bibi-promo-' + promo.id) === 'off'; } catch (e) { return false; }
+  }
+  function markSeen(valor) {
+    try { sessionStorage.setItem('bibi-promo-' + promo.id, valor); } catch (e) { /* modo privado */ }
+  }
+  function popupYaVisto() {
+    try {
+      const v = sessionStorage.getItem('bibi-promo-' + promo.id);
+      return v === 'off' || v === 'visto';
+    } catch (e) { return false; }
+  }
+
+  function pillHTML() {
+    return `
+      <div class="promo-pill" id="promo-pill" role="status">
+        <span class="dot"></span>
+        <span class="txt">${esc(promo.title)}: ${esc(promo.text)}</span>
+        <button class="go" id="promo-open">Ver</button>
+        <button class="close" id="promo-close" aria-label="Cerrar aviso">✕</button>
+      </div>`;
+  }
+
+  function modalHTML() {
+    const prod = promo.producto != null ? byId.get(promo.producto) : null;
+    const img = prod && prod.image ? prod.image : null;
+    return `
+      <div class="veil" id="promo-veil">
+        <div class="modal" role="dialog" aria-modal="true" aria-label="${esc(promo.title)}">
+          <button class="modal-close" id="modal-x" aria-label="Cerrar">✕</button>
+          <div class="modal-eyebrow">${esc(promo.title)}</div>
+          ${img ? `<div class="modal-img"><img src="${esc(thumb(img, 300))}" alt="" /></div>` : ''}
+          <h3 class="modal-title">${prod ? esc(prod.title) : 'Promo del momento'}</h3>
+          <p class="modal-text">${esc(promo.text)}</p>
+          ${promo.code ? `<div class="modal-code">${esc(promo.code)}</div>` : ''}
+          <a class="modal-cta" href="${esc(promo.url || (prod ? prod.url : '#'))}" target="_blank" rel="sponsored noopener"
+             ${prod ? track(prod) : ''}>${esc(promo.cta || 'Ver')} →</a>
+          <button class="modal-later" id="modal-later">Ahora no, gracias</button>
+        </div>
+      </div>`;
+  }
+
+  function abrirModal() {
+    if (document.getElementById('promo-veil')) return;
+    slot.insertAdjacentHTML('beforeend', modalHTML());
+    markSeen('visto');
+    const veil = document.getElementById('promo-veil');
+    const cerrar = () => veil.remove();
+    veil.addEventListener('click', e => { if (e.target === veil) cerrar(); });
+    document.getElementById('modal-x').addEventListener('click', cerrar);
+    document.getElementById('modal-later').addEventListener('click', cerrar);
+    document.getElementById('modal-x').focus();
+    document.addEventListener('keydown', function esc9(e) {
+      if (e.key === 'Escape') { cerrar(); document.removeEventListener('keydown', esc9); }
+    });
+  }
+
+  if (promo && !promoDismissed()) {
+    slot.insertAdjacentHTML('beforeend', pillHTML());
+    document.getElementById('promo-open').addEventListener('click', abrirModal);
+    document.getElementById('promo-close').addEventListener('click', () => {
+      markSeen('off');
+      const pill = document.getElementById('promo-pill');
+      if (pill) pill.remove();
+    });
+
+    // Popup: a los 7 segundos o al 35% de scroll, lo que pase primero
+    if (promo.popup && !popupYaVisto()) {
+      let disparado = false;
+      const disparar = () => {
+        if (disparado || popupYaVisto()) return;
+        disparado = true;
+        abrirModal();
+        window.removeEventListener('scroll', onScroll);
+      };
+      const onScroll = () => {
+        const alto = document.body.scrollHeight - window.innerHeight;
+        if (alto > 0 && window.scrollY / alto > 0.35) disparar();
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      setTimeout(disparar, 7000);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────
+  //  Arranque
+  // ─────────────────────────────────────────────────────
+  // El scroll lo maneja la página (si no, el navegador lo restaura y
+  // pisa el salto a la sección del video).
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  document.getElementById('live-dot').textContent = lastUpdatedLabel();
   render();
 </script>
 

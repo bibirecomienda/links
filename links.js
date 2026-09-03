@@ -107,7 +107,7 @@ var BIBI_LINKS = [
     coupon: "",
     shipping: "gratis",
     highlight: false,
-    featured: false,
+    featured: true,
     active: true,
     date: "2026-08-31"
   },
@@ -594,7 +594,7 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4gI2XmS",
     image: "https://m.media-amazon.com/images/I/61IHI9z38SL._SL1500_.jpg",
-    price: "COP $22.380",
+    price: "COP $22.100",
     originalPrice: "",
     badge: "🏆 #1 en Belleza",
     coupon: "",
@@ -602,7 +602,7 @@ var BIBI_LINKS = [
     highlight: true,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 33,
@@ -645,7 +645,7 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4hbVGvK",
     image: "https://m.media-amazon.com/images/I/51uMK6hgRvL._SL1200_.jpg",
-    price: "COP $55.678",
+    price: "COP $54.981",
     originalPrice: "",
     badge: "⭐ 4.5 · 2K+ opiniones",
     coupon: "",
@@ -653,7 +653,7 @@ var BIBI_LINKS = [
     highlight: true,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 30,
@@ -679,7 +679,7 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4fvcVXI",
     image: "https://m.media-amazon.com/images/I/71Mcspt-6AL._AC_SL1500_.jpg",
-    price: "COP $60.513",
+    price: "COP $59.756",
     originalPrice: "",
     badge: "⭐ 4.6 · 31K+ opiniones",
     coupon: "",
@@ -687,7 +687,7 @@ var BIBI_LINKS = [
     highlight: true,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 28,
@@ -781,15 +781,15 @@ var BIBI_LINKS = [
     category: "cocina",
     url: "https://amzn.to/4gJG5BK",
     image: "https://m.media-amazon.com/images/I/61n2K6HnaML._AC_SL1500_.jpg",
-    price: "COP $144.047",
+    price: "COP $142.244",
     originalPrice: "",
-    badge: "⭐ 4.3 · 957 opiniones",
+    badge: "⭐ 4.4 · 958 opiniones",
     coupon: "🎟️ 10% OFF al pagar",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 22,
@@ -974,7 +974,7 @@ var BIBI_LINKS = [
     coupon: "",
     shipping: "COP $253.392",
     highlight: false,
-    featured: true,
+    featured: false,
     active: true,
     date: "2026-08-20"
   },
@@ -1157,6 +1157,179 @@ var BIBI_CAMPANAS = [
   //   url: "https://www.mercadolibre.com.co/hot-sale",
   //   active: true
   // },
+];
+
+// ───────────────────────────────────────────────────
+//  VIDEOS / REELS
+//  Cada vez que publiques un video, reel o carrusel, agregá su entrada acá:
+//  la página muestra arriba del todo "En el video de esta semana" con esos
+//  productos numerados en el mismo orden en que salen en el video.
+//
+//  Campos por video:
+//    id        · clave única, usá la fecha ("2026-08-29").
+//                Link directo para la historia:  …/links/#video-2026-08-29
+//    title     · ej "Rutina de belleza coreana"
+//    subtitle  · ej "Los 7 productos que mostré"
+//    date      · "YYYY-MM-DD" — fecha en que se publicó el video
+//    red       · "instagram" | "tiktok" | "" (solo define la etiqueta)
+//    url       · link al video, "" si todavía no lo tenés
+//    productos · [ids de BIBI_LINKS] en el MISMO orden del video
+//    active    · true = se muestra. Dejá en true SOLO el último video.
+//
+//  Los productos que estén en el video activo no se repiten más abajo
+//  en "Destacados de la semana".
+// ───────────────────────────────────────────────────
+
+var BIBI_VIDEOS = [
+  {
+    id: "2026-08-31",
+    title: "Rutina de belleza coreana",
+    subtitle: "Los productos que mostré esta semana",
+    date: "2026-08-31",
+    red: "instagram",
+    url: "",
+    productos: [29, 31, 32, 34, 35, 39],
+    active: true
+  }
+];
+
+// ───────────────────────────────────────────────────
+//  COLECCIONES
+//  Las tarjetas de la portada. Cada colección junta productos por
+//  categoría y/o por ids sueltos, y abre su propia vista dentro de la
+//  misma página (link directo: …/links/#col-belleza-coreana).
+//
+//  Campos por colección:
+//    id         · clave única en kebab-case (va en el link)
+//    title      · nombre que se ve en la tarjeta
+//    subtitle   · una línea corta que da contexto
+//    categorias · [claves de BIBI_CATEGORIAS] que entran completas
+//    productos  · [ids sueltos] que querés sumar además de las categorías
+//    destacada  · true = sube a lo alto de la portada, encima del carrusel
+//                 de "Destacados de la semana" (podés destacar más de una)
+//    active     · true para mostrarla
+//
+//  Una colección sin productos activos no se muestra.
+// ───────────────────────────────────────────────────
+
+var BIBI_COLECCIONES = [
+  {
+    id: "belleza-coreana",
+    title: "Belleza coreana",
+    subtitle: "K-beauty que probé y repito",
+    categorias: ["belleza"],
+    productos: [],
+    destacada: true,
+    active: true
+  },
+  {
+    id: "tecnologia-util",
+    title: "Tecnología útil",
+    subtitle: "Lo que uso todos los días",
+    categorias: ["tecnologia"],
+    productos: [],
+    destacada: false,
+    active: true
+  },
+  {
+    id: "cocina-y-cafe",
+    title: "Cocina y café",
+    subtitle: "Para cocinar rico sin complicarte",
+    categorias: ["cocina"],
+    productos: [],
+    destacada: false,
+    active: true
+  },
+  {
+    id: "casa-en-orden",
+    title: "Casa en orden",
+    subtitle: "Limpieza y cositas para el hogar",
+    categorias: ["hogar"],
+    productos: [],
+    destacada: false,
+    active: true
+  },
+  {
+    id: "consentir-mascotas",
+    title: "Consentir mascotas",
+    subtitle: "Gatos y perros felices",
+    categorias: ["mascotas"],
+    productos: [],
+    destacada: false,
+    active: true
+  },
+  {
+    id: "juegos-y-familia",
+    title: "Juegos y familia",
+    subtitle: "Mesa, niños y planes en casa",
+    categorias: ["ninos"],
+    productos: [],
+    destacada: false,
+    active: true
+  },
+  {
+    id: "aire-libre",
+    title: "Aire libre",
+    subtitle: "Camping, caminatas y entrenar",
+    categorias: ["deporte"],
+    productos: [],
+    destacada: false,
+    active: true
+  },
+  {
+    id: "moda-y-viaje",
+    title: "Moda y viaje",
+    subtitle: "Ropa cómoda y maletas",
+    categorias: ["moda"],
+    productos: [],
+    destacada: false,
+    active: true
+  },
+  {
+    id: "curiosidades",
+    title: "Curiosidades",
+    subtitle: "Antojos que valen la pena",
+    categorias: ["otros"],
+    productos: [],
+    destacada: false,
+    active: true
+  }
+];
+
+// ───────────────────────────────────────────────────
+//  PROMOS MOMENTÁNEAS
+//  Cupones y promos que duran poco. Se muestran como una pastilla fija
+//  abajo de la pantalla y, si popup es true, además como ventana
+//  emergente (una sola vez por visita, a los pocos segundos).
+//
+//  Campos por promo:
+//    id        · clave única (si la cambiás, el popup vuelve a mostrarse)
+//    title     · titular corto, ej "Cupón del día"
+//    text      · el detalle, ej "10% OFF al pagar el hervidor KOIOS"
+//    code      · código a copiar, "" si el cupón se activa en la página
+//    cta       · texto del botón, ej "Ver el producto"
+//    url       · a dónde lleva (link de afiliado o ancla interna)
+//    producto  · id de BIBI_LINKS para mostrar su foto, o null
+//    popup     · true = además de la pastilla, abre la ventana emergente
+//    hasta     · "YYYY-MM-DD" último día que se muestra ("" = sin límite)
+//    active    · true para mostrarla
+//
+//  Se muestra solo la primera promo activa y vigente.
+// ───────────────────────────────────────────────────
+
+var BIBI_PROMOS = [
+  {
+    id: "cupon-koios-sep",
+    title: "Cupón activo",
+    text: "10% OFF al pagar el hervidor KOIOS cuello de cisne",
+    code: "",
+    cta: "Ver el producto",
+    url: "https://amzn.to/4gJG5BK",
+    producto: 23,
+    popup: true,
+    hasta: "",
+    active: true
+  }
 ];
 
 // ───────────────────────────────────────────────────
