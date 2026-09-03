@@ -50,15 +50,15 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4xxvIbm",
     image: "https://m.media-amazon.com/images/I/71XGgejzDuL._SL1500_.jpg",
-    price: "COP $86.095",
-    originalPrice: "",
+    price: "COP $81.793",
+    originalPrice: "COP $99.561",
     badge: "⭐ 4.4 · 1K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 65,
@@ -67,7 +67,7 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/463SxYe",
     image: "https://m.media-amazon.com/images/I/6122RdhYw2L._SL1500_.jpg",
-    price: "COP $43.320",
+    price: "COP $56.910",
     originalPrice: "",
     badge: "⭐ 4.4 · 1K+ opiniones",
     coupon: "",
@@ -75,7 +75,7 @@ var BIBI_LINKS = [
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 64,
@@ -84,7 +84,7 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4gvxwf1",
     image: "https://m.media-amazon.com/images/I/61zILb6PBuL._SL1500_.jpg",
-    price: "COP $57.632",
+    price: "COP $56.910",
     originalPrice: "",
     badge: "⭐ 4.6 · 5K+ opiniones",
     coupon: "",
@@ -92,7 +92,7 @@ var BIBI_LINKS = [
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 63,
@@ -101,15 +101,15 @@ var BIBI_LINKS = [
     category: "ninos",
     url: "https://amzn.to/4qKx3ZU",
     image: "https://m.media-amazon.com/images/I/81mIkXtk3LL._AC_SL1500_.jpg",
-    price: "COP $230.526",
-    originalPrice: "COP $256.108",
+    price: "COP $227.642",
+    originalPrice: "COP $252.904",
     badge: "⭐ 4.7 · 2K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: true,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 62,
@@ -509,15 +509,15 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4pzGbQC",
     image: "https://m.media-amazon.com/images/I/61geVDBoMpL._SL1500_.jpg",
-    price: "COP $47.994",
-    originalPrice: "COP $51.196",
+    price: "COP $45.022",
+    originalPrice: "COP $50.555",
     badge: "⭐ 4.4 · 4K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: true,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 38,
@@ -543,15 +543,15 @@ var BIBI_LINKS = [
     category: "ninos",
     url: "https://amzn.to/4r6UAEN",
     image: "https://m.media-amazon.com/images/I/71JPOzduGkL._AC_SL1500_.jpg",
-    price: "COP $153.652",
-    originalPrice: "COP $192.073",
+    price: "COP $151.729",
+    originalPrice: "COP $189.670",
     badge: "🏷️ 20% OFF",
     coupon: "",
     shipping: "gratis",
     highlight: true,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 36,
@@ -577,15 +577,15 @@ var BIBI_LINKS = [
     category: "belleza",
     url: "https://amzn.to/4wa3a7j",
     image: "https://m.media-amazon.com/images/I/51Z67GdO10L._SL1500_.jpg",
-    price: "COP $44.825",
-    originalPrice: "COP $64.003",
+    price: "COP $44.263",
+    originalPrice: "COP $63.202",
     badge: "🏷️ 30% OFF",
     coupon: "",
     shipping: "gratis",
     highlight: true,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-09-02"
   },
   {
     id: 34,
