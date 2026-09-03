@@ -180,6 +180,9 @@
     }
     .live-dot::before {
       content: '';
+      /* flex-shrink: 0 — si no, en pantallas angostas el punto se aplasta
+         a 0 px de ancho y solo se ve el halo de la animación. */
+      flex: 0 0 auto;
       width: 5px; height: 5px; border-radius: 50%;
       background: #5DAE5D;
       animation: pulse-dot 1.8s ease-in-out infinite;
@@ -212,6 +215,20 @@
     header.searching .socials { display: none; }
     header.searching .hdr-actions { grid-template-columns: 42px; }
     header.searching .hdr-search { grid-column: 1; background: var(--ink); color: var(--surface); border-color: var(--ink); }
+
+    /* En celulares angostos el chip "Actualizado" no alcanza a entrar
+       entre la foto y los íconos: se achica todo el header un punto. */
+    @media (max-width: 360px) {
+      header { gap: 10px; padding: 12px 14px 14px; }
+      .avatar { width: 76px; height: 76px; }
+      .avatar-bg { width: 88px; height: 88px; }
+      h1.brand { font-size: 24px; }
+      .tagline { font-size: 7.5px; letter-spacing: 2.4px; margin: 3px 0 6px; }
+      .live-dot { font-size: 7.5px; letter-spacing: 0.5px; padding: 4px 8px; gap: 5px; }
+      .social-icon, .hdr-search { width: 38px; height: 38px; }
+      .social-icon svg { width: 18px; height: 18px; }
+      .hdr-actions { grid-template-columns: 38px 38px; }
+    }
 
     /* ── VOLVER (vistas de colección y búsqueda) ────────── */
     .view-back {
@@ -362,11 +379,11 @@
       border-radius: 4px;
     }
     .video-go {
-      font-family: var(--sans);
-      font-size: 15px;
       color: var(--accent);
       flex-shrink: 0;
       padding-left: 2px;
+      display: flex;
+      align-items: center;
     }
     .video-link {
       display: block;
@@ -444,14 +461,16 @@
     }
     .mini-chip.coupon { color: var(--accent); background: rgba(160, 74, 54, 0.10); }
     .mini-chip.free   { color: #27ae60; background: rgba(39, 174, 96, 0.10); }
+    /* Flecha dibujada, no el glifo "→": el glifo se apoya en la línea base
+       de cada fuente y en Android queda por debajo del centro del círculo. */
+    .ico-arrow { width: 17px; height: 17px; display: block; }
+    .col-go .ico-arrow, .video-go .ico-arrow { width: 16px; height: 16px; }
     .feat-go {
       flex-shrink: 0;
       width: 34px; height: 34px;
       border-radius: 50%;
       background: rgba(160, 74, 54, 0.09);
       color: var(--accent);
-      font-family: var(--sans);
-      font-size: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -688,7 +707,7 @@
       color: var(--accent);
       flex-shrink: 0;
     }
-    .col-go { font-family: var(--sans); font-size: 15px; color: var(--accent); flex-shrink: 0; }
+    .col-go { color: var(--accent); flex-shrink: 0; display: flex; align-items: center; }
 
     /* ── VISTA DE COLECCIÓN / RESULTADOS ────────────────── */
     .view-head { padding: 6px 24px 18px; }
@@ -1175,7 +1194,7 @@
               ${p.coupon ? `<span class="video-coupon">Cupón</span>` : ''}
             </div>
           </div>
-          <span class="video-go">→</span>
+          <span class="video-go"><svg class="ico-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h13"/><path d="m12 6.5 5.5 5.5L12 17.5"/></svg></span>
         </a>
       </li>`).join('');
 
@@ -1217,7 +1236,7 @@
               ${p.shipping === 'gratis' ? `<span class="mini-chip free">Envío gratis</span>` : ''}
             </div>
           </div>
-          <span class="feat-go">→</span>
+          <span class="feat-go"><svg class="ico-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h13"/><path d="m12 6.5 5.5 5.5L12 17.5"/></svg></span>
         </a>`;
   }
 
@@ -1238,7 +1257,7 @@
           <p class="feat-sub">${esc(col.subtitle || '')}</p>
           <span class="feat-cta">Ver los ${items.length} productos →</span>
         </div>
-        <span class="feat-go">→</span>
+        <span class="feat-go"><svg class="ico-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h13"/><path d="m12 6.5 5.5 5.5L12 17.5"/></svg></span>
       </a>`;
   }
 
@@ -1323,7 +1342,7 @@
               <p class="col-sub">${esc(col.subtitle || '')}</p>
             </div>
             <span class="col-count">${items.length}</span>
-            <span class="col-go">→</span>
+            <span class="col-go"><svg class="ico-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h13"/><path d="m12 6.5 5.5 5.5L12 17.5"/></svg></span>
           </a>
         </li>`;
     }).join('');
