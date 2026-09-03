@@ -23,6 +23,8 @@ Si no se pasa fecha, calcular el próximo domingo desde hoy (para nombre de carp
 > Si un campo del DOM devuelve `undefined` o `null`, ese dato no está disponible — usar `""`. **Nunca tomar un screenshot como fallback.**
 >
 > ⛔ **PROHIBIDO inventar productos, precios, ASINs o links.** Cada producto del carrusel debe salir de una página real de Amazon navegada en Chrome, con su link `amzn.to/...` real capturado vía SiteStripe. Si Chrome no está disponible o SiteStripe no aparece, **detener el flujo y avisar a Bibiana** — nunca generar el carrusel con datos placeholder tipo `amzn.to/[TAG]`.
+>
+> ⛔ **Sin precio → el producto no entra al carrusel.** Antes de leer el precio, esperar en bucle a que el bloque de precio contenga `COP` (la ficha carga primero en USD y la conversión llega un instante después) y verificar el ASIN. Si aun así no hay precio de compra de Amazon — solo "N opciones desde …" de otros vendedores, agotado, o el link no lleva a un producto — buscar otra oferta en su lugar. Si el producto ya existía en `links.js`, además **ponerlo `active: false` con un comentario del motivo y la fecha; nunca borrar la entrada** (ver la regla del Paso 7 de `/agregar-link`).
 
 ---
 

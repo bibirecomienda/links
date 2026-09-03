@@ -167,6 +167,23 @@ mcp__claude-in-chrome__navigate → https://www.amazon.com/gp/customer-preferenc
 Una vez en COP, volver al producto (`mcp__claude-in-chrome__navigate → https://www.amazon.com/dp/ASIN?language=es_US`) y releer el precio con el JS del Paso 3.
 > **Nunca calcular manualmente la conversión USD → COP.** Siempre obtener el precio real en COP directamente desde la página de Amazon.
 
+- **Esperar a que aparezca el precio en pesos.** La ficha carga primero en USD y Amazon inyecta la conversión un instante después: leer apenas termina de navegar devuelve dólares (o el precio del producto anterior). Esperar en bucle hasta que el bloque de precio contenga `COP`, y verificar que el ASIN de la URL sea el esperado antes de aceptar el dato.
+- **Ojo con el precio por unidad de medida.** `.a-price .a-offscreen` también captura `COP X / onza líquida` y los precios de otras variantes. Leer el bloque `#corePriceDisplay_desktop_feature_div` completo y tomar de ahí el precio de compra.
+- **Si la ficha tiene variantes** (pack x1 / x2, tallas), confirmar cuál está seleccionada: los precios difieren y a veces una variante solo la venden terceros.
+
+### ⛔ Sin precio → desactivar, nunca borrar
+
+Si después de esperar la conversión el producto **no tiene precio de compra de Amazon** — la ficha muestra solo "N opciones desde …" de otros vendedores, aparece agotado / no disponible, o el link ya no lleva a un producto:
+
+1. Poner `active: false` en esa entrada de `links.js`. **Nunca eliminar la entrada ni cambiarle el `id`.**
+2. Dejar el resto de los campos como están (precio viejo incluido), y agregar arriba de la entrada un comentario con el motivo y la fecha:
+   ```js
+   // Desactivado 2026-09-02: sin precio de Amazon (solo otros vendedores)
+   ```
+3. Avisarle a Bibiana qué se desactivó y por qué, para que decida si lo reemplaza por otro listing.
+
+Un producto desactivado desaparece de la página pero queda en el archivo: si vuelve a tener precio, se reactiva con `active: true` en lugar de crear una entrada nueva.
+
 ---
 
 ## Paso 8 — Interpretar el envío
@@ -210,8 +227,9 @@ Una vez en COP, volver al producto (`mcp__claude-in-chrome__navigate → https:/
 
 1. Editar la entrada existente en `links.js` (mismo `id`): `url` (el link nuevo capturado con SiteStripe — puede ser otro listing), `price`, `originalPrice`, `shipping`, y `date` = hoy (así la página muestra "Visto el [hoy]" y el badge "✨ Nuevo" refleja la oferta renovada). El `badge` sigue las reglas del Paso 9.
 2. Si el precio **bajó** respecto al que estaba publicado → generar historia (Paso 12) con `{{ DISCOUNT_BADGE_HTML }}` = `<div class="discount-badge">📉 Bajó de precio</div>` y el precio anterior de la página como tachado — es buen contenido de "volvió más barato".
-3. El producto actualizado entra igual al `links.txt` y al paquete del Paso 13.
-4. Commit tipo `fix: Actualizar [producto] — [motivo]` en el Paso 14.
+3. Si el producto ya no tiene precio de Amazon, aplicar la regla **"Sin precio → desactivar, nunca borrar"** del Paso 7 en vez de actualizarlo.
+4. El producto actualizado entra igual al `links.txt` y al paquete del Paso 13.
+5. Commit tipo `fix: Actualizar [producto] — [motivo]` en el Paso 14.
 
 Si no existe, leer `links.js`, obtener el `id` máximo y agregar **todos los productos del lote** al **inicio** del array `BIBI_LINKS` (ids consecutivos a partir de `MAX_ID + 1`, en una sola edición del archivo):
 

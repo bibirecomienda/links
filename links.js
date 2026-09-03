@@ -621,6 +621,8 @@ var BIBI_LINKS = [
     active: true,
     date: "2026-07-16"
   },
+  // Desactivado 2026-09-02: sin precio de Amazon (la ficha solo ofrece
+  // otros vendedores). Mismo producto que el id 66, que sí tiene precio.
   {
     id: 32,
     title: "SKIN1004 Sun Serum UV Centella Hyalu-Cica",
@@ -635,7 +637,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: true,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-31"
   },
   {
