@@ -73,7 +73,7 @@ const deliveryText = deliveryEl?.innerText?.trim() || '';
   rating:        document.querySelector('#acrPopover')?.title?.trim() || '',
   reviews:       document.querySelector('#acrCustomerReviewText')?.innerText?.trim() || '',
   category:      document.querySelector('#wayfinding-breadcrumbs_feature_div')?.innerText?.trim() || '',
-  coupon:        document.querySelector('.couponBadge, .promoPriceBlockMessage, [data-csa-c-type="coupon"], .vpcButton')?.innerText?.trim() || '',
+  coupon:        document.querySelector('#promoPriceBlockMessage_feature_div, #couponFeature, .couponBadge, [data-csa-c-type="coupon"]')?.innerText?.trim().replace(/\s+/g, ' ') || '',
   image:         imgEl?.getAttribute('data-old-hires') || imgEl?.src || '',
   siteStripe:    !!document.querySelector('#amzn-ss-wrap'),
   shipping:      deliveryText
@@ -204,12 +204,57 @@ Un producto desactivado desaparece de la página pero queda en el archivo: si vu
 
 ---
 
+## Paso 8 bis — Cupón: calcular y mostrar el precio real
+
+Un cupón de Amazon **no viene aplicado**: el comprador tiene que marcar la casilla antes de pagar. Por eso el precio que se muestra en la ficha **no es el que va a pagar**, y publicarlo pelado desperdicia la oferta. Siempre que el producto tenga cupón hay que calcular el precio final y ponerlo adelante.
+
+### Verificar que el cupón es de ESTE producto
+
+Los carruseles de recomendados de Amazon también traen cupones ("Ahorra 23 % con cupón", etc.) y ensucian cualquier selector amplio. Confirmar con **`mcp__claude-in-chrome__javascript_tool`** que el cupón sale de la ficha principal:
+
+```js
+const promo = document.querySelector('#promoPriceBlockMessage_feature_div, #couponFeature');
+({
+  asin:  (location.pathname.match(/\/dp\/([A-Z0-9]{10})/) || [])[1],
+  texto: promo?.innerText?.trim().replace(/\s+/g, ' ') || '',
+  esDeLaFicha: !!promo?.closest('#centerCol, #ppd')   // debe ser true
+})
+```
+
+Si `esDeLaFicha` es `false`, el cupón es de un producto recomendado — **ignorarlo** y dejar `coupon: ""`.
+
+### Calcular el precio con cupón
+
+| Tipo de cupón | Cálculo |
+|---|---|
+| Porcentaje ("Aplicar cupón de 20 %") | `precioConCupon = price × (1 − 0.20)`, redondeado sin decimales |
+| Monto fijo ("Ahorra COP $20.000") | `precioConCupon = price − monto` |
+
+Formatear igual que siempre: `COP $180.431`.
+
+### Cómo se muestra
+
+| Dónde | Qué poner |
+|---|---|
+| `price` en `links.js` | El precio **con el cupón ya aplicado** (`COP $180.431`) |
+| `originalPrice` | El precio de la ficha sin cupón (`COP $225.539`) — así queda tachado en la tarjeta |
+| `coupon` | `"XX% OFF al marcar el cupón → queda en COP $XXX.XXX"` |
+| `badge` (Paso 9) | Tratar el cupón como descuento: `🔥 XX% OFF` si es ≥ 40%, `🏷️ XX% OFF` si es 15–39% |
+| Historia (Paso 12) | `{{ DISCOUNT_BADGE_HTML }}` = `<div class="discount-badge">🏷️ XX% con cupón</div>` · `{{ PRICE }}` = precio con cupón · `{{ PRICE_BEFORE_HTML }}` = precio sin cupón tachado · en `{{ SHIPPING_HTML }}` avisar: `🏷️ Marca el <span class="ok">cupón del XX%</span> · 📦 Envío gratis` |
+| Carrusel | Mismo criterio: `price-before` con el precio sin cupón, `price-after` con el precio con cupón, y en el `product-copy` la frase "Marca el cupón del XX% antes de pagar" |
+| `BIBI_PROMOS` (si se destaca el cupón) | `text` con los dos montos: `"[Producto]: marca el cupón y queda en COP $XXX.XXX (en vez de COP $YYY.YYY)"` |
+
+> ⚠️ **Nunca mostrar solo el precio con cupón sin decir que hay que marcarlo.** El texto siempre tiene que dejar claro que el cupón se activa en la página de Amazon, para que nadie llegue esperando otro precio en el carrito.
+
+---
+
 ## Paso 9 — Elegir el badge
 
 | Situación | Badge |
 |---|---|
 | Descuento ≥ 40% | `🔥 XX% OFF` |
 | Descuento 15–39% | `🏷️ XX% OFF` |
+| Cupón activo (ver Paso 8 bis) | igual que un descuento: `🔥`/`🏷️ XX% OFF` |
 | Envío gratis como dato destacado | `📦 Envío gratis` |
 | Sin descuento, con rating | `⭐ X.X · Xk+ opiniones` |
 | Producto top de categoría | `🏆 #1 en [categoría]` |
@@ -244,7 +289,7 @@ Si no existe, leer `links.js`, obtener el `id` máximo y agregar **todos los pro
   price: "COP $XXX.XXX",
   originalPrice: "",           // solo si hay descuento
   badge: "...",
-  coupon: "",                  // texto del cupón o ""
+  coupon: "",                  // "XX% OFF al marcar el cupón → queda en COP $XXX.XXX" o "" (Paso 8 bis)
   shipping: "gratis",          // "gratis" | "COP $X.XXX" | ""
   highlight: false,
   featured: false,

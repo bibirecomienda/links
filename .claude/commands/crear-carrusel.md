@@ -269,11 +269,12 @@ Para cada uno de los 6 productos, agregar al inicio del array `BIBI_LINKS` un ob
 - `badge`: elegir según prioridad:
   - Descuento ≥ 40% → `"🔥 XX% OFF"`
   - Descuento 15–39% → `"🏷️ XX% OFF"`
+  - Cupón activo → se cuenta como descuento (misma regla 🔥 / 🏷️)
   - Envío gratis como dato destacado → `"📦 Envío gratis"`
   - Sin descuento, con rating → `"⭐ X.X · Xk+ opiniones"`
   - Top de categoría → `"🏆 #1 en [categoría]"`
   - Sin datos suficientes → `"✨ Nuevo"`
-- `coupon`: texto del cupón detectado o `""`
+- `coupon`: si el producto tiene cupón, **aplicar el descuento antes de publicar** — ver **Paso 8 bis** de `/agregar-link`. En resumen: verificar que el cupón sea de la ficha (`#promoPriceBlockMessage_feature_div` dentro de `#centerCol`, no de un carrusel de recomendados), poner en `price` el precio **con el cupón aplicado**, en `originalPrice` el precio sin cupón, y en `coupon` el texto `"XX% OFF al marcar el cupón → queda en COP $XXX.XXX"`. En el slide: `price-before` = precio sin cupón, `price-after` = precio con cupón, y en el `product-copy` la frase "Marca el cupón del XX% antes de pagar". Si no hay cupón, `""`.
 - `shipping`: valor calculado en Paso 2
 - `featured`: `false` (solo uno puede ser `true` a la vez)
 - `active`: `true`
