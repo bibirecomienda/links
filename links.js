@@ -27,6 +27,40 @@
 
 var BIBI_LINKS = [
   {
+    id: 56,
+    title: "Juguete Interactivo Recargable para Gatos Qraxond",
+    platform: "amazon",
+    category: "mascotas",
+    url: "https://amzn.to/3V9I0bD",
+    image: "https://m.media-amazon.com/images/I/81BkPMBXkKL._AC_SL1500_.jpg",
+    price: "COP $77.837",
+    originalPrice: "COP $97.793",
+    badge: "📉 Bajó de precio",
+    coupon: "",
+    shipping: "gratis",
+    highlight: true,
+    featured: true,
+    active: true,
+    date: "2026-09-11"
+  },
+  {
+    id: 31,
+    title: "TOCOBO Cica Cooling Sun Stick SPF50+",
+    platform: "amazon",
+    category: "belleza",
+    url: "https://amzn.to/4dbbmfW",
+    image: "https://m.media-amazon.com/images/I/51uMK6hgRvL._SL1200_.jpg",
+    price: "COP $53.241",
+    originalPrice: "COP $54.981",
+    badge: "📉 Bajó de precio",
+    coupon: "",
+    shipping: "gratis",
+    highlight: true,
+    featured: false,
+    active: true,
+    date: "2026-09-11"
+  },
+  {
     id: 73,
     title: "Nike Tenis de Entrenamiento para Hombre (Negro)",
     platform: "amazon",
@@ -39,7 +73,7 @@ var BIBI_LINKS = [
     coupon: "",
     shipping: "gratis",
     highlight: true,
-    featured: true,
+    featured: false,
     active: true,
     date: "2026-09-11"
   },
@@ -314,23 +348,6 @@ var BIBI_LINKS = [
     featured: false,
     active: true,
     date: "2026-08-25"
-  },
-  {
-    id: 56,
-    title: "Juguete Interactivo Recargable para Gatos Qraxond",
-    platform: "amazon",
-    category: "mascotas",
-    url: "https://amzn.to/3V9I0bD",
-    image: "https://m.media-amazon.com/images/I/81BkPMBXkKL._AC_SL1500_.jpg",
-    price: "COP $77.837",
-    originalPrice: "COP $97.793",
-    badge: "📉 Bajó de precio",
-    coupon: "",
-    shipping: "gratis",
-    highlight: true,
-    featured: false,
-    active: true,
-    date: "2026-09-11"
   },
   {
     id: 55,
@@ -741,23 +758,6 @@ var BIBI_LINKS = [
     featured: false,
     active: false,
     date: "2026-08-31"
-  },
-  {
-    id: 31,
-    title: "TOCOBO Cica Cooling Sun Stick SPF50+",
-    platform: "amazon",
-    category: "belleza",
-    url: "https://amzn.to/4dbbmfW",
-    image: "https://m.media-amazon.com/images/I/51uMK6hgRvL._SL1200_.jpg",
-    price: "COP $53.241",
-    originalPrice: "COP $54.981",
-    badge: "📉 Bajó de precio",
-    coupon: "",
-    shipping: "gratis",
-    highlight: true,
-    featured: false,
-    active: true,
-    date: "2026-09-11"
   },
   {
     id: 30,
