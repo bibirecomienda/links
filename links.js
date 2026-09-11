@@ -39,7 +39,7 @@ var BIBI_LINKS = [
     coupon: "",
     shipping: "gratis",
     highlight: true,
-    featured: false,
+    featured: true,
     active: true,
     date: "2026-09-11"
   },
@@ -209,7 +209,7 @@ var BIBI_LINKS = [
     coupon: "",
     shipping: "gratis",
     highlight: false,
-    featured: true,
+    featured: false,
     active: true,
     date: "2026-09-02"
   },
@@ -320,17 +320,17 @@ var BIBI_LINKS = [
     title: "Juguete Interactivo Recargable para Gatos Qraxond",
     platform: "amazon",
     category: "mascotas",
-    url: "https://amzn.to/3UzFafN",
+    url: "https://amzn.to/3V9I0bD",
     image: "https://m.media-amazon.com/images/I/81BkPMBXkKL._AC_SL1500_.jpg",
-    price: "COP $97.793",
-    originalPrice: "",
-    badge: "⭐ 4.4 · 2K+ opiniones",
+    price: "COP $77.837",
+    originalPrice: "COP $97.793",
+    badge: "📉 Bajó de precio",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
-    date: "2026-08-25"
+    date: "2026-09-11"
   },
   {
     id: 55,
@@ -747,17 +747,17 @@ var BIBI_LINKS = [
     title: "TOCOBO Cica Cooling Sun Stick SPF50+",
     platform: "amazon",
     category: "belleza",
-    url: "https://amzn.to/4hbVGvK",
+    url: "https://amzn.to/4dbbmfW",
     image: "https://m.media-amazon.com/images/I/51uMK6hgRvL._SL1200_.jpg",
-    price: "COP $54.981",
-    originalPrice: "",
-    badge: "⭐ 4.5 · 2K+ opiniones",
+    price: "COP $53.241",
+    originalPrice: "COP $54.981",
+    badge: "📉 Bajó de precio",
     coupon: "",
     shipping: "gratis",
-    highlight: false,
+    highlight: true,
     featured: false,
     active: true,
-    date: "2026-09-02"
+    date: "2026-09-11"
   },
   {
     id: 30,
@@ -1423,13 +1423,13 @@ var BIBI_COLECCIONES = [
 
 var BIBI_PROMOS = [
   {
-    id: "cupon-koios-sep",
+    id: "cupon-silla-moonlence-sep",
     title: "Cupón activo",
-    text: "10% OFF al pagar el hervidor KOIOS cuello de cisne",
+    text: "20% OFF al pagar la silla de camping MOON LENCE",
     code: "",
     cta: "Ver el producto",
-    url: "https://amzn.to/4gJG5BK",
-    producto: 23,
+    url: "https://amzn.to/4gVQRFa",
+    producto: 68,
     popup: true,
     hasta: "",
     active: true
