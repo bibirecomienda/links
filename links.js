@@ -28,7 +28,7 @@
 var BIBI_LINKS = [
   {
     id: 56,
-    title: "Juguete Interactivo Recargable para Gatos Qraxond",
+    title: "Juguete Interactivo para Gatos Qraxond",
     platform: "amazon",
     category: "mascotas",
     url: "https://amzn.to/3V9I0bD",
