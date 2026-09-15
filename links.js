@@ -26,6 +26,7 @@
 // ───────────────────────────────────────────────────
 
 var BIBI_LINKS = [
+  // Desactivado 2026-09-15: envío internacional de COP $244.400 (casi 66% extra sobre el precio)
   {
     id: 78,
     title: "MUXX.STIL Silla de Oficina Ergonómica Malla",
@@ -37,10 +38,10 @@ var BIBI_LINKS = [
     originalPrice: "COP $465.403",
     badge: "🏷️ 20% OFF",
     coupon: "",
-    shipping: "",
+    shipping: "COP $244.400",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-09-15"
   },
   {
