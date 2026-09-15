@@ -26,6 +26,23 @@
 // ───────────────────────────────────────────────────
 
 var BIBI_LINKS = [
+  {
+    id: 79,
+    title: "FEZIBO Escritorio de Pie Eléctrico Ajustable",
+    platform: "amazon",
+    category: "hogar",
+    url: "https://link.amazon/B07TJoxVp",
+    image: "https://m.media-amazon.com/images/I/71smFjr2QgL._AC_SL1500_.jpg",
+    price: "COP $310.248",
+    originalPrice: "COP $350.619",
+    badge: "⭐ 4.5 · 4.8K+ opiniones",
+    coupon: "",
+    shipping: "COP $245.207",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-09-15"
+  },
   // Desactivado 2026-09-15: envío internacional de COP $244.400 (casi 66% extra sobre el precio)
   {
     id: 78,
