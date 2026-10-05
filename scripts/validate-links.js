@@ -28,7 +28,8 @@ function rutaLinks() {
 }
 
 const PLATAFORMAS = ['amazon', 'mercadolibre', 'shein', 'aliexpress', 'other'];
-const TAG_AFILIADO = 'bibirecomie02-20';
+const TAG_AFILIADO = 'bibirecomie0a-20';  // tag por defecto desde 2026-10-05
+const TAGS_VALIDOS = [TAG_AFILIADO, 'bibirecomie02-20', 'bibitech-20', 'bibiessential-20'];  // los anteriores siguen siendo de Bibiana
 const RE_PRECIO = /^COP \$\d{1,3}(\.\d{3})*$/;
 const RE_FECHA = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -94,7 +95,7 @@ for (const p of data.links) {
       const esCorto = /^https:\/\/amzn\.to\//.test(p.url) || /^https:\/\/link\.amazon\//.test(p.url);
       const esLargo = /amazon\.com/.test(p.url);
       if (!esCorto && !esLargo) err(id, `url de Amazon no reconocida: "${p.url}"`);
-      if (esLargo && !p.url.includes(`tag=${TAG_AFILIADO}`)) {
+      if (esLargo && !TAGS_VALIDOS.some(t => p.url.includes(`tag=${t}`))) {
         err(id, `link largo de Amazon sin tag de afiliado ${TAG_AFILIADO}`);
       }
     }

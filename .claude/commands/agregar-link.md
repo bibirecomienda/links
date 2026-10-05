@@ -28,7 +28,7 @@ Agrega uno o varios productos de Amazon a `links.js`: navega a cada producto en 
 
 Para **cada** URL recibido, marcar si ya es un **link de afiliado confirmado** (`yaEsAfiliado = true`) cuando se cumple cualquiera de estos casos:
 - Bibiana lo indica explícitamente en el mensaje (ej. "este ya es el link del programa de afiliados", "ya tiene el tag").
-- El URL trae `tag=bibirecomie02-20` en la query string.
+- El URL trae un tag de Bibiana (`bibirecomie0a-20`, `bibirecomie02-20`, `bibitech-20` o `bibiessential-20`) en la query string.
 
 Para el **URL a navegar**: si es largo (>2000 chars) o tiene parámetros de rastreo, extraer el ASIN y construir:
 ```
@@ -104,27 +104,24 @@ if (btn) { btn.click(); 'clicked'; } else 'not found';
 
 ## Paso 5 — Capturar el link corto de afiliado
 
-**Primero verificar y forzar el tag `bibirecomie02-20`** con **`mcp__claude-in-chrome__javascript_tool`**:
+**Primero verificar el tag.** Desde 2026-10-05 la tienda por defecto (y única) de SiteStripe es `bibirecomie0a-20`; el dropdown no ofrece otra, así que no hay que forzar nada: solo comprobar que `sel.value` sea `bibirecomie0a-20` (si fuera otro, detenerse y avisar a Bibiana).
+
+SiteStripe ya **no muestra el link en un campo de texto**: tiene un botón "Copiar enlace de afiliado" que lo manda al portapapeles. Se captura interceptando `navigator.clipboard.writeText`. Ejecutar con **`mcp__claude-in-chrome__javascript_tool`** (después de abrir SiteStripe en el Paso 4):
 ```js
-const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
-  .find(d => d.innerText?.includes('Enlace'));
-const sel = sd?.querySelector('select[name="amzn-ss-store-dropdown-text"]');
-if (sel && sel.value !== 'bibirecomie02-20') sel.value = 'bibirecomie02-20';
-sel?.value || 'no dialog';
+const w = ms => new Promise(r => setTimeout(r, ms));
+window.__cp = '';
+const orig = navigator.clipboard.writeText.bind(navigator.clipboard);
+navigator.clipboard.writeText = async t => { window.__cp = t; return orig(t).catch(() => {}); };
+const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog')).find(d => d.innerText?.includes('Enlace'));
+const store = sd?.querySelector('select')?.value;           // debe ser bibirecomie0a-20
+const shortOpt = Array.from(sd?.querySelectorAll('input, label, span, div') || []).find(el => el.innerText?.trim() === 'Enlace corto');
+shortOpt?.click(); await w(500);
+const copy = Array.from(sd?.querySelectorAll('button, a, span') || []).find(el => (el.innerText || '').includes('Copiar enlace'));
+copy?.click(); await w(1200);
+({ store, link: window.__cp });
 ```
 
-Luego capturar el link con **`mcp__claude-in-chrome__javascript_tool`**:
-```js
-const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
-  .find(d => d.innerText?.includes('Enlace'));
-const shortOpt = Array.from(sd?.querySelectorAll('input, label, span, div') || [])
-  .find(el => el.innerText?.trim() === 'Enlace corto' || el.textContent?.trim() === 'Enlace corto');
-if (shortOpt) shortOpt.click();
-const inp = sd?.querySelector('input[type="text"], textarea');
-inp?.value || 'no input found';
-```
-
-El resultado debe ser algo como `"https://amzn.to/XXXXXX"`. Ese es el link de afiliado.
+El resultado es un link corto como `"https://link.amazon/XXXXXXXXX"` (antes `amzn.to/…`). Ese es el link de afiliado.
 
 ---
 
@@ -153,7 +150,7 @@ Usar el campo `category` (breadcrumb) obtenido en el Paso 3:
 - **Amazon lo muestra crudo como `COP373,363.96`** (coma de miles, punto decimal) → convertir a `COP $373.364` (redondear los decimales, punto como separador de miles, `$` después de COP)
 - En productos con variantes (tallas/colores), `.a-price .a-offscreen` puede venir vacío — el selector de `#corePrice_feature_div` del Paso 3 ya lo cubre; el `savingsPercentage` de la página da el % de descuento directo
 - Si hay precio tachado: llenar `originalPrice` también en COP
-- **Si el precio aparece en USD:** cambiar la moneda directamente en Amazon navegando a la página de preferencias de moneda y seleccionando COP, luego volver al producto para leer el precio correcto. Ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
+- **Si el precio aparece en USD (`US$…`) → cambiar la moneda a COP de inmediato, sin preguntar, y recién ahí continuar.** Bibiana lo autorizó de forma permanente: no seguir con el producto ni guardar nada hasta que el precio salga en `COP`. Amazon puede volver a USD por sí solo (la preferencia de la cuenta cambia), así que **verificar la moneda en cada producto** y repetir el cambio cuando haga falta. Pasos: ir a `https://www.amazon.com/customer-preferences/edit?preferencesReturnUrl=%2Fdp%2FASIN`, marcar **"COP - peso colombiano"** en *Configuración de divisa*, pulsar **"Guardar cambios"**, volver al producto (`https://www.amazon.com/dp/ASIN?language=es_US`) y releer el precio. Si el selector de la ficha no funciona, ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
 // Paso 1 — Abrir el selector de moneda en la misma página
 const currencyLink = document.querySelector('#icp-touch-link-cop, a[href*="currency=COP"], #nav-global-location-popover-link');

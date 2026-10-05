@@ -31,17 +31,17 @@ var BIBI_LINKS = [
     title: "FEZIBO Escritorio de Pie Eléctrico Ajustable",
     platform: "amazon",
     category: "hogar",
-    url: "https://link.amazon/B07TJoxVp",
+    url: "https://link.amazon/B0812i8cr",
     image: "https://m.media-amazon.com/images/I/71smFjr2QgL._AC_SL1500_.jpg",
-    price: "COP $310.248",
-    originalPrice: "COP $350.619",
-    badge: "⭐ 4.5 · 4.8K+ opiniones",
+    price: "COP $326.497",
+    originalPrice: "",
+    badge: "⭐ 4.5 · 4K+ opiniones",
     coupon: "",
     shipping: "COP $245.207",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-15"
+    date: "2026-10-05"
   },
   // Desactivado 2026-09-15: envío internacional de COP $244.400 (casi 66% extra sobre el precio)
   {
@@ -66,18 +66,19 @@ var BIBI_LINKS = [
     title: "OhO Gafas Inteligentes Bluetooth de Oído Abierto",
     platform: "amazon",
     category: "tecnologia",
-    url: "https://link.amazon/B00KwErmo",
+    url: "https://link.amazon/B0ihkmMo9",
     image: "https://m.media-amazon.com/images/I/51zNJXGpTOL._AC_SL1200_.jpg",
-    price: "COP $29.759",
-    originalPrice: "COP $108.577",
-    badge: "🔥 73% OFF",
+    price: "COP $130.579",
+    originalPrice: "",
+    badge: "⭐ 4.1 · 6K+ opiniones",
     coupon: "",
     shipping: "",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-15"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 76,
     title: "ALLSWIFIT Tenis Deportivos sin Cordones para Mujer",
@@ -92,7 +93,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-09-15"
   },
   {
@@ -100,18 +101,19 @@ var BIBI_LINKS = [
     title: "Wavytalk Plancha de Pelo a Vapor Antidaño",
     platform: "amazon",
     category: "belleza",
-    url: "https://link.amazon/B0j03MziO",
+    url: "https://link.amazon/B07VisWd6",
     image: "https://m.media-amazon.com/images/I/61-HItePnWL._AC_SL1500_.jpg",
-    price: "COP $176.566",
-    originalPrice: "COP $245.145",
-    badge: "🏷️ 28% OFF",
+    price: "COP $195.885",
+    originalPrice: "",
+    badge: "⭐ 4.3 · 2K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-15"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 74,
     title: "Wavytalk Cepillo Térmico Redondo de Calor 1.5″",
@@ -126,7 +128,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-09-15"
   },
   {
@@ -134,52 +136,53 @@ var BIBI_LINKS = [
     title: "Juguete Interactivo para Gatos Qraxond",
     platform: "amazon",
     category: "mascotas",
-    url: "https://amzn.to/3V9I0bD",
+    url: "https://link.amazon/B08v8phyo",
     image: "https://m.media-amazon.com/images/I/81BkPMBXkKL._AC_SL1500_.jpg",
-    price: "COP $77.837",
-    originalPrice: "COP $97.793",
-    badge: "📉 Bajó de precio",
-    coupon: "",
+    price: "COP $84.864",
+    originalPrice: "COP $104.456",
+    badge: "🏷️ 19% OFF con cupón",
+    coupon: "COP $19.592 de descuento al marcar el cupón → queda en COP $84.864",
     shipping: "gratis",
     highlight: true,
     featured: true,
     active: true,
-    date: "2026-09-11"
+    date: "2026-10-05"
   },
   {
     id: 31,
     title: "TOCOBO Cica Cooling Sun Stick SPF50+",
     platform: "amazon",
     category: "belleza",
-    url: "https://amzn.to/4dbbmfW",
+    url: "https://link.amazon/B08GzqLkc",
     image: "https://m.media-amazon.com/images/I/51uMK6hgRvL._SL1200_.jpg",
-    price: "COP $53.241",
-    originalPrice: "COP $54.981",
-    badge: "📉 Bajó de precio",
+    price: "COP $56.783",
+    originalPrice: "",
+    badge: "⭐ 4.6 · 2K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: true,
     featured: false,
     active: true,
-    date: "2026-09-11"
+    date: "2026-10-05"
   },
   {
     id: 73,
     title: "Nike Tenis de Entrenamiento para Hombre (Negro)",
     platform: "amazon",
     category: "moda",
-    url: "https://amzn.to/4xEqcDn",
+    url: "https://link.amazon/B0ieOQ1zE",
     image: "https://m.media-amazon.com/images/I/71pCp8h5j4L._AC_SL1500_.jpg",
-    price: "COP $262.650",
-    originalPrice: "COP $420.209",
-    badge: "🏷️ 37% OFF",
+    price: "COP $290.579",
+    originalPrice: "",
+    badge: "⭐ 4.4 · 691 opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: true,
     featured: false,
     active: true,
-    date: "2026-09-11"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 72,
     title: "Nike Air Force 1 '07 Tenis para Hombre (Blanco)",
@@ -194,9 +197,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: true,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-09-11"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 71,
     title: "adidas Duramo Speed 2 Tenis de Running Hombre",
@@ -211,7 +215,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: true,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-09-11"
   },
   {
@@ -219,9 +223,9 @@ var BIBI_LINKS = [
     title: "Ninja Express Chop Triturador de Alimentos 200W",
     platform: "amazon",
     category: "cocina",
-    url: "https://amzn.to/4yora7a",
+    url: "https://link.amazon/B07r5awiE",
     image: "https://m.media-amazon.com/images/I/61CJZI666BL._AC_SL1500_.jpg",
-    price: "COP $150.792",
+    price: "COP $158.693",
     originalPrice: "",
     badge: "⭐ 4.7 · 16K+ opiniones",
     coupon: "",
@@ -229,50 +233,50 @@ var BIBI_LINKS = [
     highlight: true,
     featured: false,
     active: true,
-    date: "2026-09-11"
+    date: "2026-10-05"
   },
   {
     id: 69,
     title: "FLEXTAILGEAR Bomba de Aire Portátil Ultra-Mini USB",
     platform: "amazon",
     category: "hogar",
-    url: "https://amzn.to/46k8LfX",
+    url: "https://link.amazon/B0cRNMXML",
     image: "https://m.media-amazon.com/images/I/71FckjPBB1L._AC_SL1500_.jpg",
-    price: "COP $71.039",
+    price: "COP $74.030",
+    originalPrice: "COP $88.130",
+    badge: "🏷️ 16% OFF con cupón",
+    coupon: "16% OFF al marcar el cupón → queda en COP $74.030",
+    shipping: "gratis",
+    highlight: true,
+    featured: false,
+    active: true,
+    date: "2026-10-05"
+  },
+  {
+    id: 68,
+    title: "MOON LENCE Silla de Camping Portátil Plus (Pack x2)",
+    platform: "amazon",
+    category: "deporte",
+    url: "https://link.amazon/B07BnJN7R",
+    image: "https://m.media-amazon.com/images/I/61iFlRsUusL._AC_SL1500_.jpg",
+    price: "COP $238.334",
     originalPrice: "",
-    badge: "⭐ 4.4 · 10K+ opiniones",
+    badge: "⭐ 4.3 · 1K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: true,
     featured: false,
     active: true,
-    date: "2026-09-11"
-  },
-  {
-    id: 68,
-    title: "MOON LENCE Silla de Camping Portátil Plus",
-    platform: "amazon",
-    category: "deporte",
-    url: "https://amzn.to/4gVQRFa",
-    image: "https://m.media-amazon.com/images/I/61iFlRsUusL._AC_SL1500_.jpg",
-    price: "COP $180.431",
-    originalPrice: "COP $225.539",
-    badge: "🏷️ 20% OFF con cupón",
-    coupon: "20% OFF al marcar el cupón → queda en COP $180.431",
-    shipping: "gratis",
-    highlight: true,
-    featured: false,
-    active: true,
-    date: "2026-09-11"
+    date: "2026-10-05"
   },
   {
     id: 67,
     title: "SHARDOR Molinillo de Café Eléctrico Profesional",
     platform: "amazon",
     category: "cocina",
-    url: "https://amzn.to/4gK2QFQ",
+    url: "https://link.amazon/B0dcCIQbY",
     image: "https://m.media-amazon.com/images/I/610o7fYfdEL._AC_SL1500_.jpg",
-    price: "COP $224.090",
+    price: "COP $251.395",
     originalPrice: "",
     badge: "⭐ 4.4 · 1K+ opiniones",
     coupon: "",
@@ -280,116 +284,117 @@ var BIBI_LINKS = [
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-31"
+    date: "2026-10-05"
   },
   {
     id: 66,
     title: "SKIN1004 Hyalu-Cica Suero Solar Water-Fit (Pack x2)",
     platform: "amazon",
     category: "belleza",
-    url: "https://amzn.to/4xxvIbm",
+    url: "https://link.amazon/B0cQAEai8",
     image: "https://m.media-amazon.com/images/I/71XGgejzDuL._SL1500_.jpg",
-    price: "COP $81.793",
-    originalPrice: "COP $99.561",
-    badge: "⭐ 4.4 · 1K+ opiniones",
+    price: "COP $81.305",
+    originalPrice: "",
+    badge: "⭐ 4.5 · 2K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-02"
+    date: "2026-10-05"
   },
   {
     id: 65,
     title: "Abib Barra Protección Solar SPF50+ Resplandeciente",
     platform: "amazon",
     category: "belleza",
-    url: "https://amzn.to/463SxYe",
+    url: "https://link.amazon/B0bHK2F0W",
     image: "https://m.media-amazon.com/images/I/6122RdhYw2L._SL1500_.jpg",
-    price: "COP $56.910",
+    price: "COP $49.044",
     originalPrice: "",
-    badge: "⭐ 4.4 · 1K+ opiniones",
+    badge: "⭐ 4.5 · 6K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-02"
+    date: "2026-10-05"
   },
   {
     id: 64,
     title: "SKIN1004 Ampolleta Centella Poremizing 100ml",
     platform: "amazon",
     category: "belleza",
-    url: "https://amzn.to/4gvxwf1",
+    url: "https://link.amazon/B0bnUjULQ",
     image: "https://m.media-amazon.com/images/I/61zILb6PBuL._SL1500_.jpg",
-    price: "COP $56.910",
+    price: "COP $58.775",
     originalPrice: "",
-    badge: "⭐ 4.6 · 5K+ opiniones",
+    badge: "⭐ 4.6 · 6K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-02"
+    date: "2026-10-05"
   },
   {
     id: 63,
     title: "Risk: Juego de Tronos - Juego de Mesa (Inglés)",
     platform: "amazon",
     category: "ninos",
-    url: "https://amzn.to/4qKx3ZU",
+    url: "https://link.amazon/B08LGVKMc",
     image: "https://m.media-amazon.com/images/I/81mIkXtk3LL._AC_SL1500_.jpg",
-    price: "COP $227.642",
-    originalPrice: "COP $252.904",
+    price: "COP $235.101",
+    originalPrice: "",
     badge: "⭐ 4.7 · 2K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-02"
+    date: "2026-10-05"
   },
   {
     id: 62,
     title: "Túnel para Gatos Plegable 3 Vías Tempcore",
     platform: "amazon",
     category: "mascotas",
-    url: "https://amzn.to/4glGMCo",
+    url: "https://link.amazon/B00SbubPu",
     image: "https://m.media-amazon.com/images/I/61MZx7nP3xL._AC_SL1500_.jpg",
-    price: "COP $51.908",
-    originalPrice: "COP $61.109",
-    badge: "🏷️ 15% OFF",
+    price: "COP $55.477",
+    originalPrice: "",
+    badge: "⭐ 4.6 · 18K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-25"
+    date: "2026-10-05"
   },
   {
     id: 61,
     title: "Saco de Dormir PTEROMY para Camping y Senderismo",
     platform: "amazon",
     category: "deporte",
-    url: "https://amzn.to/4xoZ9MW",
+    url: "https://link.amazon/B02di0JSY",
     image: "https://m.media-amazon.com/images/I/71kgvfqdyPL._AC_SL1500_.jpg",
-    price: "COP $68.752",
-    originalPrice: "COP $76.394",
-    badge: "⭐ 4.6 · 827 opiniones",
+    price: "COP $78.334",
+    originalPrice: "",
+    badge: "⭐ 4.5 · 915 opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-25"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: Amazon dice que no se puede enviar a Colombia
   {
     id: 60,
     title: "Sofá Cama Esponjoso COZY KISS para Gatos y Perros",
     platform: "amazon",
     category: "mascotas",
-    url: "https://amzn.to/4qDjxr2",
+    url: "https://link.amazon/B0aTz5ile",
     image: "https://m.media-amazon.com/images/I/617aT1RsRqL._AC_SL1500_.jpg",
     price: "COP $76.394",
     originalPrice: "COP $122.249",
@@ -398,7 +403,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-25"
   },
   {
@@ -406,18 +411,19 @@ var BIBI_LINKS = [
     title: "UGREEN Revodok Pro 9 en 1 USB C Hub",
     platform: "amazon",
     category: "tecnologia",
-    url: "https://amzn.to/4y32r8s",
+    url: "https://link.amazon/B09PiEjbJ",
     image: "https://m.media-amazon.com/images/I/71scB9Eu7RL._AC_SL1500_.jpg",
-    price: "COP $88.592",
-    originalPrice: "COP $131.268",
-    badge: "🏷️ 33% OFF",
+    price: "COP $97.926",
+    originalPrice: "",
+    badge: "⭐ 4.4 · 1K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-25"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 58,
     title: "UGREEN Conmutador KVM HDMI 8K Doble Monitor",
@@ -432,9 +438,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-25"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 57,
     title: "Avatar: The Last Airbender - The Search Omnibus",
@@ -449,7 +456,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-25"
   },
   {
@@ -457,43 +464,43 @@ var BIBI_LINKS = [
     title: "LHKNL Linterna Frontal LED 1200 Lúmenes (x2)",
     platform: "amazon",
     category: "deporte",
-    url: "https://amzn.to/4ilhXYA",
+    url: "https://link.amazon/B0ae7ThJL",
     image: "https://m.media-amazon.com/images/I/71DxWxvCwlL._AC_SL1500_.jpg",
-    price: "COP $54.672",
+    price: "COP $58.742",
     originalPrice: "",
-    badge: "⭐ 4.5 · 36K+ opiniones",
+    badge: "⭐ 4.5 · 37K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-20"
+    date: "2026-10-05"
   },
   {
     id: 54,
     title: "TrailBuddy Bastones de Trekking Aluminio 7075",
     platform: "amazon",
     category: "deporte",
-    url: "https://amzn.to/4xbIw78",
+    url: "https://link.amazon/B0aVrXthj",
     image: "https://m.media-amazon.com/images/I/81mVGxNi+xL._AC_SL1500_.jpg",
-    price: "COP $121.256",
-    originalPrice: "COP $151.920",
-    badge: "🏷️ 20% OFF",
+    price: "COP $163.232",
+    originalPrice: "",
+    badge: "⭐ 4.7 · 63K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-20"
+    date: "2026-10-05"
   },
   {
     id: 53,
     title: "Wise Owl Hamaca de Camping Portátil con Correas",
     platform: "amazon",
     category: "deporte",
-    url: "https://amzn.to/46cH3Sd",
+    url: "https://link.amazon/B0dov2DD7",
     image: "https://m.media-amazon.com/images/I/81OW4HrLbUL._AC_SL1500_.jpg",
-    price: "COP $133.442",
+    price: "COP $129.044",
     originalPrice: "",
     badge: "⭐ 4.8 · 30K+ opiniones",
     coupon: "",
@@ -501,8 +508,9 @@ var BIBI_LINKS = [
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-20"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 52,
     title: "Plumero de Aire Comprimido 180.000 RPM",
@@ -517,9 +525,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-20"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 51,
     title: "UGREEN Cargador Compacto 30W USB-C (iPhone 17)",
@@ -534,9 +543,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-20"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 50,
     title: "UGREEN Cargador GaN 65W USB-C, 3 Puertos",
@@ -551,9 +561,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-20"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 49,
     title: "GHome Enchufe Inteligente WiFi — Alexa y Google Home",
@@ -568,9 +579,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-20"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 48,
     title: "LISEN Soporte Ajustable para Celular y Tablet",
@@ -585,9 +597,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-20"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 47,
     title: "Recipientes Herméticos DWËLLZA KITCHEN x5 con Tapas",
@@ -602,7 +615,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-03"
   },
   {
@@ -610,35 +623,36 @@ var BIBI_LINKS = [
     title: "Mochila Plegable FIORETTO 15L Senderismo y Viaje",
     platform: "amazon",
     category: "deporte",
-    url: "https://amzn.to/4zbg3js",
+    url: "https://link.amazon/B0e3uPhRk",
     image: "https://m.media-amazon.com/images/I/81dE643aFhL._AC_SL1500_.jpg",
-    price: "COP $62.790",
-    originalPrice: "COP $82.088",
-    badge: "🏷️ 24% OFF",
+    price: "COP $84.865",
+    originalPrice: "",
+    badge: "⭐ 4.4 · 350 opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-03"
+    date: "2026-10-05"
   },
   {
     id: 45,
     title: "Juego de Cartas Beat The Heat — Fiesta Familiar",
     platform: "amazon",
     category: "ninos",
-    url: "https://amzn.to/4pYFEYD",
+    url: "https://link.amazon/B034N5cwi",
     image: "https://m.media-amazon.com/images/I/713dl3XS+DL._AC_SL1500_.jpg",
-    price: "COP $31.490",
+    price: "COP $31.967",
     originalPrice: "",
-    badge: "⭐ 4.7 · 320 opiniones",
+    badge: "⭐ 4.7 · 356 opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-03"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 44,
     title: "Adidas Terrex Skychaser AX5 Mid Gore-Tex Hombre",
@@ -653,7 +667,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-03"
   },
   {
@@ -661,24 +675,25 @@ var BIBI_LINKS = [
     title: "Cartuchos Filtro Repuesto PHILIPS GoZero AWP231 x3",
     platform: "amazon",
     category: "cocina",
-    url: "https://link.amazon/B0fMmWeqa",
+    url: "https://link.amazon/B03YYogit",
     image: "https://m.media-amazon.com/images/I/71F3EwDmcVL._AC_SL1500_.jpg",
-    price: "COP $90.645",
+    price: "COP $86.726",
     originalPrice: "",
-    badge: "⭐ 4.4 · 100 opiniones",
+    badge: "⭐ 4.4 · 102 opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-07-29"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: sin precio de compra de Amazon (solo 'Ver todas las opciones')
   {
     id: 42,
     title: "Brita UltraMax Dispensador de Agua Grande con Filtro",
     platform: "amazon",
     category: "cocina",
-    url: "https://amzn.to/3Uvje5v",
+    url: "https://link.amazon/B00QoCICB",
     image: "https://m.media-amazon.com/images/I/71k6R32mIDL._SL1500_.jpg",
     price: "COP $108.923",
     originalPrice: "",
@@ -687,9 +702,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-20"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 41,
     title: "SanDisk Extreme PRO Tarjeta SD 128GB 4K UHD",
@@ -704,7 +720,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-07-24"
   },
   {
@@ -712,35 +728,36 @@ var BIBI_LINKS = [
     title: "Paño de limpieza de lentes Koala - Microfibra japonesa (6 unidades)",
     platform: "amazon",
     category: "otros",
-    url: "https://amzn.to/4vNgKwi",
+    url: "https://link.amazon/B062DMyHB",
     image: "https://m.media-amazon.com/images/I/71iuhiJShtL._AC_SL1500_.jpg",
-    price: "COP $32.178",
+    price: "COP $32.620",
     originalPrice: "",
-    badge: "⭐ 4.7 · 27K+ opiniones",
+    badge: "⭐ 4.7 · 28K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-07-22"
+    date: "2026-10-05"
   },
   {
     id: 39,
     title: "AXIS-Y Suero de Colágeno Vegano para Ojos",
     platform: "amazon",
     category: "belleza",
-    url: "https://amzn.to/4pzGbQC",
+    url: "https://link.amazon/B0iHtL7FT",
     image: "https://m.media-amazon.com/images/I/61geVDBoMpL._SL1500_.jpg",
-    price: "COP $45.022",
-    originalPrice: "COP $50.555",
+    price: "COP $52.212",
+    originalPrice: "",
     badge: "⭐ 4.4 · 4K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-02"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 38,
     title: "BISSELL Little Green - Limpiador Portátil de Alfombras y Tapicería",
@@ -755,9 +772,10 @@ var BIBI_LINKS = [
     shipping: "COP $115.227",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-07-21"
   },
+  // Desactivado 2026-10-05: el link ya no lleva al producto (Amazon: Documento no encontrado)
   {
     id: 37,
     title: "CATAN Traveler - Edición Compacta de Viaje",
@@ -772,7 +790,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-09-02"
   },
   {
@@ -780,24 +798,25 @@ var BIBI_LINKS = [
     title: "Exploding Kittens Edición Original en Español",
     platform: "amazon",
     category: "ninos",
-    url: "https://amzn.to/4hkn4HX",
+    url: "https://link.amazon/B0dTRSc88",
     image: "https://m.media-amazon.com/images/I/61WeY4xe2ZL._AC_SL1024_.jpg",
-    price: "COP $64.522",
+    price: "COP $64.163",
     originalPrice: "",
-    badge: "⭐ 4.7 · 2K+ opiniones",
+    badge: "⭐ 4.8 · 1K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-07-17"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: Amazon dice que no se puede enviar a Colombia
   {
     id: 35,
     title: "Elizavecca Enjuague Tratamiento Colágeno 16.9oz",
     platform: "amazon",
     category: "belleza",
-    url: "https://amzn.to/4wa3a7j",
+    url: "https://link.amazon/B0h4XVYS2",
     image: "https://m.media-amazon.com/images/I/51Z67GdO10L._SL1500_.jpg",
     price: "COP $44.263",
     originalPrice: "COP $63.202",
@@ -806,7 +825,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-09-02"
   },
   {
@@ -814,18 +833,19 @@ var BIBI_LINKS = [
     title: "Tratamiento Proteínas Colágeno Elizavecca CER-100",
     platform: "amazon",
     category: "belleza",
-    url: "https://amzn.to/4gI2XmS",
+    url: "https://link.amazon/B0biI6suk",
     image: "https://m.media-amazon.com/images/I/61IHI9z38SL._SL1500_.jpg",
-    price: "COP $22.100",
+    price: "COP $22.824",
     originalPrice: "",
-    badge: "🏆 #1 en Belleza",
+    badge: "⭐ 4.4 · 64K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-02"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 33,
     title: "Under Armour Charged Assert 10 - Zapatos para mujer",
@@ -840,7 +860,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-07-16"
   },
   // Desactivado 2026-09-02: sin precio de Amazon (la ficha solo ofrece
@@ -862,6 +882,7 @@ var BIBI_LINKS = [
     active: false,
     date: "2026-08-31"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 30,
     title: "Aspiradora robot Lefant",
@@ -876,7 +897,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-07-12"
   },
   {
@@ -884,18 +905,19 @@ var BIBI_LINKS = [
     title: "medicube Zero Pore Pad 2.0",
     platform: "amazon",
     category: "belleza",
-    url: "https://amzn.to/4fvcVXI",
+    url: "https://link.amazon/B09MBYnEr",
     image: "https://m.media-amazon.com/images/I/71Mcspt-6AL._AC_SL1500_.jpg",
-    price: "COP $59.756",
+    price: "COP $61.714",
     originalPrice: "",
-    badge: "⭐ 4.6 · 31K+ opiniones",
+    badge: "⭐ 4.6 · 33K+ opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-02"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 28,
     title: "Auriculares Skullcandy Crusher Evo",
@@ -910,9 +932,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-07-12"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 27,
     title: "Camiseta Zeagoo manga larga",
@@ -927,9 +950,10 @@ var BIBI_LINKS = [
     shipping: "",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-07-12"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 26,
     title: "Set de tablas de titanio",
@@ -944,9 +968,10 @@ var BIBI_LINKS = [
     shipping: "",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-07-12"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 25,
     title: "Juego de cuchillos Astercook",
@@ -961,9 +986,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-07-12"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 24,
     title: "Pantuflas Evshine de Felpa con Banda Cruzada",
@@ -978,7 +1004,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-07-11"
   },
   {
@@ -986,18 +1012,19 @@ var BIBI_LINKS = [
     title: "KOIOS Hervidor Eléctrico Cuello de Cisne 0.8L",
     platform: "amazon",
     category: "cocina",
-    url: "https://amzn.to/4gJG5BK",
+    url: "https://link.amazon/B0iOS0wZx",
     image: "https://m.media-amazon.com/images/I/61n2K6HnaML._AC_SL1500_.jpg",
-    price: "COP $142.244",
+    price: "COP $146.905",
     originalPrice: "",
-    badge: "⭐ 4.4 · 958 opiniones",
-    coupon: "🎟️ 10% OFF al pagar",
+    badge: "⭐ 4.3 · 977 opiniones",
+    coupon: "🎟️ 12% OFF al pagar",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-09-02"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 22,
     title: "Envasadora al Vacío Compacta con 20 Bolsas",
@@ -1012,9 +1039,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-04"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 21,
     title: "Tapetes Antifatiga GENIMO Set x2 para Cocina",
@@ -1029,9 +1057,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-04"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 20,
     title: "Rallador Rotativo SUSTEAS 5 Cuchillas con Almacenamiento",
@@ -1046,9 +1075,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-04"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 19,
     title: "Tineco Floor ONE S7 Stretch Ultra — Aspira y friega, 180°, autolimpieza",
@@ -1063,9 +1093,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-07"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 18,
     title: "Aspiradora Shark PowerPro Plus — Inalámbrica, HEPA, 50 min, pelo mascotas",
@@ -1080,9 +1111,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-07"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 17,
     title: "AXV Plataforma vibración fitness — Cuerpo completo, gym en casa",
@@ -1097,9 +1129,10 @@ var BIBI_LINKS = [
     shipping: "",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-07"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 16,
     title: "Logitech MX Mouse Vertical — Ergonómico, 3 dispositivos, recargable",
@@ -1114,9 +1147,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-07"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 15,
     title: "Bicicleta equilibrio Gamfeiny — Luces, 10-36 meses, ruedas silenciosas",
@@ -1131,9 +1165,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-07"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 14,
     title: "Auriculares bmani Bluetooth — 80H batería, pantalla LED, micrófono",
@@ -1148,7 +1183,7 @@ var BIBI_LINKS = [
     shipping: "",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-07"
   },
   {
@@ -1156,24 +1191,25 @@ var BIBI_LINKS = [
     title: "Fuente de agua inalámbrica para gatos FEELNEEDY 3.5L",
     platform: "amazon",
     category: "mascotas",
-    url: "https://amzn.to/4xiYOeM",
+    url: "https://link.amazon/B06cxHCJI",
     image: "https://m.media-amazon.com/images/I/71yYHjMgdmL._AC_SL1500_.jpg",
-    price: "COP $151.920",
-    originalPrice: "COP $182.310",
-    badge: "🏷️ 17% OFF",
+    price: "COP $163.232",
+    originalPrice: "",
+    badge: "⭐ 4.4 · 625 opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-08-20"
+    date: "2026-10-05"
   },
+  // Desactivado 2026-10-05: Amazon dice que no se puede enviar a Colombia
   {
     id: 12,
     title: "UPFAS Caja arena autolimpiante — App, monitoreo peso, silenciosa para gatos",
     platform: "amazon",
     category: "mascotas",
-    url: "https://amzn.to/4fMgdWy",
+    url: "https://link.amazon/B06qMwhbY",
     image: "https://m.media-amazon.com/images/I/616zZxB0g1L._AC_SL1500_.jpg",
     price: "COP $331.221",
     originalPrice: "COP $368.053",
@@ -1182,9 +1218,10 @@ var BIBI_LINKS = [
     shipping: "COP $253.392",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-20"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 11,
     title: "GNMN Auriculares Bluetooth ANC — Cancelación ruido, 90H batería, resistente al agua",
@@ -1199,9 +1236,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-08"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 10,
     title: "American Tourister Stratum 2.0 — Set x3 maletas expandibles ruedas giratorias",
@@ -1216,9 +1254,10 @@ var BIBI_LINKS = [
     shipping: "",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-08"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 9,
     title: "Christopher Knight Home Isaiah — Silla huevo mimbre colgante interior/exterior",
@@ -1233,9 +1272,10 @@ var BIBI_LINKS = [
     shipping: "",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-08"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 8,
     title: "Thermos Funtainer — Recipiente comida aislado niños con cuchara plegable 10 oz",
@@ -1250,9 +1290,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-08"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 7,
     title: "Rihero Sandalias planas verano — Punta cuadrada, cuero genuino, deslizables",
@@ -1267,9 +1308,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-08"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 6,
     title: "PRETTYGARDEN Vestido maxi floral — Bohemio tirantes, boda playa, verano 2026",
@@ -1284,9 +1326,10 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-06-08"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 5,
     title: "LEGO Trofeo Oficial Mundial FIFA — Coleccionable para fanáticos del fútbol",
@@ -1300,10 +1343,11 @@ var BIBI_LINKS = [
     shipping: "COP $116.051",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-05-24",
     badge: "⭐ 4.8 · + COP $116.051 envío"
   },
+  // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
     id: 4,
     title: "Logitech Lift — Mouse Ergonómico Vertical Inalámbrico, clics silenciosos",
@@ -1317,7 +1361,7 @@ var BIBI_LINKS = [
     shipping: "gratis",
     highlight: false,
     featured: false,
-    active: true,
+    active: false,
     date: "2026-08-20",
     badge: "🏷️ 28% OFF"
   },

@@ -134,17 +134,16 @@ if (btn) { btn.click(); 'clicked'; } else 'not found';
 
 Ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
-// 2. Verificar y forzar tag bibirecomie02-20
+// 2. Verificar tag por defecto bibirecomie0a-20 (el dropdown solo tiene esa tienda; no hay que forzarlo)
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
   .find(d => d.innerText?.includes('Enlace'));
 const sel = sd?.querySelector('select[name="amzn-ss-store-dropdown-text"]');
-if (sel && sel.value !== 'bibirecomie02-20') sel.value = 'bibirecomie02-20';
 sel?.value || 'no dialog';
 ```
 
 Ejecutar con **`mcp__claude-in-chrome__javascript_tool`**:
 ```js
-// 3. Seleccionar "Enlace corto" y leer el link del input
+// 3. Seleccionar "Enlace corto" y copiar el link: SiteStripe ya no tiene input de texto, se captura el portapapeles como en /agregar-link Paso 5
 const sd = Array.from(document.querySelectorAll('[role="dialog"], dialog'))
   .find(d => d.innerText?.includes('Enlace'));
 const shortOpt = Array.from(sd?.querySelectorAll('input, label, span, div') || [])
