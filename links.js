@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 88,
+    title: "Bedsure Cama Cueva 2 en 1 para Gatos con Cojín",
+    platform: "amazon",
+    category: "mascotas",
+    url: "https://link.amazon/B03A6UhWm",
+    image: "https://m.media-amazon.com/images/I/91sJ7zccZVL._AC_SL1500_.jpg",
+    price: "COP $83.158",
+    originalPrice: "",
+    badge: "🏷️ 25% OFF con Prime",
+    coupon: "COP $61.977 si tienes Prime",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-10-06"
+  },
+  {
     id: 87,
     title: "Mintakawa Arenero Automático para Gatos con APP",
     platform: "amazon",
