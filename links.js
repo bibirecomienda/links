@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 89,
+    title: "Subminimal SubScale Báscula Dosificadora Digital LED",
+    platform: "amazon",
+    category: "cocina",
+    url: "https://link.amazon/B0e6ZLdtK",
+    image: "https://m.media-amazon.com/images/I/71RxLBkDuQL._SL1500_.jpg",
+    price: "COP $159.822",
+    originalPrice: "",
+    badge: "🏷️ 20% OFF con Prime",
+    coupon: "COP $127.825 si tienes Prime",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-10-06"
+  },
+  {
     id: 88,
     title: "Bedsure Cama Cueva 2 en 1 para Gatos con Cojín",
     platform: "amazon",
