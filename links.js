@@ -1570,13 +1570,13 @@ var BIBI_COLECCIONES = [
 
 var BIBI_PROMOS = [
   {
-    id: "cupon-silla-moonlence-sep",
+    id: "cupon-juguete-qraxond-oct",
     title: "Cupón activo",
-    text: "Silla de camping MOON LENCE: marca el cupón y queda en COP $180.431 (en vez de COP $225.539)",
+    text: "Juguete interactivo para gatos Qraxond: marca el cupón y queda en COP $84.864 (en vez de COP $104.456)",
     code: "",
     cta: "Ver el producto",
-    url: "https://amzn.to/4gVQRFa",
-    producto: 68,
+    url: "https://link.amazon/B08v8phyo",
+    producto: 56,
     popup: true,
     hasta: "",
     active: true
