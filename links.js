@@ -27,6 +27,40 @@
 
 var BIBI_LINKS = [
   {
+    id: 98,
+    title: "Eucerin Crema de Noche Radiant Tone Anti-Manchas",
+    platform: "amazon",
+    category: "belleza",
+    url: "https://link.amazon/B05Nj23UM",
+    image: "https://m.media-amazon.com/images/I/71atoxnJf2L._SL1500_.jpg",
+    price: "COP $90.688",
+    originalPrice: "COP $113.368",
+    badge: "🏷️ 20% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-10-07"
+  },
+  {
+    id: 97,
+    title: "EQQUALBERRY Suero Iluminador Niacinamida 4% y TXA",
+    platform: "amazon",
+    category: "belleza",
+    url: "https://link.amazon/B0hzm16kf",
+    image: "https://m.media-amazon.com/images/I/61gTlZ8B-tL._SL1500_.jpg",
+    price: "COP $74.488",
+    originalPrice: "",
+    badge: "🏷️ 30% OFF con Prime",
+    coupon: "COP $51.808 si tienes Prime",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-10-07"
+  },
+  {
     id: 96,
     title: "Catan Hexatower Torre de Dados Amarillo",
     platform: "amazon",
