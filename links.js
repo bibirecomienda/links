@@ -27,21 +27,38 @@
 
 var BIBI_LINKS = [
   {
-    id: 98,
-    title: "Eucerin Crema de Noche Radiant Tone Anti-Manchas",
+    id: 99,
+    title: "Pelota Interactiva para Perros Pequeños con Rebote Automático",
     platform: "amazon",
-    category: "belleza",
-    url: "https://link.amazon/B05Nj23UM",
-    image: "https://m.media-amazon.com/images/I/71atoxnJf2L._SL1500_.jpg",
-    price: "COP $90.688",
-    originalPrice: "COP $113.368",
-    badge: "🏷️ 20% OFF",
+    category: "mascotas",
+    url: "https://link.amazon/B05yt6KD5",
+    image: "https://m.media-amazon.com/images/I/610uymTD8DL._AC_SL1499_.jpg",
+    price: "COP $42.982",
+    originalPrice: "",
+    badge: "⭐ 3.9 · 375 opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-10-07"
+    date: "2026-10-13"
+  },
+  {
+    id: 98,
+    title: "Eucerin Crema de Noche Radiant Tone Anti-Manchas",
+    platform: "amazon",
+    category: "belleza",
+    url: "https://link.amazon/B02LNG3Xb",
+    image: "https://m.media-amazon.com/images/I/71atoxnJf2L._SL1500_.jpg",
+    price: "COP $101.938",
+    originalPrice: "COP $111.567",
+    badge: "🏷️ 9% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-10-13"
   },
   {
     id: 97,
@@ -459,17 +476,17 @@ var BIBI_LINKS = [
     title: "Juguete Interactivo para Gatos Qraxond",
     platform: "amazon",
     category: "mascotas",
-    url: "https://link.amazon/B08lrxT7J",
+    url: "https://link.amazon/B00mdy1qu",
     image: "https://m.media-amazon.com/images/I/81BkPMBXkKL._AC_SL1500_.jpg",
-    price: "COP $104.457",
-    originalPrice: "",
-    badge: "🏷️ 25% OFF con Prime",
-    coupon: "COP $78.139 si tienes Prime",
+    price: "COP $82.870",
+    originalPrice: "COP $102.002",
+    badge: "🏷️ 19% OFF con cupón",
+    coupon: "19% OFF al marcar el cupón de COP $19.131 → queda en COP $82.870",
     shipping: "gratis",
     highlight: true,
     featured: true,
     active: true,
-    date: "2026-10-06"
+    date: "2026-10-13"
   },
   {
     id: 31,
@@ -963,17 +980,17 @@ var BIBI_LINKS = [
     title: "Juego de Cartas Beat The Heat — Fiesta Familiar",
     platform: "amazon",
     category: "ninos",
-    url: "https://link.amazon/B034N5cwi",
+    url: "https://link.amazon/B07oFGhEF",
     image: "https://m.media-amazon.com/images/I/713dl3XS+DL._AC_SL1500_.jpg",
-    price: "COP $31.967",
+    price: "COP $31.471",
     originalPrice: "",
-    badge: "⭐ 4.7 · 356 opiniones",
+    badge: "⭐ 4.7 · 363 opiniones",
     coupon: "",
     shipping: "gratis",
     highlight: false,
     featured: false,
     active: true,
-    date: "2026-10-05"
+    date: "2026-10-13"
   },
   // Desactivado 2026-10-05: limpieza del catálogo (solo quedan los productos principales)
   {
