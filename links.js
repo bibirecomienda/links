@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 110,
+    title: "Luces de Navidad Solares 20 m, 200 LED Blanca (Cable Verde)",
+    platform: "mercadolibre",
+    category: "hogar",
+    url: "https://meli.la/21fwzuj",
+    image: "https://http2.mlstatic.com/D_NQ_NP_888178-MLA118523210116_102026-O.jpg",
+    price: "COP $54.900",
+    originalPrice: "COP $79.900",
+    badge: "🏷️ 31% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-11-19"
+  },
+  {
     id: 109,
     title: "TORRAS Q3 Air Funda iPhone 18 Pro Max, Soporte Magnético",
     platform: "amazon",
