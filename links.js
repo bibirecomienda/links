@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 112,
+    title: "Soldador Inversor 250A + Careta Magnux Portátil",
+    platform: "mercadolibre",
+    category: "hogar",
+    url: "https://meli.la/2wXqTx2",
+    image: "https://http2.mlstatic.com/D_NQ_NP_949291-MLA89574414312_082025-O.jpg",
+    price: "COP $173.400",
+    originalPrice: "COP $866.500",
+    badge: "🔥 79% OFF",
+    coupon: "",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-11-19"
+  },
+  {
     id: 111,
     title: "TORRAS Funda iPhone 17 Pro Max, Soporte Magnético 360° Azul",
     platform: "amazon",
