@@ -327,6 +327,8 @@ Leer la plantilla **`templates/historia-ig-template.html`** (1080×1920, con zon
 | `{{ PRICE }}` | Precio actual en COP (ej: `COP $162.667`) |
 | `{{ SHIPPING_HTML }}` | Ver tabla abajo |
 
+> 🟩 **Historia FULL (Mercado Libre):** si el producto es de Mercado Libre y la ficha trae el sello **FULL** (o Bibiana lo indica), usar **`templates/historia-ig-full-template.html`** en vez de la normal: lleva un banderín verde con solo la palabra "FULL" que sale del borde izquierdo de la foto. Mismas variables que la normal, sin variables extra. Si el producto no es FULL, usar la normal.
+>
 > 🟦 **Historia Prime (solo cuando Bibiana lo indique):** si Bibiana dice que el producto tiene **precio especial para miembros Prime**, usar **`templates/historia-ig-prime-template.html`** en vez de la plantilla normal. Si ella no lo dice, usar siempre la normal (aunque la ficha muestre "Precio para miembro Prime": en ese caso solo avisarle). Mismas variables que la normal más `{{ PRIME_PCT }}` (ej: `-17%`, sin texto adicional). `{{ PRICE }}` = precio Prime y `{{ PRICE_BEFORE_HTML }}` = precio normal tachado ("Precio sin oferta" en la ficha). El % = (normal − Prime) / normal, redondeado. Nunca inventar el precio normal: leerlo de la ficha. En `links.js` el `price` es el precio que paga cualquiera (el normal) y el precio Prime va en `coupon` como `"COP $XXX.XXX si tienes Prime"`.
 
 **`{{ SHIPPING_HTML }}` según caso:**
