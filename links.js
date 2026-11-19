@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 111,
+    title: "TORRAS Funda iPhone 17 Pro Max, Soporte Magnético 360° Azul",
+    platform: "amazon",
+    category: "tecnologia",
+    url: "https://link.amazon/B02e1SZuU",
+    image: "https://m.media-amazon.com/images/I/71Kc9mEOsBL._AC_SL1500_.jpg",
+    price: "COP $124.163",
+    originalPrice: "",
+    badge: "🏷️ 20% OFF con Prime",
+    coupon: "COP $99.324 si tienes Prime",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-11-19"
+  },
+  {
     id: 110,
     title: "Luces de Navidad Solares 20 m, 200 LED Blanca (Cable Verde)",
     platform: "mercadolibre",
