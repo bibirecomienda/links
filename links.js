@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 114,
+    title: "SONOFF TX Gen2 Interruptor Táctil Inteligente 3 Canales, Wi-Fi",
+    platform: "amazon",
+    category: "hogar",
+    url: "https://link.amazon/B014tdihW",
+    image: "https://m.media-amazon.com/images/I/619Ai34n-YL._SL1500_.jpg",
+    price: "COP $61.408",
+    originalPrice: "",
+    badge: "🏷️ 20% OFF con Prime",
+    coupon: "COP $49.127 si tienes Prime",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-11-20"
+  },
+  {
     id: 113,
     title: "Echo Dot 5.ª gen (2022) con Alexa, Carbón · versión internacional",
     platform: "amazon",
