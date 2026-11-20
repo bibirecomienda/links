@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 113,
+    title: "Echo Dot 5.ª gen (2022) con Alexa, Carbón · versión internacional",
+    platform: "amazon",
+    category: "tecnologia",
+    url: "https://link.amazon/B08xs8HFj",
+    image: "https://m.media-amazon.com/images/I/61ngo6DX8yL._AC_SL1000_.jpg",
+    price: "COP $167.799",
+    originalPrice: "",
+    badge: "⭐ 4.8 · 1K+ opiniones",
+    coupon: "",
+    shipping: "COP $48.907",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-11-20"
+  },
+  {
     id: 112,
     title: "Soldador Inversor 250A + Careta Magnux Portátil",
     platform: "mercadolibre",
