@@ -27,6 +27,23 @@
 
 var BIBI_LINKS = [
   {
+    id: 115,
+    title: "Guirnalda Navideña Solar 500 Luces LED, 50 m Luz Cálida",
+    platform: "mercadolibre",
+    category: "hogar",
+    url: "https://meli.la/24kyq9B",
+    image: "https://http2.mlstatic.com/D_NQ_NP_746999-MCO98210323446_112025-O.jpg",
+    price: "COP $89.100",
+    originalPrice: "COP $99.900",
+    badge: "🏷️ 10% OFF",
+    coupon: "⚡ Oferta relámpago: este precio es hasta la medianoche del 20 nov (12:00 a. m. del 21 nov)",
+    shipping: "gratis",
+    highlight: false,
+    featured: false,
+    active: true,
+    date: "2026-11-20"
+  },
+  {
     id: 114,
     title: "SONOFF TX Gen2 Interruptor Táctil Inteligente 3 Canales, Wi-Fi",
     platform: "amazon",
